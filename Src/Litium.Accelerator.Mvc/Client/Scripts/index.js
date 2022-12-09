@@ -224,7 +224,7 @@ const bootstrapComponents = () => {
     }
 
     // Pando Nexis bootstrap
-    pnBootstrapComponents();
+    pnBootstrapComponents(store);
 };
 
 bootstrapComponents();

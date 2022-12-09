@@ -50,4 +50,5 @@ $desktop-width: map-get($breakpoints, xxlarge); // OLD: 1440px;
 /* Navigation bar */
 $navbar-width: 300px;
 
-$header-background-color: rgb(222,222,222);
+$body-background-color: #fff;//#170322;
+$header-background-color: $body-background-color;

@@ -4,25 +4,22 @@ import CLOUDS2 from "./vendor/vanta.clouds";
 
 import * as THREE from 'three';
 const Background = (props) => {
-    const { theme } = props
     const [vantaEffect, setVantaEffect] = useState(0);
+    const [theme, setTheme] = useState(props.theme || 'cells');
     const mainBg = useRef(null);
     const mapOptions = {
-        mouseControls: true,
-        touchControls: true,
+        mouseControls: false,
+        touchControls: false,
         gyroControls: false,
-        minHeight: 200.0,
-        minWidth: 200.0,
         scale: 1.0,
         color1: 0x303904,
+        color2: 0x52047f,
         THREE: THREE
     };
     const cloudOptions = {
         mouseControls: true,
         touchControls: false,
         gyroControls: true,
-        minHeight: 200.00,
-        minWidth: 200.00,
         scale: 1.00,
         backgroundColor: 0x0,
         skyColor: 0x4b95b9,// 0x68b8d7, // 0x99b5bf,
@@ -62,9 +59,9 @@ const Background = (props) => {
 
     return (
         <Fragment>
-            <div className="main-background" ref={mainBg}>
-                <div className="main-background__overlay"></div>
-                <div className="main-background__map"></div>
+            <div className={`pn-main-background__container pn-main-background__${theme}`} ref={mainBg}>
+                <div className="pn-main-background__overlay"></div>
+                <div className="pn-main-background__canvas"></div>
             </div>
         </Fragment>
     );

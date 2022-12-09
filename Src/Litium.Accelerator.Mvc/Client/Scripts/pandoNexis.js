@@ -7,12 +7,13 @@ import GenericGridViewContainer from './_Addons/GenericGridView/Containers/Gener
 import FieldConfiguratorContainer from './_Addons/GenericGridView/Containers/FieldConfigurator.container';
 import DropZoneContainer from './_Addons/GenericGridView/Containers/DropZone.container';
 import HeaderInformationDataContainer from './_Addons/GenericGridView/Containers/HeaderInformationData.container';
+import PnBackground from './_Addons/PnThreeDeeBg/Background';
 // END ADDONS IMPORT
 
 import './pandoNexis.events.js';
 import './pandoNexis.functions.js';
 
-export const pnBootstrapComponents = () => {
+export const pnBootstrapComponents = (store) => {
 
     // ADDONS
     // MediaCatalog
@@ -47,6 +48,19 @@ export const pnBootstrapComponents = () => {
         );
     }
     // END CollectionPage
+
+    // PN 3D background
+    const pnMainBackground = document.getElementById("pnMainBackground");
+    if (pnMainBackground) {
+        ReactDOM.render(
+            <Provider store={store}>
+                <PnBackground />
+            </Provider>,
+            pnMainBackground
+        );
+    }
+
+    // END PN 3D background
 
     // GenericGridView
     document.querySelectorAll('[data-field-configuration]').forEach((elem) => {
