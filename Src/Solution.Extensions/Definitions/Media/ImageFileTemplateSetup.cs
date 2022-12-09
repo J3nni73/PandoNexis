@@ -1,10 +1,6 @@
-using Litium.Websites;
 using Litium.FieldFramework;
-using System.Collections.Generic;
-using Litium.Accelerator.Constants;
-using PandoNexis.AddOns.Extensions.CollectionPage;
 using Litium.Accelerator.Definitions;
-using PN=PandoNexis.Accelerator.Extensions.Constants;
+using PN = PandoNexis.Accelerator.Extensions.Constants;
 using Litium.Media;
 
 namespace Solution.Extensions.Definitions
