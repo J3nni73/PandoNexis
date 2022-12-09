@@ -1,0 +1,2 @@
+(self.webpackChunk=self.webpackChunk||[]).push([[652],{2652:(e,t,c)=>{"use strict";c.r(t),c.d(t,{default:()=>s});var r=c(7378);const s=({extractScripts:e,executeScript:t,includeScript:c,paymentSession:s})=>{const i=e(s),u=(0,r.useRef)(!0);return(0,r.useEffect)((()=>{u.current&&(u.current=!1,i.scripts&&i.scripts.forEach((e=>t("checkout-widget",e))),i.scriptFiles&&i.scriptFiles.forEach((e=>c("checkout-widget",e))))}),[t,c,i]),r.createElement("div",{id:"checkout-widget",dangerouslySetInnerHTML:{__html:i.html}})}}}]);
+//# sourceMappingURL=652.6ad993af483a4c75ac68.js.map

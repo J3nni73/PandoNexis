@@ -1,0 +1,39 @@
+﻿@using PandoNexis.AddOns.Extensions.Block.ImageStatsBlock
+@model ImageStatsBlockViewModel
+
+@if (Model.BlockTitle != null)
+{
+    <div class="image-stats-block">
+        <div class="columns">
+            <div class="image-stats-block__image-title-wrapper">
+                <div class="image-stats-block__image-title-wrapper__text-holder">
+                    <h2 class="image-stats-block__image-title-wrapper__title">
+                        @Model.BlockTitle
+                    </h2>
+                    <h2 class="image-stats-block__image-title-wrapper__title-alt-color">
+                        @Model.BlockTitle2
+                    </h2>
+                </div>
+                @Html.ImageFor(x => Model.Image)
+            </div>
+
+            @if (Model.Items.Any())
+            {
+                <div class="image-stats-block__items-wrapper">
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="image-stats-block__items-wrapper__items">
+                            <div class="image-stats-block__items-wrapper__items__text-highlight">
+                                @Html.Raw(item.BlockText)
+                            </div>
+                            <div class="image-stats-block__items-wrapper__items__text">
+                                @Html.Raw(item.BlockText2)
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+}
+

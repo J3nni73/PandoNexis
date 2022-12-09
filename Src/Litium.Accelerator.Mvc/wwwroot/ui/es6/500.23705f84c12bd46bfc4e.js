@@ -1,0 +1,2 @@
+(self.webpackChunk=self.webpackChunk||[]).push([[500],{3500:(e,t,s)=>{"use strict";s.r(t),s.d(t,{default:()=>u});var a=s(7378),l=(s(3082),s(4837));const n={showStatus:!1,showThumbs:!1,infiniteLoop:!0},u=({values:e})=>a.createElement(l.lr,n,e.map(((e,t)=>a.createElement("div",{key:`figure${t}`,dangerouslySetInnerHTML:{__html:e.html}}))))}}]);
+//# sourceMappingURL=500.23705f84c12bd46bfc4e.js.map

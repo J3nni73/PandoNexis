@@ -1,0 +1,207 @@
+$inspiration-block-color-primary: $block-background1;
+$inspiration-block-color-secondary: $block-background2;
+$inspiration-block-color-tertiary: $block-background3;
+
+.inspirational-block {
+    display: flex;
+    flex-direction: column;
+    margin: rem(20px) 0;
+    max-height: 40rem;
+    min-height: 30rem;
+
+    @include mobile {
+        max-height: none;
+        margin: rem(20px 0);
+    }
+
+    &.primaryColor, &.color__primary {
+        background-color: $inspiration-block-color-primary;
+    }
+
+    &.secondaryColor, &.color__secondary {
+        background-color: $inspiration-block-color-secondary;
+    }
+
+    &.thirdColor, &.color__tertiary {
+        background-color: $inspiration-block-color-tertiary;
+    }
+
+    &__title {
+        font-size: $fontsize-h2;
+        color: $color-primary;
+
+        &.white {
+            color: $color-white;
+        }
+    }
+
+    &__subtitle {
+        font-size: $fontsize-normal;
+        /*font-weight: $font-weight-extra-bold;*/
+        text-transform: uppercase;
+    }
+
+    &__text {
+        max-height: 75%;
+        overflow: hidden;
+
+        @include mobile {
+            max-height: none;
+        }
+
+        li {
+            list-style-type: disc;
+            margin-left: 1.2rem;
+            /*font-weight: $font-weight-black;*/
+        }
+
+        p {
+            /*font-size: $fontsize-base;*/
+        }
+
+        &.white {
+            color: $color-white;
+        }
+    }
+
+    &__button {
+        display: flex;
+        padding-top: 1rem;
+
+        .primaryCTA {
+            min-width: rem(212px);
+            width: auto;
+            height: rem(44px);
+            border-radius: rem(50px);
+            border: 2px solid $color-primary;
+            color: $color-primary;
+            padding: 0.5rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /*font-weight: $font-weight-bold;*/
+        }
+
+        .secondaryCTA {
+            min-width: rem(212px);
+            width: auto;
+            height: rem(44px);
+            border-radius: rem(50px);
+            padding: 0.5rem 1rem;
+            color: $color-white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /*font-weight: $font-weight-bold;*/
+        }
+
+        .thirdCTA {
+            min-width: rem(212px);
+            width: auto;
+            height: rem(44px);
+            border-radius: rem(50px);
+            border: 2px solid $color-white;
+            padding: 0.5rem 1rem;
+            color: $color-white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /*font-weight: $font-weight-bold;*/
+        }
+    }
+
+    &__item-reverse {
+        display: flex;
+        flex-direction: row-reverse;
+        max-height: 40rem;
+        min-height: 30rem;
+
+        @include mobile {
+            display: grid;
+            max-height: none;
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: row;
+        max-height: 40rem;
+        min-height: 30rem;
+
+        @include mobile {
+            display: grid;
+            max-height: none;
+        }
+    }
+
+    &__image-wrapper {
+        width: 100%;
+        height: 100%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &.negativeMargin {
+            margin-top: rem(-60px);
+
+            @include mobile {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &__sectionleft {
+        padding: 2rem;
+        min-width: 50%;
+        max-width: 50%;
+        max-height: 40rem;
+        min-height: 30rem;
+
+        @include mobile {
+            min-width: 100%;
+            max-width: 100%;
+            max-height: none;
+            min-height: 0;
+        }
+
+        &.extra-padding {
+            padding: rem(90px);
+
+            @include mobile-tablet {
+                padding: rem(50px);
+            }
+        }
+    }
+
+    &__sectionright {
+        min-height: 26rem;
+        min-width: 50%;
+        max-width: 50%;
+        margin: 0;
+        max-height: 40rem;
+        min-height: 30rem;
+
+        &__text-only {
+            padding: 3rem;
+            background-color: $color-primary;
+            width: 100%;
+            height: 100%;
+
+            p {
+                color: $color-white;
+            }
+
+            li {
+                color: $color-white;
+            }
+        }
+
+        @include mobile {
+            min-width: 100%;
+            max-width: 100%;
+        }
+    }
+}

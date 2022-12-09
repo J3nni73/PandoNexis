@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <Configurations>Debug;Release;Production</Configurations>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Views\Home\Index2cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index2cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Litium.Accelerator.Administration.Extensions\Litium.Accelerator.Administration.Extensions.csproj" />
+    <ProjectReference Include="..\Litium.Accelerator.Elasticsearch\Litium.Accelerator.Elasticsearch.csproj" />
+    <ProjectReference Include="..\Litium.Accelerator\Litium.Accelerator.csproj" />
+    <ProjectReference Include="..\PandoNexis.Accelerator.Extensions\PandoNexis.Accelerator.Extensions.csproj" />
+    <ProjectReference Include="..\PandoNexis.AddOns.Extensions\PandoNexis.AddOns.Extensions.csproj" />
+    <ProjectReference Include="..\Solution.Extensions\Solution.Extensions.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Litium.Accelerator.Administration.Deployment" Version="8.7.1" />
+    <PackageReference Include="Litium.Web.Setup.Elasticsearch" Version="8.7.1" />
+    <PackageReference Include="Litium.Web.Setup.Redis" Version="8.7.1" />
+    <PackageReference Include="Litium.Web.Setup.Complete" Version="8.7.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Litium.Cloud.NLog.Extensions" Version="1.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.9" Condition=" '$(Configuration)' == 'Debug' " />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\Api\_Solution\" />
+    <Folder Include="Controllers\Api\_PandoNexis\" />
+    <Folder Include="Controllers\Api\_PandoNexis\" />
+    <Folder Include="Controllers\_Solution\" />
+    <Folder Include="Views\_Solution\Shared\DisplayTemplates\" />
+    <Folder Include="Views\_PandoNexis\Shared\DisplayTemplates\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\_Addons\GenericGridView\Index.cshtml" />
+    <None Include="Views\_PandoNexis\Framework\ClientContext.cshtml" />
+    <None Include="Views\_Solution\Framework\CenteredHeader.cshtml" />
+  </ItemGroup>
+</Project>

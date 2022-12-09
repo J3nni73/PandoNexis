@@ -1,0 +1,44 @@
+﻿@using PandoNexis.Accelerator.Extensions.Blocks.TextBlock
+@model TextBlockViewModel
+
+@{
+    var itemCount = Model.Items.Any() ? Model.Items.Count() : 1;
+
+    var smallColumns = Math.Min(itemCount, 2);
+    var mediumColumns = Math.Min(itemCount, 3);
+    var largeColumns = Math.Min(itemCount, 4);
+}
+
+@if (Model.Items.Any())
+{
+    <div class="text-block @Model.Background">
+        <div class="row small-up-@smallColumns medium-up-@mediumColumns large-up-@largeColumns">
+            @if (Model.Items.Any())
+            {
+                @foreach (var item in Model.Items)
+                {
+                    <div class="column">
+                        <div class="text-block__item @item.Background">
+                            <h3 class="text-block__subtitle">
+                                @item.BlockSubTitle
+                            </h3>
+
+                            <h2 class="text-block__title">
+                                @item.BlockTitle
+                            </h2>
+                            <div class="text-block__text">
+                                @Html.Raw(item.BlockText)
+                            </div>
+                            @if (item.Button != null && !string.IsNullOrEmpty(item.Button.Href))
+                            {
+                                <div class="text-block__button-container">
+                                    <a href="@item.Button.Href" target="@item.Button.Target" class="button @item.Button.Class">@item.Button.LinkText</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}

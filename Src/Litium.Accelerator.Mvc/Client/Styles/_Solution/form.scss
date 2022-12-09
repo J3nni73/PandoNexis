@@ -1,0 +1,18 @@
+$form-active-color: #ffc444;
+.form {
+    &__input, &__select {
+        padding-right: rem(32px);
+        background-size: rem(12px 12px);
+
+        &:hover {
+            border-color: $form-active-color;
+        }
+
+        option {
+            &:hover {
+                box-shadow: 0 0 10px 100px $form-active-color inset;
+                background: $form-active-color !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="GenericGridView\**" />
+    <EmbeddedResource Remove="GenericGridView\**" />
+    <None Remove="GenericGridView\**" />
+  </ItemGroup>
+<ItemGroup>
+		<LitiumLocalization Include="Resources\Administration*.resx" />
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.18.0" />
+    <PackageReference Include="Litium.Owin" Version="8.1.6" />
+    <PackageReference Include="Litium.Web.WebApi.Abstractions" Version="8.7.1" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0-rc.2.22472.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Litium.Accelerator.FieldTypes\Litium.Accelerator.FieldTypes.csproj" />
+    <ProjectReference Include="..\Litium.Accelerator\Litium.Accelerator.csproj" />
+    <ProjectReference Include="..\PandoNexis.Accelerator.Extensions\PandoNexis.Accelerator.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Builders\" />
+    <Folder Include="Definitions\Pages\" />
+    <Folder Include="PNGenericGridView\Definitions\Websites\" />
+    <Folder Include="PNGenericGridView\_Solution\Definitions\Pages\" />
+    <Folder Include="PNGenericGridView\_Solution\Definitions\Products\" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Block\Resources\AdministrationBlock.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PNGenericGridView\Resources\AdministrationGenericGridView.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PNGenericGridView\Resources\AdministrationGenericGridView.sv-se.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PNMediaCatalog\Resources\AdministrationMediaCatalog.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="PNMediaCatalog\Resources\AdministrationMediaCatalog.sv-se.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

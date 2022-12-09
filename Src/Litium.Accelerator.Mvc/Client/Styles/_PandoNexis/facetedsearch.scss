@@ -1,0 +1,19 @@
+@include mobile {
+    .faceted-search {
+
+        &__group-header {
+            text-align: center;
+            justify-content: center;
+        }
+    }
+
+
+    .compact-filter {
+        .accordion {
+            &__header {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    }
+}

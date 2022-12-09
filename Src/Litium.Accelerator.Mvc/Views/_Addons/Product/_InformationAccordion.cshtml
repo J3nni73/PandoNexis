@@ -1,0 +1,81 @@
+﻿@model Litium.Accelerator.ViewModels.Product.ProductPageViewModel
+@{  
+    var openTabsIndividually = true;       // Open and close all tabs separately. Default is only one opened at a time. Opening a new tab will close the the other.
+    var pageLoadForceAllClosed = false;     // On page load: Ignore Accelerator standard where first tab with data will start opened
+    var useChevron = false;                 // Default is plus/minus
+
+    /// radio: always ONLY one accordion "tab" open. Opening one closes all other. Can't close all.
+    /// checkbox: individually open/close accordion "tabs". All can be closed
+    var tabOpenType = openTabsIndividually ? "checkbox" : "radio";
+
+    var isTabActivated = false;
+    var groups = Model.ProductFieldGroups.Where(x => x.ProductFields.Count() != 0).ToList();
+}
+<div class="row">
+    <div class="small-12 columns product-info__container">
+        <section class="pn-accordion @(useChevron?"use-chevron":"")">
+        @foreach (var group in groups)
+        {
+            <section class="pn-accordion__data">
+                    <input type="@tabOpenType" class="pn-accordion__@tabOpenType" id="product-description" name="tab-@tabOpenType" @(!isTabActivated? "checked" : string.Empty) />
+                    <label class="pn-accordion__label" for="product-description"><i class="pn__plus-minus"></i> @(group.Name ?? group.GroupId) </label>
+                     <div class="pn-accordion__content">
+                        <div class="row product-info">
+                            <div class="small-12 medium-8 columns" data-equalizer-watch>
+                                <h2 class="product-info__title">
+                                    @(group.Name ?? group.GroupId)
+                                </h2>
+
+                                @foreach (var item in group.ProductFields)
+                                {
+                                    <p>
+                                        @await Html.PartialAsync("_" + item.ViewName, item)
+                                    </p>
+                                }
+
+                            </div>
+                         </div>
+                    </div>
+            </section>
+            isTabActivated = true;
+        }
+            @if (Model.BundleProducts != null && Model.BundleProducts.Any())
+            {
+                <section class="pn-accordion__data">
+                    <input type="@tabOpenType" class="pn-accordion__@tabOpenType" id="product-package" name="tab-@tabOpenType" @(!isTabActivated? "checked" : string.Empty) />
+                    <label class="pn-accordion__label" for="product-package"><i class="pn__plus-minus"></i>  @Html.WebSiteString("product.package") </label>
+                    <div class="pn-accordion__content">
+                        <div class="row">
+                            <div class="small-12 medium-8 columns" data-equalizer-watch>
+                                <h2 class="product-info__title">
+                                    @Html.WebSiteString("product.package")
+                                </h2>
+
+                                <ul class="small-block-grid-2 medium-block-grid-4">
+                                    @foreach (var bundleProd in Model.BundleProducts)
+                                    {
+                                        <li>
+                                            <div itemscope itemtype="http://schema.org/Product" class="package-item">
+                                                <h3>@bundleProd.Name</h3>
+                                                <div class="product-item">
+                                                    @if (bundleProd.Images != null && bundleProd.Images.Count > 0)
+                                                    {
+                                                        @Html.ImageFor(x => bundleProd.Images[0], maxSize: new Size(350, 510), renderSizeAttributes: true)
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <div class="product-detail__price-info">
+                                                @Html.DisplayFor(x => x.ProductItem.Price)
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            }
+        </section>
+    </div>
+</div>

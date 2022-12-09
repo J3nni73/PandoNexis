@@ -1,0 +1,42 @@
+.p {
+    &__category {
+        // teaser-change on category page
+        .select > .form__input {
+            margin: 0;
+        }
+
+        .inspirational-block {
+            margin-top: 0;
+        }
+
+        .banner {
+            &-block {
+                margin-top: 0;
+                margin-bottom: 12px;
+
+                figure {
+                    position: relative;
+                }
+
+                &__image {
+                    @include transition;
+                    max-height: rem(250px);
+                    object-fit: cover;
+                    object-position: center center;
+
+                    @include desktop {
+                        max-height: rem(300px);
+                    }
+                }
+            }
+
+            &-text {
+                &__title {
+                }
+            }
+        }
+
+        .compact-filter, .banner-block {
+        }
+    }
+}

@@ -1,0 +1,18 @@
+$rem-fallback: true; // used in sass-rem
+@import 'sass-rem';
+
+$global-flexbox: true;
+$fa-font-path: '~font-awesome/fonts'; // used in font-awesome
+
+@import 'foundation-zurb-settings';
+@import '~foundation-sites/scss/foundation';
+
+//below includes may be extracted to foundation.scss to reduce unused css
+
+@include foundation-global-styles;
+@include foundation-flex-grid;
+@include foundation-flex-classes;
+@include foundation-visibility-classes;
+
+@include foundation-forms;
+@include foundation-button;

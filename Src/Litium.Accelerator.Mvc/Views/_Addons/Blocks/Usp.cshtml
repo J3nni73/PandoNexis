@@ -1,0 +1,82 @@
+﻿@using PandoNexis.AddOns.Extensions.Block.UspBlock
+@model UspBlockViewModel
+
+@{
+    var backgroundColor = Model.Background;
+    var linkOnlyLayout = string.Empty;
+    var fadeEffect = string.Empty;
+}
+
+<div class="usp-block @backgroundColor">
+    <div class="row">
+        <div class="columns small-12">
+            <div class="usp-block__title-wrapper">
+                @if (!string.IsNullOrEmpty(Model.BlockTitle))
+                {
+                    <h2 class="usp-block__title-wrapper__title">
+                        @Model.BlockTitle
+                    </h2>
+                }
+                @if (!string.IsNullOrEmpty(Model.BlockSubTitle))
+                {
+                    <h4 class="usp-block__title-wrapper__subtitle">
+                        @Model.BlockSubTitle
+                    </h4>
+                }
+                @if (!string.IsNullOrEmpty(Model.BlockText))
+                {
+                    <div class="usp-block__title-wrapper__text">
+                        @Html.Raw(@Model.BlockText)
+                    </div>
+                }
+            </div>
+
+            @if (Model.Items.Any())
+            {
+                <div class="row small-up-2 medium-up-4 large-up-5 align-center">
+                    @foreach (var item in Model.Items)
+                    {
+                        if (string.IsNullOrEmpty(item.BlockTitle) && item.Button != null && !string.IsNullOrEmpty(item.Button.Href))
+                        {
+                            linkOnlyLayout = "link-only-layout";
+                        }
+
+                        <div class="usp-block__items__item column @linkOnlyLayout">
+                            <div class="usp-block__items__item__title-wrapper">
+                                @if (item.Image != null)
+                                {
+                                    <div class="usp-block__items__item__title-wrapper__image-holder">
+                                        @Html.ImageFor(x => item.Image)
+                                    </div>
+                                }
+                                @if (!string.IsNullOrEmpty(item.BlockTitle))
+                                {
+                                    <h4 class="usp-block__items__item__title-wrapper__title">
+                                        @item.BlockTitle
+                                    </h4>
+                                }
+
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(item.BlockText))
+                            {
+                                <div class="usp-block__items__item__text">
+                                    @Html.Raw(@item.BlockText)
+                                </div>
+                            }
+                            @if (item.Button != null && !string.IsNullOrEmpty(item.Button.Href))
+                            {
+                                <div class="usp-block__items__item__button-holder">
+                                    <a href="@item.Button.Href" target="@item.Button.Target" class="button @item.Button.Class">@item.Button.LinkText</a>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+

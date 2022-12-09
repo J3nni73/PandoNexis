@@ -1,0 +1,37 @@
+
+@mixin icon-pn--file-doc($color: 333) {
+    background: url('../../images/pandoNexis/file_doc.svg') center no-repeat;
+}
+@mixin icon-pn--file-excel($color: 333) {
+    background: url('../../images/pandoNexis/file_excel.svg') center no-repeat;
+}
+@mixin icon-pn--file-xml($color: 333) {
+    background: url('../../images/pandoNexis/file_xml.svg') center no-repeat;
+}
+@mixin icon-pn--folder($color: 333) {
+    background: url('../../images/pandoNexis/folder_fill.svg') center no-repeat;
+}
+@mixin icon-pn--folder-open($color: 333) {
+    background: url('../../images/pandoNexis/folder_open_fill.svg') center no-repeat;
+}
+@mixin icon-pn--file-zip($color: 333) {
+    background: url('../../images/pandoNexis/file_zip.svg') center no-repeat;
+}
+@mixin icon-pn--file-pdf($color: 333) {
+    background: url('../../images/pandoNexis/file_pdf.svg') center no-repeat;
+}
+@mixin icon-pn--file-download($color: 333) {
+    background: url('../../images/pandoNexis/file_download.svg') center no-repeat;
+}
+@mixin icon-pn--info($color: 333) {
+    background: url('../../images/pandoNexis/info.svg') center no-repeat;
+}
+@mixin icon-pn--grid-view($color: 333) {
+    background: url('../../images/pandoNexis/grid_view.svg') center no-repeat;
+}
+@mixin icon-pn--list-view($color: 333) {
+    background: url('../../images/pandoNexis/list_view.svg') center no-repeat;
+}
+@mixin icon-pn--arrow-back($color: 333) {
+    background: url('../../images/pandoNexis/arrow_back.svg') center no-repeat;
+}

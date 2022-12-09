@@ -1,0 +1,49 @@
+.chevron {
+    @include chevron;
+
+    &--right {
+    }
+
+    &--left {
+        @include rotate(135);
+    }
+
+    &--up {
+        @include rotate(-135);
+    }
+
+    &--down {
+        @include rotate(45);
+    }
+
+    &__dropdown {
+        &, &--select-box, &--select-box-site-select {
+            @include chevron(7px, $white, $angle: 45);
+            -webkit-transform: rotate(45deg);
+            position: absolute;
+            right: 0;
+            top: 4px;
+            opacity: .8;
+
+            @include mobile {
+                top: 8.5px;
+            }
+        }
+
+        &--select-box, &--select-box-site-select {
+            opacity: 1;
+            right: 8px;
+            top: 12px;
+        }
+
+        &--select-box-site-select {
+            right: 12px;
+            top: 14px;
+
+            @include tablet-desktop {
+                right: 16px;
+                opacity: 1;
+            }
+        }
+    }
+}

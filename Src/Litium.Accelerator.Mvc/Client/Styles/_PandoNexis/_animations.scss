@@ -1,0 +1,90 @@
+/*  timing function options:
+    inherit|ease|ease-in|ease-out|ease-in-out|linear|step-start|step-end    */
+
+/*  animation-fill-mode: 
+    none|forwards|backwards|both|initial|inherit;   */
+
+/// Example animation usage
+/// @include animation(0, 0.5s, fade-in, ease-in-out);
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    99% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes off-canvas-in {
+    0% {
+        transform: translateX(-20%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+@keyframes mini-cart-in {
+    0% {
+        transform: scale(.8,.8) translateX(-60%);
+    }
+
+    100% {
+        transform: scale(1,1) translateX(-50%);
+    }
+}
+
+@keyframes mini-cart-in-mobile {
+    0% {
+        transform: scale(1,1) translateX(100%);
+    }
+
+    100% {
+        transform: scale(1,1) translateX(0);
+    }
+}
+
+@keyframes slide-down {
+    0% {
+        max-height: 0;
+    }
+
+    100% {
+        max-height: 400rem;
+    }
+}
+
+@keyframes mega-menu-in {
+    0% {
+        overflow: hidden;
+        margin-top: -250px;
+        padding-bottom: 0;
+        opacity: 0;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    99% {
+        overflow: hidden;
+        margin-top: 0;
+        opacity: 1;
+    }
+
+    100% {
+        overflow: auto;
+        margin-top: 0;
+        opacity: 1;
+    }
+}

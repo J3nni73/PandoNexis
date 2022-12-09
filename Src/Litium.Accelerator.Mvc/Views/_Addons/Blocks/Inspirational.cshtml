@@ -1,0 +1,101 @@
+﻿@using PandoNexis.AddOns.Extensions.Block.InspirationalBlock
+@model InspirationalBlockViewModel
+@{
+    var sectionsclass = string.Empty;
+    var negativeMargin = string.Empty;
+    var fullWidth = string.Empty;
+    var extraPadding = string.Empty;
+    var textColor = string.Empty;
+    var backgroundColor = Model.Background;
+    //if (backgroundColor == "thirdColor")
+    //{
+    //    textColor = "white";
+    //}
+    if (!Model.FullWidth)
+    {
+        fullWidth = "row";
+    }
+    if (Model.FullWidth)
+    {
+        extraPadding = "extra-padding";
+    }
+}
+@if (Model.Items.Any())
+{
+    <div class="inspirational-block @backgroundColor">
+        @if (Model.Items.Any())
+        {
+            @foreach (var item in Model.Items)
+            {
+                sectionsclass = "inspirational-block__item";
+                @if (!item.Reverse)
+                {
+                    sectionsclass = "inspirational-block__item-reverse";
+                }
+                @if (item.NegativeMargin)
+                {
+                    negativeMargin = "negativeMargin";
+                }
+
+                <div class="@sectionsclass @fullWidth">
+                    @*section1*@
+                    <div class="inspirational-block__sectionleft @extraPadding">
+                        <h3 class="inspirational-block__subtitle">
+                            @item.BlockSubTitle
+                        </h3>
+                        <h2 class="inspirational-block__title @textColor">
+                            @item.BlockTitle
+                        </h2>
+                        <div class="inspirational-block__text @textColor">
+                            @Html.Raw(item.BlockText)
+                        </div>
+                        @if (item.Button != null && !string.IsNullOrEmpty(item.Button.Href))
+                        {
+                            <div class="inspirational-block__button">
+                                <a href="@item.Button.Href" target="@item.Button.Target" class="@item.Button.Class">@item.Button.LinkText</a>
+                            </div>
+                        }
+                    </div>
+                    @*section2*@
+                    <div class="inspirational-block__sectionright">
+
+                        @if (item?.Image != null)
+                        {
+                            <div class="inspirational-block__image-wrapper @negativeMargin">
+                                @Html.ImageFor(x => item.Image)
+                            </div>
+                        }
+                        else if (item.Video != null && !string.IsNullOrEmpty(item.Video.Url))
+                        {
+                            var fileUrl = item.Video.Url;
+                            var isSupportedVideo = fileUrl.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) || fileUrl.EndsWith(".ogg", StringComparison.OrdinalIgnoreCase) || fileUrl.EndsWith(".webm", StringComparison.OrdinalIgnoreCase);
+                            if (isSupportedVideo)
+                            {
+                                var videoFormat = fileUrl.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) ? "video/mp4" :
+                                fileUrl.EndsWith(".ogg", StringComparison.OrdinalIgnoreCase) ? "video/ogg" : "video/webm";
+                                <div class="row video">
+                                    <div class="columns small-12 video__container">
+                                        <video class="video__player" playsinline webkit-playsinline autoplay muted loop>
+                                            <source src="@item.Video.Url" type="@videoFormat">
+                                        </video>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="inspirational-block__sectionright__text-only">
+                                <h3 class="inspirational-block__subtitle">
+                                    @item.BlockSubTitle2
+                                </h3>
+                                <div class="inspirational-block__text @textColor">
+                                    @Html.Raw(item.BlockText2)
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </div>
+}

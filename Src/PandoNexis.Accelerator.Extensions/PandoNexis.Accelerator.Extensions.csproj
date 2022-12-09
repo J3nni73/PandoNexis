@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;Production</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Litium.Web.Administration.Application" Version="8.7.1" />
+    <PackageReference Include="Litium.Web.WebApi.Abstractions" Version="8.7.1" />
+  </ItemGroup>
+<ItemGroup>
+    <LitiumLocalization Include="Resources\Administration*.resx" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Litium.Accelerator\Litium.Accelerator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="Tracking\" />
+    <Folder Include="ViewModel\Product\" />
+  </ItemGroup>
+
+</Project>

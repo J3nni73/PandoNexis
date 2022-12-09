@@ -1,0 +1,96 @@
+﻿@using PandoNexis.AddOns.Extensions.Block.InfoTileBlock
+@model InfoTileBlockViewModel
+
+@{
+    var backgroundColor = Model.Background;
+    var linkOnlyLayout = string.Empty;
+    var fadeEffect = string.Empty;
+}
+
+<div class="info-tile @backgroundColor">
+    <div>
+        <div class="info-tile__title-wrapper">
+            @if (!string.IsNullOrEmpty(Model.BlockTitle))
+            {
+                <h2 class="info-tile__title-wrapper__title">
+                    @Model.BlockTitle
+                </h2>
+            }
+            @if (!string.IsNullOrEmpty(Model.BlockSubTitle))
+            {
+                <h4 class="info-tile__title-wrapper__subtitle">
+                    @Model.BlockSubTitle
+                </h4>
+            }
+            @if (!string.IsNullOrEmpty(Model.BlockText))
+            {
+                <div class="info-tile__title-wrapper__text">
+                    @Html.Raw(@Model.BlockText)
+                </div>
+            }
+        </div>
+
+        @if (Model.Items.Any())
+        {
+            <div class="info-tile__items">
+                @foreach (var item in Model.Items)
+                {
+                    if (string.IsNullOrEmpty(item.BlockText) && string.IsNullOrEmpty(item.BlockText2) &&
+                    string.IsNullOrEmpty(item.BlockTitle) && item.Button != null && !string.IsNullOrEmpty(item.Button.Href))
+                    {
+                        linkOnlyLayout = "link-only-layout";
+                    }
+                    if (!string.IsNullOrEmpty(item.BlockText2))
+                    {
+                        fadeEffect = "fade-text";
+                    }
+                    <div class="info-tile__items__item @linkOnlyLayout">
+                        <div class="info-tile__items__item__title-wrapper">
+                            @if (!string.IsNullOrEmpty(item.BlockTitle))
+                            {
+                                <h4 class="info-tile__items__item__title-wrapper__title">
+                                    @item.BlockTitle
+                                </h4>
+                            }
+                            @if (item.Image != null)
+                            {
+                                <div class="info-tile__items__item__title-wrapper__image-holder">
+                                    @Html.ImageFor(x => item.Image)
+                                </div>
+                            }
+                        </div>
+                    
+                        @if (!string.IsNullOrEmpty(item.BlockText))
+                        {
+                            <div class="info-tile__items__item__load-more js-toggle-class" data-toggleclass="active">
+                                <div class="info-tile__items__item__text @fadeEffect">
+                                    @Html.Raw(@item.BlockText)
+                                </div>
+                                @if (!string.IsNullOrEmpty(item.BlockText2))
+                                {
+                                    <p class="info-tile__items__item__load-more__link">
+                                        @Html.WebSiteString("blocks.load.more")
+                                    </p>
+                                    <p class="info-tile__items__item__load-more__show-less">
+                                        @Html.WebSiteString("blocks.show.less")
+                                    </p>
+                                    <div class="info-tile__items__item text2">
+                                        @Html.Raw(@item.BlockText2)
+                                    </div>
+                                }
+                            </div>
+                        }
+                        @if (item.Button != null && !string.IsNullOrEmpty(item.Button.Href))
+                        {
+                            <div class="info-tile__items__item__button-holder">
+                                <a href="@item.Button.Href" target="@item.Button.Target" class="@item.Button.Class">@item.Button.LinkText</a>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+

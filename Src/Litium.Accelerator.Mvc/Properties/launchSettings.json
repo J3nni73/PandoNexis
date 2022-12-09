@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Litium.Accelerator.Mvc": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://pandonexisaccelerator.localtest.me:61548;http://pandonexisaccelerator.localtest.me:61549"
+    }
+  }
+}

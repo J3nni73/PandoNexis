@@ -1,0 +1,264 @@
+//// LARGER MIXINS
+
+//// dropdown-selector - html/REACT usage:
+/*
+    <div class="dropdown-selector">
+        <label class="dropdown-selector__current" for="sortSelectorCheckbox">
+        @selectedName
+        <i class="chevron__dropdown"></i>
+        </label >
+        <input class="dropdown-selector__checkbox" id="sortSelectorCheckbox" type="checkbox">
+        <ul class="dropdown-selector__items">
+            @foreach (var item in Model.SortItems) {
+                <li class="@(item.Selected?"selected":"")"><a href="@item.Value">@item.Text</a></li>
+            }
+        </ul>
+    </div>
+*/
+@mixin dropdown-selector-function ($display-type: block, $selectorOnHover: false, $active-bg-color: #eee, $shadow-color: #eee, $chevron-color: #000, $chevron-border-width: 2px, $label-display-type: flex) {
+    .dropdown-selector {
+        &__img {
+            margin-right: rem(8px);
+            width: 35px;
+        }
+
+        .chevron__dropdown {
+            position: absolute;
+            display: inline-block;
+            right: rem(20px);
+            top: rem(12px);
+            padding: 4px;
+            border-width: 0 $chevron-border-width $chevron-border-width 0;
+            border-color: transparent $chevron-color $chevron-color transparent;
+        }
+
+        .dropdown-selector__items {
+            display: none;
+            position: absolute;
+            top: calc(100% - 12px);
+            z-index: 10;
+            background: rgba($color-white, .98);
+            left: 50%;
+            transform: translateX(-50%);
+            padding: rem(24px);
+            @include box-shadow(0, 0, 12px, 0, rgba($shadow-color, .4));
+        }
+
+        &.active {
+        }
+
+        @include mobile {
+        }
+
+        > label {
+            position: relative;
+            display: $label-display-type;
+            margin: 0 auto;
+        }
+
+        > input[type=checkbox] {
+            display: none;
+        }
+
+        &.active {
+        }
+
+        &__current {
+
+            > .button {
+                background-color: $active-bg-color !important;
+            }
+
+            .chevron__dropdown {
+                transform: rotate(-135deg);
+                -webkit-transform: rotate(-135deg);
+                margin-top: rem(4px);
+            }
+
+            .dropdown-selector__items {
+                display: $display-type;
+            }
+        }
+
+        input[type=checkbox]:checked {
+            ~ .dropdown-selector__items {
+                display: $display-type;
+            }
+
+            ~ label .chevron__dropdown {
+                transform: rotate(-135deg);
+                -webkit-transform: rotate(-135deg);
+                margin-top: rem(5px);
+            }
+        }
+
+        @if $selectorOnHover {
+            &:hover {
+                .dropdown-selector__items {
+                    display: $display-type;
+                }
+
+                .chevron__dropdown {
+                    transform: rotate(-135deg);
+                    -webkit-transform: rotate(-135deg);
+                    margin-top: rem(4px);
+                }
+            }
+        }
+    }
+}
+
+
+@mixin dropdown-selector($selectorHeight: auto,$selectorMobileHeight: auto, $selectorFontSize: 10px, $selectorFontWeigt: 400, $selectorMarginLeft: 0, $selectorPositionLeft: 0, $selectorPositionRight: auto, $selectorPositionTop: 4px, $selectorPositionBottom: auto, $selectorPadding: 24px 30px, $selectorBorder: none, $selectorBg: #eee, $selectorItemPadding: 4px, $selectorItemColor: #000, $selectorItemBg: transparent, $selectorItemHoverColor: #fff, $selectorItemHoverBg: #fff, $selectorMinWidth: 155px, $selectorItemFontSize: 10px,$selectorItemMargin: 0 0 10px 0, $selectorItemBorder: none, $selectorItemSelectedColor: $color-white, $selectorItemSelectedBg: transparent, $selectorToUpperCase: false, $selectorItemLineHeight: 1, $selectorOnHover: false) {
+    .dropdown-selector {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+        height: rem($selectorHeight);
+        cursor: pointer;
+        position: relative;
+        margin-left: rem($selectorMarginLeft);
+
+        &__img {
+            margin-right: rem(8px);
+            width: 35px;
+        }
+
+        @include mobile {
+            height: rem($selectorMobileHeight);
+            padding: 0;
+            display: flex;
+            margin-right: rem(24px);
+        }
+
+        label {
+            cursor: pointer;
+            font-size: rem($selectorFontSize);
+            color: $color-white;
+        }
+
+        img {
+            width: rem(32px);
+            margin-top: rem(-4px);
+            display: inline-block;
+            margin-right: 10px;
+            margin-top: -0.125rem;
+        }
+
+        &__current {
+            font-size: rem($selectorFontSize);
+            color: $color-white;
+
+            @if $selectorToUpperCase {
+                text-transform: uppercase;
+            }
+
+            .chevron__dropdown {
+                position: relative;
+                display: inline-block;
+                margin-left: 8px;
+                padding: 4px;
+                top: -2px;
+            }
+
+            &.active {
+                .chevron__dropdown {
+                    transform: rotate(-135deg);
+                    -webkit-transform: rotate(-135deg);
+                    top: 2px;
+                }
+            }
+
+            @include mobile {
+            }
+        }
+
+        &__items {
+            display: none;
+            position: absolute;
+            left: rem($selectorPositionLeft);
+            top: rem($selectorPositionTop);
+            right: rem($selectorPositionRight);
+            bottom: rem($selectorPositionBottom);
+            padding: rem($selectorPadding);
+            background: $selectorBg;
+            z-index: 100;
+            min-width: $selectorMinWidth;
+            border: $selectorBorder;
+
+            @include mobile {
+                top: -302px;
+            }
+
+            @include box-shadow(-3px, 0, 8px, 0px, rgba(0,0,0,0.62));
+
+            > li {
+                border-bottom: $selectorItemBorder;
+                padding: 0;
+                margin: 0;
+
+                a {
+                    padding: rem($selectorItemPadding);
+                    margin: rem($selectorItemMargin);
+                    width: 100%;
+                    display: inline-block;
+                }
+
+                &, a {
+                    white-space: nowrap;
+                    text-align: left;
+                    color: $selectorItemColor;
+                    font-size: rem($selectorItemFontSize);
+                    background: $selectorItemBg;
+                    line-height: $selectorItemLineHeight;
+
+                    @if $selectorToUpperCase {
+                        text-transform: uppercase;
+                    }
+
+                    &:hover {
+                        color: $selectorItemHoverColor;
+                        background: $selectorItemHoverBg;
+                    }
+                }
+
+                &.selected {
+                    &, a {
+                        color: $selectorItemSelectedColor;
+                        background: $selectorItemSelectedBg;
+                    }
+                }
+
+
+                @include mobile {
+                    padding: 0.5rem;
+                    padding-left: 1.25rem;
+                    height: 57px;
+                }
+                /*&:nth-child(even) {
+                    background: $color-customer-background-menu1;
+                }*/
+            }
+
+            &.active {
+                display: block;
+            }
+        }
+
+        input[type=checkbox] {
+            display: none;
+        }
+
+        input[type=checkbox]:checked + .dropdown-selector__items {
+            display: block;
+        }
+
+        @if $selectorOnHover {
+            &:hover {
+                .dropdown-selector__items {
+                    display: block;
+                }
+            }
+        }
+    }
+}

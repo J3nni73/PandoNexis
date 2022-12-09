@@ -1,0 +1,21 @@
+
+.row {
+    max-width: rem($page-width);
+
+    .row {
+        &.collapse {
+            .column, .columns {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+        }
+    }
+}
+
+.main-content {
+    padding-top: rem(20px);
+
+    @include mobile {
+        overflow-x: hidden;
+    }
+}

@@ -1,0 +1,208 @@
+/* SETTINGS */
+$pn-accordion-border-radius: 5px;
+$pn-accordion-color-shadow: $color-grey-darkest;
+$pn-accordion-color-border: rgba($color-full-black, .1);
+$pn-accordion-color-icon: $color-grey-darkest;
+$pn-accordion-color-text: $color-black;
+$pn-accordion-tab-background: #fafafa;
+$pn-accordion-tab-background-active: #fafaff;
+
+/* IF PLUS AND MINUS */
+$pn-accordion-plusminus-width: rem(2px);
+$pn-accordion-plusminus-size: rem(16px);
+/* END SETTINGS */
+
+.pn-accordion {
+    border: 1px solid $pn-accordion-color-border;
+    border-radius: rem($pn-accordion-border-radius);
+    overflow: hidden;
+    @include box-shadow(3px, 0, 12px, 0, rgba($pn-accordion-color-shadow, .3));
+
+    &__content {
+        box-sizing: border-box;
+        @include transition;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        border-bottom: 1px solid $pn-accordion-color-border;
+        border-top: none;
+        padding: rem(0 20px);
+        margin: 0;
+        font-size: rem($fontsize-normal);
+
+        > h2 {
+            font-size: rem($fontsize-normal);
+        }
+
+        > h3 {
+            font-size: rem($fontsize-h3);
+        }
+    }
+
+    &__label {
+        @include transition;
+        display: flex;
+        color: $pn-accordion-color-text;
+        position: relative;
+        cursor: pointer;
+        margin: 0;
+        padding: rem(0 20px);
+        width: 100%;
+        border-bottom: 1px solid $pn-accordion-color-border;
+        font-size: rem($fontsize-normal);
+        font-weight: 700;
+        height: rem(47px);
+        align-items: center;
+        background: $pn-accordion-tab-background;
+    }
+
+    &:not(.use-chevron) {
+        .pn-accordion {
+            &__label {
+                .pn__plus-minus {
+                    position: absolute;
+                    width: $pn-accordion-plusminus-size;
+                    height: $pn-accordion-plusminus-size;
+                    right: rem(40px);
+                    top: 50%;
+                    transform: translateY(-50%);
+
+                    &:before,
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        background-color: rgba($pn-accordion-color-icon, .7);
+                        transition: transform 0.25s ease-out;
+                    }
+                    /* Vertical line */
+                    &:before {
+                        top: 0;
+                        left: 50%;
+                        width: $pn-accordion-plusminus-width;
+                        height: 100%;
+                        margin-left: -$pn-accordion-plusminus-width/2;
+                    }
+                    /* horizontal line */
+                    &:after {
+                        top: 50%;
+                        left: 0;
+                        width: 100%;
+                        height: $pn-accordion-plusminus-width;
+                        margin-top: -$pn-accordion-plusminus-width/2;
+                    }
+                }
+            }
+
+            &__radio, &__checkbox {
+                &:checked {
+                    & + .pn-accordion__label {
+                        .pn__plus-minus {
+                            &:before {
+                                transform: rotate(90deg);
+                            }
+
+                            &:after {
+                                transform: rotate(180deg);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.use-chevron {
+        .pn-accordion {
+            &__label {
+                .pn__plus-minus {
+                    position: absolute;
+                    width: 30px;
+                    height: 30px;
+                    right: rem(12px);
+                    top: 50%;
+                    transform: translateY(-50%);
+
+                    &:after {
+                        @include transition(all, .2s, ease-in-out);
+                        content: '';
+                        @include chevron(6px, $pn-accordion-color-icon, -45);
+                        border-width: rem(2px);
+                        border-right: none;
+                        border-top: none;
+                        position: relative;
+                        left: rem(2px);
+                    }
+                }
+            }
+
+            &__radio, &__checkbox {
+                &:checked {
+                    & + .pn-accordion__label {
+                        margin: 0 !important;
+
+                        .pn__plus-minus {
+                            &:before {
+                                transform: rotate(90deg);
+                            }
+
+                            &:after {
+                                top: rem(8px);
+                                transform: rotate(135deg);
+                                -webkit-transform: rotate(135deg);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &__margin-top {
+        margin-top: rem(14px);
+    }
+
+    &__radio, &__checkbox {
+        display: none;
+
+        &[type=checkbox] + label, &[type=radio] + label {
+            display: flex;
+
+            &, &:checked {
+                margin: 0;
+            }
+        }
+
+        &:checked {
+            & + .pn-accordion__label {
+                margin: 0 !important;
+                background: $pn-accordion-tab-background-active;
+
+                & + .pn-accordion__content {
+                    display: block;
+                    max-height: calc(100vh - 120px);
+                    overflow: auto;
+                    opacity: 1;
+                    padding: rem(20px);
+                }
+            }
+        }
+    }
+
+    &__data {
+        &:last-child {
+            .pn-accordion {
+                &__label, &__content {
+                    border: none;
+                }
+
+                &__radio, &__checkbox {
+                    &:checked {
+                        & + .pn-accordion__label {
+                            border-bottom: 1px solid $pn-accordion-color-border;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

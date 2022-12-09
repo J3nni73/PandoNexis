@@ -1,0 +1,73 @@
+﻿@using PandoNexis.AddOns.Extensions.Block.HeroBlock
+@model HeroBlockViewModel
+@{
+    var narrow = string.Empty;
+    if (Model.FullWidth == false)
+    {
+        narrow = "narrow";
+    }
+    var overlayImageLeftPosition = string.Empty;
+    if (!Model.BlockOverlayLeft)
+    {
+        overlayImageLeftPosition = "right";
+    }
+    var extraPadding = string.Empty;
+    if (Model.BlockOverlayImage != null && Model.BlockOverlayLeft)
+    {
+        extraPadding = "extra-padding";
+    }
+    var quoteStyle = string.Empty;
+    if (Model.QuoteStyle == true)
+    {
+        quoteStyle = "quote-style";
+    }
+    var heroCenteredTextClass = Model.CenteredText ? "hero-block__centered-text" : "";
+}
+
+<div class="hero-block">
+    <div class="hero-block__content @narrow @Model.Background">
+        <div class="hero-block__text-wrapper @extraPadding @heroCenteredTextClass">
+            @if (!string.IsNullOrEmpty(Model.BlockTitle))
+            {
+                <h2 class="hero-block__text-wrapper__title">@Model.BlockTitle</h2>
+            }
+            @if (!string.IsNullOrEmpty(Model.BlockTitle2))
+            {
+                <h2 class="hero-block__text-wrapper__title-alt-color">@Model.BlockTitle2</h2>
+            }
+            @if (!string.IsNullOrEmpty(Model.BlockSubTitle))
+            {
+                <h3 class="hero-block__text-wrapper__subtitle">@Model.BlockSubTitle</h3>
+            }
+            @if (!string.IsNullOrEmpty(Model.BlockText))
+            {
+                <div class="hero-block__text-wrapper__text @quoteStyle">
+                    @Html.Raw(@Model.BlockText)
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.Button.Href) && !string.IsNullOrEmpty(Model.Button.LinkText))
+            {
+                <div class="hero-block__text-wrapper__button">
+                    <a href="@Model.Button.Href" target="@Model.Button.Target" class="button @Model.Button.Class">@Model.Button.LinkText</a>
+                </div>
+            }
+        </div>
+        <div class="hero-block__image-wrapper @narrow">
+            @if (Model.GradiantOverlay)
+            {
+                <div class="overlay"></div>
+            }
+            @Html.ImageFor(x => Model.BlockImage)
+        </div>
+        <div class="hero-block__image-wrapper-mobile @narrow">
+            @if (Model.GradiantOverlay)
+            {
+                <div class="overlay"></div>
+            }
+            @Html.ImageFor(x => Model.BlockMobilImage)
+        </div>
+        <div class="hero-block__image @overlayImageLeftPosition">
+            @Html.ImageFor(x => Model.BlockOverlayImage)
+        </div>
+    </div>
+</div>
