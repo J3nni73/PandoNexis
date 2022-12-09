@@ -29,6 +29,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.9" Condition=" '$(Configuration)' == 'Debug' " />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Client\Scripts\_Addons\PnThreeDeeBg\images\" />
     <Folder Include="Controllers\Api\_Solution\" />
     <Folder Include="Controllers\Api\_PandoNexis\" />
     <Folder Include="Controllers\Api\_PandoNexis\" />
