@@ -8,7 +8,7 @@ namespace PandoNexis.AddOns.Extensions.PNFilesToFieldConnect
 {
     public static class FilesToFieldConnectConstants
     {
-        public static string FilesToFieldConnectMainFolder = "FilesToFieldConnectMainFolder4";
-        public static string ProductCertificates = "ProductCertificates4";
+        public static string FilesToFieldConnectMainFolder = "FilesToFieldConnectMainFolder";
+        public static string ProductCertificates = "ProductCertificates";
     }
 }
