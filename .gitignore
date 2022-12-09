@@ -367,3 +367,4 @@ FodyWeavers.xsd
 /Src/Litium.Accelerator.FieldTypes/dist
 /Src/Litium.Accelerator.Mvc/wwwroot
 /Src/files
+/Src/Litium.Accelerator.Mvc/appsettings.Development.json
