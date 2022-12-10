@@ -4,6 +4,7 @@
 @{   
     var bareLayout = (bool?)ViewContext.RouteData.DataTokens["BareLayout"] == true;
     var pageCssClass = ViewData["PageCssClass"];
+    var sessionInitClass = (bool)ViewData["IsSessionInit"]? "session__init" : "";
     var isLoggedOn = User.Identity.IsAuthenticated;
 }
 <!DOCTYPE html>
@@ -13,8 +14,9 @@
     @RenderSection("head", false)
     <vc:client-context-controller />
 </head>
-<body class="@pageCssClass">
-   @* <div class="pn-main-background" id="pnMainBackground"></div>*@
+<body class="@pageCssClass @sessionInitClass">
+    <div class="pn-main-background" id="pnMainBackground"></div>
+    <section class="pn-page__wrapper">
     <vc:body-start-layout-controller />
     @if (!bareLayout)
     {
@@ -32,5 +34,6 @@
     <div id="globalNotification"></div>
     @RenderSection("js", false)
     <vc:body-end-layout-controller />
+    </section>
 </body>
 </html>

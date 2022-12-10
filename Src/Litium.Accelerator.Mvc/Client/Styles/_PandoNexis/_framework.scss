@@ -11,12 +11,16 @@
         }
     }
 }
+.pn-page__wrapper{
+    position: relative;
+    z-index: 10;
+}
 
 .main-content {
     position: relative;
     z-index: 2;
     padding-top: rem(20px);
-    
+
     @include mobile {
         overflow-x: hidden;
     }

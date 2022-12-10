@@ -28,13 +28,15 @@
 
 <header id="header" role="banner" class="pn-header">
     <div class="row pn-header__row @headerClass align-center">
-        <div class="small-2 large-4 columns"></div>
+        <div class="small-2 large-4 columns">
+            <a href="@Model.StartPageUrl" class="header__logo">
+                @Html.ImageFor(x => x.Logo, maxSize: new System.Drawing.Size(-1, logoHeight), renderSizeAttributes: true, responsiveDefinition: responsiveDefinition)
+            </a>
+        </div>
         <div class="small-8 large-4 columns text--center">
             <section class="pn-header__center-container">
-                <a href="@Model.StartPageUrl" class="header__logo">
-                    @Html.ImageFor(x => x.Logo, maxSize: new System.Drawing.Size(-1, logoHeight), renderSizeAttributes: true, responsiveDefinition: responsiveDefinition)
-                </a>
                 <div id="quickSearch"></div>
+                <div class="pn-header__powered-by"><span class="pn-icon" data-type="powered_by" data-title="@Html.WebSiteString("solution.poweredby")"></span><span class="pn-icon" data-type="litium" data-title="Litium"></span></div>
             </section>
         </div>
 

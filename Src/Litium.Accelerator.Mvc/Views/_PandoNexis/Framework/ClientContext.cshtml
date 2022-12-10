@@ -19,13 +19,13 @@
 		isBusinessCustomer = Model.IsBusinessCustomer,
 		hasApproverRole = Model.HasApproverRole
 	});
-	window.__litium.TopLinkList = @Html.Json(Model.TopLinkList);
 
 	window.__litium.constants = {
 		role: {
 			approver: "@RolesConstants.RoleOrderApprover",
 			buyer: "@RolesConstants.RoleOrderPlacer",
 		},
+		topLinkList: @Html.Json(Model.TopLinkList),
 		countries: @Html.Json(Model.Countries),
 		checkoutMode: {
 			privateCustomers: @((int)CheckoutMode.PrivateCustomers),

@@ -8,7 +8,7 @@ import app, { createReducer } from './reducers';
 import { historyMiddleware } from './Middlewares/History.middleware';
 import MiniCart from './Components/MiniCart';
 import QuickSearch from './Components/QuickSearch';
-import Navigation from './Components/Navigation';
+import Navigation from './_PandoNexis/Components/Navigation'; // Pando Nexis Change. Old:  './Components/Navigation'; 
 import FacetedSearch from './Components/FacetedSearch';
 import FacetedSearchCompactContainer from './Components/FacetedSearchCompactContainer';
 import DynamicComponent from './Components/DynamicComponent';

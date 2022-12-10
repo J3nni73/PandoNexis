@@ -1,18 +1,19 @@
 html, body {
     font-family: $font-family;
-    color: $color-white;
+    color: $solution-color;
     background: $body-background-color;
 }
 
 a {
     line-height: inherit;
-    color: $color-black;
+    color: $solution-link-color;
     text-decoration: none;
     cursor: pointer;
+
     &:focus,
     &:hover,
     &:active {
-        color: $color-black;
+        color: $solution-link-color-hover;
     }
 }
 h1,

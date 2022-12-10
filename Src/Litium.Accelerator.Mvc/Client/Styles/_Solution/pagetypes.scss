@@ -39,4 +39,18 @@
         .compact-filter, .banner-block {
         }
     }
+
+    &__home {
+        .main-content {
+            padding-top: 0;
+
+            > section[data-litium-block-id] {
+                &:first-of-type {
+                    .teaser > a{
+                        padding-top: 0;
+                    }
+                }
+            }
+        }
+    }
 }

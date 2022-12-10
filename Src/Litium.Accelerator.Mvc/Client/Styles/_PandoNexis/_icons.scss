@@ -1,4 +1,7 @@
-
+.pn-icon {
+    opacity: 0;
+    @include animation(0, 0.5s, fade-in, ease-in-out);
+}
 @mixin icon-pn--file-doc($color: 333) {
     background: url('../../images/pandoNexis/file_doc.svg') center no-repeat;
 }

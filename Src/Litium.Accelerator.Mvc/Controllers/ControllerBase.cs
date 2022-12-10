@@ -5,6 +5,7 @@ using Litium.Accelerator.Builders.Menu;
 using Litium.Globalization;
 using Litium.Sales;
 using Litium.Web.Routing;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
@@ -72,6 +73,8 @@ namespace Litium.Accelerator.Mvc.Controllers
 
             var _PNFrameworkService = HttpContext.RequestServices.GetRequiredService<PNFrameworkService>();
             ViewData["PageCssClass"] = _PNFrameworkService.GetCurrentPageBodyCssClass();
+            ViewData["IsSessionInit"] = string.IsNullOrEmpty(HttpContext.Session.GetString("_IsSessionInit"));
+            HttpContext.Session.SetString("_IsSessionInit", "true");
             //PandoExtensions: end
             ViewData["MasterName"] = masterName;
 

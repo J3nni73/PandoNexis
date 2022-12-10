@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import DynamicComponent from './Components/DynamicComponent';
 
 // ADDONS IMPORT
 import GenericGridViewContainer from './_Addons/GenericGridView/Containers/GenericGridView.container';
@@ -14,6 +15,24 @@ import './pandoNexis.events.js';
 import './pandoNexis.functions.js';
 
 export const pnBootstrapComponents = (store) => {
+
+    // ICONS
+    const iconEls = document.querySelectorAll('.pn-icon');
+    if (iconEls) {
+        const PnIcon = DynamicComponent({
+            loader: () => import('./_PandoNexis/Components/PnIcon'),
+        });
+        iconEls.forEach((elem) => {
+            const { type, title } = elem.dataset;
+
+            ReactDOM.render(
+                <Provider store={store}>
+                    <PnIcon type={type} title={title} />
+                </Provider>,
+                elem
+            );
+        });
+    }
 
     // ADDONS
     // MediaCatalog
