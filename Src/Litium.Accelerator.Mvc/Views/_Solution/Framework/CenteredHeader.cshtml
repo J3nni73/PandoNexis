@@ -36,7 +36,7 @@
         <div class="small-8 large-4 columns text--center">
             <section class="pn-header__center-container">
                 <div id="quickSearch"></div>
-                <div class="pn-header__powered-by"><span class="pn-icon" data-type="powered_by" data-title="@Html.WebSiteString("solution.poweredby")"></span><span class="pn-icon" data-type="litium" data-title="Litium"></span></div>
+                <div class="pn-header__powered-by-litium"><span class="pn-icon" data-icon-name="powered-by" data-title="@Html.WebSiteString("solution.poweredby")" data-width="65" data-height="15"></span><span class="pn-icon" data-icon-name="litium" data-title="Litium" data-width="65" data-height="15"></span></div>
             </section>
         </div>
 
@@ -58,7 +58,7 @@
                 }
                 <div class="profile">
                     <a href="@currentPage.Href" class="profile__link--block" rel="nofollow" alt="@currentPage.Text" title="@currentPage.Text">
-                        <i class="profile__icon"></i>
+                        <span class="pn-icon" data-icon-name="account" data-width="32" data-height="32" data-title="@Html.WebSiteString("solution.account")"></span>
                         <span class="profile__title">@currentPage.Text</span>
                     </a>
                 </div>

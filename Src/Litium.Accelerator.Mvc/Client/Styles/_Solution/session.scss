@@ -1,0 +1,42 @@
+.session {
+    &__init {
+        
+    }
+}
+
+.pn-header {
+    &__row {
+        > div:not(.text--center), .quick-search {
+            opacity: 0;
+        }
+    }
+
+    border-color: rgba($solution-border-color-solid, 0) !important;
+
+    &__powered-by-litium {
+        position: relative;
+        @include scale(400%, 400%);
+        top: calc(50vh - 100px);
+
+        .pn-icon {
+            &__litium {
+                opacity: 0;
+                transform: translateX(50%);
+            }
+
+            &__powered-by {
+                transform: translateX(50%);
+            }
+        }
+    }
+}
+
+footer.footer, .main-content {
+    opacity: 0;
+}
+
+body{
+    max-height: 100vh;
+    overflow: hidden;
+}
+

@@ -1,8 +1,17 @@
+@import '../PandoNexisAccTheme/fonts';
 $rem-fallback: true; // used in sass-rem
 @import 'sass-rem';
 
 $global-flexbox: true;
 $fa-font-path: '~font-awesome/fonts'; // used in font-awesome
+
+$font-family: Lato, Helvetica, Roboto, Arial, sans-serif;
+$body-font-family: $font-family;
+$header-font-family: $font-family;
+
+$body-background-color: #170322;
+$body-background: $body-background-color;
+@import '../PandoNexisAccTheme/setfonts';
 
 @import 'foundation-zurb-settings';
 @import '~foundation-sites/scss/foundation';

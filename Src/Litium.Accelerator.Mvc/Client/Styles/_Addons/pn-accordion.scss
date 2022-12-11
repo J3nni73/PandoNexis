@@ -1,11 +1,12 @@
 /* SETTINGS */
 $pn-accordion-border-radius: 5px;
-$pn-accordion-color-shadow: $color-grey-darkest;
+$pn-accordion-color-shadow: rgba(8,10,20,.5);
 $pn-accordion-color-border: rgba($color-full-black, .1);
-$pn-accordion-color-icon: $color-grey-darkest;
-$pn-accordion-color-text: $color-black;
-$pn-accordion-tab-background: #fafafa;
-$pn-accordion-tab-background-active: #fafaff;
+$pn-accordion-color-icon: rgba(255,255,255,.7);
+$pn-accordion-color-text: $pn-accordion-color-icon;
+$pn-accordion-tab-background: rgba(88,88,155, .3);
+$pn-accordion-tab-background-active: rgba(128, 88, 255, 0.3);
+$pn-accordion-content-background: rgba(0,0,0,.5);
 
 /* IF PLUS AND MINUS */
 $pn-accordion-plusminus-width: rem(2px);
@@ -30,6 +31,8 @@ $pn-accordion-plusminus-size: rem(16px);
         margin: 0;
         font-size: rem($fontsize-normal);
 
+        background: $pn-accordion-content-background;
+        
         > h2 {
             font-size: rem($fontsize-normal);
         }

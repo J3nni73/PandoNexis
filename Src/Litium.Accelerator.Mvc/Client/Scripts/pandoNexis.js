@@ -23,11 +23,10 @@ export const pnBootstrapComponents = (store) => {
             loader: () => import('./_PandoNexis/Components/PnIcon'),
         });
         iconEls.forEach((elem) => {
-            const { type, title } = elem.dataset;
-
+            const { iconName, title, width, height } = elem.dataset;
             ReactDOM.render(
                 <Provider store={store}>
-                    <PnIcon type={type} title={title} />
+                    <PnIcon iconName={iconName} title={title} width={width} height={height} />
                 </Provider>,
                 elem
             );

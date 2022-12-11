@@ -1,9 +1,10 @@
+$pn-navbar-link-hover-border-bottom-color: $solution-border-color-solid;
 $pn-header-background: transparent; //$color-secondary; // none; 222, 250
 $pn-header-shadow-color: $color-primary;
-$pn-header-border-bottom: 3px solid rgba($color-white, .4);
+$pn-header-border-bottom: 1px solid $pn-navbar-link-hover-border-bottom-color;
 $pn-header-logo-padding: 20px 16px;
 $pn-header-logo-desktop-height: 66px;
-$pn-header-height: 118px;
+$pn-header-height: 128px;
 $pn-header-mobile-height: 84px;
 $pn-header-components-height: 54px;
 $pn-header-components-size: 14px;
@@ -13,12 +14,11 @@ $pn-header-components-icon-size: 20px;
 $pn-header-components-transform: none; // uppercase; // none;
 
 $pn-navbar-link-size: 16px;
-$pn-navbar-link-padding: 6px 12px;
+$pn-navbar-link-padding: 6px 24px;
 $pn-navbar-link-tablet-padding: 6px 12px;
 $pn-navbar-link-color: $solution-link-color;
 $pn-navbar-link-hover-color: $solution-link-color-hover;
 $pn-navbar-link-hover-background: transparent;
-$pn-navbar-link-hover-border-bottom-color: #fff;
 $pn-navbar-transform: none; // uppercase; // none;
 
 $pn-search-border: 3px solid rgba($color-white, .4);
@@ -29,29 +29,51 @@ $pn-search-color: #fff;
 $pn-search-margin: 8px 0 6px 0;
 
 $pn-megamenu-font-size: 14px;
+$pn-megamenu-font-color: $solution-link-color;
+$pn-megamenu-font-color-hover: $solution-link-color-hover;
 $pn-megamenu-background-angle: 50;
-$pn-megamenu-background-color-start: #f7faf7;
-$pn-megamenu-background-color-start: rgba($pn-megamenu-background-color-start, .99);
-$pn-megamenu-background-color-end: lighten($color-secondary, 40%);
-$pn-megamenu-background-color-end: rgba($pn-megamenu-background-color-end, .98);
+$pn-megamenu-background-color-start: rgba(5,0,0,.95);
+//$pn-megamenu-background-color-start: rgba($pn-megamenu-background-color-start, .99);
+$pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary, 40%);
+//$pn-megamenu-background-color-end: rgba($pn-megamenu-background-color-end, .98);
 
 .pn-header {
     @include transition;
     position: relative;
+    z-index: 10;
     //@include gradient($pn-megamenu-background-angle, darken( $pn-header-background, 8%), $pn-header-background);
 
     border-bottom: $pn-header-border-bottom;
     background: $pn-header-background;
     //@include box-shadow(0, 0, 12px, 0, rgba($pn-header-shadow-color, .2));
 
+    @include animation(0, 1.5s, fade-in, ease-in-out);
+
     &__row {
         @include tablet-desktop {
-            min-height: rem($pn-header-height);
+            height: rem($pn-header-height);
         }
 
         &, > .row {
             max-width: none;
             width: 100%;
+        }
+    }
+
+    &__powered-by-litium {
+        /*display: flex;
+        align-items: baseline;
+        justify-content: center;
+        height: 30px;*/
+    }
+
+    .pn-icon {
+        &__powered-by {
+            margin-right: rem(8px);
+        }
+
+        &__litium {
+
         }
     }
 
@@ -73,12 +95,13 @@ $pn-megamenu-background-color-end: rgba($pn-megamenu-background-color-end, .98);
         width: 100%;
         max-width: 400px;
         display: inline-block;
-        margin: rem(8px 0);
+        margin: rem(8px 0 0 0);
         z-index: 100;
         position: relative;
     }
 
     &__components {
+        @include transition;
         display: flex;
         align-items: center;
         justify-content: end;
@@ -105,6 +128,41 @@ $pn-megamenu-background-color-end: rgba($pn-megamenu-background-color-end, .98);
 
             &__title {
                 text-transform: $pn-header-components-transform;
+            }
+
+            .pn-icon__account, .pn-icon__cart {
+                margin-right: rem(8px);
+                @include transition;
+                fill: rgba($solution-link-color, .4);
+                //@include rotate(90);
+            }
+
+            &:hover {
+                .pn-icon__account, .pn-icon__cart {
+                    fill: rgba($solution-link-color, .8);
+                }
+            }
+        }
+
+        .cart {
+            &--mini .cart__quantity {
+                background: none;
+                top: rem(-15px);
+                left: rem(18px);
+                @include transition;
+                color: rgba($solution-link-color, .8);
+            }
+
+            &:hover {
+                .cart {
+                    &--mini .cart__quantity {
+                        color: rgba($solution-link-color, .98);
+                    }
+                }
+            }
+
+            &__icon-wrapper {
+                position: relative;
             }
         }
 
@@ -134,6 +192,18 @@ $pn-megamenu-background-color-end: rgba($pn-megamenu-background-color-end, .98);
             height: 100%;
             padding-right: rem(16px);
             background: $pn-search-background;
+
+            .pn-icon__search {
+                @include transition;
+                fill: rgba($solution-link-color, .4);
+                //@include rotate(90);
+            }
+
+            &:hover {
+                .pn-icon__search {
+                    fill: rgba($solution-link-color, .8);
+                }
+            }
 
             @include border-radius(0, 44px, 44px, 0);
         }
@@ -202,6 +272,9 @@ $pn-megamenu-background-color-end: rgba($pn-megamenu-background-color-end, .98);
         min-height: 0;
 
         &__wrapper {
+            margin: 0;
+            padding: 0;
+            height: 100%;
 
             @include tablet-desktop {
                 height: rem(40px);
@@ -249,7 +322,7 @@ $pn-megamenu-background-color-end: rgba($pn-megamenu-background-color-end, .98);
 
                         &:after {
                             background-color: $pn-navbar-link-hover-border-bottom-color;
-                            bottom: rem(3px);
+                            bottom: rem(0px);
                         }
                     }
 
@@ -272,14 +345,15 @@ $pn-megamenu-background-color-end: rgba($pn-megamenu-background-color-end, .98);
                     }
                     // MEGA MENU
                     > .navbar__menu {
-                        @include box-shadow(0, 0, 10px, 0, rgba($pn-header-shadow-color, .2));
+                        @include box-shadow(5px, 0, 32px, 0, rgba($pn-header-shadow-color, .9));
                         @include gradient($pn-megamenu-background-angle, $pn-megamenu-background-color-start, $pn-megamenu-background-color-end);
                         border: none;
                         padding-top: 0;
+                        z-index: 99;
 
                         @include tablet-desktop {
+                            border-top: 2px solid $pn-navbar-link-hover-border-bottom-color;
                             border-bottom: $pn-header-border-bottom;
-
 
                             & > .navbar__menu-links {
                                 display: grid;
@@ -293,7 +367,7 @@ $pn-megamenu-background-color-end: rgba($pn-megamenu-background-color-end, .98);
                         }
 
                         @include desktop {
-                            margin-top: rem(-3px);
+                            margin-top: 0; //rem(-3px);
                         }
 
                         @include tablet {
@@ -316,10 +390,15 @@ $pn-megamenu-background-color-end: rgba($pn-megamenu-background-color-end, .98);
                                 a {
                                     display: inline-block;
                                     font-size: rem($pn-megamenu-font-size);
+                                    color: $pn-megamenu-font-color;
                                     font-weight: 600;
                                     width: 100%;
                                     text-align: left;
                                     text-transform: none;
+
+                                    &:hover {
+                                        color: $pn-megamenu-font-color-hover;
+                                    }
                                 }
 
                                 .navbar__menu {

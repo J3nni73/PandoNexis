@@ -55,13 +55,15 @@
         flex-flow: column wrap;
         flex: 1 1 auto;
         width: 100%;
+        background: rgba(0,0,0,.3);
 
         @include transition;
         @include border-radius(2px, 2px, 0, 0);
-        @include box-shadow(0, 0, 1px, 0, rgba($general-shadow-color, .9));
+
+        @include box-shadow(0, 0, 2px,0, rgba($general-shadow-color, .3));
 
         &:hover {
-            @include box-shadow(0, 0, 4px,0, rgba($general-shadow-color, .2));
+            @include box-shadow(0, 0, 2px, 1px, rgba($general-shadow-color, .4));
         }
 
         margin-bottom: rem(24px);
@@ -91,8 +93,8 @@
 
     &__info {
         width: 100%;
-        padding-top: 10px;
-        border-top: rem(1px) solid $color-primary;
+        padding: rem(10px 10px 6px 10px);
+        border-top: rem(1px) solid $solution-line-color;
     }
 
     &__name,
@@ -125,7 +127,7 @@
     &__campaign-price {
         font-size: rem($fontsize-large);
         line-height: 1.5em;
-        font-weight: 300;
+        font-weight: 600;
 
         @include tablet-small {
             font-size: rem($fontsize-small) !important;
@@ -134,7 +136,8 @@
 
     &__old-price {
         font-size: rem(16px);
-        color: $color-grey-darkest;
+        font-weight: 200;
+        color: $color-text-primary-highlight;
     }
 
     &__quantity-container {

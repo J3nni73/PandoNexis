@@ -1,7 +1,7 @@
 .pagination {
     text-align: center;
     font-size: 0;
-    background-color: $color-white;
+    background-color: transparent;
     padding: rem(10px 0);
 
     &__item {
@@ -16,6 +16,7 @@
         &:first-child {
             margin-left: 0;
         }
+
         &:last-child {
             margin-right: 0;
         }
@@ -29,7 +30,8 @@
         width: rem(30px);
         height: rem(30px);
         padding: rem(11px);
-        background-color: $color-grey-lightest;
+        background-color: rgba($color-black-light, .3);
+        @include box-shadow(0, 0, 1px,0, rgba($general-shadow-color, .5));
         @include textoverflow();
         @include transition(background-color);
 
@@ -38,13 +40,17 @@
             height: rem(30px);
         }
 
+        &:hover {
+            background-color: rgba($color-grey-lightest, .1);
+        }
+
         &--current {
             &,
-            &:hover,
             &:active,
-            &:focus {
-                background-color: $color-black-light;
+            &:focus,
+            &:hover {
                 color: $color-white;
+                background-color: rgba($color-grey-lightest, .3);
             }
         }
 

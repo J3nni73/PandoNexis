@@ -1,5 +1,8 @@
 /* font-family */
 $font-family: Lato, Helvetica, Roboto, Arial, sans-serif;
+$body-font-family: $font-family;
+
+$header-font-family: $font-family;
 
 /* Colors */
 $color-black: #333 !default;
@@ -8,13 +11,6 @@ $color-black-lighter: #565656 !default;
 
 $color-white: #fff !default;
 $color-white-dark: #fbfbfb !default;
-
-$color-primary: #111 !default;
-$color-primary-dark: #000 !default;
-$color-error: #f04124 !default;
-$color-success: #206020 !default;
-
-$color-link: #0099ff !default;
 
 $color-grey-lightest: #f2f2f2 !default;
 $color-grey-lighter: #eee !default;
@@ -27,8 +23,22 @@ $color-grey-darkest: #595959 !default;
 $color-secondary: #ffc444 !default;
 
 $solution-color: rgba($color-white, .7);
+$solution-line-color: rgba($color-white, .2);
+$solution-border-color-solid: #706a89;
 $solution-link-color: $solution-color;
 $solution-link-color-hover: $color-white;
+
+$color-link: $solution-link-color !default;
+$solution-color-purple-light: #7811c1;
+
+$color-primary: #111 !default;
+$color-primary-dark: #000 !default;
+$color-error: #f08164 !default;
+$color-success: #70a070 !default;
+
+$color-text-primary: $solution-link-color;
+$color-text-primary-light: $solution-link-color-hover;
+$color-text-primary-highlight: lighten($solution-color-purple-light, 40%);
 
 /* Font size */
 $fontsize-tiny: 10px;
@@ -54,5 +64,4 @@ $desktop-width: map-get($breakpoints, xxlarge); // OLD: 1440px;
 /* Navigation bar */
 $navbar-width: 300px;
 
-$body-background-color: #170322;
 $header-background-color: $body-background-color;
