@@ -46,7 +46,6 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
     border-bottom: $pn-header-border-bottom;
     background: $pn-header-background;
     //@include box-shadow(0, 0, 12px, 0, rgba($pn-header-shadow-color, .2));
-
     @include animation(0, 1.5s, fade-in, ease-in-out);
 
     &__row {
@@ -65,15 +64,17 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
         align-items: baseline;
         justify-content: center;
         height: 30px;*/
+        min-height: rem(24px);
     }
 
     .pn-icon {
         &__powered-by {
+            opacity: 0;
             margin-right: rem(8px);
         }
 
         &__litium {
-
+            opacity: 0;
         }
     }
 
@@ -83,9 +84,20 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
 
             @include tablet-desktop {
                 height: rem($pn-header-logo-desktop-height);
+                position: relative;
 
                 img {
+                    @include transition;
+                    max-height: 8rem;
                     margin: 0 0 auto;
+                    position: absolute;
+                    top: rem(-1px);
+                }
+
+                &:hover {
+                    img {
+                        @include scale(1.1, 1);
+                    }
                 }
             }
         }

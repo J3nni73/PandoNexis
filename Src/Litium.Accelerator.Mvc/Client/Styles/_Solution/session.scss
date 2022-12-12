@@ -1,42 +1,73 @@
-.session {
-    &__init {
-        
-    }
-}
+body {
+    &.session__init {
+        .pn-header {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
 
-.pn-header {
-    &__row {
-        > div:not(.text--center), .quick-search {
+            &__components {
+                padding-right: rem(20px);
+            }
+
+            &__row {
+                > div:not(.text--center), .quick-search {
+                    opacity: 0;
+                    @include animation(0.5s, 5.5s, session-start-fade-in, ease-in-out);
+                }
+            }
+
+            border-color: rgba($solution-border-color-solid, 0);
+            @include animation(0.5s, 5.5s, session-start-header, ease-in-out);
+
+            &__powered-by-litium {
+                position: relative;
+                @include scale(400%, 400%);
+                top: calc(50vh - 100px);
+                @include animation(0.5s, 5.5s, powered-by-litium, ease-in-out);
+
+                .pn-icon {
+                    &__litium {
+                        opacity: 0;
+                        transform: translateX(50%);
+                        @include animation(0.5s, 5.5s, litium, ease-in-out);
+                    }
+
+                    &__powered-by {
+                        transform: translateX(50%);
+                        @include animation(0.5s, 5.5s, powered-by, ease-in-out);
+                    }
+                }
+            }
+        }
+
+        footer.footer {
             opacity: 0;
+            @include animation(0.5s, 5.5s, session-start-fade-in, ease-in-out);
+        }
+
+        .main-content {
+            opacity: 0;
+            padding-top: rem(128px);
+            @include animation(1.5s, 5.5s, session-start-content, ease-in-out);
+        }
+
+        body {
+            max-height: 100vh;
+            @include animation(1.5s, 5.5s, session-start-body, ease-in-out);
         }
     }
 
-    border-color: rgba($solution-border-color-solid, 0) !important;
-
-    &__powered-by-litium {
-        position: relative;
-        @include scale(400%, 400%);
-        top: calc(50vh - 100px);
-
+    &:not(.session__init) {
         .pn-icon {
             &__litium {
                 opacity: 0;
-                transform: translateX(50%);
+                @include animation(0.5s, 1.5s, fade-in, ease-in-out);
             }
 
             &__powered-by {
-                transform: translateX(50%);
+                @include animation(0.5s, 1.5s, fade-in, ease-in-out);
             }
         }
     }
 }
-
-footer.footer, .main-content {
-    opacity: 0;
-}
-
-body{
-    max-height: 100vh;
-    overflow: hidden;
-}
-
