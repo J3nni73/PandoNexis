@@ -1,7 +1,9 @@
-body {
+html, body {
     font-family: $font-family;
-    color: $color-black;
+    color: $color-white;
+    background: $body-background-color;
 }
+
 a {
     line-height: inherit;
     color: $color-black;
