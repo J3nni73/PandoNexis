@@ -46,7 +46,7 @@
 
             > section[data-litium-block-id] {
                 &:first-of-type {
-                    .teaser > a{
+                    .teaser > a, .hero-block > .hero-block__content {
                         padding-top: 0;
                     }
                 }
