@@ -1,6 +1,6 @@
 .image-stats-block {
     display: flex;
-    background-color: $color-primary;
+    background-color: $solution-background-transparent;
     height: rem(450px);
     margin: 2rem 0;
 
@@ -41,7 +41,7 @@
         }
 
         &__title {
-           /* font-weight: $font-weight-extra-black;
+            /* font-weight: $font-weight-extra-black;
             font-size: $fontsize-large-heading;*/
             line-height: rem(50px);
             color: $color-white;
@@ -55,7 +55,7 @@
 
         &__title-alt-color {
             /*color: $color-accent;*/
-  /*          font-weight: $font-weight-extra-black;
+            /*          font-weight: $font-weight-extra-black;
             font-size: $fontsize-large-heading;*/
             line-height: rem(50px);
             text-transform: uppercase;
