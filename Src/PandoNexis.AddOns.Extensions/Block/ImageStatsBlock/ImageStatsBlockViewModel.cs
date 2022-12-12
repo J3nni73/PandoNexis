@@ -26,7 +26,7 @@ namespace PandoNexis.AddOns.Extensions.Block.ImageStatsBlock
             cfg.CreateMap<BlockModel, ImageStatsBlockViewModel>()
               .ForMember(x => x.BlockTitle, m => m.MapFromField(BlockFieldNameConstants.BlockTitle))
               .ForMember(x => x.BlockTitle2, m => m.MapFromField(BlockFieldNameConstants.BlockTitle2))
-              .ForMember(x => x.Image, m => m.MapFrom(c => c.Fields.GetValue<Guid>(BlockFieldNameConstants.BlockImage, CultureInfo.CurrentUICulture).MapTo<ImageModel>()))
+              .ForMember(x => x.Image, m => m.MapFrom(c => c.Fields.GetValue<Guid>(BlockFieldNameConstants.BlockImage).MapTo<ImageModel>()))
               ;
         }
     }
