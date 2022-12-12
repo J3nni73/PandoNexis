@@ -30,7 +30,7 @@ namespace PandoNexis.AddOns.Extensions.Block.HeroBlock
                .ForMember(x => x.BlockTitle, m => m.MapFrom(c => c.Fields.GetValue<string>((BlockFieldNameConstants.BlockTitle), CultureInfo.CurrentCulture)))
                .ForMember(x => x.BlockSubTitle, m => m.MapFrom(c => c.Fields.GetValue<string>((BlockFieldNameConstants.BlockSubTitle), CultureInfo.CurrentCulture)))
                .ForMember(x => x.BlockText, m => m.MapFrom(c => c.Fields.GetValue<string>((BlockFieldNameConstants.BlockText), CultureInfo.CurrentCulture)))
-               .ForMember(x => x.Image, m => m.MapFrom(c => c.Fields.GetValue<Guid>(BlockFieldNameConstants.BlockImage, CultureInfo.CurrentUICulture).MapTo<ImageModel>()))
+               .ForMember(x => x.Image, m => m.MapFrom(c => c.Fields.GetValue<Guid>(BlockFieldNameConstants.BlockImage).MapTo<ImageModel>()))
                .ForMember(x => x.BlockSubTitle2, m => m.MapFrom(c => c.Fields.GetValue<string>((BlockFieldNameConstants.BlockSubTitle2), CultureInfo.CurrentCulture)))
                .ForMember(x => x.BlockText2, m => m.MapFrom(c => c.Fields.GetValue<string>((BlockFieldNameConstants.BlockText2), CultureInfo.CurrentCulture)))
                .ForMember(x => x.Reverse, m => m.MapFrom(c => c.Fields.GetValue<bool>((BlockFieldNameConstants.Reverse))))
