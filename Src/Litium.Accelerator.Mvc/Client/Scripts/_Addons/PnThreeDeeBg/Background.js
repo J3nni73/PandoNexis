@@ -7,7 +7,8 @@ const Background = (props) => {
     const [vantaEffect, setVantaEffect] = useState(0);
     const [theme, setTheme] = useState(props.theme || 'cells');
     const mainBg = useRef(null);
-    const mapOptions = {
+    const cellsOptions = {
+        backgroundColor: 0x170322,
         mouseControls: false,
         touchControls: false,
         gyroControls: false,
@@ -37,7 +38,7 @@ const Background = (props) => {
             setVantaEffect(
                 theme === 'clouds' ?
                     CLOUDS2({ ...cloudOptions, el: mainBg.current }) :
-                    CELLS({ ...mapOptions, el: mainBg.current }));
+                    CELLS({ ...cellsOptions, el: mainBg.current }));
         }
         return () => {
             if (vantaEffect) vantaEffect.destroy();
@@ -49,7 +50,7 @@ const Background = (props) => {
             setVantaEffect(
                 theme === 'clouds' ?
                     CLOUDS2({ ...cloudOptions, el: mainBg.current }) :
-                    CELLS({ ...mapOptions, el: mainBg.current }));
+                    CELLS({ ...cellsOptions, el: mainBg.current }));
             setEffectLoaded(true);
         }
         return () => {

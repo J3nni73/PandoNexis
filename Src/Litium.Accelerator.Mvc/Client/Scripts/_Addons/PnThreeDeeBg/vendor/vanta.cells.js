@@ -4,9 +4,9 @@ class Effect extends ShaderBase { }
 export default VANTA.register('CELLS', Effect)
 
 Effect.prototype.defaultOptions = {
-    color1: 0x8c8c,
-    color2: 0xf2e735,
-    backgroundColor: 0xd7ff8f,
+    color1: 0x303904,
+    color2: 0x52047f,
+    backgroundColor: 0x170322,
     amplitudeFactor: 1.0,
     ringFactor: 1.0,
     rotationFactor: 1.0,

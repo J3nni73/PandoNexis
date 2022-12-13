@@ -112,18 +112,21 @@
         opacity: 0;
     }
 
-    60% {
+    70% {
         padding-top: rem(128px);
         opacity: 0;
     }
-
+    80% {
+        padding-top: rem(0);
+    }
     98% {
         opacity: 1;
+        padding-top: rem(0);
     }
 
     100% {
-        padding-top: rem(0);
         opacity: 1;
+        padding-top: rem(0);
     }
 }
 

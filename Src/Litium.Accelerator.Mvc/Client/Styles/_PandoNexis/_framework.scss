@@ -25,3 +25,7 @@
         overflow-x: hidden;
     }
 }
+
+section[data-litium-block-id] {
+    @include animation(0, 0.5s, fade-in, ease-in-out);
+}

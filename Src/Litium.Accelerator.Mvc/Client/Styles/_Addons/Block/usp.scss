@@ -8,7 +8,9 @@ $usp-block-color-tertiary: $block-background3;
     justify-content: center;
     margin: rem(20px 0);
     padding: rem(32px 32px 0 32px);
-    background-color: lightgray;
+    background-color: $solution-background-transparent;
+    border-top: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.1);
 
     p {
         margin: 0;
