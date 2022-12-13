@@ -75,6 +75,27 @@
     }
 }
 
+
+@keyframes powered-by-litium-mobile {
+    0% {
+        transform: scale(2,2);
+        right: calc(50vw - 69px);
+        top: calc(50vh - 100px);
+    }
+
+    85% {
+        right: calc(50vw - 69px);
+        transform: scale(2,2);
+        top: calc(50vh - 100px);
+    }
+
+    100% {
+        transform: scale(1,1);
+        right: rem(10px);
+        top: rem(60px);
+    }
+}
+
 @keyframes session-start-fade-in {
     0% {
         opacity: 0;

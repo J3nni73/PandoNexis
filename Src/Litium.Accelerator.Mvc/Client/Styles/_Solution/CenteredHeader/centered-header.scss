@@ -5,7 +5,7 @@ $pn-header-border-bottom: 1px solid $pn-navbar-link-hover-border-bottom-color;
 $pn-header-logo-padding: 20px 16px;
 $pn-header-logo-desktop-height: 66px;
 $pn-header-height: 128px;
-$pn-header-mobile-height: 84px;
+$pn-header-mobile-height: 134px;
 $pn-header-components-height: 54px;
 $pn-header-components-size: 14px;
 $pn-header-components-color: $solution-link-color;
@@ -96,6 +96,14 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
                     }
                 }
             }
+
+            &-mobile {
+                @include transition;
+
+                @include tablet-desktop {
+                    display: none;
+                }
+            }
         }
     }
 
@@ -143,6 +151,10 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
                 @include transition;
                 fill: rgba($solution-link-color, .4);
                 //@include rotate(90);
+
+                @include mobile {
+                    fill: rgba($solution-link-color, .5);
+                }
             }
 
             &:hover {
@@ -251,7 +263,9 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
         }
 
         @include mobile {
-            background-color: $color-primary;
+            background-color: $solution-background-transparent;
+            border-top: 1px solid rgba($solution-line-color, .4);
+            border-bottom: 1px solid rgba($solution-line-color, .1);
 
             &__submit-icon {
             }
@@ -264,13 +278,15 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
                 }
             }
 
-            &__submit-icon {
-                display: block;
-                opacity: .7;
+            &__submit {
+                &-icon {
+                    display: block;
+                    opacity: .7;
 
-                @include rotate(90);
-                float: right;
-                opacity: .5;
+                    @include rotate(90);
+                    float: right;
+                    opacity: .5;
+                }
             }
         }
     }
@@ -324,6 +340,7 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
                             text-align: left;
                             align-items: center;
                             padding-top: rem(10px);
+                            font-weight: 500;
 
                             @include border-radius(0);
                         }
@@ -336,7 +353,7 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
 
                     @include mobile {
                         display: flex;
-                        height: rem(44px);
+                        height: rem($pn-search-height);
                         align-items: center;
                     }
 
@@ -432,8 +449,8 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
     }
 
     @include mobile {
-        min-height: rem(84px);
-        padding-bottom: (24px);
+        min-height: rem($pn-header-mobile-height);
+        padding-bottom: ($pn-search-height);
         position: relative;
 
         &__row {
@@ -444,12 +461,13 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
 
         &__center-container {
             max-width: rem(226px);
-            margin: rem(10px auto);
+            margin: 0;
+            position: static;
         }
 
         &__components {
             position: absolute;
-            top: 0;
+            top: rem(16px);
             right: rem(6px);
             z-index: 10;
 
@@ -459,6 +477,13 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
                     height: 44px;
                 }
             }
+        }
+
+        &__powered-by-litium {
+            position: absolute;
+            right: rem(10px);
+            top: rem( 60px);
+            opacity: .3;
         }
 
         #quickSearch {
@@ -485,8 +510,15 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
                 background: none;
             }
 
-            &__submit-button {
-                @include border-radius(0);
+            &__submit {
+                &-button {
+                    @include border-radius(0);
+                    padding: rem(0 0 0 32px);
+                }
+
+                &-title {
+                    display: none;
+                }
             }
 
             &__input {
@@ -500,9 +532,19 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
 
         .header {
             &__logo {
+                @include transition;
                 max-width: rem(226px);
                 padding: 0;
                 margin: 0;
+                display: none;
+
+                &-mobile {
+                    @include transition;
+
+                    img {
+                        max-width: rem(200px);
+                    }
+                }
             }
         }
 
@@ -517,7 +559,7 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
 
             .navbar__icon {
                 &.navbar__link--block {
-                    padding: rem(10px 7px 4px 7px);
+                    padding: rem(18px 7px 4px 7px);
                 }
 
                 padding: rem(10px);
@@ -548,14 +590,43 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
 
     @include mobile-small {
         .header__logo {
-            max-width: rem(180px);
-            padding: rem(2px 0);
+            &-mobile {
+                position: absolute;
+                left: rem(62px);
+                top: 0;
+
+                img {
+                    width: rem(200px);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 363px) {
+        .header__logo {
+            &-mobile {
+                left: rem(62px);
+
+                img {
+                    width: 50vw;
+                }
+            }
         }
     }
 
     @include mobile-mini {
         .header__logo {
-            margin-left: rem(-4px);
+            &-mobile {
+                left: 4px;
+                z-index: -1;
+                opacity: .2;
+                top: rem(-18px);
+
+                img {
+                    width: 100vw;
+                    max-width: none;
+                }
+            }
         }
     }
 }

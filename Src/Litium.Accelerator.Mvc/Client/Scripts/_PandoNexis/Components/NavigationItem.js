@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import { translate } from '../../Services/translation';
 import constants from '../../constants';
 
@@ -21,13 +21,14 @@ const NavigationItem = ({ links = [], contentLink = null }) => {
     return (
         <Fragment>
             {!contentLink ? (
-                <a
-                    className="navbar__link--block navbar__icon--menu navbar__icon"
+                <button
+                    type="button"
+                    className="nav__hamburger-icon navbar__link--block navbar__icon--menu navbar__icon"
                     onClick={toggleMenu}
                     rel="nofollow"
                     href="#"
                     title={translate('general.menu') || 'menu'}
-                ></a>
+                ><span /><span /><span /><span /></button>
             ) : (
                 <Fragment>
                     <a
@@ -47,7 +48,7 @@ const NavigationItem = ({ links = [], contentLink = null }) => {
             )}
 
             {links.length > 0 && (
-                <div className="navbar__menu" ref={menuRef}>
+                <div className={`navbar__menu`} ref={menuRef}>
                     <div className="navbar__menu-header">
                         {!contentLink ? (
                             <span

@@ -8,10 +8,21 @@ body {
 
             &__components {
                 padding-right: rem(20px);
+
+                @include mobile {
+                    padding-right: 0;
+                }
             }
 
             &__row {
                 > div:not(.text--center), .quick-search {
+                    opacity: 0;
+                    @include animation(0.5s, 5.5s, session-start-fade-in, ease-in-out);
+                }
+            }
+
+            .header {
+                &__logo-mobile {
                     opacity: 0;
                     @include animation(0.5s, 5.5s, session-start-fade-in, ease-in-out);
                 }
@@ -25,6 +36,13 @@ body {
                 @include scale(400%, 400%);
                 top: calc(50vh - 100px);
                 @include animation(0.5s, 5.5s, powered-by-litium, ease-in-out);
+
+                @include mobile {
+                    position: absolute;
+                    right: calc(50vw - 69px);
+                    transform: scale(2,2);
+                    @include animation(0.5s, 5.5s, powered-by-litium-mobile, ease-in-out);
+                }
 
                 .pn-icon {
                     &__litium {
@@ -41,9 +59,9 @@ body {
             }
         }
 
-        footer.footer {
+        footer.footer, .breadcrumbs {
             opacity: 0;
-            @include animation(0.5s, 5.5s, session-start-fade-in, ease-in-out);
+            @include animation(0.5s, 7.5s, session-start-fade-in, ease-in-out);
         }
 
         .main-content {
