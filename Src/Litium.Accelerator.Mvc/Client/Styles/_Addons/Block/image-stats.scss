@@ -1,8 +1,11 @@
 .image-stats-block {
-    display: flex;
     background-color: $solution-background-transparent;
     height: rem(450px);
     margin: 2rem 0;
+
+    > .row {
+        max-width: none;
+    }
 
     @include mobile-small {
         height: auto;
@@ -18,22 +21,17 @@
     }
 
     &__image-title-wrapper {
-        width: 50%;
-
-        @include mobile-small {
-            width: 100%;
-        }
+        height: rem(450px);
 
         &__text-holder {
             position: absolute;
             max-width: 30%;
-            padding-top: 4rem;
+            padding-top: rem(100px);
             left: 8%;
-            font-size: rem(22px);
 
             @include mobile {
                 left: 5%;
-                padding-top: 2rem;
+                padding-top: rem(32px);
                 font-size: rem(16px);
             }
 
@@ -44,30 +42,54 @@
         }
 
         &__title {
-            /* font-weight: $font-weight-extra-black;
-            font-size: $fontsize-large-heading;*/
             line-height: rem(50px);
             color: $color-white;
             text-transform: uppercase;
             letter-spacing: 0.06em;
 
-            @media (max-width: 800px) {
-                /*font-size: $fontsize-large;*/
+            @include mobile {
+                line-height: 1.2;
             }
         }
 
         &__title-alt-color {
-            /*color: $color-accent;*/
-            /*          font-weight: $font-weight-extra-black;
-            font-size: $fontsize-large-heading;*/
             line-height: rem(50px);
             text-transform: uppercase;
             letter-spacing: 0.06em;
+        }
 
-            @media (max-width: 800px) {
-                /*font-size: $fontsize-large;*/
+        @include mobile {
+            &__text-holder {
+                left: 5%;
+                padding-top: rem(32px);
+                font-size: rem(16px);
+            }
+
+            &__title {
+                line-height: 1.4;
+            }
+
+            &__title-alt-color {
+                line-height: 2;
+            }
+
+            &__title, &__title-alt-color {
+                font-size: rem(18px);
             }
         }
+
+        @include mobile-small {
+            &__text-holder {
+                font-size: rem(24px);
+                max-width: none;
+            }
+
+            &__title, &__title-alt-color {
+                font-size: rem(24px);
+            }
+        }
+
+
 
         img {
             width: 100%;
@@ -81,41 +103,63 @@
         grid-template-columns: auto auto;
         justify-content: center;
         align-items: center;
-        width: 50%;
         background-color: $solution-background-transparent;
         padding: rem(64px 32px);
-        gap: rem(0 36px);
+        gap: rem(0 100px);
+        width: 100%;
 
         @include mobile {
-            gap: 1rem;
+            padding: rem(32px);
+            grid-template-columns: auto;
+            gap: rem(0 50px);
         }
 
         @include mobile-small {
+            gap: rem(20px 0);
             width: 100%;
         }
 
         @media (max-width: $large-mobile-width) {
-            grid-template-columns: auto;
         }
 
         &__items {
-            max-width: rem(250px);
+            max-width: rem(350px);
+            font-size: rem(22px);
 
             &__text-highlight {
-                color: rgba($block-background2, .8);
+                color: rgba($block-background2, .75);
                 font-weight: $font-weight-extra-bold;
-                line-height: rem(70px);
-                /*font-size: $fontsize-x-large-heading;*/
+                line-height: 1.2;
 
-                @media (max-width: 800px) {
-                    font-size: $fontsize-large;
+                > * {
+                    margin: 0;
                 }
             }
 
             &__text {
                 color: $color-white;
-                /*font-size: $fontsize-base;*/
-                /*font-weight: $font-weight-black;*/
+                line-height: 2.2;
+            }
+
+            @include mobile {
+                font-size: rem(16px);
+
+                &__text-highlight {
+                    font-size: rem(16px);
+                    line-height: normal;
+                }
+
+                &__text {
+                    & > * {
+                        margin: 0;
+                    }
+                }
+            }
+
+            @include mobile-small {
+                &__text-highlight {
+                    font-size: rem(24px);
+                }
             }
         }
     }

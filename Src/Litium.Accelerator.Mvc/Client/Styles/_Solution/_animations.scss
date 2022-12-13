@@ -110,40 +110,58 @@
     0% {
         padding-top: rem(128px);
         opacity: 0;
+        max-height: calc(100vh - 300px);
     }
 
     70% {
         padding-top: rem(128px);
         opacity: 0;
+        max-height: calc(100vh - 300px);
     }
-    80% {
+    84% {
+        opacity: 0;
+        max-height: calc(100vh - 300px);
+    }
+
+    90% {
         padding-top: rem(0);
+        max-height: 10000vh;
     }
     98% {
         opacity: 1;
         padding-top: rem(0);
+        max-height: 10000vh;
     }
 
     100% {
         opacity: 1;
         padding-top: rem(0);
+        max-height: none;
     }
 }
 
 @keyframes session-start-body {
     0% {
-        max-height: 100vh;
+        max-height: calc(100vh + 1px) !important;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
 
     80% {
-        max-height: 100vh;
+        max-height: calc(100vh + 1px) !important;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
 
     99% {
-        max-height: 100vh;
+        max-height: 10000vh !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden;
     }
 
     100% {
-        max-height: none;
+        max-height: none !important;
+        overflow-y: auto !important;
+        overflow-x: auto;
     }
 }

@@ -13,7 +13,7 @@
 }
 */
 .pn-main-background {
-    @include filter(blur, .5rem);
+    @include filter(blur, .7rem);
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -36,6 +36,8 @@
     }
 
     &__container {
+        width: 100%;
+        height: 100%;
     }
 
 

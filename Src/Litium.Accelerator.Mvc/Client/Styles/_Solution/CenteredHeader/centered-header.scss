@@ -431,10 +431,6 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
         }
     }
 
-    @include tablet {
-        min-height: rem(162px);
-    }
-
     @include mobile {
         min-height: rem(84px);
         padding-bottom: (24px);
@@ -514,7 +510,7 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
             &__wrapper {
                 position: absolute;
                 top: 0;
-                left: rem(6px);
+                left: 0;
                 width: rem(64px);
                 z-index: 10;
             }
