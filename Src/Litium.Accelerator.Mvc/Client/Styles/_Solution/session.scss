@@ -40,6 +40,7 @@ body {
                 @include mobile {
                     position: absolute;
                     right: calc(50vw - 69px);
+                    opacity: 1;
                     transform: scale(2,2);
                     @include animation(0.5s, 5.5s, powered-by-litium-mobile, ease-in-out);
                 }
