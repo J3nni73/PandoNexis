@@ -95,7 +95,7 @@
         cursor: pointer;
         background-color: $color-white;
         @include mobile {
-            background-color: $color-primary;
+            background-color: $solution-background-primary;
             width: rem(100px);
         }
     }

@@ -94,7 +94,7 @@
         color: $color-text-primary;
         font-size: rem(13px);
         @include transition(border-color);
-        background: $solution-background-transparent;
+        background: $solution-background-primary;
 
         &:hover {
             border-color: lighten(rgba($solution-line-color, .8), 20%);

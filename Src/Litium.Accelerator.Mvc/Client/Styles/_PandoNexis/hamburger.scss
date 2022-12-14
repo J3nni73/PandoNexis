@@ -9,9 +9,9 @@ $icon-color: #fff;
     position: relative;
     z-index: 1;
     left: rem(4px);
-    top: rem(24px);
+    top: rem(16px);
     margin: 10px auto;
-    opacity: .6;
+    opacity: .7;
 
     &:before, &:after {
         content: '';
@@ -28,7 +28,7 @@ $icon-color: #fff;
     }
 
     @include mobile {
-        top: 8px;
+        top: 16px;
     }
 
     * {

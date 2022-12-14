@@ -73,8 +73,21 @@ namespace Litium.Accelerator.Mvc.Controllers
 
             var _PNFrameworkService = HttpContext.RequestServices.GetRequiredService<PNFrameworkService>();
             ViewData["PageCssClass"] = _PNFrameworkService.GetCurrentPageBodyCssClass();
+            
+            var _routeRequestLookupInfoAccessor = HttpContext.RequestServices.GetRequiredService<RouteRequestLookupInfoAccessor>();
             ViewData["IsSessionInit"] = string.IsNullOrEmpty(HttpContext.Session.GetString("_IsSessionInit"));
+            if (!_routeRequestLookupInfoAccessor.RouteRequestLookupInfo.IsInAdministration)
+            {
+                ViewData["IsInAdmin"] = false;
+            }
+            else
+            {
+                ViewData["IsInAdmin"] = true;
+                ViewData["IsSessionInit"] = false;
+            }
+            
             HttpContext.Session.SetString("_IsSessionInit", "true");
+
             //PandoExtensions: end
             ViewData["MasterName"] = masterName;
 

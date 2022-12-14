@@ -5,6 +5,7 @@
     var bareLayout = (bool?)ViewContext.RouteData.DataTokens["BareLayout"] == true;
     var pageCssClass = ViewData["PageCssClass"];
     var sessionInitClass = (bool)ViewData["IsSessionInit"] ? "session__init" : "";
+    var isInAdmin = (bool)ViewData["IsInAdmin"] ? "is-in-admin" : "";
     var isLoggedOn = User.Identity.IsAuthenticated;
 }
 <!DOCTYPE html>
@@ -14,7 +15,7 @@
     @RenderSection("head", false)
     <vc:client-context-controller />
 </head>
-<body class="@pageCssClass @sessionInitClass">
+<body class="@pageCssClass @sessionInitClass @isInAdmin">
     <div class="pn-main-background" id="pnMainBackground"></div>
     <section class="pn-page__wrapper">
         <vc:body-start-layout-controller />

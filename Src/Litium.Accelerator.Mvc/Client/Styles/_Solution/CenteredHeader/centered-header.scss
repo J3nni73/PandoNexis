@@ -153,7 +153,7 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
                 //@include rotate(90);
 
                 @include mobile {
-                    fill: rgba($solution-link-color, .5);
+                    fill: rgba($solution-link-color, .6);
                 }
             }
 
@@ -263,7 +263,7 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
         }
 
         @include mobile {
-            background-color: $solution-background-transparent;
+            background-color: $solution-background-primary;
             border-top: 1px solid rgba($solution-line-color, .4);
             border-bottom: 1px solid rgba($solution-line-color, .1);
 
@@ -484,6 +484,10 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
             right: rem(10px);
             top: rem( 60px);
             opacity: .3;
+
+            @include mobile {
+                opacity: .4;
+            }
         }
 
         #quickSearch {

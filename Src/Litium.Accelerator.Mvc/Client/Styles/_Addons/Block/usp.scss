@@ -8,7 +8,7 @@ $usp-block-color-tertiary: $block-background3;
     justify-content: center;
     margin: rem(20px 0);
     padding: rem(32px 32px 0 32px);
-    background-color: $solution-background-transparent;
+    background-color: $solution-background-primary;
     border-top: 1px solid rgba(255,255,255,.1);
     border-bottom: 1px solid rgba(255,255,255,.1);
 
@@ -37,7 +37,7 @@ $usp-block-color-tertiary: $block-background3;
         &__title {
             /*            font-weight: $font-weight-normal;*/
             /*font-size: $fontsize-x-large;*/
-            color: $color-primary;
+            color: $solution-color;
             text-align: center;
             margin: 0;
             padding: 0;
@@ -48,7 +48,7 @@ $usp-block-color-tertiary: $block-background3;
         &__subtitle {
             /*font-weight: $font-weight-black;*/
             /*font-size: $fontsize-base;*/
-            color: $color-primary;
+            color: $solution-color;
             padding-bottom: rem(4px);
             text-align: center;
         }

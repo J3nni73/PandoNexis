@@ -108,7 +108,7 @@ $collection-page-cardcolor-shadow-color: rgb(46,46,80);
             }
 
             &.thirdColor, &.color__tertiary {
-                background-color: $color-primary;
+                background-color: $solution-background-primary;
             }
 
             &-text {
@@ -161,7 +161,7 @@ $collection-page-cardcolor-shadow-color: rgb(46,46,80);
 
         &__title {
             font-size: $fontsize-h2;
-            color: $color-primary;
+            color: $solution-color;
 
             &.white {
                 color: $color-white;
@@ -205,7 +205,7 @@ $collection-page-cardcolor-shadow-color: rgb(46,46,80);
                 height: rem(44px);
                 border-radius: rem(50px);
                 border: 2px solid $color-primary;
-                color: $color-primary;
+                color: $solution-color;
                 padding: 0.5rem 1rem;
                 display: flex;
                 justify-content: center;
@@ -219,7 +219,7 @@ $collection-page-cardcolor-shadow-color: rgb(46,46,80);
                 border-radius: rem(50px);
                 border: 2px solid $color-secondary;
                 padding: 0.5rem 1rem;
-                color: $color-primary;
+                color: $solution-color;
                 display: flex;
                 justify-content: center;
                 align-items: center;

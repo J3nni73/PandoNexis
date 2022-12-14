@@ -9,14 +9,14 @@
     &__subtitle {
         /*font-weight: $font-weight-extra-bold;*/
         /*font-size: $fontsize-sub-text;*/
-        color: $color-primary;
+        color: $solution-color;
         text-transform: uppercase;
     }
 
     &__title {
         /*font-weight: $font-weight-normal;*/
         font-size: $fontsize-h2;
-        color: $color-primary;
+        color: $solution-color;
         padding-bottom: 1rem;
     }
 
@@ -33,7 +33,7 @@
     }
 
     &__text {
-       /* font-weight: $font-weight-bold;*/
+        /* font-weight: $font-weight-bold;*/
         font-size: $fontsize-normal;
         color: $color-black;
     }
@@ -74,7 +74,7 @@
         &__title {
             /*font-weight: $font-weight-extra-bold;*/
             /*font-size: $fontsize-sub-text;*/
-            color: $color-primary;
+            color: $solution-color;
             text-transform: uppercase;
             word-break: break-word;
             padding-right: 1rem;
@@ -93,7 +93,7 @@
 
     &__summary {
         display: flex;
-        background-color: $color-primary;
+        background-color: $solution-background-primary;
         padding: rem(40px) 0;
         justify-content: space-between;
 
@@ -117,7 +117,7 @@
             }
 
             p {
-               /* font-size: $fontsize-sub-text;
+                /* font-size: $fontsize-sub-text;
                 font-weight: $font-weight-bold;*/
             }
 
@@ -138,7 +138,7 @@
 
         &__subtext {
             color: $color-white;
-           /* font-weight: $font-weight-black;
+            /* font-weight: $font-weight-black;
             font-size: $fontsize-base;*/
         }
 
@@ -153,7 +153,7 @@
                 height: rem(44px);
                 border-radius: rem(50px);
                 border: 2px solid $color-primary;
-                color: $color-primary;
+                color: $solution-color;
                 padding: 0.5rem 1rem;
                 display: flex;
                 justify-content: center;

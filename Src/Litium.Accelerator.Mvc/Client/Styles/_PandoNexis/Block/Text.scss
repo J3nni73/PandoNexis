@@ -41,7 +41,7 @@ $text-block-color-tertiary: $block-background3;
 
     &__title {
         font-size: $fontsize-h2;
-        color: $color-primary;
+        color: $solution-color;
 
         &.white {
             color: $color-white;
@@ -85,7 +85,7 @@ $text-block-color-tertiary: $block-background3;
             height: rem(44px);
             border-radius: rem(50px);
             border: 2px solid $color-primary;
-            color: $color-primary;
+            color: $solution-color;
             padding: 0.5rem 1rem;
             display: flex;
             justify-content: center;
@@ -99,7 +99,7 @@ $text-block-color-tertiary: $block-background3;
             border-radius: rem(50px);
             border: 2px solid $color-secondary;
             padding: 0.5rem 1rem;
-            color: $color-primary;
+            color: $solution-color;
             display: flex;
             justify-content: center;
             align-items: center;
