@@ -7,11 +7,6 @@ const scrollToTop = () => {
         if (pageWrapperEl) {
             pageWrapperEl.scrollTo(0, 0);
         }
-
-        $('body').bind('touchmove', function (e) { e.preventDefault() });
-        setTimeout(() => {
-            $('body').unbind('touchmove');
-        }, 6000);
     }
 };
 

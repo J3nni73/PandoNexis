@@ -3,11 +3,10 @@ $gutter-small: map-get($grid-column-gutter, small);
 
 $color-full-black: #000;
 $page-width: 1344px;
-$color-gold: #897419;
 
 $block-background1: transparent;
-$block-background2: rgba($color-gold, .8);
-$block-background3: rgba(0,0,0,.7);
+$block-background2: $solution-color-yellow;
+$block-background3: #dfe0e4;
 
 $general-shadow-color: rgb(245,246,255);
 

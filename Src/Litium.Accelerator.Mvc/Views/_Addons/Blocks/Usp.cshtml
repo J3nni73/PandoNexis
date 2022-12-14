@@ -33,7 +33,7 @@
 
             @if (Model.Items.Any())
             {
-                <div class="row small-up-2 medium-up-4 large-up-5 align-center">
+                <div class="row small-up-2 medium-up-4 large-up-4 align-center">
                     @foreach (var item in Model.Items)
                     {
                         if (string.IsNullOrEmpty(item.BlockTitle) && item.Button != null && !string.IsNullOrEmpty(item.Button.Href))
