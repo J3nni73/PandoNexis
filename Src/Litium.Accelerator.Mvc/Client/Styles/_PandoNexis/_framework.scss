@@ -33,16 +33,18 @@ section[data-litium-block-id] {
 .pn-blockquote {
     font-style: italic;
     position: relative;
-    padding-left: rem(14px);
-    padding-right: rem(10px);
+    padding-left: rem(6px);
+    padding-right: rem(6px);
     text-align: center;
+    margin-left: 0;
+    margin-right: 0;
 
     &:before, &:after {
         display: inline-block;
         line-height: 1;
         height: 1.5rem;
         content: "\201C";
-        font-size: rem(32px);
+        font-size: rem(44px);
         position: absolute;
         top: -.5rem;
         left: 0px;
@@ -56,5 +58,11 @@ section[data-litium-block-id] {
         left: auto;
         right: 0px;
         bottom: -.5rem;
+    }
+
+    @include mobile {
+        &:before, &:after {
+            font-size: rem(32px);
+        }
     }
 }
