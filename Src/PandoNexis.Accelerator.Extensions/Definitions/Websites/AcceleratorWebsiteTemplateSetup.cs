@@ -3,6 +3,7 @@ using Litium.FieldFramework;
 using System.Collections.Generic;
 using Litium.Accelerator.Constants;
 using Litium.Accelerator.Definitions;
+using PandoNexis.Accelerator.Extensions.Constants;
 
 namespace PandoNexis.Accelerator.Extensions.Definitions.Websites
 {
@@ -30,7 +31,8 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.Websites
                         Fields =
                         {
                             AcceleratorWebsiteFieldNameConstants.LogotypeMain,
-                            AcceleratorWebsiteFieldNameConstants.LogotypeIcon
+                            AcceleratorWebsiteFieldNameConstants.LogotypeIcon, 
+                            WebsiteFieldNameConstants.DefaultOpenGraphImage,
                         }
                     },
                     new FieldTemplateFieldGroup()

@@ -16,6 +16,10 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.Websites
             {
                 new FieldDefinition<WebsiteArea>(AcceleratorWebsiteFieldNameConstants.LogotypeMain, SystemFieldTypeConstants.MediaPointerImage),
                 new FieldDefinition<WebsiteArea>(AcceleratorWebsiteFieldNameConstants.LogotypeIcon, SystemFieldTypeConstants.MediaPointerImage),
+                new FieldDefinition<WebsiteArea>(WebsiteFieldNameConstants.DefaultOpenGraphImage, SystemFieldTypeConstants.MediaPointerImage)
+                {
+                    MultiCulture = false,
+                },
                 new FieldDefinition<WebsiteArea>(AcceleratorWebsiteFieldNameConstants.HeaderLayout, SystemFieldTypeConstants.TextOption)
                 {
                     Option = new TextOption
