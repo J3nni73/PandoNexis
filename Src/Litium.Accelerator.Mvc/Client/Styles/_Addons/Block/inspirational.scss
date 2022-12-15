@@ -5,9 +5,7 @@ $inspiration-block-color-tertiary: $block-background3;
 .inspirational-block {
     display: flex;
     flex-direction: column;
-    margin: rem(20px) 0;
-    max-height: 40rem;
-    min-height: 30rem;
+    margin: 0; //rem(20px) 0;
 
     @include mobile {
         max-height: none;
@@ -110,28 +108,25 @@ $inspiration-block-color-tertiary: $block-background3;
         }
     }
 
-    &__item-reverse {
-        display: flex;
-        flex-direction: row-reverse;
-        max-height: 40rem;
-        min-height: 30rem;
+    &__item {
+        &, &-reverse {
+            max-height: 40rem;
+            min-height: 30rem;
+            display: flex;
 
-        @include mobile {
-            display: grid;
-            max-height: none;
+            @include mobile {
+                display: grid;
+                max-height: none;
+            }
         }
     }
 
-    &__item {
-        display: flex;
-        flex-direction: row;
-        max-height: 40rem;
-        min-height: 30rem;
+    &__item-reverse {
+        flex-direction: row-reverse;
+    }
 
-        @include mobile {
-            display: grid;
-            max-height: none;
-        }
+    &__item {
+        flex-direction: row;
     }
 
     &__image-wrapper {

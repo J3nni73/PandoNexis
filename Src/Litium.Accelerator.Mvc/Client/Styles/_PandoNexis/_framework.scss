@@ -29,3 +29,32 @@
 section[data-litium-block-id] {
     @include animation(0, 0.5s, fade-in, ease-in-out);
 }
+
+.pn-blockquote {
+    font-style: italic;
+    position: relative;
+    padding-left: rem(14px);
+    padding-right: rem(10px);
+    text-align: center;
+
+    &:before, &:after {
+        display: inline-block;
+        line-height: 1;
+        height: 1.5rem;
+        content: "\201C";
+        font-size: rem(32px);
+        position: absolute;
+        top: -.5rem;
+        left: 0px;
+        color: rgba(255, 255, 255, 0.8);
+        opacity: .7;
+    }
+
+    &:after {
+        content: "\201D";
+        top: auto;
+        left: auto;
+        right: 0px;
+        bottom: -.5rem;
+    }
+}
