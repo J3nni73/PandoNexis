@@ -13,11 +13,11 @@
 }
 */
 .pn-main-background {
-    @include filter(blur, 1.2rem);
     width: 100vw;
     height: 100vh;
     position: fixed;
-    @include animation(0, 4.4s, fade-in, ease-in-out);
+    opacity: 0;
+    @include animation(1s, 3.4s, fade-in-background, ease-in-out);
     padding: 0 !important;
     margin: 0 !important;
     background: black;
