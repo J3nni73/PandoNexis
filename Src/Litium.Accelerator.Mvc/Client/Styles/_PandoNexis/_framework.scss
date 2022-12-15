@@ -51,11 +51,15 @@ section[data-litium-block-id] {
         &, &--right {
             position: relative;
             display: inline-block;
-            margin: rem(-6px 6px 0 0);
             font-size: rem(44px);
+            position: absolute;
+            left: rem(-6px);
+            top: rem(-6px);
 
             @mobile {
                 font-size: rem( 32px);
+                right: rem(-6px);
+                bottom: rem(-6px);
             }
         }
 
