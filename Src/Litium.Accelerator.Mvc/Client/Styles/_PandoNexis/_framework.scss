@@ -40,31 +40,33 @@ section[data-litium-block-id] {
     margin-right: 0;
 
     p {
-        display: inline-block;
+        display: inline;
     }
 
     &-quote {
         position: relative;
         display: inline-block;
-        margin: rem(-6px 6px 0 0);
+        margin: rem(-32px 0 0 0);
 
         &, &--right {
             position: relative;
             display: inline-block;
             font-size: rem(44px);
-            position: absolute;
-            left: rem(-6px);
-            top: rem(-6px);
+            left: rem(-16px);
+            top: rem(8px);
+            padding: 0;
+            margin: 0;
+            line-height: rem(8px);
 
             @mobile {
-                font-size: rem( 32px);
-                right: rem(-6px);
-                bottom: rem(-6px);
+                font-size: rem(32px);
             }
         }
 
         &--right {
-            margin: rem(6px 0 0 6px);
+            left: rem(8px);
+            top: rem(32px);
+            line-height: rem(5px);
         }
     }
     /*&:before, &:after {
