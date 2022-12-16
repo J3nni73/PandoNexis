@@ -40,6 +40,7 @@ section[data-litium-block-id] {
     display: flex;
     max-width: 300px;
     justify-self: center;
+    overflow: visible;
 
     p {
         display: inline;
@@ -60,6 +61,7 @@ section[data-litium-block-id] {
             margin: 0;
             line-height: rem(8px);
             opacity: .5;
+            overflow: visible;
 
             @mobile {
                 font-size: rem(32px);

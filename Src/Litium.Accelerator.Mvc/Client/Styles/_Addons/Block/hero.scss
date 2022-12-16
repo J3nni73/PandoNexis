@@ -46,6 +46,10 @@ $hero-block-color-tertiary: $block-background3;
         margin: 1rem 0;
         align-items: center;
 
+        @include mobile {
+            align-items: flex-start;
+        }
+
         &.primaryColor, &.color__primary {
             background-color: $hero-block-color-primary;
         }
@@ -71,6 +75,7 @@ $hero-block-color-tertiary: $block-background3;
 
         @media (max-width: 640px) {
             padding-left: rem(50px);
+            margin-top: rem(64px);
         }
 
         &__title {
