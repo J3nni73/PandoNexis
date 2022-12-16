@@ -36,8 +36,10 @@ section[data-litium-block-id] {
     padding-left: rem(24px);
     padding-right: rem(24px);
     text-align: center;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 0 auto;
+    display: flex;
+    max-width: 300px;
+    justify-self: center;
 
     p {
         display: inline;
@@ -57,6 +59,7 @@ section[data-litium-block-id] {
             padding: 0;
             margin: 0;
             line-height: rem(8px);
+            opacity: .5;
 
             @mobile {
                 font-size: rem(32px);

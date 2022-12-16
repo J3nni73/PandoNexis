@@ -193,6 +193,11 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
         }
     }
 
+    #quickSearch {
+        position: relative;
+        z-index: 9;
+    }
+
     .quick-search {
         margin: rem($pn-search-margin);
         width: 100%;
@@ -271,8 +276,6 @@ $pn-megamenu-background-color-end: rgba(10,0,30,.97); //lighten($color-secondary
             }
 
             &:hover {
-                opacity: .8;
-
                 .quick-search__submit-icon {
                     opacity: 1;
                 }
