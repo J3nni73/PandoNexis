@@ -46,7 +46,7 @@ $hero-block-color-tertiary: $block-background3;
         margin: 1rem 0;
         align-items: center;
 
-        @include mobile {
+        @include mobile-small {
             align-items: flex-start;
         }
 
