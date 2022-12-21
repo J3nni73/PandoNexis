@@ -50,12 +50,13 @@ section[data-litium-block-id] {
         position: relative;
         display: inline-block;
         margin: rem(-32px 0 0 0);
+        overflow: visible;
 
         &, &--right {
             position: relative;
             display: inline-block;
             font-size: rem(44px);
-            left: rem(-16px);
+            left: rem(-2px);
             top: rem(8px);
             padding: 0;
             margin: 0;
@@ -64,14 +65,19 @@ section[data-litium-block-id] {
             overflow: visible;
 
             @mobile {
-                font-size: rem(32px);
+                font-size: rem(24px);
+                left: rem(-8px);
             }
         }
 
         &--right {
-            left: rem(8px);
+            left: rem(10px);
             top: rem(32px);
             line-height: rem(5px);
+
+            @include mobile {
+                left: 0;
+            }
         }
     }
     /*&:before, &:after {

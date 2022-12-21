@@ -62,8 +62,8 @@
                             {
                                 <div class="usp-block__items__item__text">
                                     <blockquote class="pn-blockquote">
-                                        <i class="pn-blockquote-quote">&ldquo;</i>@Html.Raw(@item.BlockText)<i class="pn-blockquote-quote--right">&rdquo;</i>
-                                </blockquote>
+                                        <i class="pn-blockquote-quote">&ldquo;&nbsp;</i>@Html.Raw(@item.BlockText)<i class="pn-blockquote-quote--right">&rdquo;&nbsp;</i>
+                                    </blockquote>
                                 </div>
                             }
                             @if (item.Button != null && !string.IsNullOrEmpty(item.Button.Href))

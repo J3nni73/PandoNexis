@@ -9,7 +9,6 @@ $inspiration-block-color-tertiary: $block-background3;
 
     @include mobile {
         max-height: none;
-        margin: rem(20px 0);
     }
 
     &.primaryColor, &.color__primary {
@@ -115,8 +114,9 @@ $inspiration-block-color-tertiary: $block-background3;
             display: flex;
 
             @include mobile {
-                display: grid;
+                display: block;
                 max-height: none;
+                min-height: 0;
             }
         }
     }
@@ -160,13 +160,14 @@ $inspiration-block-color-tertiary: $block-background3;
             max-width: 100%;
             max-height: none;
             min-height: 0;
+            padding: rem(12px 24px);
         }
 
         &.extra-padding {
             padding: rem(90px);
 
             @include mobile-tablet {
-                padding: rem(50px);
+                padding: rem(16px 32px);
             }
         }
     }
@@ -197,6 +198,8 @@ $inspiration-block-color-tertiary: $block-background3;
         @include mobile {
             min-width: 100%;
             max-width: 100%;
+            max-height: none;
+            min-height: 0;
         }
     }
 }
