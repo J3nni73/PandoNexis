@@ -1,14 +1,42 @@
 $inspiration-block-color-primary: $block-background1;
 $inspiration-block-color-secondary: $block-background2;
 $inspiration-block-color-tertiary: $block-background3;
+$inspiration-block-color-text-secondary: rgba($block-background2, .75);
 
 .inspirational-block {
     display: flex;
     flex-direction: column;
     margin: 0; //rem(20px) 0;
 
+    font-size: 18px;
+    font-weight: 300;
+
+    h2 {
+        font-size: rem(32px);
+    }
+
+    h3 {
+        font-size: rem(26px);
+    }
+
+    h4 {
+        font-size: rem(24px);
+    }
+
     @include mobile {
         max-height: none;
+
+        h2 {
+            font-size: rem(28px);
+        }
+
+        h3 {
+            font-size: rem(24px);
+        }
+
+        h4 {
+            font-size: rem(20px);
+        }
     }
 
     &.primaryColor, &.color__primary {
@@ -33,9 +61,12 @@ $inspiration-block-color-tertiary: $block-background3;
     }
 
     &__subtitle {
-        font-size: $fontsize-normal;
+        font-size: rem(20px);
+        color: $inspiration-block-color-text-secondary;
         /*font-weight: $font-weight-extra-bold;*/
         text-transform: uppercase;
+        line-height: 1;
+        margin: 0;
     }
 
     &__text {
