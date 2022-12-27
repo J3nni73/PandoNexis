@@ -8,6 +8,7 @@ using Litium.Security;
 using Litium.Web.Administration.WebApi.Media.ViewModels;
 using FieldTemplateBase = Litium.Media.FieldTemplateBase;
 using Litium.Customers;
+using PandoNexis.Accelerator.Extensions.Services;
 
 namespace PandoNexis.AddOns.Extensions.PNFilesToFieldConnect
 {
@@ -21,6 +22,7 @@ namespace PandoNexis.AddOns.Extensions.PNFilesToFieldConnect
         private readonly LanguageService _languageService;
         private readonly SecurityContextService _securityContextService;
         private readonly GroupService _groupService;
+        private readonly PNMediaService _pNMediaService;
 
         private Guid _visitorGroupSystemId;
 
@@ -31,7 +33,8 @@ namespace PandoNexis.AddOns.Extensions.PNFilesToFieldConnect
                                         LanguageService languageService,
                                         SecurityContextService securityContextService,
                                         FieldTemplateService fieldTemplateService,
-                                        GroupService groupService)
+                                        GroupService groupService,
+                                        PNMediaService pNMediaService)
         {
             _folderService = folderService;
             _filService = filService;
@@ -42,6 +45,7 @@ namespace PandoNexis.AddOns.Extensions.PNFilesToFieldConnect
             _groupService = groupService;
             _visitorGroupSystemId = (_groupService.Get<Group>("Visitors") ?? _groupService.Get<Group>("Besökare"))?.SystemId ?? Guid.Empty;
             _groupService = groupService;
+            _pNMediaService = pNMediaService;
         }
 
 
@@ -75,7 +79,7 @@ namespace PandoNexis.AddOns.Extensions.PNFilesToFieldConnect
 
                             foreach (var language in languages)
                             {
-                                var fileName = file.Name;
+                                var fileName = _pNMediaService.GetFileName(file, language.CultureInfo);
                                 textOptionItem.Name.Add(language.Id, fileName);
 
                             }

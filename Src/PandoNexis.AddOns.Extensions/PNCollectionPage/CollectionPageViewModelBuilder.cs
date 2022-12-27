@@ -22,7 +22,6 @@ namespace PandoNexis.AddOns.Extensions.PNCollectionPage
             _extendedLinkViewModelBuilder = extendedLinkViewModelBuilder;
             _collectionPageService = collectionPageService; 
         }
-
      
         /// <summary>
         /// Build the article model
@@ -33,12 +32,7 @@ namespace PandoNexis.AddOns.Extensions.PNCollectionPage
         {
             var model = pageModel.MapTo<CollectionPageViewModel>();
             model.PageId = pageModel.SystemId;
-
-
             return model;
         }
-
-       
-      
     }
 }

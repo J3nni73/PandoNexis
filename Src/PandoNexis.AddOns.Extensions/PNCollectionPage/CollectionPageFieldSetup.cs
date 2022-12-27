@@ -65,6 +65,14 @@ namespace PandoNexis.AddOns.Extensions.PNCollectionPage
                 {
                     MultiCulture = true,
                 },
+                    new FieldDefinition<WebsiteArea>(CollectionPageFieldNameConstants.CollectionPageLink, SystemFieldTypeConstants.Pointer)
+                {
+                    Option = new PointerOption { EntityType = PointerTypeConstants.WebsitesPage, MultiSelect = false }
+                },
+                    new FieldDefinition<WebsiteArea>(CollectionPageFieldNameConstants.CollectionPageLinkText, SystemFieldTypeConstants.Text)
+                {
+                    MultiCulture = true,
+                },
             };
             return fields;
         }

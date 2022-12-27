@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace PandoNexis.Accelerator.Extensions.Services
 {
-    [Service(ServiceType = typeof(PNMediaService), Lifetime = DependencyLifetime.Scoped)]
+    [Service(ServiceType = typeof(PNMediaService))]
     [RequireServiceImplementation]
     public class PNMediaService
     {
@@ -32,19 +32,20 @@ namespace PandoNexis.Accelerator.Extensions.Services
         public string GetFileName(Guid fileId, CultureInfo culture)
         {
             var file = fileId.MapTo<Litium.Media.File>();
-            if (file != null)
-            {
+            if (file != null) { 
                 return string.IsNullOrWhiteSpace(file.Fields.GetValue<string>(MediaFieldNameConstants.DisplayName, culture)) ? file.Name : file.Fields.GetValue<string>(MediaFieldNameConstants.DisplayName, culture);
             }
-            return string.Empty;
+            return null;
         }
+
         public string GetFileName(Litium.Media.File file, CultureInfo culture)
         {
-            return string.IsNullOrWhiteSpace(file.Fields.GetValue<string>(MediaFieldNameConstants.DisplayName, culture)) ? file.Name : file.Fields.GetValue<string>(MediaFieldNameConstants.DisplayName, culture);
+            return string.IsNullOrWhiteSpace(file.Fields.GetValue<string>(MediaFieldNameConstants.DisplayName, culture)) ? file.Name : file.Fields.GetValue<string>(MediaFieldNameConstants.DisplayName);
+
         }
         public string GetFileName(Litium.Media.File file)
         {
-            return string.IsNullOrWhiteSpace(file.Fields.GetValue<string>(MediaFieldNameConstants.DisplayName, CultureInfo.CurrentCulture)) ? file.Name : file.Fields.GetValue<string>(MediaFieldNameConstants.DisplayName, CultureInfo.CurrentCulture);
+            return string.IsNullOrWhiteSpace(file.Fields.GetValue<string>(MediaFieldNameConstants.DisplayName, CultureInfo.CurrentCulture)) ? file.Name : file.Fields.GetValue<string>(MediaFieldNameConstants.DisplayName);
 
         }
 
