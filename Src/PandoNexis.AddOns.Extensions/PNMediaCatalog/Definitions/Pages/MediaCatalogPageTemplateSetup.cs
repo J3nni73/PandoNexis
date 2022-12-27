@@ -3,75 +3,72 @@ using Litium.FieldFramework;
 using System.Collections.Generic;
 using Litium.Accelerator.Constants;
 using Litium.Accelerator.Definitions;
+using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 
 namespace PandoNexis.AddOns.Extensions.PNMediaCatalog.Definitions.Pages
 {
-    internal class MediaCatalogPageTemplateSetup : FieldTemplateSetup
+    internal class MediaCatalogPageTemplateSetup : FieldTemplateHelper
     {
-        public override IEnumerable<FieldTemplate> GetTemplates()
+        public override IEnumerable<FieldTemplateChanges> GetFieldTemplateFieldChanges()
         {
-            var templates = new List<FieldTemplate>
+            var templateChanges = new List<FieldTemplateChanges>
             {
-                new PageFieldTemplate(Constants.PageTemplateNameConstants.MediaCatalog)
-                {
-                    IndexThePage = true,
-                    TemplatePath = "",
-                    FieldGroups = new []
+
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "General",SystemFieldDefinitionConstants.Name),
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "General",SystemFieldDefinitionConstants.Url),
+
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "Contents",PageFieldNameConstants.Title),
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "Contents",PageFieldNameConstants.Introduction),
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "Contents",PageFieldNameConstants.Text),
+
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "List",PageFieldNameConstants.Links),
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "Image",PageFieldNameConstants.Image),
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "Image",PageFieldNameConstants.AlternativeImageDescription),
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "MediaFolder",PageFieldNameConstants.AlternativeImageDescription),
+
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "MediaFolder",Constants.PageFieldNameConstants.MediaCatalogPointer),
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "MediaFolder",Constants.PageFieldNameConstants.AlternativeFirstCatalogName),
+                GetPageField(Constants.PageTemplateNameConstants.MediaCatalog,  "MediaFolder",Constants.PageFieldNameConstants.AlternativeFolderView),
+
+            };
+            return templateChanges;
+        }
+
+        public override FieldTemplate GetFieldTemplateNewTemplate()
+        {
+            var template = new PageFieldTemplate(Constants.PageTemplateNameConstants.MediaCatalog)
+            {
+                IndexThePage = true,
+                TemplatePath = "",
+                FieldGroups = new[]
                     {
                         new FieldTemplateFieldGroup()
                         {
                             Id = "General",
                             Collapsed = false,
-                            Fields =
-                            {
-                                SystemFieldDefinitionConstants.Name,
-                                SystemFieldDefinitionConstants.Url
-                            }
                         },
                         new FieldTemplateFieldGroup()
                         {
                             Id = "Contents",
                             Collapsed = false,
-                            Fields =
-                            {
-                               PageFieldNameConstants.Title,
-                               PageFieldNameConstants.Introduction,
-                               PageFieldNameConstants.Text
-                            }
                         },
                         new FieldTemplateFieldGroup()
                         {
                             Id = "List",
                             Collapsed = false,
-                            Fields =
-                            {
-                                PageFieldNameConstants.Links
-                            }
                         },
                         new FieldTemplateFieldGroup()
                         {
                             Id = "Image",
-                            Collapsed = false,
-                            Fields =
-                            {
-                                PageFieldNameConstants.Image,
-                                PageFieldNameConstants.AlternativeImageDescription,
-
-                            }
+                            Collapsed = false
                         },
                         new FieldTemplateFieldGroup()
                         {
                             Id = "MediaFolder",
                             Collapsed = false,
-                            Fields =
-                            {
-                                Constants.PageFieldNameConstants.MediaCatalogPointer,
-                                Constants.PageFieldNameConstants.AlternativeFirstCatalogName,
-                                Constants.PageFieldNameConstants.AlternativeFolderView,
-                            }
                         }
                     },
-                    Containers = new List<BlockContainerDefinition>
+                Containers = new List<BlockContainerDefinition>
                     {
                         new BlockContainerDefinition()
                         {
@@ -83,9 +80,9 @@ namespace PandoNexis.AddOns.Extensions.PNMediaCatalog.Definitions.Pages
                             }
                         }
                     },
-                },
             };
-            return templates;
+            return template;
         }
     }
 }
+

@@ -5,5 +5,6 @@
         public const string MediaCatalogPointer = "MediaCatalogPointer";
         public const string AlternativeFirstCatalogName = "AlternativeFirstCatalogName";
         public const string AlternativeFolderView = "AlternativeFolderView";
+        public const string PaginationType = "PaginationType";
     }
 }

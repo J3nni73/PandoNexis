@@ -1,23 +1,47 @@
 ﻿using Litium.Accelerator.Definitions;
 using Litium.Blocks;
 using Litium.FieldFramework;
+using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 using PandoNexis.AddOns.Extensions.Block.Constants;
 using BlockTemplateNameConstants = PandoNexis.AddOns.Extensions.Block.Constants.BlockTemplateNameConstants;
 
-internal class UspBlockTemplateSetup : FieldTemplateSetup
+internal class UspBlockTemplateSetup : FieldTemplateHelper
 {
     private readonly CategoryService _categoryService;
     public UspBlockTemplateSetup(CategoryService categoryService)
     {
         _categoryService = categoryService;
     }
-    public override IEnumerable<FieldTemplate> GetTemplates()
+
+    public override IEnumerable<FieldTemplateChanges> GetFieldTemplateFieldChanges()
+    {
+        var templateChanges = new List<FieldTemplateChanges>
+        {
+
+            GetBlockField(BlockTemplateNameConstants.UspBlock,BlockFieldGroupNameConstants.General, SystemFieldDefinitionConstants.Name),
+           
+            GetBlockField(BlockTemplateNameConstants.UspBlock, BlockFieldGroupNameConstants.General, BlockFieldNameConstants.BlockTitle),
+
+            GetBlockField(BlockTemplateNameConstants.UspBlock, BlockFieldGroupNameConstants.General, BlockFieldNameConstants.BlockSubTitle),
+
+            GetBlockField(BlockTemplateNameConstants.UspBlock, BlockFieldGroupNameConstants.General, BlockFieldNameConstants.BlockText),
+
+            GetBlockField(BlockTemplateNameConstants.UspBlock, BlockFieldGroupNameConstants.General, BlockFieldNameConstants.Background),
+
+            GetBlockField(BlockTemplateNameConstants.UspBlock, BlockFieldGroupNameConstants.General, BlockFieldNameConstants.UspBlockItem),
+            
+
+        };
+
+        templateChanges.AddRange(GetChangesForBlockExtendedCTA(BlockTemplateNameConstants.UspBlock));
+
+        return templateChanges;
+    }
+    public override FieldTemplate GetFieldTemplateNewTemplate()
     {
         var blockCategoryId = _categoryService.Get(BlockCategoryNameConstants.Pages)?.SystemId ?? Guid.Empty;
 
-        var templates = new List<FieldTemplate>
-            {
-                new BlockFieldTemplate(BlockTemplateNameConstants.UspBlock)
+        var template = new BlockFieldTemplate(BlockTemplateNameConstants.UspBlock)
                 {
                     CategorySystemId = blockCategoryId,
                     Icon = "fas fa-images",
@@ -61,9 +85,9 @@ internal class UspBlockTemplateSetup : FieldTemplateSetup
                             }
                         }
                     }
-                }
+              
             };
-        return templates;
+        return template;
     }
 }
 

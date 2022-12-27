@@ -22,6 +22,8 @@ namespace PandoNexis.AddOns.Extensions.PNCollectionPage
         public static string CollectionFilterField1Value = "CollectionFilterField1Value";
         public static string CollectionFilterField2Value = "CollectionFilterField2Value";
         public static string CollectionFilterField3Value = "CollectionFilterField3Value";
+        public static string CollectionPageLink = "CollectionPageLink";
+        public static string CollectionPageLinkText = "CollectionPageLinkText";
     }
     public static class CollectionPageFieldTemplateConstants
     {

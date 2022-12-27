@@ -3,13 +3,54 @@ using Litium.FieldFramework;
 using System.Collections.Generic;
 using Litium.Accelerator.Constants;
 using Litium.Accelerator.Definitions;
+using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 using PandoNexis.Accelerator.Extensions.Constants;
+using Litium.Connect.Erp.Import;
 
 namespace PandoNexis.Accelerator.Extensions.Definitions.Websites
 {
-    internal class AcceleratorWebsiteTemplateSetup : FieldTemplateSetup
+    internal class AcceleratorWebsiteTemplateSetup : FieldTemplateHelper
     {
-        public override IEnumerable<FieldTemplate> GetTemplates()
+        public override IEnumerable<FieldTemplateChanges> GetFieldTemplateFieldChanges()
+        {
+            var templateChanges = new List<FieldTemplateChanges>
+            {
+                GetWebsiteField("AcceleratorWebsite", "General", SystemFieldDefinitionConstants.Name),
+                GetWebsiteField("AcceleratorWebsite",  "Logotype", AcceleratorWebsiteFieldNameConstants.LogotypeMain),
+                GetWebsiteField("AcceleratorWebsite",  "Logotype", AcceleratorWebsiteFieldNameConstants.LogotypeIcon),
+
+                GetWebsiteField("AcceleratorWebsite",  "Header", AcceleratorWebsiteFieldNameConstants.HeaderLayout),
+                GetWebsiteField("AcceleratorWebsite",  "Header", AcceleratorWebsiteFieldNameConstants.CheckoutPage),
+                GetWebsiteField("AcceleratorWebsite",  "Header", AcceleratorWebsiteFieldNameConstants.MyPagesPage),
+                GetWebsiteField("AcceleratorWebsite",  "Header", AcceleratorWebsiteFieldNameConstants.AdditionalHeaderLinks),
+
+                GetWebsiteField("AcceleratorWebsite",  "Search", AcceleratorWebsiteFieldNameConstants.SearchResultPage),
+
+                GetWebsiteField("AcceleratorWebsite",  "Footer", AcceleratorWebsiteFieldNameConstants.Footer),
+                GetWebsiteField("AcceleratorWebsite",  "Navigation", AcceleratorWebsiteFieldNameConstants.NavigationTheme),
+                GetWebsiteField("AcceleratorWebsite",  "LeftNavigation", AcceleratorWebsiteFieldNameConstants.InFirstLevelCategories),
+                GetWebsiteField("AcceleratorWebsite",  "LeftNavigation", AcceleratorWebsiteFieldNameConstants.InBrandPages),
+                GetWebsiteField("AcceleratorWebsite",  "LeftNavigation", AcceleratorWebsiteFieldNameConstants.InProductListPages),
+                GetWebsiteField("AcceleratorWebsite",  "LeftNavigation", AcceleratorWebsiteFieldNameConstants.InArticlePages),
+
+                GetWebsiteField("AcceleratorWebsite",  "ProductLists", AcceleratorWebsiteFieldNameConstants.ProductsPerPage),
+                GetWebsiteField("AcceleratorWebsite",  "ProductLists", AcceleratorWebsiteFieldNameConstants.ShowBuyButton),
+                GetWebsiteField("AcceleratorWebsite",  "ProductLists", AcceleratorWebsiteFieldNameConstants.ShowQuantityFieldProductList),
+
+                GetWebsiteField("AcceleratorWebsite",  "Filters", AcceleratorWebsiteFieldNameConstants.FiltersOrdering),
+                GetWebsiteField("AcceleratorWebsite",  "Filters", AcceleratorWebsiteFieldNameConstants.FiltersIndexedBySearchEngines),
+
+                GetWebsiteField("AcceleratorWebsite",  "Checkout", AcceleratorWebsiteFieldNameConstants.CheckoutMode),
+                GetWebsiteField("AcceleratorWebsite",  "Customers", AcceleratorWebsiteFieldNameConstants.AllowCustomersEditLogin),
+                GetWebsiteField("AcceleratorWebsite",  "Emails", AcceleratorWebsiteFieldNameConstants.SenderEmailAddress),
+                GetWebsiteField("AcceleratorWebsite",  "OrderConfirmationPage", AcceleratorWebsiteFieldNameConstants.OrderConfirmationPage),
+            };
+
+
+            return templateChanges;
+        }
+
+        public override FieldTemplate GetFieldTemplateNewTemplate()
         {
             var template = new WebsiteFieldTemplate("AcceleratorWebsite")
             {
@@ -18,142 +59,77 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.Websites
                     new FieldTemplateFieldGroup()
                     {
                         Id = "General",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            SystemFieldDefinitionConstants.Name
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "Logotype",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.LogotypeMain,
-                            AcceleratorWebsiteFieldNameConstants.LogotypeIcon, 
-                            WebsiteFieldNameConstants.DefaultOpenGraphImage,
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "Header",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.HeaderLayout,
-                            AcceleratorWebsiteFieldNameConstants.CheckoutPage,
-                            AcceleratorWebsiteFieldNameConstants.MyPagesPage,
-                            AcceleratorWebsiteFieldNameConstants.AdditionalHeaderLinks
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "Search",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.SearchResultPage
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "Footer",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.Footer
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "Navigation",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.NavigationTheme
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "LeftNavigation",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.InFirstLevelCategories,
-                            AcceleratorWebsiteFieldNameConstants.InBrandPages,
-                            AcceleratorWebsiteFieldNameConstants.InProductListPages,
-                            AcceleratorWebsiteFieldNameConstants.InArticlePages
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "ProductLists",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.ProductsPerPage,
-                            AcceleratorWebsiteFieldNameConstants.ShowBuyButton,
-                            AcceleratorWebsiteFieldNameConstants.ShowQuantityFieldProductList
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "ProductPage",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.ShowQuantityFieldProductPage
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "Filters",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.FiltersOrdering,
-                            AcceleratorWebsiteFieldNameConstants.FiltersIndexedBySearchEngines
-                        }
-                    },new FieldTemplateFieldGroup()
+                        Collapsed = false
+                    },
+                    new FieldTemplateFieldGroup()
                     {
                         Id = "Checkout",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.CheckoutMode
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "Customers",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.AllowCustomersEditLogin
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "Emails",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.SenderEmailAddress
-                        }
+                        Collapsed = false
                     },
                     new FieldTemplateFieldGroup()
                     {
                         Id = "OrderConfirmationPage",
-                        Collapsed = false,
-                        Fields =
-                        {
-                            AcceleratorWebsiteFieldNameConstants.OrderConfirmationPage
-                        }
+                        Collapsed = false
                     }
                 }
             };
-            return new List<FieldTemplate>() { template };
+
+            return template;
         }
     }
 }
