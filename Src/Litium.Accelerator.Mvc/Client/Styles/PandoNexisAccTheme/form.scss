@@ -60,7 +60,7 @@
     &__button {
         &, &:focus, &:active, &:hover {
             padding: rem(16px);
-            background-color: $color-primary;
+            background-color: $solution-background-primary;
             color: $color-white;
             border: none;
             cursor: pointer;

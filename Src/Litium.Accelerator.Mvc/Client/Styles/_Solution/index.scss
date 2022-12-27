@@ -1,13 +1,17 @@
 
 // Solution
-//@import 'CenteredHeader/index';
 @import '_framework';
 @import 'buttons';
 @import 'pagetypes';
+
+@import 'quicksearch';
+@import 'quicksearchresult';
+@import 'searchresult';
 
 @import 'facetedsearch';
 @import 'subnav';
 @import 'product';
 @import 'productdetail';
 @import 'CenteredHeader/index';
+@import 'session';
 @import 'form';

@@ -6,26 +6,16 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
 import app, { createReducer } from './reducers';
 import { historyMiddleware } from './Middlewares/History.middleware';
-import MiniCart from './Components/MiniCart';
-import QuickSearch from './Components/QuickSearch';
-import Navigation from './Components/Navigation';
+import MiniCart from './_Solution/Components/MiniCart'; // Pando Nexis Change. Old:  './Components/MiniCart';
+import QuickSearch from './_Solution/Components/QuickSearch'; // Pando Nexis Change. Old:  './Components/QuickSearch';
+import Navigation from './_PandoNexis/Components/Navigation'; // Pando Nexis Change. Old:  './Components/Navigation'; 
 import FacetedSearch from './Components/FacetedSearch';
 import FacetedSearchCompactContainer from './Components/FacetedSearchCompactContainer';
 import DynamicComponent from './Components/DynamicComponent';
 
-// Pando Nexis imports
-// ADDONS IMPORT
-
-import GenericGridViewContainer from './_Addons/GenericGridView/Containers/GenericGridView.container';
-import FieldConfiguratorContainer from './_Addons/GenericGridView/Containers/FieldConfigurator.container';
-import DropZoneContainer from './_Addons/GenericGridView/Containers/DropZone.container';
-import HeaderInformationDataContainer from './_Addons/GenericGridView/Containers/HeaderInformationData.container';
-// END ADDONS IMPORT
-
-
-import './pandoNexis.events.js';
-import './pandoNexis.functions.js';
-// END Pando Nexis imports
+// Pando Nexis JS
+import {pnBootstrapComponents} from './pandoNexis.js';
+// END Pando Nexis JS
 
 window.__litium = window.__litium || {};
 const preloadState = window.__litium.preloadState || {};
@@ -233,101 +223,8 @@ const bootstrapComponents = () => {
         );
     }
 
-    // ADDONS
-    // MediaCatalog
-    const mediaCatalog = document.getElementById("media-catalog");
-    if (mediaCatalog) {
-        const MediaCatalog = DynamicComponent({
-            loader: () => import('./_Addons/MediaCatalog/Components/MediaCatalogContainer'),
-        });
-        const { mediaFolderId, mediaFolderAlternativeName, mediaFolderAlternativeView } = mediaCatalog.dataset;
-        const useAltMediaView = mediaFolderAlternativeView?.toLowerCase() === 'true';
-        renderReact(
-            <Provider store={store}>
-                <MediaCatalog mediaFolderId={mediaFolderId} alternativeFolderName={mediaFolderAlternativeName} useAltMediaView={useAltMediaView} />
-            </Provider>,
-            mediaCatalog
-        );
-    }
-    // END MediaCatalog
-    // CollectionPage
-    const collectionPage = document.getElementById("collectionPage");
-    if (collectionPage) {
-        const CollectionPage = DynamicComponent({
-            loader: () => import('./_Addons/CollectionPage/Components/CollectionPageContainer'), 
-        });
-        
-        const { collectionPageSystemId } = collectionPage.dataset;
-        renderReact(
-            <Provider store={store}>
-                <CollectionPage {...{ collectionPageSystemId }}  />
-            </Provider>,
-            collectionPage
-        );
-    }
-    // END CollectionPage
-
-    // GenericGridView
-    document.querySelectorAll('[data-field-configuration]').forEach((elem) => {
-        ReactDOM.render(
-            <Provider store={store}>
-                <FieldConfiguratorContainer type={elem.dataset.fieldConfiguration} />
-            </Provider>,
-            elem
-        );
-    });
-
-    document.querySelectorAll('[data-grid-view]').forEach((elem) => {
-        console.log(elem.dataset.gridView);
-        ReactDOM.render(
-            <Provider store={store}>
-                <GenericGridViewContainer type={elem.dataset.gridView} />
-            </Provider>,
-            elem
-        );
-    });
-
-    document.querySelectorAll('[data-dropzone]').forEach((elem) => {
-        ReactDOM.render(
-            <Provider store={store}>
-                <DropZoneContainer type={elem.dataset.dropzone} />
-            </Provider>,
-            elem
-        );
-    });
-
-
-    const reorderBtn = document.querySelectorAll('reorder-button');
-    if (reorderBtn.length > 0) {
-        const ReorderButton = DynamicComponent({
-            loader: () => import('./Components/ReorderButton'),
-        });
-        Array.from(reorderBtn).forEach(
-            (button) => {
-                const { cssClass, orderId, title } = button.dataset;
-                const label = button.innerText;
-                renderReact(
-                    <Provider store={store}>
-                        <ReorderButton {...{ label, title, cssClass, orderId }} />
-                    </Provider>,
-                    button
-                );
-            }
-        );
-    }
-
-    const headerInformationData = document.getElementById('headerInformationData');
-    if (headerInformationData) {
-        ReactDOM.render(
-            <Provider store={store}>
-                <HeaderInformationDataContainer />
-            </Provider>,
-            headerInformationData
-        );
-    }
-    // END GenericGridView
-
-    // END ADDONS
+    // Pando Nexis bootstrap
+    pnBootstrapComponents(store);
 };
 
 bootstrapComponents();

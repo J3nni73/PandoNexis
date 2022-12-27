@@ -1,9 +1,24 @@
+const scrollToTop = () => {
+    const sessionInit = document.querySelector("body.session__init");
+    if (sessionInit) {
 
+        window.scrollTo(0, 0);
+        const pageWrapperEl = document.querySelector(".main-content");
+        if (pageWrapperEl) {
+            pageWrapperEl.scrollTo(0, 0);
+        }
+    }
+};
 
 ready(function () {
-    
 });
 
+window.addEventListener('load', function (event) {
+    setTimeout( () => {
+        scrollToTop();
+    }, 2);
+    
+});
 
 function ready(callbackFunc) {
     if (document.readyState !== 'loading') {

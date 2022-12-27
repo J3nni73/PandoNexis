@@ -21,5 +21,6 @@ namespace PandoNexis.Accelerator.Extensions.Constants
         public const string General = "General";
         public const string Text = "Text";
         public const string Items = "Items";
+        public const string CTA = "CTA";
     }
 }

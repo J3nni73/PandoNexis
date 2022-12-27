@@ -1,2 +1,0 @@
-(self.webpackChunk=self.webpackChunk||[]).push([[500],{3500:function(e,t,n){"use strict";n.r(t);n(3238),n(5769),n(4078),n(1013);var u=n(7378),r=(n(3082),n(4837)),a={showStatus:!1,showThumbs:!1,infiniteLoop:!0};t.default=function(e){var t=e.values;return u.createElement(r.lr,a,t.map((function(e,t){return u.createElement("div",{key:"figure".concat(t),dangerouslySetInnerHTML:{__html:e.html}})})))}}}]);
-//# sourceMappingURL=500.bea96ca569e641833f60.js.map

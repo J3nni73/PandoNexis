@@ -1,4 +1,7 @@
-
+.pn-icon {
+    opacity: 0;
+    @include animation(0, 0.5s, fade-in, ease-in-out);
+}
 @mixin icon-pn--file-doc($color: 333) {
     background: url('../../images/pandoNexis/file_doc.svg') center no-repeat;
 }
@@ -34,4 +37,7 @@
 }
 @mixin icon-pn--arrow-back($color: 333) {
     background: url('../../images/pandoNexis/arrow_back.svg') center no-repeat;
+}
+@mixin icon-pn--powered-by($color: 333) {
+    background: url('../../images/pandoNexis/powered_by.svg') center no-repeat;
 }

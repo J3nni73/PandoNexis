@@ -1,9 +1,11 @@
 ﻿@using Litium.Accelerator.Mvc.Controllers.Framework
 @using System.Globalization
 @using Microsoft.AspNetCore.Http
-@{   
+@{
     var bareLayout = (bool?)ViewContext.RouteData.DataTokens["BareLayout"] == true;
     var pageCssClass = ViewData["PageCssClass"];
+    var sessionInitClass = (bool)ViewData["IsSessionInit"] ? "session__init" : "";
+    var isInAdmin = (bool)ViewData["IsInAdmin"] ? "is-in-admin" : "";
     var isLoggedOn = User.Identity.IsAuthenticated;
 }
 <!DOCTYPE html>
@@ -13,23 +15,25 @@
     @RenderSection("head", false)
     <vc:client-context-controller />
 </head>
-<body class="@pageCssClass">
-    <vc:body-start-layout-controller />
-    @if (!bareLayout)
-    {
-        <vc:header-layout-controller />
-        <vc:bread-crumbs-layout-controller />
-    }
-    <main class="main-content">
-      @*  <div id="media-catalog" data-media-folder-id="62bed118-f355-4e3b-9c19-7aee501dc126"></div>*@
-        @RenderBody()
-    </main>
-    @if (!bareLayout)
-    {
-        <vc:footer-layout-controller />
-    }
-    <div id="globalNotification"></div>
-    @RenderSection("js", false)
-    <vc:body-end-layout-controller />
+<body class="@pageCssClass @sessionInitClass @isInAdmin ">
+    <div class="pn-main-background" id="pnMainBackground"></div>
+    <section class="pn-page__wrapper">
+        <vc:body-start-layout-controller />
+        @if (!bareLayout)
+        {
+            <vc:header-layout-controller />
+            <vc:bread-crumbs-layout-controller />
+        }
+        <main class="main-content">
+            @RenderBody()
+        </main>
+        @if (!bareLayout)
+        {
+            <vc:footer-layout-controller />
+        }
+        <div id="globalNotification"></div>
+        @RenderSection("js", false)
+        <vc:body-end-layout-controller />
+    </section>
 </body>
 </html>

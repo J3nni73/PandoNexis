@@ -13,7 +13,7 @@ namespace PandoNexis.AddOns.Extensions.Block.Constants
         public const string BlockTitle = "BlockTitle";
         public const string BlockSubTitle = "BlockSubTitle";
         public const string BlockText = "BlockText1";
-        public const string BlockImage = "BlockImage";
+        public const string BlockImage = "BlockImage1";
         public const string BlockOverlayImage = "BlockOverlayImage";
         public const string BlockMobilImage = "BlockMobilImage";
         public const string BlockVideo = "BlockVideo";

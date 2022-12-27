@@ -1,27 +1,30 @@
-body {
+html, body {
     font-family: $font-family;
-    color: $color-black;
+    color: $solution-color;
+    background: $body-background-color;
 }
+
 a {
     line-height: inherit;
-    color: $color-black;
+    color: $solution-link-color;
     text-decoration: none;
     cursor: pointer;
+
     &:focus,
     &:hover,
     &:active {
-        color: $color-black;
+        color: $solution-link-color-hover;
     }
 }
 h1,
 h2,
 h3 {
-    font-weight: 900;
+    font-weight: 600;
 }
 h4,
 h5,
 h6 {
-    font-weight: 700;
+    font-weight: 500;
 }
 h1,
 h2,

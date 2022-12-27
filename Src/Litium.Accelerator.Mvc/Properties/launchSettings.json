@@ -6,7 +6,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://pandonexisaccelerator.localtest.me:61548;http://pandonexisaccelerator.localtest.me:61549"
+      "applicationUrl": "https://pandonexis.localtest.me:61558;http://pandonexis.localtest.me:61559"
     }
   }
 }

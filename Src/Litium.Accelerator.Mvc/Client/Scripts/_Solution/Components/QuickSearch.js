@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as debounce from 'lodash.debounce';
 import QuickSearchResult from './QuickSearchResult';
+import PnIcon from '../../_PandoNexis/Components/PnIcon';
 import { translate } from '../../Services/translation';
 import {
     query,
@@ -132,7 +133,8 @@ const QuickSearch = () => {
                         dispatch(handleClickSearch({ searchUrl }));
                     }}
                 >
-                    <i className="quick-search__submit-icon"></i>
+                    <PnIcon iconName="search" title="search" width="24" height="24" cssClass="" />
+                   
                     <span className="quick-search__submit-title">
                         {translate('general.search')}
                     </span>

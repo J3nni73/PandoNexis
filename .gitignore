@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Src/.angular/cache/13.3.8
+/Src/Litium.Accelerator.Administration.Extensions/dist
+/Src/Litium.Accelerator.Email/dist
+/Src/Litium.Accelerator.FieldTypes/dist
+/Src/Litium.Accelerator.Mvc/wwwroot
+/Src/files
+/Src/Litium.Accelerator.Mvc/appsettings.Development.json

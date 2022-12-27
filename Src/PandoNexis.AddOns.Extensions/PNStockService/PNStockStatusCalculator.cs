@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Variant = Litium.Products.Variant;
 using Litium.Runtime.DependencyInjection;
+using Litium.Blocks;
 
 namespace PandoNexis.AddOns.Extensions.Services.PNStockService
 {
@@ -23,16 +24,19 @@ namespace PandoNexis.AddOns.Extensions.Services.PNStockService
         private readonly RequestModelAccessor _requestModelAccessor;
         private readonly PersonStorage _personStorage;
         private readonly VariantService _variantService;
+        private readonly PNAvailabilityService _pNAvailabilityService;
 
         public PNStockStatusCalculator(IStockStatusCalculator parentResolver,
                                         RequestModelAccessor requestModelAccessor,
                                         PersonStorage personStorage,
-                                        VariantService variantService)
+                                        VariantService variantService,
+                                        PNAvailabilityService pNAvailabilityService)
         {
             _parentResolver = parentResolver;
             _requestModelAccessor = requestModelAccessor;
             _personStorage = personStorage;
             _variantService = variantService;
+            _pNAvailabilityService = pNAvailabilityService;
         }
 
         public ICollection<Inventory> GetInventories(StockStatusCalculatorArgs calculatorArgs)
@@ -45,6 +49,14 @@ namespace PandoNexis.AddOns.Extensions.Services.PNStockService
 
             var stockStatuses = _parentResolver.GetStockStatuses(calculatorArgs, calculatorItemArgs);
            
+            foreach(var item in stockStatuses )
+            {
+                if (!_pNAvailabilityService.RequiresInventory(item.Key))
+                { 
+                    item.Value.InStockQuantity = 99999; 
+                }
+            }
+
             return stockStatuses;
         }
     }

@@ -85,7 +85,7 @@
         }
         &__header {
             width: 100%;
-            background-color: $color-primary;
+            background-color: $solution-background-primary;
             color: $color-white;
             border: none;
             text-transform: capitalize;
@@ -132,7 +132,7 @@
             align-items: center;
             font-size: $fontsize-large;
             padding: rem(5px 10px);
-            background-color: $color-primary;
+            background-color: $solution-background-primary;
             color: $color-white;
             cursor: pointer;
             font-weight: 300;
@@ -201,7 +201,7 @@
             flex: 1;
             font-size: rem($fontsize-large);
             color: $color-white;
-            background-color: $color-primary;
+            background-color: $solution-background-primary;
             cursor: pointer;
             @include transition(background-color);
             &:focus {

@@ -1,9 +1,7 @@
-@import '_variables';
 @import 'fonts';
+@import '_variables';
 @import 'setfonts';
-
 @import '_mixins';
-
 @import 'normalize';
 
 // Pando Nexis Accelerator INIT
@@ -23,8 +21,8 @@
 @import 'navbar';
 @import 'profile';
 @import 'cart';
-@import 'quicksearch';
-@import 'quicksearchresult';
+/*@import 'quicksearch';
+@import 'quicksearchresult';*/
 // @import 'facetedsearch'; MOVED TO SOLUTION
 @import 'toplink';
 @import 'news';
@@ -34,7 +32,7 @@
 // @import 'subnav'; MOVED TO SOLUTION
 @import 'brandlist';
 @import 'pagination';
-@import 'searchresult';
+/*@import 'searchresult';*/
 @import 'ordersummary';
 @import 'orderhistory';
 @import 'orderhistorydetail';

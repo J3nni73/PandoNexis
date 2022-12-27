@@ -1,17 +1,42 @@
 $inspiration-block-color-primary: $block-background1;
 $inspiration-block-color-secondary: $block-background2;
 $inspiration-block-color-tertiary: $block-background3;
+$inspiration-block-color-text-secondary: rgba($block-background2, .75);
 
 .inspirational-block {
     display: flex;
     flex-direction: column;
-    margin: rem(20px) 0;
-    max-height: 40rem;
-    min-height: 30rem;
+    margin: 0; //rem(20px) 0;
+
+    font-size: 18px;
+    font-weight: 300;
+
+    h2 {
+        font-size: rem(32px);
+    }
+
+    h3 {
+        font-size: rem(26px);
+    }
+
+    h4 {
+        font-size: rem(24px);
+    }
 
     @include mobile {
         max-height: none;
-        margin: rem(20px 0);
+
+        h2 {
+            font-size: rem(28px);
+        }
+
+        h3 {
+            font-size: rem(24px);
+        }
+
+        h4 {
+            font-size: rem(20px);
+        }
     }
 
     &.primaryColor, &.color__primary {
@@ -28,7 +53,7 @@ $inspiration-block-color-tertiary: $block-background3;
 
     &__title {
         font-size: $fontsize-h2;
-        color: $color-primary;
+        color: $solution-color;
 
         &.white {
             color: $color-white;
@@ -36,9 +61,12 @@ $inspiration-block-color-tertiary: $block-background3;
     }
 
     &__subtitle {
-        font-size: $fontsize-normal;
+        font-size: rem(20px);
+        color: $inspiration-block-color-text-secondary;
         /*font-weight: $font-weight-extra-bold;*/
         text-transform: uppercase;
+        line-height: 1;
+        margin: 0;
     }
 
     &__text {
@@ -74,7 +102,7 @@ $inspiration-block-color-tertiary: $block-background3;
             height: rem(44px);
             border-radius: rem(50px);
             border: 2px solid $color-primary;
-            color: $color-primary;
+            color: $solution-color;
             padding: 0.5rem 1rem;
             display: flex;
             justify-content: center;
@@ -110,28 +138,26 @@ $inspiration-block-color-tertiary: $block-background3;
         }
     }
 
-    &__item-reverse {
-        display: flex;
-        flex-direction: row-reverse;
-        max-height: 40rem;
-        min-height: 30rem;
+    &__item {
+        &, &-reverse {
+            max-height: 40rem;
+            min-height: 30rem;
+            display: flex;
 
-        @include mobile {
-            display: grid;
-            max-height: none;
+            @include mobile {
+                display: block;
+                max-height: none;
+                min-height: 0;
+            }
         }
     }
 
-    &__item {
-        display: flex;
-        flex-direction: row;
-        max-height: 40rem;
-        min-height: 30rem;
+    &__item-reverse {
+        flex-direction: row-reverse;
+    }
 
-        @include mobile {
-            display: grid;
-            max-height: none;
-        }
+    &__item {
+        flex-direction: row;
     }
 
     &__image-wrapper {
@@ -165,13 +191,14 @@ $inspiration-block-color-tertiary: $block-background3;
             max-width: 100%;
             max-height: none;
             min-height: 0;
+            padding: rem(12px 24px);
         }
 
         &.extra-padding {
             padding: rem(90px);
 
             @include mobile-tablet {
-                padding: rem(50px);
+                padding: rem(16px 32px);
             }
         }
     }
@@ -186,7 +213,7 @@ $inspiration-block-color-tertiary: $block-background3;
 
         &__text-only {
             padding: 3rem;
-            background-color: $color-primary;
+            background-color: $solution-background-primary;
             width: 100%;
             height: 100%;
 
@@ -202,6 +229,8 @@ $inspiration-block-color-tertiary: $block-background3;
         @include mobile {
             min-width: 100%;
             max-width: 100%;
+            max-height: none;
+            min-height: 0;
         }
     }
 }

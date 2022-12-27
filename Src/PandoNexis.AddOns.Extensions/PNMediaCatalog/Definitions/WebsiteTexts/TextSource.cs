@@ -43,7 +43,7 @@ namespace PandoNexis.AddOns.Extensions.PNMediaCatalog.Definitions.WebsiteTexts
                 "mediacatalog.button.folderopen".AsWebsiteTextDefinition("Open Folder", "Öppen mapp", clientAvailable: true, serverAvailable: false),
                 "mediacatalog.button.folder".AsWebsiteTextDefinition("Folder", "Mapp", clientAvailable: true, serverAvailable: false),
                 "mediacatalog.button.stepoutoffolder".AsWebsiteTextDefinition("Step out of this folder", "Lämna denna katalog", clientAvailable: true, serverAvailable: false),
-                "heppa".AsWebsiteTextDefinition("Step out of this folder", "Lämna denna katalog", clientAvailable: true, serverAvailable: false),
+                
             };
         }
     }

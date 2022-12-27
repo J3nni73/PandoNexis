@@ -7,21 +7,21 @@
 }
 
 .breadcrumbs {
-    background: $color-grey-lightest;
-    margin: rem(0 0 40px 0);
+    margin: rem(0 0 8px 0);
     padding: rem(9px 18px);
     font-weight: 400;
     font-size: rem(13px);
     line-height: rem(13px);
 
     &__link {
+        @include transition;
         text-transform: capitalize;
         display: inline-block;
-        color: $color-black-light;
+        color: rgba($solution-link-color, .7);
 
         &:hover {
             text-decoration: underline;
-            color: $color-black-light;
+            color: $solution-link-color-hover;
         }
     }
 
@@ -32,13 +32,13 @@
         &:not(:last-of-type):after {
             content: '/';
             margin: 0 10px;
-            color: $color-grey-darker;
+            color: $solution-link-color;
         }
 
         &:last-of-type .breadcrumbs__link {
             pointer-events: none;
             cursor: default;
-            color: #6c6c6c;
+            color: rgba($solution-link-color, .8);
         }
 
         &--disabled .breadcrumbs__link {

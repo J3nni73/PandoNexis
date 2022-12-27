@@ -1,0 +1,9 @@
+﻿@using Litium.Accelerator.Fields
+@model Litium.Accelerator.ViewModels.ProductFieldViewModel
+
+@if (!string.IsNullOrEmpty(Model.Value))
+{
+    <b>@Model.Name</b>
+    <br />
+    <img src="@Model.Value" target="_blank" alt="@Model.Name" />
+}

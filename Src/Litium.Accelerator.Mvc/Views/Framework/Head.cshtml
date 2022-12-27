@@ -22,25 +22,32 @@
 {
     <meta name="robots" content="@Model.MetaRobots" />
 }
-    <meta name="generator" content="Litium" />
+<meta name="generator" content="Litium" />
+@{
+    var openGraphImageUrl = Model.OpenGraph.ImageUrl;
+    if (string.IsNullOrEmpty(openGraphImageUrl))
+    {
+        openGraphImageUrl = $"https://{Context.Request.Host}{Context.Request.PathBase}/PandoNexisDefaultOGImg.jpg";
+    }
+}
 @if (Model.OpenGraph != null)
 {
     <meta property="og:title" content="@Model.OpenGraph.Title" />
     <meta property="og:type" content="website" />
-    @if (Model.OpenGraph.ImageVisible && Model.OpenGraph.ImageUrl != null)
+    @if (!string.IsNullOrEmpty(openGraphImageUrl))
     {
-    <meta property="og:image" content="@Model.OpenGraph.ImageUrl" />
-        @if (Model.OpenGraph.ImageUrl.StartsWith("https://"))
+        <meta property="og:image" content="@openGraphImageUrl" />
+        @if (openGraphImageUrl.StartsWith("https://"))
         {
-    <meta property="og:image:secure_url" content="@Model.OpenGraph.ImageUrl" />
+            <meta property="og:image:secure_url" content="@openGraphImageUrl" />
         }
     }
-    @if (Model.OpenGraph.LogotypeVisible && Model.OpenGraph.LogotypeImageUrl != null)
+    else if (Model.OpenGraph.LogotypeVisible && Model.OpenGraph.LogotypeImageUrl != null)
     {
-    <meta property="og:image" content="@Model.OpenGraph.LogotypeImageUrl" />
+        <meta property="og:image" content="@Model.OpenGraph.LogotypeImageUrl" />
         @if (Model.OpenGraph.LogotypeImageUrl.StartsWith("https://"))
         {
-    <meta property="og:image:secure_url" content="@Model.OpenGraph.LogotypeImageUrl" />
+            <meta property="og:image:secure_url" content="@Model.OpenGraph.LogotypeImageUrl" />
         }
     }
     <meta property="og:url" content="@Model.OpenGraph.Url" />
