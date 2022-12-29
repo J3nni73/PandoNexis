@@ -19,10 +19,10 @@
     <ProjectReference Include="..\Solution.Extensions\Solution.Extensions.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Litium.Accelerator.Administration.Deployment" Version="8.7.1" />
-    <PackageReference Include="Litium.Web.Setup.Elasticsearch" Version="8.7.1" />
-    <PackageReference Include="Litium.Web.Setup.Redis" Version="8.7.1" />
-    <PackageReference Include="Litium.Web.Setup.Complete" Version="8.7.1" />
+    <PackageReference Include="Litium.Accelerator.Administration.Deployment" Version="8.7.2" />
+    <PackageReference Include="Litium.Web.Setup.Elasticsearch" Version="8.7.2" />
+    <PackageReference Include="Litium.Web.Setup.Redis" Version="8.7.2" />
+    <PackageReference Include="Litium.Web.Setup.Complete" Version="8.7.2" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Litium.Cloud.NLog.Extensions" Version="1.4.1" />
