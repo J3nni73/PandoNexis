@@ -1,5 +1,7 @@
 /* font-family */
 $font-family: Lato, Helvetica, Roboto, Arial, sans-serif;
+$font-family-condensed: 'Barlow Condensed', sans-serif;
+
 $body-font-family: $font-family;
 
 $header-font-family: $font-family;
@@ -36,6 +38,8 @@ $solution-background-transparent: rgba(0,0,0,.3);
 $solution-background-primary: $solution-background-transparent;
 $solution-color-yellow: $color-secondary;
 $solution-color-text-highlight: rgba(255,196,68,.75);
+
+$solution-button-background-primary: rgba(132, 132, 25, 0.8);
 
 $color-primary: #111 !default;
 $color-primary-dark: #000 !default;

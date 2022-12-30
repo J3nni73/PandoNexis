@@ -19,6 +19,7 @@
             font-style: italic;
             color: $color-error;
         }
+
         &--top-narrow {
             margin-top: -10px;
             margin-bottom: 10px;
@@ -42,11 +43,13 @@
         display: block;
         font-size: rem($fontsize-normal);
         color: $color-black-light;
+
         &--required {
             &:after {
                 content: '*';
             }
         }
+
         &--inline {
             display: inline;
             margin-right: 10px;
@@ -60,7 +63,7 @@
     &__button {
         &, &:focus, &:active, &:hover {
             padding: rem(16px);
-            background-color: $solution-background-primary;
+            background-color: $solution-button-background-primary;
             color: $color-white;
             border: none;
             cursor: pointer;
@@ -107,9 +110,11 @@
         box-sizing: border-box;
         @include transition(box-shadow);
         @include transition(border-color);
+
         &:hover {
             border-color: $color-grey-darkest;
         }
+
         &:focus {
             border-color: $color-grey-darkest;
             outline: none;

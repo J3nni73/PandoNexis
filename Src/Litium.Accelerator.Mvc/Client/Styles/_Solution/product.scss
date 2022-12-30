@@ -94,7 +94,7 @@
     &__info {
         width: 100%;
         padding: rem(10px 10px 6px 10px);
-        border-top: rem(1px) solid $solution-line-color;
+        border-top: rem(1px) solid rgba($solution-line-color, .2);
     }
 
     &__name,
@@ -104,6 +104,7 @@
         display: block;
         overflow: hidden;
         text-overflow: ellipsis;
+        padding: rem(0 8px);
 
         @include tablet-small {
             font-size: rem($fontsize-normal) !important;
