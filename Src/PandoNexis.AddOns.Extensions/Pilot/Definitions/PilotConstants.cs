@@ -10,6 +10,7 @@ namespace PandoNexis.AddOns.Extensions.Pilot.Definitions
     {
         
         public const string Item = "Item";
+        public const string ItemFieldData = "ItemFieldData";
 
         public const string SystemId = "SystemId";
         public const string OrganizationSystemId = "OrganizationSystemId";

@@ -55,18 +55,40 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
         {
             return new List<DatabaseColumns>
             {
-                GetColumn(DatabaseConstants.CreatedDateTime, DatabaseConstants.DateTime, DatabaseConstants.NotNull),
-                GetColumn(DatabaseConstants.CreatedBy, DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
+                GetColumn(DatabaseConstants.CreatedDateTime, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.NotNull),
+                GetColumn(DatabaseConstants.CreatedBy, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
 
-                GetColumn(DatabaseConstants.UpdatedDateTime, DatabaseConstants.DateTime, DatabaseConstants.Null),
-                GetColumn(DatabaseConstants.UpdatedBy, DatabaseConstants.UniqueIdentifier, DatabaseConstants.Null),
+                GetColumn(DatabaseConstants.UpdatedDateTime, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseConstants.UpdatedBy, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.Null),
 
-                GetColumn(DatabaseConstants.DeletedDateTime, DatabaseConstants.DateTime, DatabaseConstants.Null),
-                GetColumn(DatabaseConstants.DeletedBy, DatabaseConstants.UniqueIdentifier, DatabaseConstants.Null),
+                GetColumn(DatabaseConstants.DeletedDateTime, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseConstants.DeletedBy, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.Null),
             };
         }
+        public List<DatabaseColumns> GetFieldDataColumns()
+        {
+            var result = new List<DatabaseColumns>
+            {
+                GetColumn(DatabaseFieldDataConstants.OwnerSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(DatabaseFieldDataConstants.FieldDefinitionId, DatabaseTypeConstants.Varchar100, DatabaseTypeConstants.NotNull),
+                GetColumn(DatabaseFieldDataConstants.Culture, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
+                GetColumn(DatabaseFieldDataConstants.Index, DatabaseTypeConstants.Int, DatabaseTypeConstants.NotNull),
+                GetColumn(DatabaseFieldDataConstants.BooleanValue, DatabaseTypeConstants.Bit, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseFieldDataConstants.DateTimeValue, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseFieldDataConstants.DecimalValue, DatabaseTypeConstants.Decimal, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseFieldDataConstants.GuidValue, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseFieldDataConstants.IndexedTextValue, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseFieldDataConstants.IntValue, DatabaseTypeConstants.Int, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseFieldDataConstants.JsonValue, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseFieldDataConstants.LongValue, DatabaseTypeConstants.BigInt, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseFieldDataConstants.TextValue, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseFieldDataConstants.ChildOwnerId, DatabaseTypeConstants.Varchar100, DatabaseTypeConstants.Null),
+                GetColumn(DatabaseFieldDataConstants.ChildIndex, DatabaseTypeConstants.Int, DatabaseTypeConstants.NotNull),
+            };
+            result.AddRange(GetEditedColumns());
+            return result;
+        }
 
-      
 
         public void UpdateTableToLatestVersion(string tableName, List<DatabaseColumns> columnsToExist, List<DatabaseColumns> currentColumns)
         {

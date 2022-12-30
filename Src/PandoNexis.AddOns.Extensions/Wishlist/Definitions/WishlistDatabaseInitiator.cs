@@ -25,17 +25,17 @@ namespace PandoNexis.AddOns.Extensions.Wishlist.Definitions
         {
             return new List<DatabaseColumns>
             {
-                GetColumn(WishlistConstants.CookieId,DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(WishlistConstants.LastUpdated, DatabaseConstants.DateTime, DatabaseConstants.NotNull),
+                GetColumn(WishlistConstants.CookieId,DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(WishlistConstants.LastUpdated, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.NotNull),
             };
         }
         private List<DatabaseColumns> GetWishListItemColumns()
         {
             return new List<DatabaseColumns>
             {
-                GetColumn(WishlistConstants.BaseProductSystemId,DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(WishlistConstants.VariantSystemId, DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(WishlistConstants.AddedDate, DatabaseConstants.DateTime, DatabaseConstants.NotNull),
+                GetColumn(WishlistConstants.BaseProductSystemId,DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(WishlistConstants.VariantSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(WishlistConstants.AddedDate, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.NotNull),
             };
         }
     }

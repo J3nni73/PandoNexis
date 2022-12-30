@@ -25,6 +25,7 @@ namespace PandoNexis.AddOns.Extensions.Pilot.Definitions
         {
             SyncronizeDatabaseObjects(PilotConstants.Item, GetItemColumns());
             SyncronizeDatabaseObjects(PilotConstants.Time, GetTimeColumns());
+            SyncronizeDatabaseObjects(PilotConstants.ItemFieldData, GetFieldDataColumns());
 
             //var test = new Item()
             //{
@@ -78,14 +79,14 @@ namespace PandoNexis.AddOns.Extensions.Pilot.Definitions
         {
             var result = new List<DatabaseColumns>
             {
-                GetColumn(PilotConstants.SystemId, DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.OrganizationSystemId, DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.ParentSystemId, DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.ItemType, DatabaseConstants.Varchar50, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.ItemStatus, DatabaseConstants.Varchar50, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.ItemTitle, DatabaseConstants.Varchar100, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.ItemDescription, DatabaseConstants.VarcharMax, DatabaseConstants.Null),
-                GetColumn(PilotConstants.DueDateTime, DatabaseConstants.DateTime, DatabaseConstants.Null)
+                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.OrganizationSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.ParentSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.ItemType, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.ItemStatus, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.ItemTitle, DatabaseTypeConstants.Varchar100, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.ItemDescription, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
+                GetColumn(PilotConstants.DueDateTime, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.Null)
             };
             result.AddRange(GetEditedColumns());
             return result;
@@ -94,18 +95,18 @@ namespace PandoNexis.AddOns.Extensions.Pilot.Definitions
         {
             var result = new List<DatabaseColumns>
             {
-                GetColumn(PilotConstants.SystemId, DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.ItemSystemId, DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.OrganizationSystemId, DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.TimeType, DatabaseConstants.Varchar50, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.TimeComment, DatabaseConstants.VarcharMax, DatabaseConstants.Null),
-                GetColumn(PilotConstants.TimeFrom, DatabaseConstants.DateTime, DatabaseConstants.Null),
-                GetColumn(PilotConstants.TimeTo, DatabaseConstants.DateTime, DatabaseConstants.Null),
-                GetColumn(PilotConstants.TimeAmount, DatabaseConstants.Int, DatabaseConstants.NotNull),
-                GetColumn(PilotConstants.TimeRisk, DatabaseConstants.Int, DatabaseConstants.Null),
+                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.ItemSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.OrganizationSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.TimeType, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.TimeComment, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
+                GetColumn(PilotConstants.TimeFrom, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.Null),
+                GetColumn(PilotConstants.TimeTo, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.Null),
+                GetColumn(PilotConstants.TimeAmount, DatabaseTypeConstants.Int, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.TimeRisk, DatabaseTypeConstants.Int, DatabaseTypeConstants.Null),
             };
             result.AddRange(GetEditedColumns());
             return result;
-        }
+        }       
     }
 }
