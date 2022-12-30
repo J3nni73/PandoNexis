@@ -1,0 +1,43 @@
+
+/*Grid View*/
+$secondary-color: #e7e7e7 !default; // white-lilac
+$oil: #333333 !default;
+$jet: #222222 !default;
+$white: #FFFFFF !default;
+$custom-color-dark1: #3d3d3d;
+$custom-color-dark2: #5d5d5d;
+$custom-green-dark: #5b8817;
+$color-grey-darkest: #999 !default;
+$custom-box-shadow-color: rgba(0, 0, 0, 0.15);
+$snow: #F9F9F9 !default;
+$iron: #CCCCCC !default;
+$custom-color-red: #cc3333;
+$custom-color-red2: #a32929;
+
+$custom-color-red-hover: #af2c2c;
+$custom-filter-color: $jet;
+$custom-filter-selected-background: $oil;
+
+$color-grey-lightest: #f2f2f2 !default;
+$color-grey-lighter: #eee !default;
+$color-grey-light: #ddd !default;
+$color-grey: #ccc !default;
+$color-grey-dark: #bbb !default;
+$color-grey-darker: #aaa !default;
+$color-grey-darkest: #999 !default;
+
+$custom-pistage: rgb(182, 212, 155);
+$custom-pistage-lighten50: scale-color($custom-pistage, $lightness: 50%);
+$custom-pistage-lighten30: scale-color($custom-pistage, $lightness: 70%);
+$custom-pistage-lighten10: scale-color($custom-pistage, $lightness: 90%);
+
+$custom-color-grey-button: $custom-color-dark1;
+$custom-color-grey-button-hover: lighten($custom-color-dark1, 10%);
+
+$custom-color-grey-button: $custom-color-dark1;
+
+$custom-filter-border: $secondary-color;
+$custom-filter-background: $white;
+$custom-filter-selected-color: $snow;
+
+$global-radius: 4px;
