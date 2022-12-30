@@ -24,6 +24,21 @@
     transform: scale($ratioX, $ratioY);
 }
 
+@mixin gradient-bg ($direction: to right, $from-color, $to-color, $width: 100%) {
+    position: relative;
+    width: $width;
+    background: $from-color;
+    background: -webkit-linear-gradient($direction, $from-color, $to-color);
+    background: linear-gradient($direction, $from-color, $to-color);
+}
+
+@mixin transform($transforms) {
+    -webkit-transform: $transforms;
+    -moz-transform: $transforms;
+    -ms-transform: $transforms;
+    transform: $transforms;
+}
+
 @mixin rotate( $degrees ) {
     -webkit-transform: rotate(#{$degrees}deg);
     -moz-transform: rotate(#{$degrees}deg);
@@ -97,6 +112,19 @@
     -moz-border-radius-topright: $topright;
     -moz-border-radius-bottomright: $bottomright;
     -moz-border-radius-bottomleft: $bottomleft;
+}
+
+@mixin button-gradient($bg, $color: #fff, $direction: to right, $width: 100%) {
+    @include gradient-bg($direction, $bg, darken($bg,10%), $width);
+
+    &:hover:not([disabled]) {
+        @include gradient-bg($direction, lighten(rgba($bg, .9),5%), $bg, $width);
+        opacity: .9;
+    }
+
+    &[disabled] {
+        background-color: desaturate($bg, 80%) !important;
+    }
 }
 
 @mixin gradient($deg: 90, $color-start: $color-white, $color-end: #595959, $start-position: 0%, $end-position: 100%) {
