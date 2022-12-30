@@ -1,0 +1,140 @@
+
+$padding: rem(10px);
+$bg: $custom-color-grey-button;
+
+button {
+    border-radius: rem(4px) !important;
+    @include transition;
+    &.form__button{
+        &:hover{
+            opacity: .9;
+        }
+    }
+}
+
+@mixin general-button-color($color) {
+
+    @include button-gradient($color, #fff, to right, 100%);
+    width: inherit;
+    color: #fff; //rgba(darken($color-green,40%), .8);
+}
+
+.button {
+    background-color: $bg;
+    color: #fff;
+    border-radius: $global-radius;
+    padding: $padding;
+    width: auto;
+    text-transform: none;
+
+    &-green {
+        @include general-button-color($color-green);
+    }
+
+    &-orange {
+        @include general-button-color($color-orange);
+    }
+
+    &-cyan {
+        @include general-button-color($color-cyan);
+    }
+
+    &-magenta {
+        @include general-button-color($color-magenta);
+    }
+}
+
+.mu-btn {
+    animation-duration: 0.0001s;
+    animation-name: mui-btn-inserted;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.custom-general-cta {
+    width: 100%;
+    display: block;
+    color: inherit;
+
+    a {
+        color: inherit;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    span {
+        @include button--underline;
+    }
+}
+
+.filter-wrapper {
+
+    &__item {
+        overflow: hidden;
+        position: relative;
+        margin: auto;
+        padding: 0;
+        display: inline-block;
+        margin-right: rem(8px);
+
+        &-label {
+            display: inline-block;
+            width: 100%;
+            border: 1px solid $custom-filter-border;
+            padding: rem(0 16px);
+            border-radius: 1.5rem;
+            height: 2rem;
+            line-height: 2rem;
+            text-align: center;
+            margin: 0 !important;
+            font-size: 1rem;
+            background-color: $custom-filter-background;
+            color: $custom-filter-color;
+            cursor: pointer;
+            white-space: nowrap;
+            overflow: hidden;
+            /*&:hover {
+                background: #ddd;
+            }*/
+        }
+
+
+        &-radio {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 2rem;
+            line-height: 2rem;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -ms-appearance: none;
+            appearance: none;
+            border: none;
+            padding: 0;
+            vertical-align: middle;
+            background-color: transparent;
+            transition: .3s ease;
+            outline: 0;
+            cursor: pointer;
+
+            &:checked ~ label {
+                background-color: $custom-filter-selected-background;
+                color: $custom-filter-selected-color;
+            }
+
+            &:hover ~ label {
+                background-color: rgba($custom-filter-selected-background, .5);
+                color: $custom-filter-selected-color;
+            }
+        }
+    }
+}

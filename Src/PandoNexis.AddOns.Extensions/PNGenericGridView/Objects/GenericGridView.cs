@@ -86,7 +86,7 @@
         public bool ReadOnly { get; set; } = true;
         public bool Editable { get; set; } = false;
         public bool IsVisible { get; set; } = true;
-        public string BackgroundColor { get; set; } = "#FFFFFF";
+        public string BackgroundColor { get; set; } = string.Empty;
         public bool ShowForMobile { get; set; } = true;
         public bool ShowForTablet { get; set; } = true;
         public bool ShowForDesktop { get; set; } = true;
