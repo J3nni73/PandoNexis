@@ -26,52 +26,52 @@ namespace PandoNexis.AddOns.Extensions.Pilot.Definitions
             SyncronizeDatabaseObjects(PilotConstants.Item, GetItemColumns());
             SyncronizeDatabaseObjects(PilotConstants.Time, GetTimeColumns());
 
-            var test = new Item()
-            {
-                SystemId = Guid.NewGuid(),
-                OrganizationSystemId = Guid.NewGuid(),
-                ParentSystemId = Guid.NewGuid(),
-                ItemTitle = "Första aktiviteten",
-                ItemDescription = "Description",
-                ItemStatus = "Teststatus",
-                ItemType = "Testtyp",
-                CreatedDateTime = DateTime.Now,
-                CreatedBy = Guid.NewGuid(),
-                UpdatedDateTime = DateTime.Now,
-                UpdatedBy = Guid.NewGuid(),
-            };
-            _pilotItemDALService.AddOrUpdateItem(test);
+            //var test = new Item()
+            //{
+            //    SystemId = Guid.NewGuid(),
+            //    OrganizationSystemId = Guid.NewGuid(),
+            //    ParentSystemId = Guid.NewGuid(),
+            //    ItemTitle = "Första aktiviteten",
+            //    ItemDescription= "Description",
+            //    ItemStatus = "Teststatus",
+            //    ItemType = "Testtyp",
+            //    CreatedDateTime= DateTime.Now,
+            //    CreatedBy = Guid.NewGuid(),
+            //    UpdatedDateTime= DateTime.Now,  
+            //    UpdatedBy = Guid.NewGuid(),
+            //};
+            //_pilotItemDALService.AddOrUpdateItem(test);
 
-            test = new Item()
-            {
-                SystemId = Guid.NewGuid(),
-                OrganizationSystemId = Guid.NewGuid(),
-                ParentSystemId = Guid.NewGuid(),
-                ItemTitle = "Andra aktiviteten",
-                ItemDescription = "Description",
-                ItemStatus = "Teststatus",
-                ItemType = "Testtyp",
-                CreatedDateTime = DateTime.Now,
-                CreatedBy = Guid.NewGuid(),
-                UpdatedDateTime = DateTime.Now,
-                UpdatedBy = Guid.NewGuid(),
-            };
-            _pilotItemDALService.AddOrUpdateItem(test);
-            test = new Item()
-            {
-                SystemId = Guid.NewGuid(),
-                OrganizationSystemId = Guid.NewGuid(),
-                ParentSystemId = Guid.NewGuid(),
-                ItemTitle = "Tredje aktiviteten",
-                ItemDescription = "Description",
-                ItemStatus = "Teststatus",
-                ItemType = "Testtyp",
-                CreatedDateTime = DateTime.Now,
-                CreatedBy = Guid.NewGuid(),
-                UpdatedDateTime = DateTime.Now,
-                UpdatedBy = Guid.NewGuid(),
-            };
-            _pilotItemDALService.AddOrUpdateItem(test);
+            //test = new Item()
+            //{
+            //    SystemId = Guid.NewGuid(),
+            //    OrganizationSystemId = Guid.NewGuid(),
+            //    ParentSystemId = Guid.NewGuid(),
+            //    ItemTitle = "Andra aktiviteten",
+            //    ItemDescription = "Description",
+            //    ItemStatus = "Teststatus",
+            //    ItemType = "Testtyp",
+            //    CreatedDateTime = DateTime.Now,
+            //    CreatedBy = Guid.NewGuid(),
+            //    UpdatedDateTime = DateTime.Now,
+            //    UpdatedBy = Guid.NewGuid(),
+            //};
+            //_pilotItemDALService.AddOrUpdateItem(test);
+            //test = new Item()
+            //{
+            //    SystemId = Guid.NewGuid(),
+            //    OrganizationSystemId = Guid.NewGuid(),
+            //    ParentSystemId = Guid.NewGuid(),
+            //    ItemTitle = "Tredje aktiviteten",
+            //    ItemDescription = "Description",
+            //    ItemStatus = "Teststatus",
+            //    ItemType = "Testtyp",
+            //    CreatedDateTime = DateTime.Now,
+            //    CreatedBy = Guid.NewGuid(),
+            //    UpdatedDateTime = DateTime.Now,
+            //    UpdatedBy = Guid.NewGuid(),
+            //};
+            //_pilotItemDALService.AddOrUpdateItem(test);
 
         }
         public List<DatabaseColumns> GetItemColumns()
