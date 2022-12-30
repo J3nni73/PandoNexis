@@ -86,7 +86,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView._Solution.Services
             var parentCategory = _categoryService.Get(type);
 
             var website = _requestModelAccessor.RequestModel.WebsiteModel;
-            var category = website.GetValue<PointerItem>(Constants.PageFieldNameConstants.QuotaCategory);
+            var category = website.GetValue<PointerItem>(Constants.GenericGridView_PageFieldNameConstants.QuotaCategory);
 
             if (category == null)
             {
@@ -112,8 +112,8 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView._Solution.Services
             var parentCategory = _categoryService.Get(type);
 
             var website = _requestModelAccessor.RequestModel.WebsiteModel;
-            var categorWeb = website.GetValue<PointerItem>(Constants.PageFieldNameConstants.QuotaCategory);
-            var category = _categoryService.GetChildCategories(parentCategory.SystemId).Where(x => x.Fields.GetValue<string>(Constants.ProductFieldNameConstants.QuotaId).ToLower().Contains(itemsListObj[0].QuotaId.ToLower())).FirstOrDefault().MakeWritableClone();
+            var categorWeb = website.GetValue<PointerItem>(Constants.GenericGridView_PageFieldNameConstants.QuotaCategory);
+            var category = _categoryService.GetChildCategories(parentCategory.SystemId).Where(x => x.Fields.GetValue<string>(Constants.GenericGridView_ProductFieldNameConstants.QuotaId).ToLower().Contains(itemsListObj[0].QuotaId.ToLower())).FirstOrDefault().MakeWritableClone();
 
             if (category != null)
             {
@@ -160,7 +160,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView._Solution.Services
             var itemsListObj = JsonConvert.DeserializeObject<List<VariantsData>>(data);
 
             var parentCategory = _categoryService.Get(type);
-            var category = _categoryService.GetChildCategories(parentCategory.SystemId).Where(x => x.Fields.GetValue<string>(Constants.ProductFieldNameConstants.QuotaId).ToLower().Contains(itemsListObj[0].QuotaId.ToLower())).FirstOrDefault().MakeWritableClone();
+            var category = _categoryService.GetChildCategories(parentCategory.SystemId).Where(x => x.Fields.GetValue<string>(Constants.GenericGridView_ProductFieldNameConstants.QuotaId).ToLower().Contains(itemsListObj[0].QuotaId.ToLower())).FirstOrDefault().MakeWritableClone();
 
             if (category != null)
             {
@@ -193,8 +193,8 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView._Solution.Services
                                 _variantService.Create(variant);
                             }
                             variant = variant.MakeWritableClone();
-                            variant.Fields.AddOrUpdateValue(Constants.ProductFieldNameConstants.SupplierItemNumber, item.ArticleNumber);
-                            variant.Fields.AddOrUpdateValue(Constants.ProductFieldNameConstants.CreatedDate, DateTime.UtcNow);
+                            variant.Fields.AddOrUpdateValue(Constants.GenericGridView_ProductFieldNameConstants.SupplierItemNumber, item.ArticleNumber);
+                            variant.Fields.AddOrUpdateValue(Constants.GenericGridView_ProductFieldNameConstants.CreatedDate, DateTime.UtcNow);
                             using (_securityContextService.ActAsSystem("My custom integration task"))
                             {
                                 _variantService.Update(variant);
@@ -269,7 +269,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView._Solution.Services
                 {
                     var culture = CultureInfo.GetCultureInfo(assortmentLocalization.Key);
                     category.Fields.AddOrUpdateValue("_name", culture, categoryName);
-                    category.Fields.AddOrUpdateValue(Constants.ProductFieldNameConstants.QuotaId, categoryName);
+                    category.Fields.AddOrUpdateValue(Constants.GenericGridView_ProductFieldNameConstants.QuotaId, categoryName);
                     //category.Fields.AddOrUpdateValue("_url", culture, _suggestionService.Suggest(culture, categoryName));
                 }
 

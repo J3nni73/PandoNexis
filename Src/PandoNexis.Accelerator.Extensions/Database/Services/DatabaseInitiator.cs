@@ -10,6 +10,8 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
+using PandoNexis.Accelerator.Extensions.Database.Constants;
+using MetadataExtractor.Formats.Xmp;
 
 namespace PandoNexis.Accelerator.Extensions.Database.Services
 {
@@ -24,55 +26,100 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
             _configuration = configuration;
         }
         public abstract void GetCheckDatabaseObjects();
-        public void UpdateTableToLatestVersion(string databaseName, List<DatabaseColumns> databaseColumnsToExist, List<DatabaseColumns> currentDatabaseColumns)
+      
+        public void SyncronizeDatabaseObjects(string tableName, List<DatabaseColumns> columns)
+        {
+
+            var inDatabaseColumns = new List<DatabaseColumns>();
+            if (!TableExists(tableName, out inDatabaseColumns))
+            {
+                CreateTable(tableName, columns);
+            }
+            else if (inDatabaseColumns.Any())
+            {
+                UpdateTableToLatestVersion(tableName, columns, inDatabaseColumns);
+            }
+        }
+
+        public DatabaseColumns GetColumn(string name, string type, string attribute)
+        {
+            return new DatabaseColumns()
+            {
+                Name = name,
+                Type = type,
+                Attribute = attribute
+            };
+        }
+
+        public List<DatabaseColumns> GetEditedColumns()
+        {
+            return new List<DatabaseColumns>
+            {
+                GetColumn(DatabaseConstants.CreatedDateTime, DatabaseConstants.DateTime, DatabaseConstants.NotNull),
+                GetColumn(DatabaseConstants.CreatedBy, DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
+
+                GetColumn(DatabaseConstants.UpdatedDateTime, DatabaseConstants.DateTime, DatabaseConstants.Null),
+                GetColumn(DatabaseConstants.UpdatedBy, DatabaseConstants.UniqueIdentifier, DatabaseConstants.Null),
+
+                GetColumn(DatabaseConstants.DeletedDateTime, DatabaseConstants.DateTime, DatabaseConstants.Null),
+                GetColumn(DatabaseConstants.DeletedBy, DatabaseConstants.UniqueIdentifier, DatabaseConstants.Null),
+            };
+        }
+
+      
+
+        public void UpdateTableToLatestVersion(string tableName, List<DatabaseColumns> columnsToExist, List<DatabaseColumns> currentColumns)
         {
             var columnsToCreate = new List<DatabaseColumns>();
 
-            foreach (var column in databaseColumnsToExist)
+            foreach (var column in columnsToExist)
             {
-                if (currentDatabaseColumns.FirstOrDefault(i => i.Name == column.Name)==null)
+                if (currentColumns.FirstOrDefault(i => i.Name == column.Name) == null)
                 {
                     columnsToCreate.Add(column);
                 }
             }
 
-            var sql = $"Alter TABLE [{databaseName}]" + Environment.NewLine;
+            var sql = $"Alter TABLE {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{tableName}" + Environment.NewLine;
 
             sql += $"add " + Environment.NewLine;
-            foreach (var column in columnsToCreate)
+            if (columnsToCreate.Any())
             {
-                if (columnsToCreate.IndexOf(column) != columnsToCreate.Count - 1)
+                foreach (var column in columnsToCreate)
                 {
-                    sql += $"{column.Name} {column.Type} {column.Attribute}, " + Environment.NewLine;
-                }
-                else
-                {
-                    sql += $"{column.Name} {column.Type} {column.Attribute}" + Environment.NewLine;
-                }
-            }
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.ConnectionString = _configuration["Litium:Data:ConnectionString"];
-            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-            {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(sql, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    if (columnsToCreate.IndexOf(column) != columnsToCreate.Count - 1)
                     {
+                        sql += $"{column.Name} {column.Type} {column.Attribute}, " + Environment.NewLine;
+                    }
+                    else
+                    {
+                        sql += $"{column.Name} {column.Type} {column.Attribute}" + Environment.NewLine;
+                    }
+                }
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.ConnectionString = _configuration["Litium:Data:ConnectionString"];
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                        }
                     }
                 }
             }
         }
 
-        public void CreateTable(string databaseName, List<DatabaseColumns> databaseColumnsToCreate)
+        public void CreateTable(string tableName, List<DatabaseColumns> columnsToCreate)
         {
-            var sql = $"CREATE TABLE [{databaseName}]" + Environment.NewLine;
+            var sql = $"CREATE TABLE {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{tableName}" + Environment.NewLine;
             sql += $"(" + Environment.NewLine;
-            foreach (var column in databaseColumnsToCreate)
+            foreach (var column in columnsToCreate)
             {
-                if (databaseColumnsToCreate.IndexOf(column) != databaseColumnsToCreate.Count - 1)
+                if (columnsToCreate.IndexOf(column) != columnsToCreate.Count - 1)
                 {
-                    sql += $"{column.Name} {column.Type} {column.Attribute}, " +  Environment.NewLine;
+                    sql += $"{column.Name} {column.Type} {column.Attribute}, " + Environment.NewLine;
                 }
                 else
                 {
@@ -96,10 +143,10 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
             }
         }
 
-        public bool TableExists(string databaseName, out List<DatabaseColumns> databaseColumns)
+        public bool TableExists(string tableName, out List<DatabaseColumns> columns)
         {
-            databaseColumns = new List<DatabaseColumns>();
-            var sql = $"select c.name from sys.all_objects o inner join sys.all_columns c on c.object_id = o.object_id where o.type = 'U' and o.name like '{databaseName}'";
+            columns = new List<DatabaseColumns>();
+            var sql = $"select c.name from sys.all_objects o inner join sys.all_columns c on c.object_id = o.object_id where o.type = 'U' and o.name like '{DatabaseConstants.TablePrefix}{tableName}'";
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.ConnectionString = _configuration["Litium:Data:ConnectionString"];
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -111,7 +158,7 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
                     {
                         while (reader.Read())
                         {
-                            databaseColumns.Add(new DatabaseColumns
+                            columns.Add(new DatabaseColumns
                             {
                                 Name = reader.GetString(0)
                             });
@@ -119,19 +166,11 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
                     }
                 }
             }
-            if (databaseColumns.Any())
+            if (columns.Any())
                 return true;
             else
                 return false;
         }
-        public DatabaseColumns GetColumn(string name, string type, string attribute)
-        {
-            return new DatabaseColumns()
-            {
-                Name = name,
-                Type = type,
-                Attribute = attribute
-            };
-        }
+
     }
 }

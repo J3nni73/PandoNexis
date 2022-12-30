@@ -17,7 +17,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView._Solution.Processors
     [Service(Name = "Quota")]
     public class QuotaProcessor : GridViewDataProcessorBase
     {
-        private const string _processorName = ProductTemplateNameConstants.Quota;
+        private const string _processorName = GenericGridView_ProductTemplateNameConstants.Quota;
         private readonly GenericGridViewService _genericGridViewService;
         private readonly SecurityContextService _securityContextService;
 

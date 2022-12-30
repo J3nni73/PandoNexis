@@ -18,29 +18,8 @@ namespace PandoNexis.AddOns.Extensions.Wishlist.Definitions
 
         public override void GetCheckDatabaseObjects()
         {
-            var wishListColumns = GetWishListColumns();
-            var inDatabaseColumns = new List<DatabaseColumns>();
-
-            if (!TableExists(WishlistConstants.WishList, out inDatabaseColumns))
-            {
-                CreateTable(WishlistConstants.WishList, wishListColumns);
-            }
-            else if (inDatabaseColumns.Any())
-            {
-                UpdateTableToLatestVersion(WishlistConstants.WishList, wishListColumns, inDatabaseColumns);
-            }
-
-
-            var wishListItemColumns = GetWishListItemColumns();
-            inDatabaseColumns = new List<DatabaseColumns>();
-            if (!TableExists(WishlistConstants.WishListItem, out inDatabaseColumns))
-            {
-                CreateTable(WishlistConstants.WishListItem, wishListItemColumns);
-            }
-            else if (inDatabaseColumns.Any())
-            {
-                UpdateTableToLatestVersion(WishlistConstants.WishListItem, wishListItemColumns, inDatabaseColumns);
-            }
+            SyncronizeDatabaseObjects(WishlistConstants.WishList, GetWishListColumns());
+            SyncronizeDatabaseObjects(WishlistConstants.WishListItem, GetWishListItemColumns());
         }
         private List<DatabaseColumns> GetWishListColumns()
         {

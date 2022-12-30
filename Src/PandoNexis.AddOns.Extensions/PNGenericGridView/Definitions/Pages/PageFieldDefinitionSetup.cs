@@ -21,15 +21,15 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Definitions.Pages
         {
             var fields = new List<FieldDefinition>
             {
-                new FieldDefinition<WebsiteArea>(Constants.PageFieldNameConstants.DataSource, SystemFieldTypeConstants.TextOption)
+                new FieldDefinition<WebsiteArea>(Constants.GenericGridView_PageFieldNameConstants.DataSource, SystemFieldTypeConstants.TextOption)
                 {
                     Option = new TextOption { MultiSelect = true}
                 },
                 
-                new FieldDefinition<WebsiteArea>(Constants.PageFieldNameConstants.ReactClass, SystemFieldTypeConstants.Text),
-                new FieldDefinition<WebsiteArea>(Constants.PageFieldNameConstants.HasMegaMenu, SystemFieldTypeConstants.Boolean),
-                new FieldDefinition<WebsiteArea>(Constants.PageFieldNameConstants.ExtraElementAttributes, SystemFieldTypeConstants.Text),
-                new FieldDefinition<WebsiteArea>(Constants.PageFieldNameConstants.EnableDropZone, SystemFieldTypeConstants.Boolean),
+                new FieldDefinition<WebsiteArea>(Constants.GenericGridView_PageFieldNameConstants.ReactClass, SystemFieldTypeConstants.Text),
+                new FieldDefinition<WebsiteArea>(Constants.GenericGridView_PageFieldNameConstants.HasMegaMenu, SystemFieldTypeConstants.Boolean),
+                new FieldDefinition<WebsiteArea>(Constants.GenericGridView_PageFieldNameConstants.ExtraElementAttributes, SystemFieldTypeConstants.Text),
+                new FieldDefinition<WebsiteArea>(Constants.GenericGridView_PageFieldNameConstants.EnableDropZone, SystemFieldTypeConstants.Boolean),
             };
             return fields;
         }

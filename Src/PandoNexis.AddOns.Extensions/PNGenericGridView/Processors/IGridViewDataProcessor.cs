@@ -13,7 +13,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Processors
         Task<object> GetGridForm(string data);
         Task<object> UpdateRow(string data);
         Task<object> HandleFormData(string data);
-        void CalculateFields(Variant variant, MultiFieldItem customerData/*, List<FieldConfigurationField> fields*/);
+        void CalculateFields(object rowObject, object helperObject/*, List<FieldConfigurationField> fields*/);
         Task<object> GetGridViewForExport(string data);
     }
 }
