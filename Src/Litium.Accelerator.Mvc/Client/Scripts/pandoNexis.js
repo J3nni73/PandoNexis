@@ -56,6 +56,33 @@ const initNewBuyButton = (button) => {
 
 export const bootstrapPNComponents = () => {
 
+    // PRODUCT PAGE IMAGES
+    const lightBoxImagesEl = document.getElementById('lightBoxImages');
+    if (lightBoxImagesEl) {
+        const LightboxImages = DynamicComponent({
+            loader: () => import('./_Solution/Components/LightboxImages'),
+        });
+        import('./Reducers/LightboxImages.reducer').then(
+            ({ lightboxImages }) => {
+                window.__pn.store.injectReducer('lightboxImages', lightboxImages);
+                const rootElement = lightBoxImagesEl;
+                const images = Array.from(
+                    rootElement.querySelectorAll('template')
+                ).map((img) => ({
+                    html: img.innerHTML,
+                    src: img.dataset.src,
+                }));
+                renderReact(
+                    <Provider store={window.__pn.store}>
+                        <LightboxImages images={images} />
+                    </Provider>,
+                    lightBoxImagesEl
+                );
+            }
+        );
+    }
+    // END PRODUCT PAGE IMAGES
+
     // ICONS
     const iconEls = document.querySelectorAll('.pn-icon');
     if (iconEls) {

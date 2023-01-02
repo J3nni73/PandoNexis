@@ -138,29 +138,7 @@ const bootstrapComponents = () => {
             document.getElementById('checkout')
         );
     }
-    if (document.getElementById('lightBoxImages')) {
-        const LightboxImages = DynamicComponent({
-            loader: () => import('./Components/LightboxImages'),
-        });
-        import('./Reducers/LightboxImages.reducer').then(
-            ({ lightboxImages }) => {
-                store.injectReducer('lightboxImages', lightboxImages);
-                const rootElement = document.getElementById('lightBoxImages');
-                const images = Array.from(
-                    rootElement.querySelectorAll('template')
-                ).map((img) => ({
-                    html: img.innerHTML,
-                    src: img.dataset.src,
-                }));
-                renderReact(
-                    <Provider store={store}>
-                        <LightboxImages images={images} />
-                    </Provider>,
-                    document.getElementById('lightBoxImages')
-                );
-            }
-        );
-    }
+    
 
     if (document.querySelectorAll('.slider').length > 0) {
         const Slider = DynamicComponent({

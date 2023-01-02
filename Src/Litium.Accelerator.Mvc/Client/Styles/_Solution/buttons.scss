@@ -1,134 +1,137 @@
+$button-general-height: 50px;
+$button-general-shadow-color: rgb(46,46,80);
 
-$padding: rem(10px);
-$bg: $custom-color-grey-button;
+$button-general-primary-color: $solution-highlight-bg1;
+$button-general-secondary-color: #ff6a00;
+$button-general-tertiary-color: $solution-color-beige;
 
-button {
-    border-radius: rem(4px) !important;
-}
+$button-general-text-color: $color-white;
+$button-general-max-width: 200px;
+$button-general-jusify: center;
+$button-general-margin: 12px 0;
 
-@mixin general-button-color($color) {
+//$btn-bg1: rgba(132, 105, 25);
 
-    @include button-gradient($color, #fff, to right, 100%);
-    width: inherit;
-    color: #fff; //rgba(darken($color-green,40%), .8);
-}
 
-.button {
-    background-color: $bg;
-    color: #fff;
-    border-radius: $global-radius;
-    padding: $padding;
+.button, .form__button {
+    @include transition;
+    font-size: rem(16px);
+    padding: rem(6px 32px);
+    cursor: pointer;
+    outline: none;
+    color: $button-general-text-color;
+    //text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: rem($button-general-height);
+    font-size: rem(14px);
+    font-weight: 600;
+    background-color: $button-general-primary-color;
+    @include border-radius(rem(20px));
+    @include box-shadow(0, 0, 0, 0, rgba($button-general-shadow-color, 0));
+    justify-self: $button-general-jusify;
+    margin: rem($button-general-margin);
     width: auto;
-    text-transform: none;
+    line-height: 1;
+    flex: 1 1 auto;
+    max-width: rem($button-general-max-width);
+    //border: 1px solid rgba($button-general-text-color, .2);
+    //background: radial-gradient(ellipse farthest-corner at right bottom, rgba($btn-bg1, .7) 0%, rgba($btn-bg2, .7) 8%, rgba($btn-bg3, .7) 30%, rgba($btn-bg4, .7) 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
 
-    &-green {
-        @include general-button-color($color-green);
+    &--left {
+        margin-left: 0;
     }
 
-    &-orange {
-        @include general-button-color($color-orange);
+    max-width: 200px;
+
+    &--right {
+        margin-right: 0;
     }
 
-    &-cyan {
-        @include general-button-color($color-cyan);
+    &--center {
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    &-magenta {
-        @include general-button-color($color-magenta);
+    &:not(.product__buy-button) {
+        min-height: rem($button-general-height);
     }
-}
 
-.mu-btn {
-    animation-duration: 0.0001s;
-    animation-name: mui-btn-inserted;
-    -webkit-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+    &, &.disabled {
+        background-color: $button-general-primary-color;
+    }
 
-.custom-general-cta {
-    width: 100%;
-    display: block;
-    color: inherit;
+    &:hover {
+        @include box-shadow(0, 0, 6px, 0, rgba($button-general-shadow-color, .2));
+        background-color: rgba($button-general-primary-color, .8);
+        //color: $color-full-black;
+    }
 
-    a {
-        color: inherit;
+    &:focus {
+        background-color: rgba($button-general-primary-color, 1);
+        //color: $color-full-black;
+    }
 
-        &:hover {
-            text-decoration: none;
+    &.link {
+        text-decoration: underline;
+        background-color: transparent;
+        color: $color-link;
+        border: none;
+    }
+
+    &.expanded {
+        @include button-expand;
+    }
+
+    &.rounded {
+        @include border-rounded;
+    }
+
+    &[disabled] {
+        background-color: $color-grey-darkest;
+    }
+
+    &__primary, &.firstButton {
+
+        &, &.disabled {
+            background-color: $button-general-primary-color;
+        }
+
+        &:hover, &:focus {
+            background-color: rgba($button-general-primary-color, .8);
         }
     }
 
-    span {
-        @include button--underline;
+    &__secondary, &.secondButton {
+        &, &.disabled {
+            background-color: $button-general-secondary-color;
+        }
+
+
+        &:hover, &:focus {
+            background-color: rgba($button-general-secondary-color, .8);
+        }
     }
-}
 
-.filter-wrapper {
+    &__tertiary, &.thirdButton {
 
-    &__item {
-        overflow: hidden;
-        position: relative;
-        margin: auto;
-        padding: 0;
-        display: inline-block;
-        margin-right: rem(8px);
-
-        &-label {
-            display: inline-block;
-            width: 100%;
-            border: 1px solid $custom-filter-border;
-            padding: rem(0 16px);
-            border-radius: 1.5rem;
-            height: 2rem;
-            line-height: 2rem;
-            text-align: center;
-            margin: 0 !important;
-            font-size: 1rem;
-            background-color: $custom-filter-background;
-            color: $custom-filter-color;
-            cursor: pointer;
-            white-space: nowrap;
-            overflow: hidden;
-            /*&:hover {
-                background: #ddd;
-            }*/
+        &, &.disabled {
+            background-color: $button-general-tertiary-color;
         }
 
-
-        &-radio {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 2rem;
-            line-height: 2rem;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            -ms-appearance: none;
-            appearance: none;
-            border: none;
-            padding: 0;
-            vertical-align: middle;
-            background-color: transparent;
-            transition: .3s ease;
-            outline: 0;
-            cursor: pointer;
-
-            &:checked ~ label {
-                background-color: $custom-filter-selected-background;
-                color: $custom-filter-selected-color;
-            }
-
-            &:hover ~ label {
-                background-color: rgba($custom-filter-selected-background, .5);
-                color: $custom-filter-selected-color;
-            }
+        &:hover, &:focus {
+            background-color: rgba($button-general-tertiary-color, .8);
         }
+    }
+
+    &.disabled {
+        pointer-events: none;
+        color: $color-full-black;
+    }
+
+    &--expand {
+        width: 100%;
+        max-width: none;
     }
 }
