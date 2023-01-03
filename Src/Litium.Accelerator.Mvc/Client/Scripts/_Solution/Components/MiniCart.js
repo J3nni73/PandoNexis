@@ -39,13 +39,13 @@ const MiniCart = () => {
                     className="cart__close-button"
                     onClick={() => onToggle()}
                 ></span>
-                <p className="cart__info-row">
+                <p className="cart__info-row text--center">
                     {quantity} {translate('minicart.numberofproduct')}
                 </p>
-                <p className="cart__info-row">
+                <p className="cart__info-row text--center">
                     <b>{translate('minicart.total')}</b> {orderTotal}
                 </p>
-                <a href={checkoutUrl} className="cart__checkout-button">
+                <a href={checkoutUrl} className="button cart__checkout-button">
                     {translate('minicart.checkout')}
                 </a>
             </div>
