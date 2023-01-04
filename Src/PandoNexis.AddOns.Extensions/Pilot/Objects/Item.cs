@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PandoNexis.Accelerator.Extensions.Database.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,5 +23,6 @@ namespace PandoNexis.AddOns.Extensions.Pilot.Objects
         public Guid UpdatedBy { get; set; }
         public DateTime DeletedDateTime { get; set; }
         public Guid DeletedBy { get; set; }
+        public PNFields Fields { get; set; }
     }
 }
