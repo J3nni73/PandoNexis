@@ -40,7 +40,7 @@ namespace PandoNexis.AddOns.Extensions.Block.HeroBlock
                .ForMember(x => x.BlockSubTitle, m => m.MapFromField(BlockFieldNameConstants.BlockSubTitle))
                .ForMember(x => x.BlockText, m => m.MapFromField(BlockFieldNameConstants.BlockText))
                .ForMember(x => x.BlockImage, m => m.MapFrom(c => c.Fields.GetValue<Guid>(BlockFieldNameConstants.BlockImage).MapTo<ImageModel>()))
-               .ForMember(x => x.BlockMobilImage, m => m.MapFrom(c => c.Fields.GetValue<Guid>(BlockFieldNameConstants.BlockMobilImage).MapTo<ImageModel>()))
+               .ForMember(x => x.BlockMobilImage, m => m.MapFrom(c => c.Fields.GetValue<Guid>(BlockFieldNameConstants.BlockMobileImage).MapTo<ImageModel>()))
                .ForMember(x => x.BlockOverlayImage, m => m.MapFrom(c => c.Fields.GetValue<Guid>(BlockFieldNameConstants.BlockOverlayImage).MapTo<ImageModel>()))
 
                .ForMember(x => x.BlockOverlayLeft, m => m.MapFromField(BlockFieldNameConstants.BlockOverlayLeft))

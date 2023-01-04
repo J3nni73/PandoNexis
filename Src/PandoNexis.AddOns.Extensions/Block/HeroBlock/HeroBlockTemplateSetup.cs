@@ -24,7 +24,7 @@ internal class HeroBlockTemplateSetup : FieldTemplateHelper
             GetBlockField(BlockTemplateNameConstants.HeroBlock,BlockFieldGroupNameConstants.General, BlockFieldNameConstants.BlockText),
 
             GetBlockField(BlockTemplateNameConstants.HeroBlock,BlockFieldGroupNameConstants.General, BlockFieldNameConstants.BlockImage),
-            GetBlockField(BlockTemplateNameConstants.HeroBlock,BlockFieldGroupNameConstants.General, BlockFieldNameConstants.BlockMobilImage),
+            GetBlockField(BlockTemplateNameConstants.HeroBlock,BlockFieldGroupNameConstants.General, BlockFieldNameConstants.BlockMobileImage),
             GetBlockField(BlockTemplateNameConstants.HeroBlock,BlockFieldGroupNameConstants.General, BlockFieldNameConstants.BlockOverlayImage),
             GetBlockField(BlockTemplateNameConstants.HeroBlock,BlockFieldGroupNameConstants.General, BlockFieldNameConstants.BlockOverlayLeft),
             GetBlockField(BlockTemplateNameConstants.HeroBlock,BlockFieldGroupNameConstants.General, BlockFieldNameConstants.FullWidth),
