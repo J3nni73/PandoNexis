@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import DynamicComponent from './Components/DynamicComponent';
-import PnBackground from './_Addons/PnThreeDeeBg/Background';
 
 // ADDONS IMPORT
 import GenericGridViewContainer from './_Addons/GenericGridView/Containers/GenericGridView.container';
@@ -99,6 +98,7 @@ export const bootstrapPNComponents = () => {
             );
         });
     }
+    
     // ADDONS
     // Logged on info
     //const loggedOnInfoLabels = document.querySelectorAll('.pn-info-label');
@@ -118,6 +118,21 @@ export const bootstrapPNComponents = () => {
     //    });
     //}
     // END Logged on info
+
+    // 3D Background
+    const threeDBg = document.getElementById("pnMainBackground");
+    if (threeDBg) {
+        const ThreeDBg = DynamicComponent({
+            loader: () => import('./_Addons/PnThreeDeeBg/Background'),
+        });
+        renderReact(
+            <Provider store={window.__pn.store}>
+                <ThreeDBg />
+            </Provider>,
+            threeDBg
+        );
+    }
+    // END 3D Background
 
     // MediaCatalog
     const mediaCatalog = document.getElementById("media-catalog");
