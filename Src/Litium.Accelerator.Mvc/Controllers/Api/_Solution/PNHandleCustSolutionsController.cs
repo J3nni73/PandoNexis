@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PandoNexis.AddOns.Extensions.PNInfinityScroll.Services;
 
-namespace Litium.Accelerator.Mvc.Controllers._PandoNexis.Api
+namespace Litium.Accelerator.Mvc.Controllers.Api._Solution
 {
     [Route("api/_PandoNexis/handleCustSolutions")]
     public class PNHandleCustSolutionsController : ApiControllerBase
@@ -64,7 +64,7 @@ namespace Litium.Accelerator.Mvc.Controllers._PandoNexis.Api
         }
 
 
-       
+
     }
 
     public class Aspen
