@@ -183,10 +183,10 @@
   <data name="fielddefinition.blockarea.blockImage.description" xml:space="preserve">
     <value />
   </data>
-  <data name="fielddefinition.blockarea.blockMobilImage.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.BlockMobileImage.name" xml:space="preserve">
     <value>Block image - Mobile</value>
   </data>
-  <data name="fielddefinition.blockarea.blockMobilImage.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.BlockMobileImage.description" xml:space="preserve">
     <value />
   </data>
   <data name="fielddefinition.blockarea.blockImage.name" xml:space="preserve">

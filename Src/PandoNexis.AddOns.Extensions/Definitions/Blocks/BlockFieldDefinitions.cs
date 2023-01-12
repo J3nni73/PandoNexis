@@ -38,7 +38,7 @@ namespace PandoNexis.AddOns.Extensions.Definitions.Blocks
                 {
                     MultiCulture = false,
                 },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.BlockMobilImage, SystemFieldTypeConstants.MediaPointerImage)
+                new FieldDefinition<BlockArea>(BlockFieldNameConstants.BlockMobileImage, SystemFieldTypeConstants.MediaPointerImage)
                 {
                     MultiCulture = false,
                 },

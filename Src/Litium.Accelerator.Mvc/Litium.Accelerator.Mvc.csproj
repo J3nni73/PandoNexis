@@ -30,9 +30,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Client\Scripts\_Addons\PnThreeDeeBg\images\" />
-    <Folder Include="Controllers\Api\_Solution\" />
-    <Folder Include="Controllers\Api\_PandoNexis\" />
-    <Folder Include="Controllers\Api\_PandoNexis\" />
     <Folder Include="Controllers\_Solution\" />
     <Folder Include="Views\_Solution\Shared\DisplayTemplates\" />
     <Folder Include="Views\_PandoNexis\Shared\DisplayTemplates\" />

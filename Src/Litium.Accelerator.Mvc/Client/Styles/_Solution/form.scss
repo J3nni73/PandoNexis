@@ -15,4 +15,8 @@ $form-active-color: $solution-color-yellow;
             }
         }
     }
+
+    &_button {
+        background-color: $solution-button-background-primary;
+    }
 }

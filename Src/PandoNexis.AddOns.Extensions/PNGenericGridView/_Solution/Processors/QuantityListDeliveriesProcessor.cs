@@ -11,7 +11,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView._Solution.Processors
     [Service(Name = "QuantityListDeliveryDates")]
     internal class QuantityListDeliveryDatesProcessor : GridViewDataProcessorBase
     {
-        private const string _processorName = ProductTemplateNameConstants.QuickBuy;
+        private const string _processorName = GenericGridView_ProductTemplateNameConstants.QuickBuy;
         private readonly GenericGridViewService _genericGridViewService;
         private readonly CartContextAccessor _cartContextAccessor;
         private readonly CartViewModelBuilder _cartViewModelBuilder;

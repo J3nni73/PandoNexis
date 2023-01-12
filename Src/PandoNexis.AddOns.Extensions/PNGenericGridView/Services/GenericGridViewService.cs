@@ -209,8 +209,8 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Services
             var result = new List<GenericGridViewField>();
             var fieldTemplate = _fieldTemplateService.Get<ProductFieldTemplate>(fieldTemplateId);
             if (fieldTemplate == null) return result;
-            var fieldVariantFields = fieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == ProductTemplateNameConstants.Fields).Fields;
-            var editableVariantFields = fieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == ProductTemplateNameConstants.Editable).Fields; ;
+            var fieldVariantFields = fieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == GenericGridView_ProductTemplateNameConstants.Fields).Fields;
+            var editableVariantFields = fieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == GenericGridView_ProductTemplateNameConstants.Editable).Fields; ;
             foreach (var fieldVariantField in fieldVariantFields)
             {
                 var fieldDefinition = _fieldDefinitionService.Get<ProductArea>(fieldVariantField);
@@ -223,10 +223,9 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Services
                 field.FieldID = fieldVariantField;
                 field.FieldName = fieldVariantField;//fieldDefinition.GetEntityName(CultureInfo.CurrentCulture);
                 //field.FieldType = fieldDefinition.FieldType.GetGridViewFieldType();
-                if (fieldDefinition.FieldType == "SpecialField")
+                if (specialFieldData != null && fieldDefinition.FieldType == "SpecialField")
                 {
-                    continue; // Aspen - temp fix to get data.
-                    field.FieldType = specialFieldData.GetGridViewFieldType();
+                    field.FieldType = specialFieldData.GetGridViewFieldType() ?? "string";
                 }
                 else
                 {
@@ -238,7 +237,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Services
                     Editable = editable,
                     ReadOnly = editable == false,
                 };
-                if (fieldVariantField == ProductFieldNameConstants.Category)
+                if (fieldVariantField == GenericGridView_ProductFieldNameConstants.Category)
                 {
                     field.DropDownOptions = GetDropDownOptions(fieldVariantField);
                     //field.FieldType = "dropdown";
@@ -259,8 +258,13 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Services
             var fieldTemplate = _fieldTemplateService.Get<ProductFieldTemplate>(fieldTemplateId);
             if (fieldTemplate == null) return result;
             //var fieldVariantFields = fieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == ProductTemplateNameConstants.Fields).Fields;
-            var editableVariantFields = fieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == ProductTemplateNameConstants.Editable).Fields; ;
-            var formGroupVariantFields = fieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == ProductTemplateNameConstants.FormGroup).Fields; ;
+            var editableVariantFields = fieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == GenericGridView_ProductTemplateNameConstants.Editable)?.Fields;
+            var formGroupVariantFields = fieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == GenericGridView_ProductTemplateNameConstants.FormGroup)?.Fields;
+
+            if (formGroupVariantFields == null)
+            {
+                return result;
+            }
             foreach (var fieldVariantField in formGroupVariantFields)
             {
                 var fieldDefinition = _fieldDefinitionService.Get<ProductArea>(fieldVariantField);
@@ -287,7 +291,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Services
                     Editable = editable,
                     ReadOnly = editable == false,
                 };
-                if (fieldVariantField == ProductFieldNameConstants.Category)
+                if (fieldVariantField == GenericGridView_ProductFieldNameConstants.Category)
                 {
                     field.DropDownOptions = GetDropDownOptions(fieldVariantField);
                     //field.FieldType = "dropdown";
@@ -305,7 +309,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Services
         public List<GenericGridViewFieldSimpleList> GetDropDownOptions(string fieldId)
         {
             List<GenericGridViewFieldSimpleList> dropDownOptions = new List<GenericGridViewFieldSimpleList>();
-            if (fieldId == ProductFieldNameConstants.Category)
+            if (fieldId == GenericGridView_ProductFieldNameConstants.Category)
             {
                 //Get value from categories
                 var categories = _categoryService.GetChildCategories(Guid.Parse("88820f7f-96c9-45fc-be1f-93048ffc814e"));
@@ -372,7 +376,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Services
                     var quantity = (decimal)property.Value;
                     if (fieldDefinition.Id == "Quantity" && quantity > 0)
                     {
-                        var qtyCtn = variant.Fields.GetValue<decimal>(ProductFieldNameConstants.QtyCtn);
+                        var qtyCtn = variant.Fields.GetValue<decimal>(GenericGridView_ProductFieldNameConstants.QtyCtn);
                         if ((quantity % qtyCtn) != 0)
                         {
                             quantity = (((quantity - (quantity % qtyCtn)) / qtyCtn) + 1) * qtyCtn;
@@ -397,7 +401,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Services
             // Skip groups / group permissions when we update
             using (_securityContextService.ActAsSystem("My custom integration task"))
             {
-                variant.Fields.AddOrUpdateValue(ProductFieldNameConstants.UpdatedDate, DateTime.UtcNow);
+                variant.Fields.AddOrUpdateValue(GenericGridView_ProductFieldNameConstants.UpdatedDate, DateTime.UtcNow);
                 _variantService.Update(variant);
             }
 
@@ -417,12 +421,10 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Services
                 category = await CreateCategory(query, query, assortment, null);
             }
 
-            //var categories = _categoryService.GetChildCategories(Guid.Empty, assortment.SystemId); // Get All Categorys
-
             var result = new List<Guid>();
-            // Aspen - temp fix to get data.
+            // Aspen - test code to get test data.
             //category = _categoryService.Get(Guid.Parse("44f69e40-f4f2-4c28-bfae-ab67537f0013"));
-            // Aspen - END temp fix to get data.
+            // Aspen - END test code to get test data.
 
 
             foreach (var id in category.ProductLinks)
@@ -435,7 +437,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Services
         public virtual async Task<List<Guid>> GetAllVariantsFromCatAsync(Guid parentCategoryEntitySystemId, string childCategoryName)
         {
             var result = new List<Guid>();
-            var category = _categoryService.GetChildCategories(parentCategoryEntitySystemId).Where(x => x.Fields.GetValue<string>(ProductFieldNameConstants.QuotaId) == childCategoryName).FirstOrDefault();
+            var category = _categoryService.GetChildCategories(parentCategoryEntitySystemId).Where(x => x.Fields.GetValue<string>(GenericGridView_ProductFieldNameConstants.QuotaId) == childCategoryName).FirstOrDefault();
 
             if (category == null) return result;
 

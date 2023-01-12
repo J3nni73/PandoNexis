@@ -36,9 +36,9 @@ $button-general-margin: 12px 0;
     line-height: 1;
     flex: 1 1 auto;
     max-width: rem($button-general-max-width);
-   //border: 1px solid rgba($button-general-text-color, .2);
+    //border: 1px solid rgba($button-general-text-color, .2);
     //background: radial-gradient(ellipse farthest-corner at right bottom, rgba($btn-bg1, .7) 0%, rgba($btn-bg2, .7) 8%, rgba($btn-bg3, .7) 30%, rgba($btn-bg4, .7) 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
-   
+
     &--left {
         margin-left: 0;
     }

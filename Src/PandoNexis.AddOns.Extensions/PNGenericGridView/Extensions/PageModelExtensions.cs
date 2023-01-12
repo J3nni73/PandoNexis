@@ -34,7 +34,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Extensions
         /// <returns></returns>
         public static bool IsGenericGridViewPageType(this PageModel pageModel)
         {
-            return pageModel.GetPageType() == PNGenericGridView.Constants.PageTemplateNameConstants.GenericGridView;
+            return pageModel.GetPageType() == PNGenericGridView.Constants.GenericGridView_PageTemplateNameConstants.GenericGridView;
         }
     }
 }

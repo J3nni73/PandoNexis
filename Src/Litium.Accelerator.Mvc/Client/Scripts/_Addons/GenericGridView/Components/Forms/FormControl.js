@@ -9,7 +9,9 @@ import Textarea from './FormFileds/Textarea';
 import UploadFile from './FormFileds/UploadFile';
 
 import Hidden from './FormFileds/Hidden';
-//import QuotaFormContainer from '../../../Containers/QuotaFormContainer';
+
+// SOLUTION
+import QuotaFormContainer from '../../_Solution/Components/Quota/QuotaFormContainer';
 
 const FormControl = (props) => {
   const { controlForm, ...rest } = props;
@@ -32,9 +34,11 @@ const FormControl = (props) => {
     case 'file':
       return <UploadFile {...rest} />;
     case 'hidden':
-      return <Hidden {...rest} />;
-    //case 'quotaformfield':
-    //  return <QuotaFormContainer {...rest} />;
+          return <Hidden {...rest} />;
+
+    // SOLUTION FORMS
+    case 'quotaformfield':
+      return <QuotaFormContainer {...rest} />;
 
     default:
       return null;

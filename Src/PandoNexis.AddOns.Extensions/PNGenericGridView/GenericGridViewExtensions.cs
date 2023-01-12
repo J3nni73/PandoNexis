@@ -38,7 +38,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView
         {
             if (variant == null || fieldId == null)
                 return null;
-            if (fieldDefinition.FieldType == Constants.FieldTypesConstants.SpecialField)
+            if (fieldDefinition.FieldType == Constants.GenericGridView_FieldTypesConstants.SpecialField)
             {
                 return GetSpecialFieldValue(variant, fieldId);
             }
@@ -99,7 +99,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView
                 case SystemFieldTypeConstants.Int:
                 case SystemFieldTypeConstants.IntOption:
                     return "int";
-                case ProductFieldNameConstants.ProductImageUpload:
+                case GenericGridView_ProductFieldNameConstants.ProductImageUpload:
                     return "productimageupload";
                 default:
                     return "string";
@@ -110,10 +110,10 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView
         {
             var result = string.Empty;
 
-            var ctnCbm = variant.Fields.GetValue<decimal>(ProductFieldNameConstants.CtnCbm);
+            var ctnCbm = variant.Fields.GetValue<decimal>(GenericGridView_ProductFieldNameConstants.CtnCbm);
             var cubicFoot = ctnCbm * footConverter;
-            var qtyCnt = variant.Fields.GetValue<decimal>(ProductFieldNameConstants.QtyCtn);
-            var unitPriceUSD = variant.Fields.GetValue<decimal>(ProductFieldNameConstants.UnitPriceUSD);
+            var qtyCnt = variant.Fields.GetValue<decimal>(GenericGridView_ProductFieldNameConstants.QtyCtn);
+            var unitPriceUSD = variant.Fields.GetValue<decimal>(GenericGridView_ProductFieldNameConstants.UnitPriceUSD);
             var shipping = qtyCnt == decimal.Zero ? decimal.Zero : cubicFoot * freightConverter / qtyCnt;
             var exchangeRate = unitPriceUSD * usdRate;
             var shippingAndExchangeRate = shipping + exchangeRate;
@@ -122,37 +122,37 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView
 
             switch (fieldId)
             {
-                case Constants.ProductFieldNameConstants.CubicFoot:
+                case Constants.GenericGridView_ProductFieldNameConstants.CubicFoot:
 
                     result = cubicFoot.ToString("0.##").Replace(',', '.');
                     break;
-                case Constants.ProductFieldNameConstants.Shipping:
+                case Constants.GenericGridView_ProductFieldNameConstants.Shipping:
 
                     result = shipping.ToString("0.##").Replace(',', '.');
                     break;
-                case Constants.ProductFieldNameConstants.ExchangeRate:
+                case Constants.GenericGridView_ProductFieldNameConstants.ExchangeRate:
 
                     result = exchangeRate.ToString("0.##").Replace(',', '.');
                     break;
-                case Constants.ProductFieldNameConstants.ShippingAndExchangeRate:
+                case Constants.GenericGridView_ProductFieldNameConstants.ShippingAndExchangeRate:
                     result = shippingAndExchangeRate.ToString("0.##").Replace(',', '.');
                     break;
-                case Constants.ProductFieldNameConstants.Cost:
+                case Constants.GenericGridView_ProductFieldNameConstants.Cost:
                     result = cost.ToString("0.##").Replace(',', '.');
                     break;
-                case Constants.ProductFieldNameConstants.FOB:
+                case Constants.GenericGridView_ProductFieldNameConstants.FOB:
                     result = (unitPriceUSD * fobPercentage).ToString("0.##").Replace(',', '.');
                     break;
-                case Constants.ProductFieldNameConstants.DDP:
+                case Constants.GenericGridView_ProductFieldNameConstants.DDP:
                     result = (cost * ddpPercentage).ToString("0.##").Replace(',', '.');
                     break;
-                case Constants.ProductFieldNameConstants.DIST:
+                case Constants.GenericGridView_ProductFieldNameConstants.DIST:
                     result = (cost * distPercentage).ToString("0.##").Replace(',', '.');
                     break;
-                case Constants.ProductFieldNameConstants.SellingPriceBP:
+                case Constants.GenericGridView_ProductFieldNameConstants.SellingPriceBP:
                     result = salesPrice.ToString("0.##").Replace(',', '.');
                     break;
-                case Constants.ProductFieldNameConstants.StoreX3:
+                case Constants.GenericGridView_ProductFieldNameConstants.StoreX3:
                     result = (salesPrice * storePriceAddon).ToString("0.##").Replace(',', '.');
                     break;
             }

@@ -16,7 +16,6 @@
 
 @mixin button--underline {
     &:not(.product-detail__buy-button) {
-
         &:after {
             content: '';
             border: 1px solid $custom-green-dark;

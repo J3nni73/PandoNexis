@@ -1,5 +1,8 @@
 ﻿using PandoNexis.AddOns.Extensions.PNGenericGridView.Objects;
 using Litium.Products;
+using PandoNexis.AddOns.Extensions.PNGenericGridView.ViewModels;
+using Litium.Owin.InversionOfControl;
+using System.Reflection;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericGridView.FieldTypes
 {
@@ -16,8 +19,16 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.FieldTypes
 
         object GetData(string type, string query);
 
-        object SetData(string type);
+        object SetData(string type, FieldUpdateData fieldData);
 
         void AddSpecialFieldToCartAsync(string fieldId, decimal quantity);
     }
+    //internal class Components : IComponentInstaller
+    //{
+    //    public void Install(IIoCContainer container, Assembly[] assemblies)
+    //    {
+    //        container.For<IGridSpecialFieldData>().AsPlugin().RegisterAsSingleton();
+    //    }
+    //}
+
 }

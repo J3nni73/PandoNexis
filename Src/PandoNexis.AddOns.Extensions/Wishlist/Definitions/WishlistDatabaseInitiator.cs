@@ -18,45 +18,24 @@ namespace PandoNexis.AddOns.Extensions.Wishlist.Definitions
 
         public override void GetCheckDatabaseObjects()
         {
-            var wishListColumns = GetWishListColumns();
-            var inDatabaseColumns = new List<DatabaseColumns>();
-
-            if (!TableExists(WishlistConstants.WishList, out inDatabaseColumns))
-            {
-                CreateTable(WishlistConstants.WishList, wishListColumns);
-            }
-            else if (inDatabaseColumns.Any())
-            {
-                UpdateTableToLatestVersion(WishlistConstants.WishList, wishListColumns, inDatabaseColumns);
-            }
-
-
-            var wishListItemColumns = GetWishListItemColumns();
-            inDatabaseColumns = new List<DatabaseColumns>();
-            if (!TableExists(WishlistConstants.WishListItem, out inDatabaseColumns))
-            {
-                CreateTable(WishlistConstants.WishListItem, wishListItemColumns);
-            }
-            else if (inDatabaseColumns.Any())
-            {
-                UpdateTableToLatestVersion(WishlistConstants.WishListItem, wishListItemColumns, inDatabaseColumns);
-            }
+            SyncronizeDatabaseObjects(WishlistConstants.WishList, GetWishListColumns());
+            SyncronizeDatabaseObjects(WishlistConstants.WishListItem, GetWishListItemColumns());
         }
         private List<DatabaseColumns> GetWishListColumns()
         {
             return new List<DatabaseColumns>
             {
-                GetColumn(WishlistConstants.CookieId,DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(WishlistConstants.LastUpdated, DatabaseConstants.DateTime, DatabaseConstants.NotNull),
+                GetColumn(WishlistConstants.CookieId,DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(WishlistConstants.LastUpdated, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.NotNull),
             };
         }
         private List<DatabaseColumns> GetWishListItemColumns()
         {
             return new List<DatabaseColumns>
             {
-                GetColumn(WishlistConstants.BaseProductSystemId,DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(WishlistConstants.VariantSystemId, DatabaseConstants.UniqueIdentifier, DatabaseConstants.NotNull),
-                GetColumn(WishlistConstants.AddedDate, DatabaseConstants.DateTime, DatabaseConstants.NotNull),
+                GetColumn(WishlistConstants.BaseProductSystemId,DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(WishlistConstants.VariantSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(WishlistConstants.AddedDate, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.NotNull),
             };
         }
     }

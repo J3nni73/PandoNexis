@@ -10,7 +10,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView._Solution.Processors
     [Service(Name = "Purchase")]
     public class PurchaseProcessor : GridViewDataProcessorBase
     {
-        private const string _processorName = ProductTemplateNameConstants.Purchase;
+        private const string _processorName = GenericGridView_ProductTemplateNameConstants.Purchase;
         private readonly GenericGridViewService _genericGridViewService;
         private readonly RequestModelAccessor _requestModelAccessor;
         private readonly ExcelExportService _excelExportService;

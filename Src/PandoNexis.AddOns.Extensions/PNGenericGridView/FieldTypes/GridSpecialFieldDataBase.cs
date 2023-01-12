@@ -1,5 +1,6 @@
 ﻿using PandoNexis.AddOns.Extensions.PNGenericGridView.Objects;
 using Litium.Products;
+using PandoNexis.AddOns.Extensions.PNGenericGridView.ViewModels;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericGridView.FieldTypes
 {
@@ -27,7 +28,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.FieldTypes
             return null;
         }
 
-        public virtual object SetData(string type)
+        public virtual object SetData(string type, FieldUpdateData fieldData)
         {
             return null;
         }

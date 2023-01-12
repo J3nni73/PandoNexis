@@ -28,13 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Builders\" />
-    <Folder Include="Definitions\Pages\" />
     <Folder Include="PNGenericGridView\Definitions\Websites\" />
-    <Folder Include="PNGenericGridView\_Solution\Definitions\Pages\" />
-    <Folder Include="PNGenericGridView\_Solution\Definitions\Products\" />
-    <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>

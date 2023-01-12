@@ -3,6 +3,7 @@ $bg-color-odd-row: #99aabb;
 $off-canvas-bg-color-dark: $bg-color-dark;
 $off-canvas-bg-color-light: rgba($bg-color-light, .95);
 
+$grid-view-icon-color: #abbee0;
 $grid-view-header-bg-color-dark: $bg-color-odd-row;
 $grid-view-header-bg-color-light: $bg-color-light;
 $gridview-background-angle: 50;
@@ -256,7 +257,7 @@ $gridview-background-angle: 50;
                 opacity: .6;
 
                 svg {
-                    fill: darken($bg-color-odd-row, 20%);
+                    fill: lighten($grid-view-icon-color, 10%);
                 }
             }
 
@@ -267,7 +268,7 @@ $gridview-background-angle: 50;
                 svg {
                     height: rem(20px);
                     width: rem(20px);
-                    fill: darken($bg-color-odd-row, 30%);
+                    fill: lighten($grid-view-icon-color, 5%);
                 }
 
                 &:hover {
@@ -432,6 +433,7 @@ $gridview-background-angle: 50;
         overflow-x: auto;
         position: relative;
         border-spacing: 0;
+        color: $color-navy;
 
         thead th,
         thead td,
@@ -458,6 +460,7 @@ $gridview-background-angle: 50;
             background: rgba($color-white, .9);
             border-bottom: 2px solid $bg-color-odd-row;
             padding: rem(4px 6px);
+            text-align: left;
 
             &.ascending::after {
                 content: '\21E9';

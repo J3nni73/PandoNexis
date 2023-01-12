@@ -25,10 +25,10 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.ViewModels
         public bool EnableDropZone { get; set; }
         public bool EnableFieldConfigurator { get; set; }
         //[UsedImplicitly]
-        public void Configure(IMapperConfigurationExpression cfg) => cfg.CreateMap<PageModel, GenericGridViewModel>().ForMember(x => x.DataSources, m => m.MapFromField(Constants.PageFieldNameConstants.DataSource))
+        public void Configure(IMapperConfigurationExpression cfg) => cfg.CreateMap<PageModel, GenericGridViewModel>().ForMember(x => x.DataSources, m => m.MapFromField(Constants.GenericGridView_PageFieldNameConstants.DataSource))
             .ForMember(x => x.PageSize, m => m.MapFrom(genericGridViewPage => genericGridViewPage.GetValue<int>(PageFieldNameConstants.PageSize)))
-            .ForMember(x => x.HasMegaMenu, m => m.MapFrom(genericGridViewPage => genericGridViewPage.GetValue<bool>(Constants.PageFieldNameConstants.HasMegaMenu)))
-            .ForMember(x => x.EnableDropZone, m => m.MapFrom(genericGridViewPage => genericGridViewPage.GetValue<bool>(Constants.PageFieldNameConstants.EnableDropZone)))
+            .ForMember(x => x.HasMegaMenu, m => m.MapFrom(genericGridViewPage => genericGridViewPage.GetValue<bool>(Constants.GenericGridView_PageFieldNameConstants.HasMegaMenu)))
+            .ForMember(x => x.EnableDropZone, m => m.MapFrom(genericGridViewPage => genericGridViewPage.GetValue<bool>(Constants.GenericGridView_PageFieldNameConstants.EnableDropZone)))
             //.ForMember(x => x.EnableFieldConfigurator, m => m.MapFrom<FieldConfiguratorResolver>())
             ;
         //[UsedImplicitly]
@@ -38,6 +38,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.ViewModels
             private readonly SettingService _settingService;
             private readonly RequestModelAccessor _requestModelAccessor;
             private readonly PersonStorage _personStorage;
+            private readonly PersonService _personService;
             private readonly Guid _fieldConfiguratorGroupId;
 
             public FieldConfiguratorResolver(SecurityContextService securityContextService, GroupService groupService, SettingService settingService, RequestModelAccessor requestModelAccessor,
@@ -48,36 +49,27 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.ViewModels
                 _requestModelAccessor = requestModelAccessor;
                 _personStorage = personStorage;
                 _fieldConfiguratorGroupId = groupService.Get<Group>("FieldConfigurator")?.SystemId ?? Guid.Empty;
-
             }
 
             public bool Resolve(PageModel source, GenericGridViewModel destination, bool destMember, ResolutionContext context)
             {
-                bool hasPermission = true;
-                //var person = _securityContextService.GetIdentityUserSystemId()?.GetPerson();
-                //if (person != null)
-                //{
-                //    hasPermission = person.GroupLinks.Any(i => i.GroupSystemId == _fieldConfiguratorGroupId);
-                //}
+                bool hasPermission = false;
+                var personSystemId = _securityContextService.GetIdentityUserSystemId();
+                if (personSystemId != null)
+                {
+                    var currentPerson = _personService.Get(personSystemId.Value);
+                    if (currentPerson != null)
+                    {
+                        hasPermission = currentPerson.GroupLinks.Any(i => i.GroupSystemId == _fieldConfiguratorGroupId);
+                    }
+                }
 
-                //ensure defualt fields
-                //if (_personStorage.CurrentSelectedOrganization != null)
-                //{
-                var types = source.Fields.GetValue<IList<string>>(Constants.PageFieldNameConstants.DataSource);
-                //if (eweOrg != null)
-                //{
-                //    foreach (var type in types)
-                //    {
-                //        var fields = _fieldConfigurationService.GetFields(type);
-                //        var selectedFields = _settingService.Get<List<FieldConfigurationField>>($"FieldConfiguration:{type}:{_requestModelAccessor.RequestModel.CurrentPageModel.SystemId}:{eweOrg.Id}");
-                //        if (selectedFields == null || selectedFields.Count == 0)
-                //        {
-                //            //Will also save default fields
-                //            _fieldConfigurationService.GetDefaultFields(fields, type);
-                //        }
-                //    }
-                //}
-                //}
+                // ensure defualt fields
+                if (_personStorage.CurrentSelectedOrganization != null)
+                {
+                    var types = source.Fields.GetValue<IList<string>>(Constants.GenericGridView_PageFieldNameConstants.DataSource);
+                }
+
                 return hasPermission;
             }
         }

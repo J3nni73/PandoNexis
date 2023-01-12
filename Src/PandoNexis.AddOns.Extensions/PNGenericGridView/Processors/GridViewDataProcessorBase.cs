@@ -5,7 +5,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericGridView.Processors
 {
     public abstract class GridViewDataProcessorBase : IGridViewDataProcessor
     {
-        public virtual void CalculateFields(Variant variant, MultiFieldItem customerData)
+        public virtual void CalculateFields(object rowObject, object helperObject)
         {
             throw new NotImplementedException();
         }
