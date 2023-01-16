@@ -14,4 +14,12 @@
     <ProjectReference Include="..\PandoNexis.AddOns.Extensions\PandoNexis.AddOns.Extensions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Definitions\Customers\" />
+  </ItemGroup>
+	
+	<ItemGroup>
+		<LitiumLocalization Include="PNPilot\Definitions\Administration*.resx" />
+	</ItemGroup>
+
 </Project>

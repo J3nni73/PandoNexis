@@ -37,7 +37,7 @@ namespace Litium.Accelerator.Builders.Framework
             _routeRequestLookupInfoAccessor = routeRequestLookupInfoAccessor;
         }
 
-        public HeaderViewModel Build()
+        public virtual HeaderViewModel Build()
         {
             var website = _requestModelAccessor.RequestModel.WebsiteModel;
             var myPage = website.GetValue<PointerPageItem>(AcceleratorWebsiteFieldNameConstants.MyPagesPage)?.MapTo<LinkModel>();

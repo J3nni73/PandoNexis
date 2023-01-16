@@ -17,7 +17,7 @@ using Solution.Extensions.PNPilot.Services;
 
 namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
 {
-    [Route("api/pandoNexis/pilot"), OnlyServiceAccountAuthorization]
+    [Route("api/pandoNexis/pilot")]
     public class PilotController : ApiControllerBase
     {
         private readonly PilotCustomerService _pilotCustomerService;

@@ -14,6 +14,7 @@ using System.Drawing;
 using Litium.Globalization;
 using System.Collections.Generic;
 using Litium.Media;
+using Litium.Customers;
 
 namespace Solution.Extensions.Definitions
 {
@@ -72,26 +73,29 @@ namespace Solution.Extensions.Definitions
                         FieldTemplate? fieldTemplate = null;
                         switch (templateType)
                         {
-                            case "ProductFieldTemplate":
+                            case FieldTemplateHelperConstants.ProductFieldTemplate:
                                 fieldTemplate = GetProductFieldTemplate(template.Key, changes, newTemplates);
                                 break;
-                            case "CategoryFieldTemplate":
+                            case FieldTemplateHelperConstants.CategoryFieldTemplate:
                                 fieldTemplate = GetCategoryFieldTemplate(template.Key, changes, newTemplates);
                                 break;
-                            case "PageFieldTemplate":
+                            case FieldTemplateHelperConstants.PageFieldTemplate:
                                 fieldTemplate = GetPageFieldTemplate(template.Key, changes, newTemplates);
                                 break;
-                            case "BlockFieldTemplate":
+                            case FieldTemplateHelperConstants.BlockFieldTemplate:
                                 fieldTemplate = GetBlockFieldTemplate(template.Key, changes, newTemplates);
                                 break;
-                            case "ChannelFieldTemplate":
+                            case FieldTemplateHelperConstants.ChannelFieldTemplate:
                                 fieldTemplate = GetChannelFieldTemplate(template.Key, changes, newTemplates);
                                 break;
-                            case "WebsiteFieldTemplate":
+                            case FieldTemplateHelperConstants.WebsiteFieldTemplate:
                                 fieldTemplate = GetWebsiteFieldTemplate(template.Key, changes, newTemplates);
                                 break;
                             case FieldTemplateHelperConstants.FileFieldTemplate:
                                 fieldTemplate = GetFileFieldTemplate(template.Key, changes, newTemplates);
+                                break;
+                            case FieldTemplateHelperConstants.OrganizationFieldTemplate:
+                                fieldTemplate = GetOrganizationFieldTemplate(template.Key, changes, newTemplates);
                                 break;
                         }
                         if (fieldTemplate != null)
@@ -101,7 +105,53 @@ namespace Solution.Extensions.Definitions
             }
             return fieldTemplates;
         }
+        private FieldTemplate? GetOrganizationFieldTemplate(string templateId, List<FieldTemplateChanges> changes, List<FieldTemplate> newTemplates)
+        {
+            var groups = changes.GroupBy(i => i.FieldGroupName);
+            var fileFieldTemplate = newTemplates.FirstOrDefault(i => i.Id == templateId) as OrganizationFieldTemplate;
+            if (fileFieldTemplate == null)
+                return null;
 
+            var newFileFieldTemplate = new OrganizationFieldTemplate(templateId);
+            newFileFieldTemplate.FieldGroups = new List<FieldTemplateFieldGroup>();
+            foreach (var group in fileFieldTemplate.FieldGroups)
+            {
+                var newGroup = new FieldTemplateFieldGroup()
+                {
+                    Id = group.Id,
+                    Collapsed = group.Collapsed,
+                };
+                foreach (var field in group.Fields)
+                {
+                    newGroup.Fields.Add(field);
+                }
+                newFileFieldTemplate.FieldGroups.Add(newGroup);
+            }
+
+            foreach (var change in changes)
+            {
+
+                if (newFileFieldTemplate.FieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) == null)
+                {
+                    newFileFieldTemplate.FieldGroups.Add(new FieldTemplateFieldGroup()
+                    {
+                        Id = change.FieldGroupName,
+                        Collapsed = false,
+                        Localizations =  {
+                                            ["sv-SE"] = { Name = change.FieldGroupName },
+                                            ["en-US"] = { Name = change.FieldGroupName }
+                                         },
+                    });
+                }
+
+                if (newFileFieldTemplate.FieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) != null)
+                {
+                    newFileFieldTemplate.FieldGroups.FirstOrDefault(i => i.Id == change.FieldGroupName)?.Fields.Add(change.Field);
+                }
+            }
+
+            return newFileFieldTemplate;
+        }
         private FieldTemplate? GetFileFieldTemplate(string templateId, List<FieldTemplateChanges> changes, List<FieldTemplate> newTemplates)
         {
             var groups = changes.GroupBy(i => i.FieldGroupName);

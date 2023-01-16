@@ -90,6 +90,20 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers
             };
 
         }
+        public FieldTemplateChanges GetOrganizationField(string template, string fieldgroup, string field)
+        {
+
+            return new FieldTemplateChanges()
+            {
+                TemplateType = FieldTemplateHelperConstants.OrganizationFieldTemplate,
+                DisplayTemplate = "",
+                TemplateName = template,
+                FieldGroupType = FieldTemplateHelperConstants.FieldTemplateFieldGroup,
+                FieldGroupName = fieldgroup,
+                Field = field
+            };
+
+        }
         public List<FieldTemplateChanges> GetChangesForBlockExtendedCTA(string blockId)
         {
             var templateChanges = new List<FieldTemplateChanges>

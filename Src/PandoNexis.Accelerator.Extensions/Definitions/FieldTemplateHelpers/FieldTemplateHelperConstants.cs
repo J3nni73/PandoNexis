@@ -23,6 +23,7 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers
         public const string ChannelFieldTemplate = "ChannelFieldTemplate";
         public const string WebsiteFieldTemplate = "WebsiteFieldTemplate";
         public const string FileFieldTemplate = "FileFieldTemplate";
+        public const string OrganizationFieldTemplate = "OrganizationFieldTemplate";
 
         public const string Category = "Category";
         public const string Product = "Product";
