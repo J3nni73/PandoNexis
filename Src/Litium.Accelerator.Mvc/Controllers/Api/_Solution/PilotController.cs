@@ -1,18 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
-using Litium.Accelerator.Builders.Product;
-using Litium.Accelerator.Builders.Search;
-using Litium.Accelerator.Extensions;
-using Litium.Accelerator.Mvc.Controllers.Api;
-using Litium.Accelerator.Mvc.Extensions;
-using Litium.Accelerator.Routing;
-using Litium.Accelerator.ViewModels.Search;
-using Litium.Runtime.AutoMapper;
-using Litium.Web.WebApi;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PandoNexis.AddOns.Extensions.PNInfinityScroll.Services;
 using Solution.Extensions.PNPilot.Services;
 
 namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
@@ -21,13 +11,16 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
     public class PilotController : ApiControllerBase
     {
         private readonly PilotCustomerService _pilotCustomerService;
+        private readonly PilotAddOnService _pilotAddOnService;
 
-        public PilotController(PilotCustomerService pilotCustomerService)
+        public PilotController(PilotCustomerService pilotCustomerService,
+                                PilotAddOnService pilotAddOnService)
         {
             _pilotCustomerService = pilotCustomerService;
+            _pilotAddOnService = pilotAddOnService;
         }
 
-      
+
         /// <summary>
         /// Gets available addons.
         /// </summary>
@@ -57,7 +50,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
         public IActionResult GetCustomers()
         {
             var customers = _pilotCustomerService.GetCustomers();
-           
+
             return Ok(customers);
         }
 
@@ -78,11 +71,33 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
             };
             return Ok(ret);
         }
-    }
 
-    public class Aspen
-    {
-        public string Name { get; set; }
-        public List<string> List { get; set; }
+        [HttpGet]
+        [Route("addonexists/{addonid}")]
+        public async Task<IActionResult> getaddon(string addOnId)
+        {
+
+            if (_pilotAddOnService.AddOnExists(addOnId))
+                return Ok(true);
+            else
+                return Ok(false);
+        }
+
+    
+        [HttpGet]
+        [Route("registeraddon/{addonid}")]
+        public async Task<IActionResult> RegisterAddon(string addOnId)
+        {
+
+            if (_pilotAddOnService.RegisterAddOn(addOnId))
+                return Ok("Addon Is Registered");
+            return BadRequest();
+        }
+
+        public class Aspen
+        {
+            public string Name { get; set; }
+            public List<string> List { get; set; }
+        }
     }
 }
