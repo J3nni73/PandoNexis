@@ -10,6 +10,8 @@ namespace Solution.Extensions.PNPilot.Object
     {
         public Guid SystemId { get; set; }
         public string Name { get; set; }
+        public string ProjectType { get; set; }
         public List<string> AddOns { get; set; }
+        
     }
 }

@@ -74,6 +74,7 @@ namespace Solution.Extensions.PNPilot.Services
                                         {
                                             SystemId = item.SystemId,
                                             Name = item.Fields.GetValue<string>(SystemFieldDefinitionConstants.NameInvariantCulture),
+                                            ProjectType = item.Fields.GetValue<string>(PilotFieldNameConstants.ProjectType),
                                             AddOns = GetAddOnList(item.Fields.GetValue<IList<MultiFieldItem>>(PilotFieldNameConstants.AddOns))
                                         });
                     }
