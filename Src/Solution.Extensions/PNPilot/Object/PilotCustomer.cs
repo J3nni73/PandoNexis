@@ -8,9 +8,8 @@ namespace Solution.Extensions.PNPilot.Object
 {
     public class PilotCustomer
     {
+        public Guid SystemId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public List<string> AddOns { get; set; }
-        public string ProjectName { get; set; }
+        public List<PilotProject> Projects { get; set; }
     }
 }

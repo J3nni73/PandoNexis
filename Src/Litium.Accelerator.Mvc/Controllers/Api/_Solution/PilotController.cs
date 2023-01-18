@@ -73,7 +73,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
         }
 
         [HttpGet]
-        [Route("addonexists/{addonid}")]
+        [Route("addonexists")]
         public async Task<IActionResult> getaddon(string addOnId)
         {
 
@@ -85,7 +85,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
 
     
         [HttpGet]
-        [Route("registeraddon/{addonid}")]
+        [Route("registeraddon")]
         public async Task<IActionResult> RegisterAddon(string addOnId)
         {
 
