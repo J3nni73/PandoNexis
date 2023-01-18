@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solution.Extensions.PNPilot.Object
+namespace Solution.Extensions.PNPilot.Objects
 {
     public class PilotProject
     {

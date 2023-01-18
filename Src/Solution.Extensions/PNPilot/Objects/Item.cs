@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PandoNexis.AddOns.Extensions.Pilot.Objects
+namespace Solution.Extensions.PNPilot.Objects
 {
     public class Item
     {

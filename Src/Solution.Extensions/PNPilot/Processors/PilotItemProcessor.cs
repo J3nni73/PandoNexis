@@ -1,17 +1,10 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using Litium.Runtime.DependencyInjection;
-using PandoNexis.AddOns.Extensions.Pilot.Definitions;
-using PandoNexis.AddOns.Extensions.Pilot.Services;
+﻿using Litium.Runtime.DependencyInjection;
+using Solution.Extensions.PNPilot.Services;
 using PandoNexis.AddOns.Extensions.PNGenericGridView.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericGridView.Processors;
-using PandoNexis.AddOns.Extensions.PNGenericGridView.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Solution.Extensions.PNPilot.Constants;
 
-namespace PandoNexis.AddOns.Extensions.Pilot.Processors
+namespace Solution.Extensions.PNPilot.Processors
 {
     [Service(Name = "ItemProcessor")]
     public class PilotItemProcessor : UnboundGenericGridViewDataProcessorBase

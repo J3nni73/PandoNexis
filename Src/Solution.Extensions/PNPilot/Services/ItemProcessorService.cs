@@ -1,21 +1,9 @@
-﻿using Litium;
-using Litium.AspNetCore.RequestTimeFeature;
-using Litium.FieldFramework;
-using Litium.Products;
-using Litium.Runtime.DependencyInjection;
-using Microsoft.VisualBasic.FileIO;
-using PandoNexis.AddOns.Extensions.Pilot.Definitions;
-using PandoNexis.AddOns.Extensions.Pilot.Objects;
-using PandoNexis.AddOns.Extensions.PNGenericGridView.Constants;
+﻿using Litium.Runtime.DependencyInjection;
+using Solution.Extensions.PNPilot.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericGridView.Objects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static PandoNexis.AddOns.Extensions.PNGenericGridView._Solution.Services.QuotaService;
+using Solution.Extensions.PNPilot.Constants;
 
-namespace PandoNexis.AddOns.Extensions.Pilot.Services
+namespace Solution.Extensions.PNPilot.Services
 {
     [Service(ServiceType = typeof(ItemProcessorService))]
     public class ItemProcessorService

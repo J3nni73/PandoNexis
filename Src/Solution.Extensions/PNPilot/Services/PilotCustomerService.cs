@@ -1,18 +1,11 @@
-﻿using Litium.Accelerator.Services;
-using Litium.Customers;
+﻿using Litium.Customers;
 using Litium.Data;
 using Litium.FieldFramework;
 using Litium.Products;
 using Litium.Runtime.DependencyInjection;
-using MetadataExtractor.Formats.Gif;
-using PandoNexis.AddOns.Extensions.Services.PNStockService;
 using Solution.Extensions.PNPilot.Constants;
-using Solution.Extensions.PNPilot.Object;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Solution.Extensions.PNPilot.Objects;
+
 
 namespace Solution.Extensions.PNPilot.Services
 {

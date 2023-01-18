@@ -1,19 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PandoNexis.Accelerator.Extensions.Database.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using PandoNexis.AddOns.Extensions.Pilot.Definitions;
-using PandoNexis.AddOns.Extensions.Pilot.Objects;
-using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
-using System.Data;
+using Solution.Extensions.PNPilot.Objects;
 using Litium.Runtime.DependencyInjection;
-using PandoNexis.Accelerator.Extensions.Services;
-using DocumentFormat.OpenXml.Drawing;
+using Solution.Extensions.PNPilot.Constants;
 
 namespace PandoNexis.AddOns.Extensions.Pilot.Services
 {

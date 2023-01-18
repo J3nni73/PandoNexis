@@ -9,7 +9,30 @@ namespace Solution.Extensions.PNPilot.Constants
     public static class PilotConstants
     {
         //public const string PilotCustomer = "PilotCustomer";
+        public const string Item = "Item";
+        public const string ItemFieldData = "ItemFieldData";
 
+        public const string SystemId = "SystemId";
+        public const string OrganizationSystemId = "OrganizationSystemId";
+        public const string ItemType = "ItemType";
+        public const string ItemTitle = "ItemTitle";
+        public const string ItemStatus = "ItemStatus";
+        public const string ItemDescription = "ItemDescription";
+        public const string ParentSystemId = "ParentSystemId";
+
+        public const string DueDateTime = "DueDateTime";
+
+        public const string Time = "Time";
+
+        public const string ItemSystemId = "ItemSystemId";
+        public const string TimeType = "TimeType";
+        public const string TimeComment = "TimeComment";
+        public const string TimeFrom = "TimeFrom";
+        public const string TimeTo = "TimeTo";
+        public const string TimeAmount = "TimeAmount";
+        public const string TimeRisk = "TimeRisk";
+
+        public const string ItemProcessor = "ItemProcessor";
     }
     public static class PilotFieldTemplateConstants
     {
