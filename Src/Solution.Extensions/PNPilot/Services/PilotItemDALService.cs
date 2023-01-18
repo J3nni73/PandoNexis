@@ -7,14 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using PandoNexis.AddOns.Extensions.Pilot.Definitions;
-using PandoNexis.AddOns.Extensions.Pilot.Objects;
+using Solution.Extensions.PNPilot.Definitions;
+using Solution.Extensions.PNPilot.Objects;
 using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
 using System.Data;
 using Litium.Runtime.DependencyInjection;
 using PandoNexis.Accelerator.Extensions.Services;
+using Solution.Extensions.PNPilot.Constants;
 
-namespace PandoNexis.AddOns.Extensions.Pilot.Services
+namespace Solution.Extensions.PNPilot.Services
 {
     [Service(ServiceType = typeof(PilotItemDALService))]
     public class PilotItemDALService

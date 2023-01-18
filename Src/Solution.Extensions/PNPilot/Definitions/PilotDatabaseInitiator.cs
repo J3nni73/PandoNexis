@@ -2,16 +2,15 @@
 using PandoNexis.Accelerator.Extensions.Database.Constants;
 using PandoNexis.Accelerator.Extensions.Database.Objects;
 using PandoNexis.Accelerator.Extensions.Database.Services;
-using PandoNexis.AddOns.Extensions.Pilot.Objects;
-using PandoNexis.AddOns.Extensions.Pilot.Services;
-using PandoNexis.AddOns.Extensions.Wishlist.Definitions;
+using Solution.Extensions.PNPilot.Constants;
+using Solution.Extensions.PNPilot.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PandoNexis.AddOns.Extensions.Pilot.Definitions
+namespace Solution.Extensions.PNPilot.Definitions
 {
     internal class PilotDatabaseInitiator : DatabaseInitiator
     {

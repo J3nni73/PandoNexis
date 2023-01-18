@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pilot\Definitions\" />
+    <Folder Include="Pilot\Objects\" />
+    <Folder Include="Pilot\Processors\" />
+    <Folder Include="Pilot\Services\" />
     <Folder Include="PNGenericGridView\Definitions\Websites\" />
   </ItemGroup>
 
