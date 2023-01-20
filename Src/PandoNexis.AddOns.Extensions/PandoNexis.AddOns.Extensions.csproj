@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="GenericGridView\**" />
+    <Compile Remove="Pilot\**" />
     <EmbeddedResource Remove="GenericGridView\**" />
+    <EmbeddedResource Remove="Pilot\**" />
     <None Remove="GenericGridView\**" />
+    <None Remove="Pilot\**" />
   </ItemGroup>
 <ItemGroup>
 		<LitiumLocalization Include="Resources\Administration*.resx" />
@@ -28,10 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pilot\Definitions\" />
-    <Folder Include="Pilot\Objects\" />
-    <Folder Include="Pilot\Processors\" />
-    <Folder Include="Pilot\Services\" />
     <Folder Include="PNGenericGridView\Definitions\Websites\" />
   </ItemGroup>
 

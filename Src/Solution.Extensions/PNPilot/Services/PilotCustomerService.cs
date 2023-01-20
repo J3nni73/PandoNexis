@@ -18,18 +18,21 @@ namespace Solution.Extensions.PNPilot.Services
         private readonly FieldTemplateService _fieldTemplateService;
         private readonly VariantService _variantService;
         private readonly BaseProductService _baseProductService;
+        private readonly PilotItemService _pilotItemService;
 
-        public PilotCustomerService(OrganizationService organizationService, 
-            DataService dataService, 
-            FieldTemplateService fieldTemplateService, 
+        public PilotCustomerService(OrganizationService organizationService,
+            DataService dataService,
+            FieldTemplateService fieldTemplateService,
             VariantService variantService,
-            BaseProductService baseProductService)
+            BaseProductService baseProductService,
+            PilotItemService pilotItemService)
         {
             _organizationService = organizationService;
             _dataService = dataService;
             _fieldTemplateService = fieldTemplateService;
             _variantService = variantService;
             _baseProductService = baseProductService;
+            _pilotItemService = pilotItemService;
         }
 
         public List<PilotCustomer> GetCustomers()
@@ -110,5 +113,8 @@ namespace Solution.Extensions.PNPilot.Services
 
             return string.Empty;
         }
+        
+
+      
     }
 }
