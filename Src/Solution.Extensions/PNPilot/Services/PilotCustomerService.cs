@@ -18,14 +18,14 @@ namespace Solution.Extensions.PNPilot.Services
         private readonly FieldTemplateService _fieldTemplateService;
         private readonly VariantService _variantService;
         private readonly BaseProductService _baseProductService;
-        private readonly PilotItemService _pilotItemService;
+        private readonly WorkItemService _pilotItemService;
 
         public PilotCustomerService(OrganizationService organizationService,
             DataService dataService,
             FieldTemplateService fieldTemplateService,
             VariantService variantService,
             BaseProductService baseProductService,
-            PilotItemService pilotItemService)
+            WorkItemService pilotItemService)
         {
             _organizationService = organizationService;
             _dataService = dataService;
@@ -87,7 +87,7 @@ namespace Solution.Extensions.PNPilot.Services
         {
             var result = new List<string>();
             if (multiFieldItems != null)
-            { 
+            {
                 foreach (var item in multiFieldItems)
                 {
                     result.Add(GetProductName(item.Fields.GetValue<Guid>(PilotFieldNameConstants.AddOn)));
@@ -100,21 +100,24 @@ namespace Solution.Extensions.PNPilot.Services
             var variant = _variantService.Get(productId);
             if (variant != null)
             {
-                return variant.Fields.GetValue<string>(SystemFieldDefinitionConstants.Name, "sv-SE");
+                return variant.Id;
             }
-            
+
             var product = _baseProductService.Get(productId);
             if (product != null)
             {
-                variant =_variantService.GetByBaseProduct(product.SystemId).FirstOrDefault();
-                return variant.Fields.GetValue<string>(SystemFieldDefinitionConstants.Name, "sv-SE");
+                variant = _variantService.GetByBaseProduct(product.SystemId).FirstOrDefault();
+                if (variant != null)
+                {
+                    return variant.Id;
+                }
             }
 
 
             return string.Empty;
         }
-        
 
-      
+
+
     }
 }

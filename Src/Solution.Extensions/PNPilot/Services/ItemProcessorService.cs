@@ -10,7 +10,7 @@ namespace Solution.Extensions.PNPilot.Services
     {
         public ItemProcessorService() { }
 
-        public GenericGridViewRow BuildItemRow(Item item)
+        public GenericGridViewRow BuildItemRow(WorkItem item)
         {
             var row = new GenericGridViewRow()
             {
@@ -31,7 +31,7 @@ namespace Solution.Extensions.PNPilot.Services
 
             return row;
         }
-        public List<GenericGridViewRow> BuildItemRows(List<Item> items)
+        public List<GenericGridViewRow> BuildItemRows(List<WorkItem> items)
         {
             var rows = new List<GenericGridViewRow>();
 

@@ -1,0 +1,36 @@
+﻿using Litium.Runtime.DependencyInjection;
+using Newtonsoft.Json;
+using Solution.Extensions.PNPilot.Objects;
+using Solution.Extensions.PNPilot.Services.DALServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Solution.Extensions.PNPilot.Services
+{
+    [Service(ServiceType = typeof(TimeService))]
+    public class TimeService
+    {
+        private readonly TimeDALService _timeDALService;
+        public TimeService(TimeDALService timeDALService)
+        {
+            _timeDALService = timeDALService;
+        }
+
+        public List<Time> GetAllTime()
+        {
+            return _timeDALService.GetTime();
+        }
+
+        public bool AddOrUpdateItem(string jsonItem)
+        {
+            var item = JsonConvert.DeserializeObject<Time>(jsonItem);
+            if (item == null) return false;
+            return _timeDALService.AddOrUpdateTime(item);
+
+        }
+
+    }
+}

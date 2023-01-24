@@ -9,10 +9,10 @@ namespace Solution.Extensions.PNPilot.Processors
     [Service(Name = "ItemProcessor")]
     public class PilotItemProcessor : UnboundGenericGridViewDataProcessorBase
     {
-        private readonly PilotItemService _pilotItemService;
+        private readonly    WorkItemService _pilotItemService;
         private readonly ItemProcessorService _itemProcessorService;
 
-        public PilotItemProcessor(PilotItemService pilotItemService, 
+        public PilotItemProcessor(WorkItemService pilotItemService, 
                                     ItemProcessorService itemProcessorService)
         {
             _pilotItemService = pilotItemService;
@@ -34,7 +34,7 @@ namespace Solution.Extensions.PNPilot.Processors
                 Settings = new GenericGridViewSettings(50, 50)
             };
 
-            var items = _pilotItemService.GetItems();
+            var items = _pilotItemService.GetItems()?.ToList();
             
            
             gridView.DataRows.AddRange(_itemProcessorService.BuildItemRows(items));

@@ -5,14 +5,14 @@ using Solution.Extensions.PNPilot.Objects;
 using Litium.Runtime.DependencyInjection;
 using Solution.Extensions.PNPilot.Constants;
 
-namespace PandoNexis.AddOns.Extensions.Pilot.Services
+namespace Solution.Extensions.PNPilot.Services.DALServices
 {
-    [Service(ServiceType = typeof(PilotTimeDALService))]
-    public class PilotTimeDALService
+    [Service(ServiceType = typeof(TimeDALService))]
+    public class TimeDALService
     {
         private readonly IConfiguration _configuration;
 
-        public PilotTimeDALService(IConfiguration configuration)
+        public TimeDALService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -38,7 +38,7 @@ namespace PandoNexis.AddOns.Extensions.Pilot.Services
                             newTime.SystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.SystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.SystemId)) : Guid.Empty;
                             newTime.ItemSystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.ItemSystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.ItemSystemId)) : Guid.Empty;
                             newTime.OrganizationSystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.OrganizationSystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.OrganizationSystemId)) : Guid.Empty;
-                            newTime.TimeType = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeType)) ? reader.GetString(reader.GetOrdinal(PilotConstants.TimeType)) : string.Empty;
+                            newTime.TimeTypeSystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeTypeSystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.TimeTypeSystemId)) : Guid.Empty;
                             newTime.TimeComment = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeComment)) ? reader.GetString(reader.GetOrdinal(PilotConstants.TimeComment)) : string.Empty;
                             newTime.TimeFrom = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeFrom)) ? reader.GetDateTime(reader.GetOrdinal(PilotConstants.TimeFrom)) : DateTime.MinValue;
                             newTime.TimeTo = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeTo)) ? reader.GetDateTime(reader.GetOrdinal(PilotConstants.TimeTo)) : DateTime.MinValue;
@@ -68,7 +68,7 @@ namespace PandoNexis.AddOns.Extensions.Pilot.Services
             sql += $"{PilotConstants.ItemSystemId}='{time.ItemSystemId}'" + Environment.NewLine;
             sql += $",{PilotConstants.OrganizationSystemId}='{time.OrganizationSystemId}'" + Environment.NewLine;
 
-            sql += $",{PilotConstants.TimeType}='{time.TimeType}'" + Environment.NewLine;
+            sql += $",{PilotConstants.TimeTypeSystemId}='{time.TimeTypeSystemId}'" + Environment.NewLine;
             sql += $",{PilotConstants.TimeComment}='{time.TimeComment}'" + Environment.NewLine;
             sql += $",{PilotConstants.TimeFrom}='{time.TimeFrom}'" + Environment.NewLine;
             sql += $",{PilotConstants.TimeTo}='{time.TimeTo}'" + Environment.NewLine;
@@ -97,7 +97,7 @@ namespace PandoNexis.AddOns.Extensions.Pilot.Services
             sql += $"{PilotConstants.SystemId}" + Environment.NewLine;
             sql += $",{PilotConstants.ItemSystemId}" + Environment.NewLine;
             sql += $",{PilotConstants.OrganizationSystemId}" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeType}" + Environment.NewLine;
+            sql += $",{PilotConstants.TimeTypeSystemId}" + Environment.NewLine;
             sql += $",{PilotConstants.TimeComment}" + Environment.NewLine;
             sql += $",{PilotConstants.TimeFrom}" + Environment.NewLine;
             sql += $",{PilotConstants.TimeTo}" + Environment.NewLine;
@@ -117,7 +117,7 @@ namespace PandoNexis.AddOns.Extensions.Pilot.Services
             sql += $"'{time.SystemId}'" + Environment.NewLine;
             sql += $",'{time.ItemSystemId}'" + Environment.NewLine;
             sql += $",'{time.OrganizationSystemId}'" + Environment.NewLine;
-            sql += $",'{time.TimeType}'" + Environment.NewLine;
+            sql += $",'{time.TimeTypeSystemId}'" + Environment.NewLine;
             sql += $",'{time.TimeComment}'" + Environment.NewLine;
             sql += $",'{time.TimeFrom}'" + Environment.NewLine;
             sql += $",'{time.TimeTo}'" + Environment.NewLine;

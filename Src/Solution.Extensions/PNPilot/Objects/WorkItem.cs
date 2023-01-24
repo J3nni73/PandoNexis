@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Solution.Extensions.PNPilot.Objects
 {
-    public class Item
+    public class WorkItem
     {
         public Guid SystemId { get; set; }
         public Guid OrganizationSystemId { get; set; }

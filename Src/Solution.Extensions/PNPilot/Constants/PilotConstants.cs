@@ -26,11 +26,17 @@ namespace Solution.Extensions.PNPilot.Constants
 
         public const string ItemSystemId = "ItemSystemId";
         public const string TimeType = "TimeType";
+        public const string TimeTypeSystemId = "TimeTypeSystemId";
+        public const string TimeStatus = "TimeStatus";
+        public const string TimeStatusSystemId = "TimeStatusSystemId";
         public const string TimeComment = "TimeComment";
         public const string TimeFrom = "TimeFrom";
         public const string TimeTo = "TimeTo";
         public const string TimeAmount = "TimeAmount";
         public const string TimeRisk = "TimeRisk";
+
+        public const string Name = "Name";
+        public const string Description = "Description";
 
         public const string ItemProcessor = "ItemProcessor";
     }

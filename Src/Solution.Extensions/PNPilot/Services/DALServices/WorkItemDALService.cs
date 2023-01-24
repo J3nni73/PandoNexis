@@ -14,22 +14,23 @@ using System.Data;
 using Litium.Runtime.DependencyInjection;
 using PandoNexis.Accelerator.Extensions.Services;
 using Solution.Extensions.PNPilot.Constants;
+using PandoNexis.Accelerator.Extensions.Database.Services;
 
-namespace Solution.Extensions.PNPilot.Services
+namespace Solution.Extensions.PNPilot.Services.DALServices
 {
-    [Service(ServiceType = typeof(PilotItemDALService))]
-    public class PilotItemDALService
+    [Service(ServiceType = typeof(WorkItemDALService))]
+    public class WorkItemDALService : BaseDALService
     {
         private readonly IConfiguration _configuration;
 
-        public PilotItemDALService(IConfiguration configuration)
+        public WorkItemDALService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        public List<Item> GetItems()
+        public override IEnumerable<WorkItem> GetAll()
         {
-            var result = new List<Item>();
+            var result = new List<WorkItem>();
 
             var sql = $"select * from  {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.Item}" + Environment.NewLine;
 
@@ -44,21 +45,21 @@ namespace Solution.Extensions.PNPilot.Services
                     {
                         while (reader.Read())
                         {
-                            var newItem = new Item();
-                            newItem.SystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.SystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.SystemId)) : Guid.Empty;
-                            newItem.OrganizationSystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.OrganizationSystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.OrganizationSystemId)) : Guid.Empty;
-                            newItem.ParentSystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.ParentSystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.ParentSystemId)) : Guid.Empty;
-                            newItem.ItemTitle = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.ItemTitle)) ? reader.GetString(reader.GetOrdinal(PilotConstants.ItemTitle)) : string.Empty;
-                            newItem.ItemDescription = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.ItemDescription)) ? reader.GetString(reader.GetOrdinal(PilotConstants.ItemDescription)) : string.Empty;
-                            newItem.ItemType = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.ItemType)) ? reader.GetString(reader.GetOrdinal(PilotConstants.ItemType)) : string.Empty;
-                            newItem.ItemStatus = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.ItemStatus)) ? reader.GetString(reader.GetOrdinal(PilotConstants.ItemStatus)) : string.Empty;
-                            newItem.DueDateTime = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.DueDateTime)) ? reader.GetDateTime(reader.GetOrdinal(PilotConstants.DueDateTime)) : DateTime.MinValue;
-                            newItem.CreatedDateTime = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.CreatedDateTime)) ? reader.GetDateTime(reader.GetOrdinal(DatabaseConstants.CreatedDateTime)) : DateTime.MinValue;
-                            newItem.CreatedBy = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.CreatedBy)) ? reader.GetGuid(reader.GetOrdinal(DatabaseConstants.CreatedBy)) : Guid.Empty;
-                            newItem.UpdatedDateTime = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.UpdatedDateTime)) ? reader.GetDateTime(reader.GetOrdinal(DatabaseConstants.UpdatedDateTime)) : DateTime.MinValue;
-                            newItem.UpdatedBy = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.UpdatedBy)) ? reader.GetGuid(reader.GetOrdinal(DatabaseConstants.UpdatedBy)) : Guid.Empty;
-                            newItem.DeletedDateTime = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.DeletedDateTime)) ? reader.GetDateTime(reader.GetOrdinal(DatabaseConstants.DeletedDateTime)) : DateTime.MinValue;
-                            newItem.DeletedBy = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.DeletedBy)) ? reader.GetGuid(reader.GetOrdinal(DatabaseConstants.DeletedBy)) : Guid.Empty;
+                            var newItem = new WorkItem();
+                            newItem.SystemId = GetGuidValue(reader, PilotConstants.SystemId);
+                            newItem.OrganizationSystemId = GetGuidValue(reader, PilotConstants.OrganizationSystemId);
+                            newItem.ParentSystemId = GetGuidValue(reader, PilotConstants.ParentSystemId);
+                            newItem.ItemTitle = GetStringValue(reader, PilotConstants.ItemTitle);
+                            newItem.ItemDescription = GetStringValue(reader, PilotConstants.ItemDescription);
+                            newItem.ItemType = GetStringValue(reader, PilotConstants.ItemType);
+                            newItem.ItemStatus = GetStringValue(reader, PilotConstants.ItemStatus);
+                            newItem.DueDateTime = GetDateTimeValue(reader, PilotConstants.DueDateTime);
+                            newItem.CreatedDateTime = GetDateTimeValue(reader, DatabaseConstants.CreatedDateTime);
+                            newItem.CreatedBy = GetGuidValue(reader, DatabaseConstants.CreatedBy);
+                            newItem.UpdatedDateTime = GetDateTimeValue(reader, DatabaseConstants.UpdatedDateTime);
+                            newItem.UpdatedBy = GetGuidValue(reader, DatabaseConstants.UpdatedBy);
+                            newItem.DeletedDateTime = GetDateTimeValue(reader, DatabaseConstants.DeletedDateTime);
+                            newItem.DeletedBy = GetGuidValue(reader, DatabaseConstants.DeletedBy);
                             result.Add(newItem);
                         }
                     }
@@ -66,7 +67,7 @@ namespace Solution.Extensions.PNPilot.Services
             }
             return result;
         }
-        public bool AddOrUpdateItem(Item item)
+        public bool AddOrUpdateItem(WorkItem item)
         {
             item.UpdatedDateTime = DateTime.Now;
             var sql = $"Declare @rowcount int" + Environment.NewLine;
@@ -154,6 +155,13 @@ namespace Solution.Extensions.PNPilot.Services
                 }
             }
             return false;
+        }
+
+
+
+        public override bool AddOrUpdate(object item)
+        {
+            throw new NotImplementedException();
         }
     }
 }

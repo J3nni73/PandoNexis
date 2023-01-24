@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Solution.Extensions.PNPilot.Objects;
 using Solution.Extensions.PNPilot.Services;
 
 namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
@@ -14,37 +16,24 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
     {
         private readonly PilotCustomerService _pilotCustomerService;
         private readonly PilotAddOnService _pilotAddOnService;
-        private readonly PilotItemService _pilotItemService;
+        private readonly WorkItemService _pilotItemService;
+        private readonly TimeService _timeService;
+        private readonly TimeTypeService _timeTypeService;
+        private readonly TimeStatusService _timeStatusService;
 
         public PilotController(PilotCustomerService pilotCustomerService,
                                 PilotAddOnService pilotAddOnService,
-                                PilotItemService pilotItemService)
+                                WorkItemService pilotItemService,
+                                TimeService timeService,
+                                TimeTypeService timeTypeService,
+                                TimeStatusService timeStatusService)
         {
             _pilotCustomerService = pilotCustomerService;
             _pilotAddOnService = pilotAddOnService;
             _pilotItemService = pilotItemService;
-        }
-
-
-        /// <summary>
-        /// Gets available addons.
-        /// </summary>
-        [HttpGet]
-        [Route("getavailableaddons")]
-        public IActionResult GetAvailableAddons()
-        {
-            var test = new List<string>();
-            test.Add("Hepp");
-            test.Add("Hopp");
-            test.Add("Hipp");
-            test.Add("Hupp");
-            test.Add("Happ");
-            var ret = new Aspen
-            {
-                Name = "Aspenberg",
-                List = test
-            };
-            return Ok(ret);
+            _timeService = timeService;
+            _timeTypeService = timeTypeService;
+            _timeStatusService = timeStatusService;
         }
 
         /// <summary>
@@ -88,7 +77,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
                 // await processing of the result
                 task.Wait();
                 var result = task.Result;
-                if (_pilotItemService.AddOrUpdateItem(result))             
+                if (_pilotItemService.AddOrUpdateItem(result))
                     return Ok();
             }
 
@@ -106,7 +95,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
                 return Ok(false);
         }
 
-    
+
         [HttpGet]
         [Route("registeraddon")]
         public async Task<IActionResult> RegisterAddon(string addOnId)
@@ -117,10 +106,33 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
             return BadRequest();
         }
 
-        public class Aspen
+        [HttpGet]
+        [Route("gettimetype")]
+        public async Task<IActionResult> GetTimeType()
         {
-            public string Name { get; set; }
-            public List<string> List { get; set; }
+
+            var timetypes = _timeTypeService.GetTimeTypes();
+            return Ok(JsonConvert.SerializeObject(timetypes));
+
+        }
+        [HttpGet]
+        [Route("gettimestatuses")]
+        public async Task<IActionResult> GetTimeStatuses()
+        {
+
+            var timeStatuses = _timeStatusService.GetTimeStatuses();
+            return Ok(JsonConvert.SerializeObject(timeStatuses));
+
+        }
+
+        [HttpGet]
+        [Route("getalltime")]
+        public async Task<IActionResult> GetAllTime()
+        {
+
+            var allTime = _timeService.GetAllTime();
+            return Ok(JsonConvert.SerializeObject(allTime));
+
         }
     }
 }

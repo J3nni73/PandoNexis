@@ -3,7 +3,7 @@ using PandoNexis.Accelerator.Extensions.Database.Constants;
 using PandoNexis.Accelerator.Extensions.Database.Objects;
 using PandoNexis.Accelerator.Extensions.Database.Services;
 using Solution.Extensions.PNPilot.Constants;
-using Solution.Extensions.PNPilot.Services;
+using Solution.Extensions.PNPilot.Services.DALServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +14,8 @@ namespace Solution.Extensions.PNPilot.Definitions
 {
     internal class PilotDatabaseInitiator : DatabaseInitiator
     {
-        private readonly PilotItemDALService _pilotItemDALService;
-        public PilotDatabaseInitiator(IConfiguration configuration, PilotItemDALService pilotItemDALService) : base(configuration)
+        private readonly WorkItemDALService _pilotItemDALService;
+        public PilotDatabaseInitiator(IConfiguration configuration, WorkItemDALService pilotItemDALService) : base(configuration)
         {
             _pilotItemDALService = pilotItemDALService;
         }
@@ -24,55 +24,35 @@ namespace Solution.Extensions.PNPilot.Definitions
         {
             SyncronizeDatabaseObjects(PilotConstants.Item, GetItemColumns());
             SyncronizeDatabaseObjects(PilotConstants.Time, GetTimeColumns());
-            SyncronizeDatabaseObjects(PilotConstants.ItemFieldData, GetFieldDataColumns());
+            //SyncronizeDatabaseObjects(PilotConstants.ItemFieldData, GetFieldDataColumns());
+            SyncronizeDatabaseObjects(PilotConstants.TimeType, GetTimeTypeColumns());
+            SyncronizeDatabaseObjects(PilotConstants.TimeStatus, GetTimeStatusColumns());
 
-            //var test = new Item()
-            //{
-            //    SystemId = Guid.NewGuid(),
-            //    OrganizationSystemId = Guid.NewGuid(),
-            //    ParentSystemId = Guid.NewGuid(),
-            //    ItemTitle = "Första aktiviteten",
-            //    ItemDescription= "Description",
-            //    ItemStatus = "Teststatus",
-            //    ItemType = "Testtyp",
-            //    CreatedDateTime= DateTime.Now,
-            //    CreatedBy = Guid.NewGuid(),
-            //    UpdatedDateTime= DateTime.Now,  
-            //    UpdatedBy = Guid.NewGuid(),
-            //};
-            //_pilotItemDALService.AddOrUpdateItem(test);
 
-            //test = new Item()
-            //{
-            //    SystemId = Guid.NewGuid(),
-            //    OrganizationSystemId = Guid.NewGuid(),
-            //    ParentSystemId = Guid.NewGuid(),
-            //    ItemTitle = "Andra aktiviteten",
-            //    ItemDescription = "Description",
-            //    ItemStatus = "Teststatus",
-            //    ItemType = "Testtyp",
-            //    CreatedDateTime = DateTime.Now,
-            //    CreatedBy = Guid.NewGuid(),
-            //    UpdatedDateTime = DateTime.Now,
-            //    UpdatedBy = Guid.NewGuid(),
-            //};
-            //_pilotItemDALService.AddOrUpdateItem(test);
-            //test = new Item()
-            //{
-            //    SystemId = Guid.NewGuid(),
-            //    OrganizationSystemId = Guid.NewGuid(),
-            //    ParentSystemId = Guid.NewGuid(),
-            //    ItemTitle = "Tredje aktiviteten",
-            //    ItemDescription = "Description",
-            //    ItemStatus = "Teststatus",
-            //    ItemType = "Testtyp",
-            //    CreatedDateTime = DateTime.Now,
-            //    CreatedBy = Guid.NewGuid(),
-            //    UpdatedDateTime = DateTime.Now,
-            //    UpdatedBy = Guid.NewGuid(),
-            //};
-            //_pilotItemDALService.AddOrUpdateItem(test);
 
+        }
+        public List<DatabaseColumns> GetTimeTypeColumns()
+        {
+            var result = new List<DatabaseColumns>
+            {
+                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.Name, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.Description, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
+
+            };
+            return result;
+        }
+        public List<DatabaseColumns> GetTimeStatusColumns()
+        {
+            var result = new List<DatabaseColumns>
+            {
+                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.TimeTypeSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.Name, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.Description, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
+
+            };
+            return result;
         }
         public List<DatabaseColumns> GetItemColumns()
         {
@@ -97,7 +77,7 @@ namespace Solution.Extensions.PNPilot.Definitions
                 GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.ItemSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.OrganizationSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
-                GetColumn(PilotConstants.TimeType, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.TimeTypeSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.TimeComment, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
                 GetColumn(PilotConstants.TimeFrom, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.Null),
                 GetColumn(PilotConstants.TimeTo, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.Null),
@@ -106,6 +86,6 @@ namespace Solution.Extensions.PNPilot.Definitions
             };
             result.AddRange(GetEditedColumns());
             return result;
-        }       
+        }
     }
 }
