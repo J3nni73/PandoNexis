@@ -12,10 +12,10 @@ namespace Solution.Extensions.PNPilot.Objects
         public Guid SystemId { get; set; }
         public Guid OrganizationSystemId { get; set; }
         public Guid ParentSystemId { get; set; }
+        public Guid ItemTypeSystemId { get; set; }
+        public Guid ItemStatusSystemId { get; set; }
         public string ItemTitle { get; set; }
         public string ItemDescription { get; set; }
-        public string ItemType { get; set; }
-        public string ItemStatus { get; set; }
         public DateTime DueDateTime { get; set; }
         public DateTime CreatedDateTime { get; set;}
         public Guid CreatedBy { get; set; } 

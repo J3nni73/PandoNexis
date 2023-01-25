@@ -23,7 +23,7 @@ namespace Solution.Extensions.PNPilot.Services
             row.Fields.Add(GetField(Guid.Empty, PilotConstants.SystemId, PilotConstants.SystemId, "string", false, item.SystemId.ToString()));
             row.Fields.Add(GetField(Guid.Empty, PilotConstants.OrganizationSystemId, PilotConstants.OrganizationSystemId, "string", false, item.OrganizationSystemId.ToString()));
             row.Fields.Add(GetField(Guid.Empty, PilotConstants.ParentSystemId, PilotConstants.ParentSystemId, "string", false, item.ParentSystemId.ToString()));
-            row.Fields.Add(GetField(Guid.Empty, PilotConstants.ItemType, PilotConstants.ItemStatus, "string", false, item.ItemType));
+            //row.Fields.Add(GetField(Guid.Empty, PilotConstants.ItemType, PilotConstants.ItemStatus, "string", false, item.ItemType));
             row.Fields.Add(GetField(Guid.Empty, PilotConstants.ItemTitle, PilotConstants.ItemTitle, "string", false, item.ItemTitle));
             row.Fields.Add(GetField(Guid.Empty, PilotConstants.ItemDescription, PilotConstants.ItemDescription, "string", false, item.ItemDescription));
             row.Fields.Add(GetField(Guid.Empty, PilotConstants.DueDateTime, PilotConstants.DueDateTime, "string", false, item.DueDateTime.ToString()));

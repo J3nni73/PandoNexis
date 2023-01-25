@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Solution.Extensions.PNPilot.Services
 {
-    [Service(ServiceType = typeof(TimeStatusService))]
+    [Service(ServiceType = typeof(ItemStatusService))]
     public class ItemStatusService
     {
         private readonly ItemStatusDALService _itemStatusDALService;

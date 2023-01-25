@@ -41,8 +41,8 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
                             newItem.ParentSystemId = GetGuidValue(reader, PilotConstants.ParentSystemId);
                             newItem.ItemTitle = GetStringValue(reader, PilotConstants.ItemTitle);
                             newItem.ItemDescription = GetStringValue(reader, PilotConstants.ItemDescription);
-                            newItem.ItemType = GetStringValue(reader, PilotConstants.ItemType);
-                            newItem.ItemStatus = GetStringValue(reader, PilotConstants.ItemStatus);
+                            newItem.ItemTypeSystemId = GetGuidValue(reader, PilotConstants.ItemTypeSystemId);
+                            newItem.ItemStatusSystemId = GetGuidValue(reader, PilotConstants.ItemStatusSystemId);
                             newItem.DueDateTime = GetDateTimeValue(reader, PilotConstants.DueDateTime);
                             newItem.CreatedDateTime = GetDateTimeValue(reader, DatabaseConstants.CreatedDateTime);
                             newItem.CreatedBy = GetGuidValue(reader, DatabaseConstants.CreatedBy);
@@ -71,8 +71,8 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ParentSystemId).Value = item.ParentSystemId;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemTitle).Value = item.ItemTitle;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemDescription).Value = item.ItemDescription;
-            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemType).Value = item.ItemType;
-            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemStatus).Value = item.ItemStatus;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemTypeSystemId).Value = item.ItemTypeSystemId;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemStatusSystemId).Value = item.ItemStatusSystemId;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.DueDateTime).Value = item.DueDateTime;
             dalObject.Columns.FirstOrDefault(i => i.Name == DatabaseConstants.CreatedDateTime).Value = item.CreatedDateTime;
             dalObject.Columns.FirstOrDefault(i => i.Name == DatabaseConstants.CreatedBy).Value = item.CreatedBy;
