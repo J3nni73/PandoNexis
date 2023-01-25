@@ -10,19 +10,19 @@ using DocumentFormat.OpenXml.Office2013.Excel;
 
 namespace Solution.Extensions.PNPilot.Services.DALServices
 {
-    [Service(ServiceType = typeof(TimeTypeDALService))]
-    public class TimeTypeDALService : BaseDALService
+    [Service(ServiceType = typeof(ItemTypeDALService))]
+    public class ItemTypeDALService : BaseDALService
     {
         private readonly PilotDatabaseInitiator _pilotDatabaseInitiator;
-        private readonly string _dbTable = $"{DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.TimeType}";
-        public TimeTypeDALService(IConfiguration configuration) : base(configuration)
+        private readonly string _dbTable = $"{DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.ItemType}";
+        public ItemTypeDALService(IConfiguration configuration) : base(configuration)
         {
             _pilotDatabaseInitiator = new PilotDatabaseInitiator(configuration);
         }
 
-        public override IEnumerable<TimeType> GetAll()
+        public override IEnumerable<ItemType> GetAll()
         {
-            var result = new List<TimeType>();
+            var result = new List<ItemType>();
 
             var sql = $"select * from {_dbTable}" + Environment.NewLine;
 
@@ -37,7 +37,7 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
                     {
                         while (reader.Read())
                         {
-                            var newTimeType = new TimeType();
+                            var newTimeType = new ItemType();
                             newTimeType.SystemId = GetGuidValue(reader, PilotConstants.SystemId);
                             newTimeType.Name = GetStringValue(reader, PilotConstants.Name);
                             newTimeType.Description = GetStringValue(reader, PilotConstants.Description);
@@ -51,7 +51,7 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
 
         public override bool AddOrUpdate(object item)
         {
-            var timeType = item as TimeType;
+            var itemType = item as ItemType;
 
         
 
@@ -59,9 +59,9 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
             dalObject.Table = $"{_dbTable}";
             dalObject.Columns = _pilotDatabaseInitiator.GetItemColumns();
 
-            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.SystemId).Value = timeType.SystemId;
-            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.Name).Value = timeType.Name;
-            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.Description).Value = timeType.Description;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.SystemId).Value = itemType.SystemId;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.Name).Value = itemType.Name;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.Description).Value = itemType.Description;
 
             return base.AddOrUpdate(dalObject);
         }

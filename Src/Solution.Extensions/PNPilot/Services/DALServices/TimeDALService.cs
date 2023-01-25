@@ -4,24 +4,28 @@ using Microsoft.Extensions.Configuration;
 using Solution.Extensions.PNPilot.Objects;
 using Litium.Runtime.DependencyInjection;
 using Solution.Extensions.PNPilot.Constants;
+using PandoNexis.Accelerator.Extensions.Database.Services;
+using Solution.Extensions.PNPilot.Definitions;
 
 namespace Solution.Extensions.PNPilot.Services.DALServices
 {
     [Service(ServiceType = typeof(TimeDALService))]
-    public class TimeDALService
+    public class TimeDALService : BaseDALService
     {
-        private readonly IConfiguration _configuration;
+        private readonly PilotDatabaseInitiator _pilotDatabaseInitiator;
+        private readonly string _dbTable = $"{DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.Time}";
 
-        public TimeDALService(IConfiguration configuration)
+        public TimeDALService(IConfiguration configuration):base(configuration)
         {
-            _configuration = configuration;
+
+            _pilotDatabaseInitiator = new PilotDatabaseInitiator(configuration);
         }
 
-        public List<Time> GetTime()
+        public override IEnumerable<Time> GetAll()
         {
             var result = new List<Time>();
 
-            var sql = $"select * from  {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.Time}" + Environment.NewLine;
+            var sql = $"select * from  {_dbTable}" + Environment.NewLine;
 
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.ConnectionString = _configuration["Litium:Data:ConnectionString"];
@@ -35,21 +39,21 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
                         while (reader.Read())
                         {
                             var newTime = new Time();
-                            newTime.SystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.SystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.SystemId)) : Guid.Empty;
-                            newTime.ItemSystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.ItemSystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.ItemSystemId)) : Guid.Empty;
-                            newTime.OrganizationSystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.OrganizationSystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.OrganizationSystemId)) : Guid.Empty;
-                            newTime.TimeTypeSystemId = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeTypeSystemId)) ? reader.GetGuid(reader.GetOrdinal(PilotConstants.TimeTypeSystemId)) : Guid.Empty;
-                            newTime.TimeComment = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeComment)) ? reader.GetString(reader.GetOrdinal(PilotConstants.TimeComment)) : string.Empty;
-                            newTime.TimeFrom = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeFrom)) ? reader.GetDateTime(reader.GetOrdinal(PilotConstants.TimeFrom)) : DateTime.MinValue;
-                            newTime.TimeTo = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeTo)) ? reader.GetDateTime(reader.GetOrdinal(PilotConstants.TimeTo)) : DateTime.MinValue;
-                            newTime.Amount = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeAmount)) ? reader.GetInt32(reader.GetOrdinal(PilotConstants.TimeAmount)) : 0;
-                            newTime.Risk = !reader.IsDBNull(reader.GetOrdinal(PilotConstants.TimeRisk)) ? reader.GetInt32(reader.GetOrdinal(PilotConstants.TimeRisk)) : 0;
-                            newTime.CreatedDateTime = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.CreatedDateTime)) ? reader.GetDateTime(reader.GetOrdinal(DatabaseConstants.CreatedDateTime)) : DateTime.MinValue;
-                            newTime.CreatedBy = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.CreatedBy)) ? reader.GetGuid(reader.GetOrdinal(DatabaseConstants.CreatedBy)) : Guid.Empty;
-                            newTime.UpdatedDateTime = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.UpdatedDateTime)) ? reader.GetDateTime(reader.GetOrdinal(DatabaseConstants.UpdatedDateTime)) : DateTime.MinValue;
-                            newTime.UpdatedBy = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.UpdatedBy)) ? reader.GetGuid(reader.GetOrdinal(DatabaseConstants.UpdatedBy)) : Guid.Empty;
-                            newTime.DeletedDateTime = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.DeletedDateTime)) ? reader.GetDateTime(reader.GetOrdinal(DatabaseConstants.DeletedDateTime)) : DateTime.MinValue;
-                            newTime.DeletedBy = !reader.IsDBNull(reader.GetOrdinal(DatabaseConstants.DeletedBy)) ? reader.GetGuid(reader.GetOrdinal(DatabaseConstants.DeletedBy)) : Guid.Empty;
+                            newTime.SystemId = GetGuidValue(reader, PilotConstants.SystemId);
+                            newTime.ItemSystemId = GetGuidValue(reader, PilotConstants.ItemSystemId);
+                            newTime.OrganizationSystemId = GetGuidValue(reader, PilotConstants.OrganizationSystemId);
+                            newTime.TimeTypeSystemId = GetGuidValue(reader, PilotConstants.TimeTypeSystemId);
+                            newTime.TimeComment = GetStringValue(reader, PilotConstants.TimeComment);
+                            newTime.TimeFrom = GetDateTimeValue(reader, PilotConstants.TimeFrom);
+                            newTime.TimeTo = GetDateTimeValue(reader, PilotConstants.TimeTo);
+                            newTime.Amount = GetIntValue(reader, PilotConstants.TimeAmount);
+                            newTime.Risk = GetIntValue(reader, PilotConstants.TimeRisk);
+                            newTime.CreatedDateTime = GetDateTimeValue(reader, DatabaseConstants.CreatedDateTime);
+                            newTime.CreatedBy = GetGuidValue(reader, DatabaseConstants.CreatedBy);
+                            newTime.UpdatedDateTime = GetDateTimeValue(reader, DatabaseConstants.UpdatedDateTime);
+                            newTime.UpdatedBy = GetGuidValue(reader, DatabaseConstants.UpdatedBy);
+                            newTime.DeletedDateTime = GetDateTimeValue(reader, DatabaseConstants.DeletedDateTime);
+                            newTime.DeletedBy = GetGuidValue(reader, DatabaseConstants.DeletedBy);
                             result.Add(newTime);
                         }
                     }
@@ -57,104 +61,31 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
             }
             return result;
         }
-        public bool AddOrUpdateTime(Time time)
+        public override bool AddOrUpdate(object item)
         {
-            time.UpdatedDateTime = DateTime.Now;
-            var sql = $"Declare @rowcount int" + Environment.NewLine;
-            //update
-            sql += $"Update {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.Time}" + Environment.NewLine;
-            sql += $"set" + Environment.NewLine;
+            var time = item as Time;
 
-            sql += $"{PilotConstants.ItemSystemId}='{time.ItemSystemId}'" + Environment.NewLine;
-            sql += $",{PilotConstants.OrganizationSystemId}='{time.OrganizationSystemId}'" + Environment.NewLine;
+            var dalObject = new DALAddOrUpdate();
+            dalObject.Table = $"{_dbTable}";
+            dalObject.Columns = _pilotDatabaseInitiator.GetItemColumns();
 
-            sql += $",{PilotConstants.TimeTypeSystemId}='{time.TimeTypeSystemId}'" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeComment}='{time.TimeComment}'" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeFrom}='{time.TimeFrom}'" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeTo}='{time.TimeTo}'" + Environment.NewLine;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.SystemId).Value = time.SystemId;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemSystemId).Value = time.ItemSystemId;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.OrganizationSystemId).Value = time.OrganizationSystemId;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeTypeSystemId).Value = time.TimeTypeSystemId;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeComment).Value = time.TimeComment;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeFrom).Value = time.TimeFrom;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeTo).Value = time.TimeTo;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeAmount).Value = time.Amount;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeRisk).Value = time.Risk;
+            dalObject.Columns.FirstOrDefault(i => i.Name == DatabaseConstants.CreatedDateTime).Value = time.CreatedDateTime;
+            dalObject.Columns.FirstOrDefault(i => i.Name == DatabaseConstants.CreatedBy).Value = time.CreatedBy;
+            dalObject.Columns.FirstOrDefault(i => i.Name == DatabaseConstants.UpdatedDateTime).Value = time.UpdatedDateTime;
+            dalObject.Columns.FirstOrDefault(i => i.Name == DatabaseConstants.UpdatedBy).Value = time.UpdatedBy;
+            dalObject.Columns.FirstOrDefault(i => i.Name == DatabaseConstants.DeletedDateTime).Value = time.DeletedDateTime;
+            dalObject.Columns.FirstOrDefault(i => i.Name == DatabaseConstants.DeletedBy).Value = time.DeletedBy;
 
-            sql += $",{PilotConstants.TimeAmount}={time.Amount}" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeRisk}={time.Risk}" + Environment.NewLine;
-
-            sql += $",{DatabaseConstants.UpdatedDateTime}='{time.UpdatedDateTime}'" + Environment.NewLine;
-            sql += $",{DatabaseConstants.UpdatedBy}='{time.UpdatedBy}'" + Environment.NewLine;
-            if (time.DeletedDateTime != null && time.DeletedDateTime != DateTime.MinValue)
-            {
-                sql += $",{DatabaseConstants.DeletedDateTime}='{time.DeletedDateTime}'" + Environment.NewLine;
-                sql += $",{DatabaseConstants.DeletedBy}='{time.DeletedBy}'" + Environment.NewLine;
-            }
-            sql += $"where {PilotConstants.SystemId}='{time.SystemId}'" + Environment.NewLine;
-            sql += $"select @rowcount = @@rowcount" + Environment.NewLine;
-            sql += $"if @rowcount > 0" + Environment.NewLine;
-            sql += $"begin" + Environment.NewLine;
-            sql += $"select @rowcount" + Environment.NewLine;
-            sql += $"end" + Environment.NewLine;
-            sql += $"else" + Environment.NewLine;
-            //insert
-            sql += $"begin" + Environment.NewLine;
-            sql += $"insert into {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.Time}" + Environment.NewLine;
-            sql += $"(" + Environment.NewLine;
-            sql += $"{PilotConstants.SystemId}" + Environment.NewLine;
-            sql += $",{PilotConstants.ItemSystemId}" + Environment.NewLine;
-            sql += $",{PilotConstants.OrganizationSystemId}" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeTypeSystemId}" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeComment}" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeFrom}" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeTo}" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeAmount}" + Environment.NewLine;
-            sql += $",{PilotConstants.TimeRisk}" + Environment.NewLine;
-            sql += $",{DatabaseConstants.CreatedDateTime}" + Environment.NewLine;
-            sql += $",{DatabaseConstants.CreatedBy}" + Environment.NewLine;
-            sql += $",{DatabaseConstants.UpdatedDateTime}" + Environment.NewLine;
-            sql += $",{DatabaseConstants.UpdatedBy}" + Environment.NewLine;
-            if (time.DeletedDateTime != null && time.DeletedDateTime != DateTime.MinValue)
-            {
-                sql += $",{DatabaseConstants.DeletedDateTime}" + Environment.NewLine;
-                sql += $",{DatabaseConstants.DeletedBy}" + Environment.NewLine;
-            }
-            sql += $")" + Environment.NewLine;
-            sql += $"values(" + Environment.NewLine;
-            sql += $"'{time.SystemId}'" + Environment.NewLine;
-            sql += $",'{time.ItemSystemId}'" + Environment.NewLine;
-            sql += $",'{time.OrganizationSystemId}'" + Environment.NewLine;
-            sql += $",'{time.TimeTypeSystemId}'" + Environment.NewLine;
-            sql += $",'{time.TimeComment}'" + Environment.NewLine;
-            sql += $",'{time.TimeFrom}'" + Environment.NewLine;
-            sql += $",'{time.TimeTo}'" + Environment.NewLine;
-            sql += $",{time.Amount}" + Environment.NewLine;
-            sql += $",{time.Risk}" + Environment.NewLine;
-            sql += $",'{time.CreatedDateTime}'" + Environment.NewLine;
-            sql += $",'{time.CreatedBy}'" + Environment.NewLine;
-            sql += $",'{time.UpdatedDateTime}'" + Environment.NewLine;
-            sql += $",'{time.UpdatedBy}'" + Environment.NewLine;
-            if (time.DeletedDateTime != null && time.DeletedDateTime != DateTime.MinValue)
-            {
-                sql += $",'{time.DeletedDateTime}'" + Environment.NewLine;
-                sql += $",'{time.DeletedBy}'" + Environment.NewLine;
-            }
-            sql += $")" + Environment.NewLine;
-            sql += $"select @rowcount = @@rowcount" + Environment.NewLine;
-            sql += $"select @rowcount" + Environment.NewLine;
-            sql += $"end" + Environment.NewLine;
-
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.ConnectionString = _configuration["Litium:Data:ConnectionString"];
-            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-            {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(sql, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            if (reader.GetInt32(0) > 0)
-                                return true;
-                        }
-                    }
-                }
-            }
-            return false;
+            return base.AddOrUpdate(dalObject);
         }
     }
 }

@@ -5,78 +5,25 @@ using Solution.Extensions.PNPilot.Objects;
 using Litium.Runtime.DependencyInjection;
 using Solution.Extensions.PNPilot.Constants;
 using PandoNexis.Accelerator.Extensions.Database.Services;
-using PandoNexis.Accelerator.Extensions.Database.Objects;
+using Solution.Extensions.PNPilot.Definitions;
 
 namespace Solution.Extensions.PNPilot.Services.DALServices
 {
     [Service(ServiceType = typeof(TimeStatusDALService))]
     public class TimeStatusDALService : BaseDALService
     {
-        private readonly IConfiguration _configuration;
-
-        public TimeStatusDALService(IConfiguration configuration)
+        private readonly PilotDatabaseInitiator _pilotDatabaseInitiator;
+        private readonly string _dbTable = $"{DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.TimeStatus}";
+        public TimeStatusDALService(IConfiguration configuration):base(configuration) 
         {
-            _configuration = configuration;
-        }
-
-        public bool AddOrUpdateTimeType(TimeType timeType)
-        {
-            var sql = $"Declare @rowcount int" + Environment.NewLine;
-            //update
-            sql += $"Update {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.TimeType}" + Environment.NewLine;
-            sql += $"set" + Environment.NewLine;
-
-            sql += $",{PilotConstants.Name}='{timeType.Name}'" + Environment.NewLine;
-            sql += $",{PilotConstants.Description}='{timeType.Description}'" + Environment.NewLine;
-            sql += $"where {PilotConstants.SystemId}='{timeType.SystemId}'" + Environment.NewLine;
-            sql += $"select @rowcount = @@rowcount" + Environment.NewLine;
-            sql += $"if @rowcount > 0" + Environment.NewLine;
-            sql += $"begin" + Environment.NewLine;
-            sql += $"select @rowcount" + Environment.NewLine;
-            sql += $"end" + Environment.NewLine;
-            sql += $"else" + Environment.NewLine;
-            //insert
-            sql += $"begin" + Environment.NewLine;
-            sql += $"insert into {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.TimeType}" + Environment.NewLine;
-            sql += $"(" + Environment.NewLine;
-            sql += $"{PilotConstants.SystemId}" + Environment.NewLine;
-            sql += $",{PilotConstants.Name}" + Environment.NewLine;
-            sql += $",{PilotConstants.Description}" + Environment.NewLine;
-            sql += $")" + Environment.NewLine;
-            sql += $"values(" + Environment.NewLine;
-            sql += $"'{timeType.SystemId}'" + Environment.NewLine;
-            sql += $",'{timeType.Name}'" + Environment.NewLine;
-            sql += $",'{timeType.Description}'" + Environment.NewLine;
-            sql += $")" + Environment.NewLine;
-            sql += $"select @rowcount = @@rowcount" + Environment.NewLine;
-            sql += $"select @rowcount" + Environment.NewLine;
-            sql += $"end" + Environment.NewLine;
-
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.ConnectionString = _configuration["Litium:Data:ConnectionString"];
-            using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-            {
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(sql, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            if (reader.GetInt32(0) > 0)
-                                return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
+            _pilotDatabaseInitiator = new PilotDatabaseInitiator(configuration);
+        }    
 
         public override IEnumerable<TimeStatus> GetAll()
         {
             var result = new List<TimeStatus>();
 
-            var sql = $"select * from  {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.TimeStatus}" + Environment.NewLine;
+            var sql = $"select * from  {_dbTable}" + Environment.NewLine;
 
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.ConnectionString = _configuration["Litium:Data:ConnectionString"];
@@ -104,60 +51,20 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
 
         public override bool AddOrUpdate(object item)
         {
-            var timeType = item as TimeStatus;
-            if (timeType != null)
-            {
+            var timeStatus = item as TimeStatus;
 
-                var sql = $"Declare @rowcount int" + Environment.NewLine;
-                //update
-                sql += $"Update {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.TimeType}" + Environment.NewLine;
-                sql += $"set" + Environment.NewLine;
 
-                sql += $",{PilotConstants.Name}='{timeType.Name}'" + Environment.NewLine;
-                sql += $",{PilotConstants.Description}='{timeType.Description}'" + Environment.NewLine;
-                sql += $"where {PilotConstants.SystemId}='{timeType.SystemId}'" + Environment.NewLine;
-                sql += $"select @rowcount = @@rowcount" + Environment.NewLine;
-                sql += $"if @rowcount > 0" + Environment.NewLine;
-                sql += $"begin" + Environment.NewLine;
-                sql += $"select @rowcount" + Environment.NewLine;
-                sql += $"end" + Environment.NewLine;
-                sql += $"else" + Environment.NewLine;
-                //insert
-                sql += $"begin" + Environment.NewLine;
-                sql += $"insert into {DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.TimeType}" + Environment.NewLine;
-                sql += $"(" + Environment.NewLine;
-                sql += $"{PilotConstants.SystemId}" + Environment.NewLine;
-                sql += $",{PilotConstants.Name}" + Environment.NewLine;
-                sql += $",{PilotConstants.Description}" + Environment.NewLine;
-                sql += $")" + Environment.NewLine;
-                sql += $"values(" + Environment.NewLine;
-                sql += $"'{timeType.SystemId}'" + Environment.NewLine;
-                sql += $",'{timeType.Name}'" + Environment.NewLine;
-                sql += $",'{timeType.Description}'" + Environment.NewLine;
-                sql += $")" + Environment.NewLine;
-                sql += $"select @rowcount = @@rowcount" + Environment.NewLine;
-                sql += $"select @rowcount" + Environment.NewLine;
-                sql += $"end" + Environment.NewLine;
 
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.ConnectionString = _configuration["Litium:Data:ConnectionString"];
-                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                {
-                    connection.Open();
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                if (reader.GetInt32(0) > 0)
-                                    return true;
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
+            var dalObject = new DALAddOrUpdate();
+            dalObject.Table = $"{_dbTable}";
+            dalObject.Columns = _pilotDatabaseInitiator.GetItemColumns();
+
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.SystemId).Value = timeStatus.SystemId;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeTypeSystemId).Value = timeStatus.TimeTypeSystemId;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.Name).Value = timeStatus.Name;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.Description).Value = timeStatus.Description;
+
+            return base.AddOrUpdate(dalObject);
         }
     }
 }

@@ -19,16 +19,16 @@ namespace Solution.Extensions.PNPilot.Services
             _timeDALService = timeDALService;
         }
 
-        public List<Time> GetAllTime()
+        public IEnumerable<Time> GetAllTime()
         {
-            return _timeDALService.GetTime();
+            return _timeDALService.GetAll();
         }
 
-        public bool AddOrUpdateItem(string jsonItem)
+        public bool AddOrUpdateTime(string jsonItem)
         {
             var item = JsonConvert.DeserializeObject<Time>(jsonItem);
             if (item == null) return false;
-            return _timeDALService.AddOrUpdateTime(item);
+            return _timeDALService.AddOrUpdate(item);
 
         }
 

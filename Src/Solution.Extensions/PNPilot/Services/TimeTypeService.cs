@@ -2,11 +2,7 @@
 using Newtonsoft.Json;
 using Solution.Extensions.PNPilot.Objects;
 using Solution.Extensions.PNPilot.Services.DALServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Solution.Extensions.PNPilot.Services
 {
@@ -28,7 +24,7 @@ namespace Solution.Extensions.PNPilot.Services
         {
             var item = JsonConvert.DeserializeObject<TimeType>(jsonItem);
             if (item == null) return false;
-            return _timeTypeDALService.AddOrUpdateTimeType(item);
+            return _timeTypeDALService.AddOrUpdate(item);
 
         }
 

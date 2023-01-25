@@ -12,6 +12,7 @@ using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using PandoNexis.Accelerator.Extensions.Database.Constants;
 using MetadataExtractor.Formats.Xmp;
+using Litium.Web.Security;
 
 namespace PandoNexis.Accelerator.Extensions.Database.Services
 {
@@ -41,13 +42,14 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
             }
         }
 
-        public DatabaseColumns GetColumn(string name, string type, string attribute)
+        public DatabaseColumns GetColumn(string name, string type, string attribute, bool isIdentity = false )
         {
             return new DatabaseColumns()
             {
                 Name = name,
                 Type = type,
-                Attribute = attribute
+                Attribute = attribute,
+                IsIdentity = isIdentity
             };
         }
 

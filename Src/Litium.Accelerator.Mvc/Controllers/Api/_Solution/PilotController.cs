@@ -20,13 +20,17 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
         private readonly TimeService _timeService;
         private readonly TimeTypeService _timeTypeService;
         private readonly TimeStatusService _timeStatusService;
+        private readonly ItemTypeService _itemTypeService;
+        private readonly ItemStatusService _itemStatusService;
 
         public PilotController(PilotCustomerService pilotCustomerService,
                                 PilotAddOnService pilotAddOnService,
                                 WorkItemService pilotItemService,
                                 TimeService timeService,
                                 TimeTypeService timeTypeService,
-                                TimeStatusService timeStatusService)
+                                TimeStatusService timeStatusService,
+                                ItemTypeService itemTypeService,
+                                ItemStatusService itemStatusService)
         {
             _pilotCustomerService = pilotCustomerService;
             _pilotAddOnService = pilotAddOnService;
@@ -34,6 +38,8 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
             _timeService = timeService;
             _timeTypeService = timeTypeService;
             _timeStatusService = timeStatusService;
+            _itemTypeService = itemTypeService;
+            _itemStatusService = itemStatusService;
         }
 
         /// <summary>
@@ -47,7 +53,24 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
 
             return Ok(customers);
         }
+        [HttpGet]
+        [Route("getitemtype")]
+        public async Task<IActionResult> GetItemType()
+        {
 
+            var itemtypes = _itemTypeService.GetItemTypes();
+            return Ok(JsonConvert.SerializeObject(itemtypes));
+
+        }
+        [HttpGet]
+        [Route("getitemstatuses")]
+        public async Task<IActionResult> GetItemStatuses()
+        {
+
+            var itemStatuses = _itemStatusService.GetItemStatuses();
+            return Ok(JsonConvert.SerializeObject(itemStatuses));
+
+        }
         [HttpGet]
         [Route("getworkitems")]
         public IActionResult GetWorkItems()
@@ -56,9 +79,10 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
 
             return Ok(JsonConvert.SerializeObject(items));
         }
+
         [HttpPost]
         [Route("addworkitem")]
-        public async Task<IActionResult> HandleFormData(string type)
+        public async Task<IActionResult> AddWorkItem(string type)
         {
 
             HttpContext.Request.EnableBuffering();
@@ -133,6 +157,33 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
             var allTime = _timeService.GetAllTime();
             return Ok(JsonConvert.SerializeObject(allTime));
 
+        }
+        [HttpPost]
+        [Route("addtime")]
+        public async Task<IActionResult> AddTime(string type)
+        {
+
+            HttpContext.Request.EnableBuffering();
+            Request.Body.Position = 0;
+            using (StreamReader stream = new StreamReader(HttpContext.Request.Body))
+            {
+                var task = stream
+                    .ReadToEndAsync()
+                    .ContinueWith(t =>
+                    {
+                        var res = t.Result;
+                        // TODO: Handle the post result!
+                        return res;
+                    });
+
+                // await processing of the result
+                task.Wait();
+                var result = task.Result;
+                if (_timeService.AddOrUpdateTime(result))
+                    return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Solution.Extensions.PNPilot.Services
         {
             var item = JsonConvert.DeserializeObject<WorkItem>(jsonItem);
             if (item == null) return false;
-            return _pilotItemDALService.AddOrUpdateItem(item);
+            return _pilotItemDALService.AddOrUpdate(item);
 
         }
 
