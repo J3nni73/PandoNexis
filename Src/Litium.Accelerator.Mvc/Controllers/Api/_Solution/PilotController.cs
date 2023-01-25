@@ -54,7 +54,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
             return Ok(customers);
         }
         [HttpGet]
-        [Route("getitemtype")]
+        [Route("getitemtypes")]
         public async Task<IActionResult> GetItemType()
         {
 
@@ -131,7 +131,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
         }
 
         [HttpGet]
-        [Route("gettimetype")]
+        [Route("gettimetypes")]
         public async Task<IActionResult> GetTimeType()
         {
 
