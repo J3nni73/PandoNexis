@@ -6,12 +6,16 @@ using Solution.Extensions.PNPilot.Objects;
 using Litium.Runtime.DependencyInjection;
 using Solution.Extensions.PNPilot.Constants;
 using PandoNexis.Accelerator.Extensions.Database.Services;
+using Litium.Customers;
+
 namespace Solution.Extensions.PNPilot.Services.DALServices
 {
     [Service(ServiceType = typeof(WorkItemDALService))]
     public class WorkItemDALService : BaseDALService
     {
         private readonly PilotDatabaseInitiator _pilotDatabaseInitiator;
+        private readonly OrganizationService _organizationService;
+
         private readonly string _dbTable = $"{DatabaseConstants.Schema}.{DatabaseConstants.TablePrefix}{PilotConstants.Item}";
         public WorkItemDALService(IConfiguration configuration) : base(configuration)
         {
@@ -57,10 +61,10 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
             }
             return result;
         }
-     
+
         public override bool AddOrUpdate(object workItem)
         {
-            var item = workItem as WorkItem; 
+            var item = workItem as WorkItem;
             item.UpdatedDateTime = DateTime.Now;
 
             var dalObject = new DALAddOrUpdate();
@@ -69,6 +73,7 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.SystemId).Value = item.SystemId;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.OrganizationSystemId).Value = item.OrganizationSystemId;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ParentSystemId).Value = item.ParentSystemId;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.Id).Value = item.Id;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemTitle).Value = item.ItemTitle;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemDescription).Value = item.ItemDescription;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemTypeSystemId).Value = item.ItemTypeSystemId;
@@ -83,6 +88,6 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
 
             return base.AddOrUpdate(dalObject);
         }
-    }
 
+    }
 }

@@ -54,6 +54,15 @@ namespace Solution.Extensions.PNPilot.Definitions
                 new FieldDefinition<CustomerArea>(PilotFieldNameConstants.ErpId, SystemFieldTypeConstants.Text)
                 {
                     MultiCulture = false
+                }, 
+                new FieldDefinition<CustomerArea>(PilotFieldNameConstants.WorkItemPrefix, SystemFieldTypeConstants.Text)
+                {
+                    MultiCulture = false
+                },  
+                new FieldDefinition<CustomerArea>(PilotFieldNameConstants.NextId, SystemFieldTypeConstants.Int)
+                {
+                    MultiCulture = false, 
+                    Editable= false
                 },
                 new FieldDefinition<CustomerArea>(PilotFieldNameConstants.AddOn, SystemFieldTypeConstants.Pointer)
                 {

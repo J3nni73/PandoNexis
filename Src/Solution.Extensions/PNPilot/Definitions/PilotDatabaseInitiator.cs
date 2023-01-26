@@ -86,6 +86,7 @@ namespace Solution.Extensions.PNPilot.Definitions
                 GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull, true),
                 GetColumn(PilotConstants.OrganizationSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.ParentSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.Id, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.ItemTypeSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.ItemStatusSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.ItemTitle, DatabaseTypeConstants.Varchar100, DatabaseTypeConstants.NotNull),

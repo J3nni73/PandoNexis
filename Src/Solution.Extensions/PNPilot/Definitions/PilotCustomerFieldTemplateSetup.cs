@@ -19,6 +19,8 @@ namespace Solution.Extensions.PNPilot.Definitions
                 GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "General", SystemFieldDefinitionConstants.NameInvariantCulture ),
                 GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "General", SystemFieldDefinitionConstants.Description ),
                 GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "General", PilotFieldNameConstants.ErpId ),
+                GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "General", PilotFieldNameConstants.WorkItemPrefix),
+                GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "General", PilotFieldNameConstants.NextId),
 
 
             };

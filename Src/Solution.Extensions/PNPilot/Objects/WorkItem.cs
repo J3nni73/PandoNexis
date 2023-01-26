@@ -14,6 +14,7 @@ namespace Solution.Extensions.PNPilot.Objects
         public Guid ParentSystemId { get; set; }
         public Guid ItemTypeSystemId { get; set; }
         public Guid ItemStatusSystemId { get; set; }
+        public string Id { get; set; }
         public string ItemTitle { get; set; }
         public string ItemDescription { get; set; }
         public DateTime DueDateTime { get; set; }

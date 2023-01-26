@@ -113,11 +113,11 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
                 {
                     if (columnsToCreate.IndexOf(column) != columnsToCreate.Count - 1)
                     {
-                        sql += $"{column.Name} {column.Type} {column.Attribute}, " + Environment.NewLine;
+                        sql += $"{column.Name} {column.Type} {column.Attribute.Replace(DatabaseTypeConstants.NotNull, DatabaseTypeConstants.Null)}, " + Environment.NewLine;
                     }
                     else
                     {
-                        sql += $"{column.Name} {column.Type} {column.Attribute}" + Environment.NewLine;
+                        sql += $"{column.Name} {column.Type} {column.Attribute.Replace(DatabaseTypeConstants.NotNull, DatabaseTypeConstants.Null)}" + Environment.NewLine;
                     }
                 }
                 SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();

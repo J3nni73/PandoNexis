@@ -117,73 +117,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-	<data name="fielddefinition.customerarea.projecttype.description" xml:space="preserve">
-    <value></value>
+  <data name="fielddefinition.customerarea.projecttype.description" xml:space="preserve">
+    <value />
   </data>
-	<data name="fielddefinition.customerarea.projecttype.name" xml:space="preserve">
+  <data name="fielddefinition.customerarea.projecttype.name" xml:space="preserve">
     <value>Projekttype</value>
   </data>
-	<data name="fielddefinition.customerarea.customer.description" xml:space="preserve">
-    <value></value>
+  <data name="fielddefinition.customerarea.customer.description" xml:space="preserve">
+    <value />
   </data>
-	<data name="fielddefinition.customerarea.customer.name" xml:space="preserve">
+  <data name="fielddefinition.customerarea.customer.name" xml:space="preserve">
     <value>Kund</value>
   </data>
-	<data name="fielddefinition.customerarea.erpid.description" xml:space="preserve">
-    <value></value>
+  <data name="fielddefinition.customerarea.erpid.description" xml:space="preserve">
+    <value />
   </data>
-	<data name="fielddefinition.customerarea.erpid.name" xml:space="preserve">
+  <data name="fielddefinition.customerarea.erpid.name" xml:space="preserve">
     <value>Erp id</value>
   </data>
-
-	<data name="fielddefinition.customerarea.addons.description" xml:space="preserve">
-    <value></value>
+  <data name="fielddefinition.customerarea.workitemprefix.description" xml:space="preserve">
+    <value />
   </data>
-	<data name="fielddefinition.customerarea.addons.name" xml:space="preserve">
+  <data name="fielddefinition.customerarea.workitemprefix.name" xml:space="preserve">
+    <value>Pilotidprefix</value>
+  </data>
+  <data name="fielddefinition.customerarea.addons.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.addons.name" xml:space="preserve">
     <value>AddOns</value>
   </data>
-	<data name="fielddefinition.customerarea.erpid.description" xml:space="preserve">
-    <value></value>
-  </data>
-	<data name="fielddefinition.customerarea.addon.name" xml:space="preserve">
+  <data name="fielddefinition.customerarea.addon.name" xml:space="preserve">
     <value>AddOn</value>
   </data>
-	<data name="fielddefinition.customerarea.addonstatus.description" xml:space="preserve">
-    <value></value>
+  <data name="fielddefinition.customerarea.addonstatus.description" xml:space="preserve">
+    <value />
   </data>
-	<data name="fielddefinition.customerarea.addonstatus.name" xml:space="preserve">
+  <data name="fielddefinition.customerarea.addonstatus.name" xml:space="preserve">
     <value>AddOn status</value>
   </data>
-	<data name="fielddefinition.customerarea.ordereddate.description" xml:space="preserve">
-    <value></value>
+  <data name="fielddefinition.customerarea.ordereddate.description" xml:space="preserve">
+    <value />
   </data>
-	<data name="fielddefinition.customerarea.ordereddate.name" xml:space="preserve">
+  <data name="fielddefinition.customerarea.ordereddate.name" xml:space="preserve">
     <value>Beställt datum</value>
   </data>
-	<data name="fielddefinition.customerarea.orderedby.description" xml:space="preserve">
-    <value></value>
+  <data name="fielddefinition.customerarea.orderedby.description" xml:space="preserve">
+    <value />
   </data>
-	<data name="fielddefinition.customerarea.orderedby.name" xml:space="preserve">
+  <data name="fielddefinition.customerarea.orderedby.name" xml:space="preserve">
     <value>Beställd av</value>
   </data>
-
-	<data name="fielddefinition.customerarea.implementeddate.description" xml:space="preserve">
-    <value></value>
+  <data name="fielddefinition.customerarea.implementeddate.description" xml:space="preserve">
+    <value />
   </data>
-	<data name="fielddefinition.customerarea.implementeddate.name" xml:space="preserve">
+  <data name="fielddefinition.customerarea.implementeddate.name" xml:space="preserve">
     <value>Implementerat datum</value>
   </data>
-
-	<data name="fieldtemplate.customerarea.pilotcustomer.description" xml:space="preserve">
-    <value></value>
+  <data name="fieldtemplate.customerarea.pilotcustomer.description" xml:space="preserve">
+    <value />
   </data>
-	<data name="fieldtemplate.customerarea.pilotcustomer.name" xml:space="preserve">
+  <data name="fieldtemplate.customerarea.pilotcustomer.name" xml:space="preserve">
     <value>Kund</value>
   </data>
-	<data name="fieldtemplate.customerarea.pilotproject.description" xml:space="preserve">
-    <value></value>
+  <data name="fieldtemplate.customerarea.pilotproject.description" xml:space="preserve">
+    <value />
   </data>
-	<data name="fieldtemplate.customerarea.pilotproject.name" xml:space="preserve">
+  <data name="fieldtemplate.customerarea.pilotproject.name" xml:space="preserve">
     <value>Projekt</value>
+  </data>
+  <data name="fieldtemplate.customerarea.nextid.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fieldtemplate.customerarea.nextid.name" xml:space="preserve">
+    <value>Nästa pilot id</value>
   </data>
 </root>

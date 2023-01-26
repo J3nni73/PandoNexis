@@ -56,6 +56,7 @@ namespace Solution.Extensions.PNPilot.Services
                         {
                             SystemId = item.SystemId,
                             Name = item.Fields.GetValue<string>(SystemFieldDefinitionConstants.NameInvariantCulture),
+                            WorkItemPrefix= item.Fields.GetValue<string>(PilotFieldNameConstants.WorkItemPrefix),
                             Projects = new List<PilotProject>()
                         });
                     }

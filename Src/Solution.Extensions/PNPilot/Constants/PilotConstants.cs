@@ -12,6 +12,7 @@ namespace Solution.Extensions.PNPilot.Constants
         public const string Item = "Item";
         public const string ItemFieldData = "ItemFieldData";
 
+        public const string Id = "Id";
         public const string SystemId = "SystemId";
         public const string OrganizationSystemId = "OrganizationSystemId";
         public const string ItemType = "ItemType";
@@ -66,6 +67,8 @@ namespace Solution.Extensions.PNPilot.Constants
         public const string OrderedDate = "OrderedDate";
         public const string OrderedBy = "OrderedBy";
         public const string ImplementedDate = "ImplementedDate";
+        public const string WorkItemPrefix = "WorkItemPrefix";
+        public const string NextId = "NextId";
 
     }
     public static class ProjectTypeConstants
