@@ -102,7 +102,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
                 task.Wait();
                 var result = task.Result;
                 if (_pilotItemService.AddOrUpdateItem(result))
-                    return Ok();
+                    return Ok(_pilotItemService.GetItems());
             }
 
             return BadRequest();

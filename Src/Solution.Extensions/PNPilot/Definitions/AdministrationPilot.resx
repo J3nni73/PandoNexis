@@ -171,7 +171,7 @@
   <data name="fielddefinition.customerarea.implementeddate.name" xml:space="preserve">
     <value>ImplementedDate</value>
   </data>
-  <data name="fieldtemplate.customerarea.pilotcustomer.description" xml:space="preserve">
+  <data name="fielddefinition.customerarea.pilotcustomer.description" xml:space="preserve">
     <value />
   </data>
   <data name="fieldtemplate.customerarea.pilotcustomer.name" xml:space="preserve">
@@ -183,10 +183,10 @@
   <data name="fieldtemplate.customerarea.pilotproject.name" xml:space="preserve">
     <value>Project</value>
   </data>
-  <data name="fieldtemplate.customerarea.nextid.description" xml:space="preserve">
+  <data name="fielddefinition.customerarea.nextid.description" xml:space="preserve">
     <value />
   </data>
-  <data name="fieldtemplate.customerarea.nextid.name" xml:space="preserve">
+  <data name="fielddefinition.customerarea.nextid.name" xml:space="preserve">
     <value>Next Pilotid</value>
   </data>
 </root>
