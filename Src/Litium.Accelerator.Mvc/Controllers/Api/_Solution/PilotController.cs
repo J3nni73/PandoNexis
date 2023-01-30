@@ -180,7 +180,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api.Solution
                 task.Wait();
                 var result = task.Result;
                 if (_timeService.AddOrUpdateTime(result))
-                    return Ok();
+                    return Ok(_timeService.GetAllTime());
             }
 
             return BadRequest();

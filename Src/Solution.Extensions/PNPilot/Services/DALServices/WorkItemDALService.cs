@@ -43,6 +43,7 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
                             newItem.SystemId = GetGuidValue(reader, PilotConstants.SystemId);
                             newItem.OrganizationSystemId = GetGuidValue(reader, PilotConstants.OrganizationSystemId);
                             newItem.ParentSystemId = GetGuidValue(reader, PilotConstants.ParentSystemId);
+                            newItem.Id = GetStringValue(reader, PilotConstants.Id);
                             newItem.ItemTitle = GetStringValue(reader, PilotConstants.ItemTitle);
                             newItem.ItemDescription = GetStringValue(reader, PilotConstants.ItemDescription);
                             newItem.ItemTypeSystemId = GetGuidValue(reader, PilotConstants.ItemTypeSystemId);

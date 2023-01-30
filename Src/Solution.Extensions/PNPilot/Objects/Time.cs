@@ -16,7 +16,7 @@ namespace Solution.Extensions.PNPilot.Objects
         public DateTime TimeFrom { get; set; }
         public DateTime TimeTo { get; set; }
         public int Amount { get; set; }
-        public int Risk { get; set; }
+        public decimal Risk { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public Guid CreatedBy { get; set; }
         public DateTime UpdatedDateTime { get; set; }

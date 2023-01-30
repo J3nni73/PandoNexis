@@ -40,6 +40,17 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
                     switch (column.Type)
                     {
                         case DatabaseTypeConstants.Decimal:
+                            var value = column?.Value?.ToString()?.Replace(",", ".")??"0";
+                            
+                            if (firstInstance)
+                            {
+                                sql += $"{column.Name}={value}" + Environment.NewLine;
+                            }
+                            else
+                            {
+                                sql += $",{column.Name}={value}" + Environment.NewLine;
+                            }
+                            break;
                         case DatabaseTypeConstants.Int:
                         case DatabaseTypeConstants.Bit:
                         case DatabaseTypeConstants.BigInt:
@@ -53,15 +64,28 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
                             }
                             break;
                         case DatabaseTypeConstants.DateTime:
-                            var value = _dbDateTimeMinValue;
-                            if (column.Value != null)
+                            if (column.Value != null || Convert.ToDateTime(column.Value) == DateTime.MinValue)
                             {
-                                value = Convert.ToDateTime(value);
-                                if (value == DateTime.MinValue)
-                                {
-                                    value = _dbDateTimeMinValue;
-                                }
+                                column.Value = _dbDateTimeMinValue;
                             }
+                            else
+                            {
+                                column.Value = _dbDateTimeMinValue;
+                            }
+                            if (firstInstance)
+                            {
+                                sql += $"{column.Name}='{column.Value}'" + Environment.NewLine;
+                                firstInstance = false;
+                            }
+                            else
+                            {
+                                sql += $",{column.Name}='{column.Value}'" + Environment.NewLine;
+                            }
+                            break;
+                        case DatabaseTypeConstants.UniqueIdentifier:
+                            if (column.Value == null)
+                                column.Value = Guid.Empty;
+
                             if (firstInstance)
                             {
                                 sql += $"{column.Name}='{column.Value}'" + Environment.NewLine;
@@ -133,6 +157,18 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
                     switch (column.Type)
                     {
                         case DatabaseTypeConstants.Decimal:
+                            var value = column?.Value?.ToString()?.Replace(",", ".") ?? "0";
+                            if (firstInstance)
+                            {
+                                sql += $"{value}" + Environment.NewLine;
+                                firstInstance = false;
+                            }
+                            else
+                            {
+
+                                sql += $",{value}" + Environment.NewLine;
+                            }
+                            break;
                         case DatabaseTypeConstants.Int:
                         case DatabaseTypeConstants.Bit:
                         case DatabaseTypeConstants.BigInt:
@@ -148,15 +184,29 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
                             }
                             break;
                         case DatabaseTypeConstants.DateTime:
-                            var value = _dbDateTimeMinValue;
-                            if (column.Value != null)
+                            if (column.Value != null || Convert.ToDateTime(column.Value) == DateTime.MinValue)
                             {
-                                value = Convert.ToDateTime(value);
-                                if (value == DateTime.MinValue)
-                                {
-                                    value = _dbDateTimeMinValue;
-                                }
+                                column.Value = _dbDateTimeMinValue;
                             }
+                            else
+                            {
+                                column.Value = _dbDateTimeMinValue;
+                            }
+                            if (firstInstance)
+                            {
+                                sql += $"'{column.Value}'" + Environment.NewLine;
+                                firstInstance = false;
+                            }
+                            else
+                            {
+
+                                sql += $",'{column.Value}'" + Environment.NewLine;
+                            }
+                            break;
+                        case DatabaseTypeConstants.UniqueIdentifier:
+                            if (column.Value == null)
+                                column.Value = Guid.Empty;
+
                             if (firstInstance)
                             {
                                 sql += $"'{column.Value}'" + Environment.NewLine;

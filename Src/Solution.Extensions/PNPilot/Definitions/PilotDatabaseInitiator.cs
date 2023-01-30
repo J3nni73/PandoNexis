@@ -109,7 +109,7 @@ namespace Solution.Extensions.PNPilot.Definitions
                 GetColumn(PilotConstants.TimeFrom, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.Null),
                 GetColumn(PilotConstants.TimeTo, DatabaseTypeConstants.DateTime, DatabaseTypeConstants.Null),
                 GetColumn(PilotConstants.TimeAmount, DatabaseTypeConstants.Int, DatabaseTypeConstants.NotNull),
-                GetColumn(PilotConstants.TimeRisk, DatabaseTypeConstants.Int, DatabaseTypeConstants.Null),
+                GetColumn(PilotConstants.TimeRisk, DatabaseTypeConstants.Decimal, DatabaseTypeConstants.Null),
             };
             result.AddRange(GetEditedColumns());
             return result;

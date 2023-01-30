@@ -47,7 +47,7 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
                             newTime.TimeFrom = GetDateTimeValue(reader, PilotConstants.TimeFrom);
                             newTime.TimeTo = GetDateTimeValue(reader, PilotConstants.TimeTo);
                             newTime.Amount = GetIntValue(reader, PilotConstants.TimeAmount);
-                            newTime.Risk = GetIntValue(reader, PilotConstants.TimeRisk);
+                            newTime.Risk = GetDecimalValue(reader, PilotConstants.TimeRisk);
                             newTime.CreatedDateTime = GetDateTimeValue(reader, DatabaseConstants.CreatedDateTime);
                             newTime.CreatedBy = GetGuidValue(reader, DatabaseConstants.CreatedBy);
                             newTime.UpdatedDateTime = GetDateTimeValue(reader, DatabaseConstants.UpdatedDateTime);
@@ -67,7 +67,7 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
 
             var dalObject = new DALAddOrUpdate();
             dalObject.Table = $"{_dbTable}";
-            dalObject.Columns = _pilotDatabaseInitiator.GetItemColumns();
+            dalObject.Columns = _pilotDatabaseInitiator.GetTimeColumns();
 
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.SystemId).Value = time.SystemId;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemSystemId).Value = time.ItemSystemId;
