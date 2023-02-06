@@ -35,7 +35,7 @@ namespace Solution.Extensions.PNPilot.Definitions
         {
             var result = new List<DatabaseColumns>
             {
-                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull, true),
                 GetColumn(PilotConstants.Name, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.Description, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
 
@@ -46,7 +46,7 @@ namespace Solution.Extensions.PNPilot.Definitions
         {
             var result = new List<DatabaseColumns>
             {
-                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull, true),
                 GetColumn(PilotConstants.TimeTypeSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.Name, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.Description, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
@@ -59,7 +59,7 @@ namespace Solution.Extensions.PNPilot.Definitions
         {
             var result = new List<DatabaseColumns>
             {
-                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull, true),
                 GetColumn(PilotConstants.Name, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.Description, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
 
@@ -70,7 +70,7 @@ namespace Solution.Extensions.PNPilot.Definitions
         {
             var result = new List<DatabaseColumns>
             {
-                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull, true),
                 GetColumn(PilotConstants.ItemTypeSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.Name, DatabaseTypeConstants.Varchar50, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.Description, DatabaseTypeConstants.VarcharMax, DatabaseTypeConstants.Null),
@@ -100,7 +100,7 @@ namespace Solution.Extensions.PNPilot.Definitions
         {
             var result = new List<DatabaseColumns>
             {
-                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
+                GetColumn(PilotConstants.SystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull, true),
                 GetColumn(PilotConstants.ItemSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.OrganizationSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
                 GetColumn(PilotConstants.TimeTypeSystemId, DatabaseTypeConstants.UniqueIdentifier, DatabaseTypeConstants.NotNull),
