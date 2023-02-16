@@ -21,8 +21,7 @@ namespace Solution.Extensions.PNPilot.Definitions
                 GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "General", PilotFieldNameConstants.ErpId ),
                 GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "General", PilotFieldNameConstants.WorkItemPrefix),
                 GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "General", PilotFieldNameConstants.NextId),
-
-
+                GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "Logs", ContactLoggConstants.ContactLogg),
             };
 
             return templateChanges;

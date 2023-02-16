@@ -127,6 +127,95 @@ namespace Solution.Extensions.PNPilot.Definitions
                          }
                      }
                 },
+                new FieldDefinition<CustomerArea>(ContactLoggConstants.ContactDateTime, SystemFieldTypeConstants.DateTime)
+                {
+                    MultiCulture = false
+                },
+                new FieldDefinition<CustomerArea>(ContactLoggConstants.ContactType, SystemFieldTypeConstants.TextOption)
+                {
+                    Option = new TextOption
+                    {
+                        MultiSelect = false,
+                        Items = new List<TextOption.Item>
+                        {
+                            new TextOption.Item
+                            {
+                                Value = ContactTypeConstants.Email,
+                                Name = new Dictionary<string, string> { { "en-US", "Email" }, { "sv-SE", "Email" } }
+                            },
+                            new TextOption.Item
+                            {
+                                Value = ContactTypeConstants.TeamsChat,
+                                Name = new Dictionary<string, string> { { "en-US", "TeamsChat" }, { "sv-SE", "TeamsChat" } }
+                            },
+                            new TextOption.Item
+                            {
+                                Value = ContactTypeConstants.Phone,
+                                Name = new Dictionary<string, string> { { "en-US", "Phone" }, { "sv-SE", "Phone" } }
+                            },
+                            new TextOption.Item
+                            {
+                                Value = ContactTypeConstants.Meeting,
+                                Name = new Dictionary<string, string> { { "en-US", "Meeting" }, { "sv-SE", "Meeting" } }
+                            }
+                        }
+                    }
+                },
+                new FieldDefinition<CustomerArea>(ContactLoggConstants.Title, SystemFieldTypeConstants.Text)
+                {
+                    MultiCulture = false
+                }, 
+                    new FieldDefinition<CustomerArea>(ContactLoggConstants.InvolvedPersons, SystemFieldTypeConstants.MultirowText)
+                {
+                    MultiCulture = false
+                },
+                new FieldDefinition<CustomerArea>(ContactLoggConstants.Description, SystemFieldTypeConstants.Editor)
+                {
+                    MultiCulture = false
+                },
+                new FieldDefinition<CustomerArea>(ContactLoggConstants.ContactStatus, SystemFieldTypeConstants.TextOption)
+                {
+                    Option = new TextOption
+                    {
+                        MultiSelect = false,
+                        Items = new List<TextOption.Item>
+                        {
+                            new TextOption.Item
+                            {
+                                Value = ContactStatusConstants.Initiated,
+                                Name = new Dictionary<string, string> { { "en-US", "Initiated" }, { "sv-SE", "Initierad" } }
+                            },
+                            new TextOption.Item
+                            {
+                                Value = ContactStatusConstants.OnGoing,
+                                Name = new Dictionary<string, string> { { "en-US", "OnGoing" }, { "sv-SE", "Pågående" } }
+                            },
+                            new TextOption.Item
+                            {
+                                Value = ContactStatusConstants.Completed,
+                                Name = new Dictionary<string, string> { { "en-US", "Completed" }, { "sv-SE", "Avslutad" } }
+                            },
+                        }
+                    }
+                },
+                 new FieldDefinition<CustomerArea>(ContactLoggConstants.ContactLogg, SystemFieldTypeConstants.MultiField)
+                {
+                    MultiCulture = false,
+                     Option = new MultiFieldOption
+                     {
+                         IsArray = true,
+                         Fields  = new List<string>()
+                         {
+                             ContactLoggConstants.ContactDateTime,
+                             ContactLoggConstants.ContactType,
+                             ContactLoggConstants.ContactStatus,
+                             ContactLoggConstants.InvolvedPersons,
+                             ContactLoggConstants.Title,
+                             ContactLoggConstants.Description,
+
+                         }
+                     }
+                },
             };
                 return fields;
             }

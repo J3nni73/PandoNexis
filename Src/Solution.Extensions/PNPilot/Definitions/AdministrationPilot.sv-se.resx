@@ -192,4 +192,46 @@
   <data name="fieldtemplate.customerarea.nextid.name" xml:space="preserve">
     <value>Nästa pilot id</value>
   </data>
+  <data name="fielddefinition.customerarea.contactdatetime.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.contactdatetime.name" xml:space="preserve">
+    <value>datum och tid för kontakt</value>
+  </data>
+  <data name="fielddefinition.customerarea.contactlogg.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.contactlogg.name" xml:space="preserve">
+    <value>Kontaktlogg</value>
+  </data>
+  <data name="fielddefinition.customerarea.contactstatus.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.contactstatus.name" xml:space="preserve">
+    <value>Kontaktstatus</value>
+  </data>
+  <data name="fielddefinition.customerarea.contacttype.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.contacttype.name" xml:space="preserve">
+    <value>Kontakttyp</value>
+  </data>
+  <data name="fielddefinition.customerarea.description.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.description.name" xml:space="preserve">
+    <value>Beskrivning</value>
+  </data>
+  <data name="fielddefinition.customerarea.involvedpersons.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.involvedpersons.name" xml:space="preserve">
+    <value>Involverade personer</value>
+  </data>
+  <data name="fielddefinition.customerarea.title.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.title.name" xml:space="preserve">
+    <value>Rubrik</value>
+  </data>
 </root>

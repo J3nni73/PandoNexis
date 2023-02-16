@@ -189,4 +189,46 @@
   <data name="fielddefinition.customerarea.nextid.name" xml:space="preserve">
     <value>Next Pilotid</value>
   </data>
+  <data name="fielddefinition.customerarea.contactdatetime.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.contactdatetime.name" xml:space="preserve">
+    <value>Date and time of contact</value>
+  </data>
+  <data name="fielddefinition.customerarea.contactlogg.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.contactlogg.name" xml:space="preserve">
+    <value>Contact logg</value>
+  </data>
+  <data name="fielddefinition.customerarea.contactstatus.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.contactstatus.name" xml:space="preserve">
+    <value>Status of contact</value>
+  </data>
+  <data name="fielddefinition.customerarea.contacttype.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.contacttype.name" xml:space="preserve">
+    <value>Type of contact</value>
+  </data>
+  <data name="fielddefinition.customerarea.description.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.description.name" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="fielddefinition.customerarea.involvedpersons.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.involvedpersons.name" xml:space="preserve">
+    <value>Involved persons</value>
+  </data>
+  <data name="fielddefinition.customerarea.title.description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fielddefinition.customerarea.title.name" xml:space="preserve">
+    <value>Title</value>
+  </data>
 </root>

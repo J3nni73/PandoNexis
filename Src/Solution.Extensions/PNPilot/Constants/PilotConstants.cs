@@ -86,5 +86,28 @@ namespace Solution.Extensions.PNPilot.Constants
         public const string Disconnected = "Disconnected";
 
     }
+    public static class ContactLoggConstants
+    {
+        public const string ContactLogg = "ContactLogg";
+        public const string ContactDateTime = "ContactDateTime";
+        public const string ContactType = "ContactType";
+        public const string Title = "Title";
+        public const string Description = "Description";
+        public const string ContactStatus = "ContactStatus";
+        public const string InvolvedPersons = "InvolvedPersons";
+    }
+    public static class ContactTypeConstants
+    {
+        public const string Email = "Email";
+        public const string Phone = "Phone";
+        public const string TeamsChat = "TeamsChat";
+        public const string Meeting = "Meeting";
+    }
+    public static class ContactStatusConstants
+    {
+        public const string Initiated = "Initiated";
+        public const string OnGoing = "OnGoing";
+        public const string Completed = "Completed";
 
+    }
 }
