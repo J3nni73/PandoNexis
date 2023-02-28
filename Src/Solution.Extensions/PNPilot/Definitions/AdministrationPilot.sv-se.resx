@@ -196,7 +196,7 @@
     <value />
   </data>
   <data name="fielddefinition.customerarea.contactdatetime.name" xml:space="preserve">
-    <value>datum och tid för kontakt</value>
+    <value>Datum och tid för kontakt</value>
   </data>
   <data name="fielddefinition.customerarea.contactlogg.description" xml:space="preserve">
     <value />

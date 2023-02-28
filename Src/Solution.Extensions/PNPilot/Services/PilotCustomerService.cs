@@ -65,15 +65,17 @@ namespace Solution.Extensions.PNPilot.Services
                 {
                     if (item.FieldTemplateSystemId == ProjectFieldTemplate.SystemId)
                     {
-                        customers.FirstOrDefault(i => i.SystemId == item.Fields.GetValue<Guid>(PilotFieldNameConstants.Customer))
-                                        ?.Projects.
-                                        Add(new PilotProject()
+                        var customer = customers.FirstOrDefault(i => i.SystemId == item.Fields.GetValue<Guid>(PilotFieldNameConstants.Customer));
+                        if (customer == null)
+                            continue;
+                       var proj = new PilotProject()
                                         {
                                             SystemId = item.SystemId,
                                             Name = item.Fields.GetValue<string>(SystemFieldDefinitionConstants.NameInvariantCulture),
                                             ProjectType = item.Fields.GetValue<string>(PilotFieldNameConstants.ProjectType),
                                             AddOns = GetAddOnList(item.Fields.GetValue<IList<MultiFieldItem>>(PilotFieldNameConstants.AddOns))
-                                        });
+                                        };
+                        customer.Projects.Add(proj);
                     }
                 }
 

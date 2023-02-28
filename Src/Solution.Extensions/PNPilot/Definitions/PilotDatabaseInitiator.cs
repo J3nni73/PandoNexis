@@ -3,6 +3,7 @@ using PandoNexis.Accelerator.Extensions.Database.Constants;
 using PandoNexis.Accelerator.Extensions.Database.Objects;
 using PandoNexis.Accelerator.Extensions.Database.Services;
 using Solution.Extensions.PNPilot.Constants;
+using Solution.Extensions.PNPilot.Services;
 using Solution.Extensions.PNPilot.Services.DALServices;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,14 @@ namespace Solution.Extensions.PNPilot.Definitions
     public class PilotDatabaseInitiator : DatabaseInitiator
     {
         public PilotDatabaseInitiator(IConfiguration configuration) : base(configuration)
-        {
+        {    
         }
 
         public override void GetCheckDatabaseObjects()
         {
+
+          
+
             SyncronizeDatabaseObjects(PilotConstants.Item, GetItemColumns());
             SyncronizeDatabaseObjects(PilotConstants.ItemType, GetItemTypeColumns());
             SyncronizeDatabaseObjects(PilotConstants.ItemStatus, GetItemStatusColumns());
