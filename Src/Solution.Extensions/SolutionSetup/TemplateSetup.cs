@@ -174,6 +174,8 @@ namespace Solution.Extensions.Definitions
                 }
                 newFileFieldTemplate.FieldGroups.Add(newGroup);
             }
+            newFileFieldTemplate.FileExtensions = fileFieldTemplate.FileExtensions;
+            newFileFieldTemplate.TemplateType = fileFieldTemplate.TemplateType;
 
             foreach (var change in changes)
             {
