@@ -22,38 +22,18 @@ namespace PandoNexis.AddOns.Extensions.PNPortalPage
                 GetPageField(PortalPageFieldTemplateConstants.PortalPage, "Image", PageFieldNameConstants.Image),
                 GetPageField(PortalPageFieldTemplateConstants.PortalPage, "Image", PageFieldNameConstants.AlternativeImageDescription),
                 GetPageField(PortalPageFieldTemplateConstants.PortalPage, "FileList", PageFieldNameConstants.Files),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageParentFieldGroup,PortalPageFieldNameConstants.PortalPageUseFilter),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageParentFieldGroup,PortalPageFieldNameConstants.PortalFilterField1Name),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageParentFieldGroup,PortalPageFieldNameConstants.PortalFilterField2Name),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageParentFieldGroup,PortalPageFieldNameConstants.PortalFilterField3Name),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageParentFieldGroup,PortalPageFieldNameConstants.PortalPageParentPageButtonText),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageParentFieldGroup,PortalPageFieldNameConstants.PortalPageLink),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageParentFieldGroup,PortalPageFieldNameConstants.PortalPageLinkText),
+                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageAppFieldGroup,PortalPageFieldNameConstants.PortalPageUseFilter),
+                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageAppFieldGroup,PortalPageFieldNameConstants.PortalPageParentPageButtonText),
+                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageAppFieldGroup,PortalPageFieldNameConstants.PortalPageLink),
+                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageAppFieldGroup,PortalPageFieldNameConstants.PortalPageLinkText),
 
 
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageTitle),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageDescription),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageImage),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageChildPageButtonText),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalFilterField1Value),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalFilterField2Value),
-                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalFilterField3Value),
+                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageAppFieldGroup,PortalPageFieldNameConstants.PortalPageTitle),
+                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageAppFieldGroup,PortalPageFieldNameConstants.PortalPageDescription),
+                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageAppFieldGroup,PortalPageFieldNameConstants.PortalPageImage),
+                GetPageField(PortalPageFieldTemplateConstants.PortalPage,PortalPageFieldTemplateConstants.PortalPageAppFieldGroup,PortalPageFieldNameConstants.PortalPageChildPageButtonText),
 
-                GetPageField(PNFieldTemplateConstants.ArticleWithoutLeftMenu,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageTitle),
-                GetPageField(PNFieldTemplateConstants.ArticleWithoutLeftMenu,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageDescription),
-                GetPageField(PNFieldTemplateConstants.ArticleWithoutLeftMenu,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageImage),
-                GetPageField(PNFieldTemplateConstants.ArticleWithoutLeftMenu,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageChildPageButtonText),
-                GetPageField(PNFieldTemplateConstants.ArticleWithoutLeftMenu,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalFilterField1Value),
-                GetPageField(PNFieldTemplateConstants.ArticleWithoutLeftMenu,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalFilterField2Value),
-                GetPageField(PNFieldTemplateConstants.ArticleWithoutLeftMenu,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalFilterField3Value),
 
-                GetPageField(PageTemplateNameConstants.Article,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageTitle),
-                GetPageField(PageTemplateNameConstants.Article,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageDescription),
-                GetPageField(PageTemplateNameConstants.Article,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageImage),
-                GetPageField(PageTemplateNameConstants.Article,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalPageChildPageButtonText),
-                GetPageField(PageTemplateNameConstants.Article,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalFilterField1Value),
-                GetPageField(PageTemplateNameConstants.Article,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalFilterField2Value),
-                GetPageField(PageTemplateNameConstants.Article,PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,PortalPageFieldNameConstants.PortalFilterField3Value),
 
 
 
@@ -86,12 +66,12 @@ namespace PandoNexis.AddOns.Extensions.PNPortalPage
                         },
                         new FieldTemplateFieldGroup()
                         {
-                            Id = PortalPageFieldTemplateConstants.PortalPageParentFieldGroup,
+                            Id = PortalPageFieldTemplateConstants.PortalPageAppFieldGroup,
                             Collapsed = false,
                         },
                          new FieldTemplateFieldGroup()
                         {
-                            Id = PortalPageFieldTemplateConstants.PortalPageChildFieldGroup,
+                            Id = PortalPageFieldTemplateConstants.PortalPageAppFieldGroup,
                             Collapsed = false,
                         },
                     },
