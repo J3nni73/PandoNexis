@@ -28,7 +28,9 @@ namespace PandoNexis.AddOns.Extensions.PNPortalPage
     public static class PortalPageFieldTemplateConstants
     {
         public static string PortalPage = "PortalPage";
-        public static string PortalPageParentFieldGroup = "PortalPageParentFieldGroup";
-        public static string PortalPageChildFieldGroup = "PortalPageChildFieldGroup";
+        public static string PortalAppPage = "PortalAppPage";
+        public static string PortalPageFieldGroup = "PortalPageParentFieldGroup";
+        public static string PortalPageAppFieldGroup = "PortalPageChildFieldGroup";
+
     }
 }
