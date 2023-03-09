@@ -8,10 +8,12 @@ using Litium.Runtime.DependencyInjection;
 using PageTemplateNameConstants = PandoNexis.AddOns.Extensions.Constants.PageTemplateNameConstants;
 using Litium.Accelerator.Mvc.Controllers.Addons.MediaCatalog;
 using Litium.Accelerator.Mvc.Controllers.Addons.CollectionPage;
+using Litium.Accelerator.Mvc.Controllers.Addons.PortalPage;
 using Litium.Accelerator.Mvc.Controllers._Addons.GenericGridView;
 using PandoNexis.AddOns.Extensions.Block.Constants;
 using Litium.Accelerator.Mvc.Controllers.Addons.Blocks;
 using PandoNexis.AddOns.Extensions.PNCollectionPage;
+using PandoNexis.AddOns.Extensions.PNPortalPage;
 using PandoNexis.AddOns.Extensions.PNGenericGridView.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericGridView;
 using PandoNexis.AddOns.Extensions.PNGenericGridView.Constants;
@@ -25,6 +27,7 @@ namespace Litium.Accelerator.Mvc.Definitions.Addons
         private readonly IDictionary<(Type areaType, string id), (Type controllerType, string action)> _controllerMapping = new Dictionary<(Type areaType, string id), (Type controllerType, string action)>
         {
             [(typeof(Websites.WebsiteArea), CollectionPageFieldTemplateConstants.CollectionPage)] = (typeof(CollectionPageController), nameof(CollectionPageController.Index)),
+            [(typeof(Websites.WebsiteArea), PortalPageFieldTemplateConstants.PortalPage)] = (typeof(PortalPageController), nameof(PortalPageController.Index)),
             [(typeof(Websites.WebsiteArea), PageTemplateNameConstants.MediaCatalog)] = (typeof(MediaCatalogController), nameof(MediaCatalogController.Index)),
             [(typeof(Websites.WebsiteArea), GenericGridView_PageTemplateNameConstants.GenericGridView)] = (typeof(GenericGridViewController), nameof(GenericGridViewController.Index)),
             [(typeof(Blocks.BlockArea), BlockTemplateNameConstants.InspirationalBlock)] = (typeof(InspirationalBlockController), nameof(InspirationalBlockController.Invoke)),
