@@ -12,6 +12,7 @@ namespace Solution.Extensions.PNPilot.Objects
         public Guid ItemSystemId { get; set; }
         public Guid OrganizationSystemId { get; set; }
         public Guid TimeTypeSystemId { get; set; }
+        public Guid TimeStatusSystemId { get; set; }
         public string TimeComment { get; set; }
         public DateTime TimeFrom { get; set; }
         public DateTime TimeTo { get; set; }

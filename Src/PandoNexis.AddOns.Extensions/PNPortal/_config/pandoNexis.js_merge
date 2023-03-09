@@ -1,0 +1,20 @@
+//PandoNexis: BEGIN COMPONENT  
+    // PortalPage
+    const portalPage = document.getElementById("portalPage");
+    if (portalPage) {
+        const PortalPage = DynamicComponent({
+            loader: () => import('./_Addons/PNPortalPage/Components/PortalPageContainer'),
+        });
+
+        const { portalPageSystemId, link, linkText } = portalPage.dataset;
+        renderReact(
+            <Provider store={window.__pn.store}>
+                <PortalPage {...{ portalPageSystemId, link, linkText }} />
+            </Provider>,
+            portalPage
+        );
+    }
+    // END PortalPage
+//PandoNexis: END COMPONENT  
+
+
