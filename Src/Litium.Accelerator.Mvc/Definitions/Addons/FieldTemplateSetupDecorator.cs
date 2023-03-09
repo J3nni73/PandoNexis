@@ -27,6 +27,7 @@ namespace Litium.Accelerator.Mvc.Definitions.Addons
         private readonly IDictionary<(Type areaType, string id), (Type controllerType, string action)> _controllerMapping = new Dictionary<(Type areaType, string id), (Type controllerType, string action)>
         {
             [(typeof(Websites.WebsiteArea), CollectionPageFieldTemplateConstants.CollectionPage)] = (typeof(CollectionPageController), nameof(CollectionPageController.Index)),
+            [(typeof(Websites.WebsiteArea), PortalPageFieldTemplateConstants.PortalAppPage)] = (typeof(PortalAppPageController), nameof(PortalAppPageController.Index)),
             [(typeof(Websites.WebsiteArea), PortalPageFieldTemplateConstants.PortalPage)] = (typeof(PortalPageController), nameof(PortalPageController.Index)),
             [(typeof(Websites.WebsiteArea), PageTemplateNameConstants.MediaCatalog)] = (typeof(MediaCatalogController), nameof(MediaCatalogController.Index)),
             [(typeof(Websites.WebsiteArea), GenericGridView_PageTemplateNameConstants.GenericGridView)] = (typeof(GenericGridViewController), nameof(GenericGridViewController.Index)),
