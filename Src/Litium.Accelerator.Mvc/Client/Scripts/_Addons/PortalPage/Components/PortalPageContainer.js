@@ -9,6 +9,7 @@ import ConditionalLinkWrapper from '../../../_PandoNexis/Components/ConditionalL
 const PortalPageContainer = ({
     portalPageSystemId,
 }) => {
+    
     const dispatch = useDispatch();
     const [children, setChildren] = useState([]);
     const [filters, setFilters] = useState([]);
@@ -140,6 +141,7 @@ const PortalPageContainer = ({
                                         <div dangerouslySetInnerHTML={{ __html: child.introduction }}></div>
                                     </section>
                                 </ConditionalLinkWrapper>
+                                
                                 {child.button && child.button.href && child.button.linkText &&
                                     <a className={`button button__primary portal-page__child-cta ${child.button.class}`} href={child.button.href} target={`${child.button.target ? child.button.target : ''}`}>{child.button.linkText}</a>
                                 }

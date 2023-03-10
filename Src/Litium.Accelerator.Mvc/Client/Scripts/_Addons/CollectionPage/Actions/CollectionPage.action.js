@@ -31,7 +31,7 @@ export const fillCollectionPageStructure = (response) => (dispatch, getState) =>
    return dispatch({
       type: COLLECTION_PAGE_LOAD,
     payload: {
-        fileStructure: response,
+        pageStructure: response,
     },
   });
 };

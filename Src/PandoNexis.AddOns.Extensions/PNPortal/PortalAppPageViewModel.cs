@@ -30,7 +30,7 @@ namespace PandoNexis.AddOns.Extensions.PNPortalPage
         [Litium.Owin.UsedImplicitly]
         void IAutoMapperConfiguration.Configure(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<PageModel, PortalPageViewModel>()
+            cfg.CreateMap<PageModel, PortalAppPageViewModel>()
                .ForMember(x => x.Title, m => m.MapFromField(PageFieldNameConstants.Title))
                .ForMember(x => x.Introduction, m => m.MapFromField(PageFieldNameConstants.Introduction))
                .ForMember(x => x.Text, m => m.MapFromField(PageFieldNameConstants.Text))
@@ -41,9 +41,9 @@ namespace PandoNexis.AddOns.Extensions.PNPortalPage
         }
 
         [Litium.Owin.UsedImplicitly]
-        protected class ImageModelResolver : IValueResolver<PageModel, PortalPageViewModel, ImageModel>
+        protected class ImageModelResolver : IValueResolver<PageModel, PortalAppPageViewModel, ImageModel>
         {
-            public ImageModel Resolve(PageModel source, PortalPageViewModel PortalPageViewModel, ImageModel destMember, ResolutionContext context)
+            public ImageModel Resolve(PageModel source, PortalAppPageViewModel PortalPageViewModel, ImageModel destMember, ResolutionContext context)
             {
                 var imageModel = source.GetValue<Guid>(PageFieldNameConstants.Image).MapTo<ImageModel>();
                 if (imageModel is not null)

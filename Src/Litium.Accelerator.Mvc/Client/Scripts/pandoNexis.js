@@ -209,8 +209,9 @@ export const bootstrapPNComponents = () => {
         const PortalPage = DynamicComponent({
             loader: () => import('./_Addons/PortalPage/Components/PortalPageContainer'),
         });
-
+        
         const { portalPageSystemId, link, linkText } = portalPage.dataset;
+      
         renderReact(
             <Provider store={window.__pn.store}>
                 <PortalPage {...{ portalPageSystemId, link, linkText }} />

@@ -8,6 +8,7 @@ const rootRoute = '/api/portalpage/';
 
 export const getPortalPageData = (pageSystemId) => (dispatch, getState) => {
     let pagenationActive = false;
+   
     dispatch(toggleGenericLoader(true));
     return get(rootRoute + `getGetPortalPageData?pageSystemId=` + pageSystemId)
         .then((response) => response.json())
@@ -31,7 +32,7 @@ export const fillPortalPageStructure = (response) => (dispatch, getState) => {
    return dispatch({
        type: PORTAL_PAGE_LOAD,
     payload: {
-        fileStructure: response,
+        pageStructure: response,
     },
   });
 };

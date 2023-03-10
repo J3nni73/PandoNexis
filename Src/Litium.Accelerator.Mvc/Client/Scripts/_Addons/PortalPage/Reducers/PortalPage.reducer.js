@@ -1,7 +1,7 @@
 import { PORTAL_PAGE_LOAD, PORTAL_PAGE_ERROR } from '../constants';
 
 const DEFAULT_STATE = {
-    fileStructure: {},
+    pageStructure: {},
     currentStructureIndex: [],
     showInfo: false
 };
