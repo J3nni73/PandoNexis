@@ -203,6 +203,24 @@ export const bootstrapPNComponents = () => {
     }
     // END CollectionPage
 
+    // PortalPage
+    const portalPage = document.getElementById("portalPage");
+    if (portalPage) {
+        const PortalPage = DynamicComponent({
+            loader: () => import('./_Addons/PortalPage/Components/PortalPageContainer'),
+        });
+        
+        const { portalPageSystemId, link, linkText } = portalPage.dataset;
+      
+        renderReact(
+            <Provider store={window.__pn.store}>
+                <PortalPage {...{ portalPageSystemId, link, linkText }} />
+            </Provider>,
+            portalPage
+        );
+    }
+    // END PortalPage
+
     // GenericGridView
     document.querySelectorAll('[data-field-configuration]').forEach((elem) => {
         ReactDOM.render(

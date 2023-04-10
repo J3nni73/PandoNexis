@@ -4,11 +4,14 @@ import SearchIcon from '../../_Solution/Icons/search.svg?component';
 import CartIcon from '../../_Solution/Icons/shopping_cart.svg?component';
 import AccountIcon from '../../_Solution/Icons/account.svg?component';
 import WebsitesIcon from '../../_Solution/Icons/websites.svg?component';
+import AddIcon from '../../_Solution/Icons/add.svg?component';
+import RemoveIcon from '../../_Solution/Icons/remove.svg?component';
+import CloseIcon from '../../_Solution/Icons/close.svg?component';
 import PoweredByIcon from '../../_Solution/Icons/powered_by.svg?component';
 import LitiumIcon from '../../_Solution/Icons/litium.svg?component';
 
 const PnIcon = ({ iconName, title, cssClass="", width=24, height=24 }) => {
-   
+    
     if (iconName === 'search') {
         return (<SearchIcon width={width} height={height} className={`pn-icon__${iconName} ${cssClass}`} title={title} />);
     }
@@ -20,6 +23,15 @@ const PnIcon = ({ iconName, title, cssClass="", width=24, height=24 }) => {
     }
     else if (iconName === 'websites') {
         return (<WebsitesIcon width={width} height={height} className={`pn-icon__${iconName} ${cssClass}`} title={title} />);
+    }
+    else if (iconName === 'add') {
+        return (<AddIcon width={width} height={height} className={`pn-icon__${iconName} ${cssClass}`} title={title} />);
+    }
+    else if (iconName === 'remove') {
+        return (<RemoveIcon width={width} height={height} className={`pn-icon__${iconName} ${cssClass}`} title={title} />);
+    }
+    else if (iconName === 'close') {
+        return (<CloseIcon width={width} height={height} className={`pn-icon__${iconName} ${cssClass}`} title={title} />);
     }
     else if (iconName === 'powered-by') {
         return (<PoweredByIcon width={width} height={height} className={`pn-icon__${iconName} ${cssClass}`} title={title} />);

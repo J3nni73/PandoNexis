@@ -40,8 +40,8 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
                     switch (column.Type)
                     {
                         case DatabaseTypeConstants.Decimal:
-                            var value = column?.Value?.ToString()?.Replace(",", ".")??"0";
-                            
+                            var value = column?.Value?.ToString()?.Replace(",", ".") ?? "0";
+
                             if (firstInstance)
                             {
                                 sql += $"{column.Name}={value}" + Environment.NewLine;
@@ -64,14 +64,25 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
                             }
                             break;
                         case DatabaseTypeConstants.DateTime:
-                            if (column.Value != null || Convert.ToDateTime(column.Value) == DateTime.MinValue)
+                            if (column.Name == DatabaseConstants.UpdatedDateTime)
                             {
-                                column.Value = _dbDateTimeMinValue;
+                                column.Value = DateTime.Now;
                             }
                             else
                             {
-                                column.Value = _dbDateTimeMinValue;
+                                if (column.Value != null)
+                                {
+                                    if (Convert.ToDateTime(column.Value) == DateTime.MinValue)
+                                    {
+                                        column.Value = _dbDateTimeMinValue;
+                                    }
+                                }
+                                else
+                                {
+                                    column.Value = _dbDateTimeMinValue;
+                                }
                             }
+
                             if (firstInstance)
                             {
                                 sql += $"{column.Name}='{column.Value}'" + Environment.NewLine;
@@ -184,13 +195,23 @@ namespace PandoNexis.Accelerator.Extensions.Database.Services
                             }
                             break;
                         case DatabaseTypeConstants.DateTime:
-                            if (column.Value != null || Convert.ToDateTime(column.Value) == DateTime.MinValue)
+                            if (column.Name == DatabaseConstants.CreatedDateTime || column.Name == DatabaseConstants.UpdatedDateTime)
                             {
-                                column.Value = _dbDateTimeMinValue;
+                                column.Value = DateTime.Now;
                             }
                             else
                             {
-                                column.Value = _dbDateTimeMinValue;
+                                if (column.Value != null)
+                                {
+                                    if (Convert.ToDateTime(column.Value) == DateTime.MinValue)
+                                    {
+                                        column.Value = _dbDateTimeMinValue;
+                                    }
+                                }
+                                else
+                                {
+                                    column.Value = _dbDateTimeMinValue;
+                                }
                             }
                             if (firstInstance)
                             {

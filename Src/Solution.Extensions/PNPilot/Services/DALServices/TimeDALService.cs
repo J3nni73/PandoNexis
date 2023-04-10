@@ -43,6 +43,7 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
                             newTime.ItemSystemId = GetGuidValue(reader, PilotConstants.ItemSystemId);
                             newTime.OrganizationSystemId = GetGuidValue(reader, PilotConstants.OrganizationSystemId);
                             newTime.TimeTypeSystemId = GetGuidValue(reader, PilotConstants.TimeTypeSystemId);
+                            newTime.TimeStatusSystemId = GetGuidValue(reader, PilotConstants.TimeStatusSystemId);
                             newTime.TimeComment = GetStringValue(reader, PilotConstants.TimeComment);
                             newTime.TimeFrom = GetDateTimeValue(reader, PilotConstants.TimeFrom);
                             newTime.TimeTo = GetDateTimeValue(reader, PilotConstants.TimeTo);
@@ -73,6 +74,7 @@ namespace Solution.Extensions.PNPilot.Services.DALServices
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.ItemSystemId).Value = time.ItemSystemId;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.OrganizationSystemId).Value = time.OrganizationSystemId;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeTypeSystemId).Value = time.TimeTypeSystemId;
+            dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeStatusSystemId).Value = time.TimeStatusSystemId;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeComment).Value = time.TimeComment;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeFrom).Value = time.TimeFrom;
             dalObject.Columns.FirstOrDefault(i => i.Name == PilotConstants.TimeTo).Value = time.TimeTo;

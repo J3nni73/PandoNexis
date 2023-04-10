@@ -1,4 +1,4 @@
-import { COLLECTION_PAGE_LOAD, COLLECTION_PAGE_ERROR } from '../constants';
+import { PORTAL_PAGE_LOAD, PORTAL_PAGE_ERROR } from '../constants';
 
 const DEFAULT_STATE = {
     pageStructure: {},
@@ -6,11 +6,11 @@ const DEFAULT_STATE = {
     showInfo: false
 };
 
-export const collectionPage = (state = DEFAULT_STATE, action) => {
+export const portalPage = (state = DEFAULT_STATE, action) => {
     
     switch (action.type) {
-        case COLLECTION_PAGE_LOAD:
-        case COLLECTION_PAGE_ERROR:
+        case PORTAL_PAGE_LOAD:
+        case PORTAL_PAGE_ERROR:
             return {
                 ...state,
                 ...action.payload,
