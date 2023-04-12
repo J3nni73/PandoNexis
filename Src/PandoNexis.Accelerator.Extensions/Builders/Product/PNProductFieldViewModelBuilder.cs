@@ -12,6 +12,7 @@ using Litium.Runtime.DependencyInjection;
 using Litium.Security;
 using Litium.Web.Models;
 using Litium.Web.Models.Products;
+using Litium.Web.Routing;
 using PandoNexis.Accelerator.Extensions.Services;
 
 namespace PandoNexis.Accelerator.Extensions.Builders.Product
@@ -20,14 +21,15 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Product
     {
         private readonly FieldDefinitionService _fieldDefinitionService;
         private readonly NamedServiceFactory<FieldFormatter> _fieldFormatterServiceFactory;
+        private readonly RouteRequestLookupInfoAccessor _routeRequestLookupInfoAccessor;
         private readonly SecurityContextService _securityContextService;
         private readonly PersonService _personService;
         private readonly FileService _fileService;
         private readonly PNFieldService _PNFieldService;
         private readonly PNSecurityService _PNSecurityService;
 
-        public PNProductFieldViewModelBuilder(FieldDefinitionService fieldDefinitionService, NamedServiceFactory<FieldFormatter> fieldFormatterServiceFactory, PersonService personService, SecurityContextService securityContextService, FileService fileService, PNFieldService pNFieldService, PNSecurityService pNSecurityService)
-             : base(fieldDefinitionService, fieldFormatterServiceFactory)
+        public PNProductFieldViewModelBuilder(FieldDefinitionService fieldDefinitionService, NamedServiceFactory<FieldFormatter> fieldFormatterServiceFactory, PersonService personService, SecurityContextService securityContextService, FileService fileService, PNFieldService pNFieldService, PNSecurityService pNSecurityService, RouteRequestLookupInfoAccessor routeRequestLookupInfoAccessor)
+             : base(fieldDefinitionService, fieldFormatterServiceFactory, routeRequestLookupInfoAccessor)
         {
             _fieldDefinitionService = fieldDefinitionService;
             _fieldFormatterServiceFactory = fieldFormatterServiceFactory;
@@ -36,6 +38,7 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Product
             _fileService = fileService;
             _PNFieldService = pNFieldService;
             _PNSecurityService = pNSecurityService;
+            _routeRequestLookupInfoAccessor = routeRequestLookupInfoAccessor;
         }
 
         public IEnumerable<ProductFieldViewModel> Build([NotNull] ProductModel productModel, [NotNull] string fieldGroup, bool includeBaseProductFields = true, bool includeVariantFields = true, bool includeHiddenFields = false, bool includeEmptyFields = false)

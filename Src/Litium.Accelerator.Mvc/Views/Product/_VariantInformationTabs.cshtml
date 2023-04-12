@@ -14,14 +14,14 @@
 
             @foreach (var group in groups)
             {
-                <input type="radio" class="tab__radio" id="product-@group.HtmlGroupId" name="tab-radio" @(!isTabActivated ? "checked" : string.Empty) />
+                <input type="radio" class="tab__radio" id="product-@group.HtmlGroupId" name="tab-radio" @(!isTabActivated ? "checked" : string.Empty)/>
                 isTabActivated = true;
             }
             <div class="tab-mobile-container">
                 <nav class="tab__header-container">
                     @if (Model.Variants?.Any() ?? false)
                     {
-                    <label class="tab__header" for="product-information"> @Html.WebSiteString("product.description") </label>
+                        <label class="tab__header" for="product-information"> @Html.WebSiteString("product.description") </label>
                     }
 
                     @foreach (var group in groups)
@@ -60,6 +60,6 @@
                         </div>
                     </div>
                 }
-        </section>
+            </section>
     </div>
 </div>

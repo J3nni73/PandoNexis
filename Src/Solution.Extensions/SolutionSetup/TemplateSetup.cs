@@ -108,13 +108,13 @@ namespace Solution.Extensions.Definitions
         private FieldTemplate? GetOrganizationFieldTemplate(string templateId, List<FieldTemplateChanges> changes, List<FieldTemplate> newTemplates)
         {
             var groups = changes.GroupBy(i => i.FieldGroupName);
-            var fileFieldTemplate = newTemplates.FirstOrDefault(i => i.Id == templateId) as OrganizationFieldTemplate;
-            if (fileFieldTemplate == null)
+            var customerFieldTemplate = newTemplates.FirstOrDefault(i => i.Id == templateId) as OrganizationFieldTemplate;
+            if (customerFieldTemplate == null)
                 return null;
 
-            var newFileFieldTemplate = new OrganizationFieldTemplate(templateId);
-            newFileFieldTemplate.FieldGroups = new List<FieldTemplateFieldGroup>();
-            foreach (var group in fileFieldTemplate.FieldGroups)
+            var newcustomerFieldTemplate = new OrganizationFieldTemplate(templateId);
+            newcustomerFieldTemplate.FieldGroups = new List<FieldTemplateFieldGroup>();
+            foreach (var group in customerFieldTemplate.FieldGroups)
             {
                 var newGroup = new FieldTemplateFieldGroup()
                 {
@@ -125,15 +125,15 @@ namespace Solution.Extensions.Definitions
                 {
                     newGroup.Fields.Add(field);
                 }
-                newFileFieldTemplate.FieldGroups.Add(newGroup);
+                newcustomerFieldTemplate.FieldGroups.Add(newGroup);
             }
 
             foreach (var change in changes)
             {
 
-                if (newFileFieldTemplate.FieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) == null)
+                if (newcustomerFieldTemplate.FieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) == null)
                 {
-                    newFileFieldTemplate.FieldGroups.Add(new FieldTemplateFieldGroup()
+                    newcustomerFieldTemplate.FieldGroups.Add(new FieldTemplateFieldGroup()
                     {
                         Id = change.FieldGroupName,
                         Collapsed = false,
@@ -144,13 +144,13 @@ namespace Solution.Extensions.Definitions
                     });
                 }
 
-                if (newFileFieldTemplate.FieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) != null)
+                if (newcustomerFieldTemplate.FieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) != null)
                 {
-                    newFileFieldTemplate.FieldGroups.FirstOrDefault(i => i.Id == change.FieldGroupName)?.Fields.Add(change.Field);
+                    newcustomerFieldTemplate.FieldGroups.FirstOrDefault(i => i.Id == change.FieldGroupName)?.Fields.Add(change.Field);
                 }
             }
 
-            return newFileFieldTemplate;
+            return newcustomerFieldTemplate;
         }
         private FieldTemplate? GetFileFieldTemplate(string templateId, List<FieldTemplateChanges> changes, List<FieldTemplate> newTemplates)
         {
@@ -174,6 +174,7 @@ namespace Solution.Extensions.Definitions
                 }
                 newFileFieldTemplate.FieldGroups.Add(newGroup);
             }
+
             newFileFieldTemplate.FileExtensions = fileFieldTemplate.FileExtensions;
             newFileFieldTemplate.TemplateType = fileFieldTemplate.TemplateType;
 
@@ -224,7 +225,8 @@ namespace Solution.Extensions.Definitions
                 };
                 foreach (var field in group.Fields)
                 {
-                    newGroup.Fields.Add(field);
+                    if (!newGroup.Fields.Contains(field))
+                        newGroup.Fields.Add(field);
                 }
                 newProductFieldTemplate.ProductFieldGroups.Add(newGroup);
             }
@@ -238,7 +240,8 @@ namespace Solution.Extensions.Definitions
                 };
                 foreach (var field in group.Fields)
                 {
-                    newGroup.Fields.Add(field);
+                    if (!newGroup.Fields.Contains(field))
+                        newGroup.Fields.Add(field);
                 }
                 newProductFieldTemplate.VariantFieldGroups.Add(newGroup);
             }
@@ -271,7 +274,8 @@ namespace Solution.Extensions.Definitions
                     case FieldTemplateHelperConstants.VariantFieldGroups:
                         if (newProductFieldTemplate?.VariantFieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) != null)
                         {
-                            newProductFieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == change.FieldGroupName)?.Fields.Add(change.Field);
+                            if (!newProductFieldTemplate?.VariantFieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName)?.Fields?.Contains(change.Field)??false)
+                                newProductFieldTemplate.VariantFieldGroups.FirstOrDefault(i => i.Id == change.FieldGroupName)?.Fields.Add(change.Field);
                         }
                         else
                         {
@@ -395,7 +399,7 @@ namespace Solution.Extensions.Definitions
                     Id = group.Id,
                     Collapsed = group.Collapsed,
                 };
-                foreach(var field in group.Fields)
+                foreach (var field in group.Fields)
                 {
                     newGroup.Fields.Add(field);
                 }

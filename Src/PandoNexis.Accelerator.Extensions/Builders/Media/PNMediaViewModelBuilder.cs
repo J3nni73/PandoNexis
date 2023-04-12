@@ -28,6 +28,10 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Media
 
         private MediaFilesAndFolders CreateStructure(Folder folder)
         {
+            if(folder==null || folder.SystemId == Guid.Empty)
+            {
+                return null;
+            }
             var childFolders = _folderService.GetChildFolders(folder.SystemId);
             List<MediaFilesAndFolders> filesAndFolders = null;
             if (childFolders != null && childFolders.Count() > 0)

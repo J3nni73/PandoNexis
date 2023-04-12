@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 namespace PandoNexis.Accelerator.Extensions.Blocks.TextBlock
 {
 
-    internal class InspirationalBlockTemplateSetup : FieldTemplateHelper
+    internal class TextBlockBlockTemplateSetup : FieldTemplateHelper
     {
         private readonly CategoryService _categoryService;
-        public InspirationalBlockTemplateSetup(CategoryService categoryService)
+        public TextBlockBlockTemplateSetup(CategoryService categoryService)
         {
             _categoryService = categoryService;
         }

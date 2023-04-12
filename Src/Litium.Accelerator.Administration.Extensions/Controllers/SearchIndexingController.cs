@@ -107,6 +107,7 @@ namespace Litium.Accelerator.Administration.Extensions.Controllers
                 case SystemFieldTypeConstants.Object:
                 case SystemFieldTypeConstants.Pointer:
                 case SystemFieldTypeConstants.Boolean:
+                case SystemFieldTypeConstants.Link:
                 case "FilterFields":
                 case "MediaPointerImageArray":
                     return false;

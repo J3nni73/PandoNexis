@@ -6,10 +6,14 @@ using Litium.Accelerator.ViewModels.Product;
 using Litium.FieldFramework;
 using Litium.Globalization;
 using Litium.Products;
+using Litium.Runtime.AutoMapper;
 using Litium.Runtime.DependencyInjection;
 using Litium.Sales;
 using Litium.Web.Models.Products;
 using PandoNexis.Accelerator.Extensions.Extensions;
+using PandoNexis.Accelerator.Extensions.Framework.ViewModels;
+using PandoNexis.Accelerator.Extensions.ModelServices;
+using PandoNexis.Accelerator.Extensions.ViewModel.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +34,7 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Product
         private readonly CartContextAccessor _cartContextAccessor;
         private readonly CurrencyService _currencyService;
         private readonly CountryService _countryService;
+        private readonly IEnumerable<PNProductItemModelService> _pnProductItemModelService;
 
         public PNProductItemViewModelBuilder(RequestModelAccessor requestModelAccessor,
             ProductPriceModelBuilder productPriceModelBuilder,
@@ -38,7 +43,8 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Product
             ProductModelBuilder productModelBuilder,
             CartContextAccessor cartContextAccessor,
             CurrencyService currencyService,
-            CountryService countryService) : base(requestModelAccessor,
+            CountryService countryService,
+            IEnumerable<PNProductItemModelService> pnProductItemModelService) : base(requestModelAccessor,
                                                 productPriceModelBuilder,
                                                 fieldDefinitionService,
                                                 stockService,
@@ -55,6 +61,7 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Product
             _cartContextAccessor = cartContextAccessor;
             _currencyService = currencyService;
             _countryService = countryService;
+            _pnProductItemModelService = pnProductItemModelService;
         }
         public override ProductItemViewModel Build(Variant variant)
         {
@@ -64,18 +71,27 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Product
         public override ProductItemViewModel Build(ProductModel productModel, bool inProductListPage = true, Category category = default)
         {
             var model = base.Build(productModel, inProductListPage, category);
+
+            var viewModel = model.MapTo<PNProductItemViewModel>();
+           
             var variant = productModel.SelectedVariant;
             if (variant != null)
             {
-                model.ExtendedDescription = variant.DescriptionExtended();
+                viewModel.ExtendedDescription = variant.DescriptionExtended();
             }
             else
             {
                 var baseProduct = productModel.BaseProduct;
                 if (baseProduct != null)
-                    model.ExtendedDescription = baseProduct.DescriptionExtended();
+                    viewModel.ExtendedDescription = baseProduct.DescriptionExtended();
             }
-            return model;
+
+            foreach (var item in _pnProductItemModelService)
+            {
+                item.BuildPartialModel(ref viewModel);
+            }
+
+            return viewModel;
         }
 
     }

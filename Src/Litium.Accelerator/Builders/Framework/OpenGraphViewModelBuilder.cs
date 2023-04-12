@@ -25,18 +25,12 @@ namespace Litium.Accelerator.Builders.Framework
         private string _baseUrl;
         private readonly UrlService _urlService;
         private readonly RouteRequestLookupInfoAccessor _routeRequestLookupInfoAccessor;
-        private readonly WebsiteService _websiteService;
-
-
-        public OpenGraphViewModelBuilder(MetaService metaService, 
-            UrlService urlService, 
-            RouteRequestLookupInfoAccessor routeRequestLookupInfoAccessor, 
-            WebsiteService websiteService)
+        
+        public OpenGraphViewModelBuilder(MetaService metaService, UrlService urlService, RouteRequestLookupInfoAccessor routeRequestLookupInfoAccessor)
         {
             _metaService = metaService;
             _urlService = urlService;
             _routeRequestLookupInfoAccessor = routeRequestLookupInfoAccessor;
-            _websiteService = websiteService;
         }
 
         private string PageImageProperty { get; } = PageFieldNameConstants.Image;
@@ -111,7 +105,7 @@ namespace Litium.Accelerator.Builders.Framework
             else
             {
                 model.Url = _urlService.GetUrl(page, options: options => options.AbsoluteUrl = true);
-                
+
                 if (PageImageProperty != null)
                 {
                     var imageUrl = page.Fields.GetValue<Guid?>(PageImageProperty)?.MapTo<ImageModel>().GetUrlToImage(new System.Drawing.Size(-1, -1), new System.Drawing.Size(-1, -1)).Url;
@@ -122,15 +116,7 @@ namespace Litium.Accelerator.Builders.Framework
                     }
                     else
                     {
-                        imageUrl = _websiteService.Get(page.WebsiteSystemId)?.Fields?.GetValue<Guid?>("DefaultOpenGraphImage")?.MapTo<ImageModel>()?.GetUrlToImage(new System.Drawing.Size(-1, -1), new System.Drawing.Size(-1, -1)).Url;
-
-                        if (!string.IsNullOrEmpty(imageUrl))
-                        { 
-                            model.ImageUrl = imageUrl.Contains("//") ? HttpUtility.HtmlEncode(imageUrl) : HttpUtility.HtmlEncode(GetBaseUrl() + imageUrl); 
-                        }
-                        else { 
                         model.ImageVisible = false;
-                        }
                     }
                 }
             }

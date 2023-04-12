@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Litium.Accelerator.Definitions.WebsiteTexts
 {
-    [Autostart]
+  
     public class WebsiteTextSetup : IAsyncAutostart
     {
         private readonly WebsiteTextService _websiteTextService;

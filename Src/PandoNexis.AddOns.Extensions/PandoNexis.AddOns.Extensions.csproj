@@ -20,7 +20,7 @@
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.18.0" />
     <PackageReference Include="Litium.Owin" Version="8.1.6" />
-    <PackageReference Include="Litium.Web.WebApi.Abstractions" Version="8.7.2" />
+    <PackageReference Include="Litium.Web.WebApi.Abstractions" Version="8.8.0" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0-rc.2.22472.3" />
   </ItemGroup>
 

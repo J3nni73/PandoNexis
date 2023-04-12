@@ -77,19 +77,6 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers
             };
 
         }
-        public FieldTemplateChanges GetProductField(string template, string productFieldGroup, string fieldgroup, string field)
-        {
-            return new FieldTemplateChanges()
-            {
-                TemplateType = FieldTemplateHelperConstants.ProductFieldTemplate,
-                DisplayTemplate = "",
-                TemplateName = template,
-                FieldGroupType = productFieldGroup,
-                FieldGroupName = fieldgroup,
-                Field = field
-            };
-
-        }
         public FieldTemplateChanges GetOrganizationField(string template, string fieldgroup, string field)
         {
 
@@ -99,6 +86,19 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers
                 DisplayTemplate = "",
                 TemplateName = template,
                 FieldGroupType = FieldTemplateHelperConstants.FieldTemplateFieldGroup,
+                FieldGroupName = fieldgroup,
+                Field = field
+            };
+
+        }
+        public FieldTemplateChanges GetProductField(string template, string productFieldGroup, string fieldgroup, string field)
+        {
+            return new FieldTemplateChanges()
+            {
+                TemplateType = FieldTemplateHelperConstants.ProductFieldTemplate,
+                DisplayTemplate = "",
+                TemplateName = template,
+                FieldGroupType = productFieldGroup,
                 FieldGroupName = fieldgroup,
                 Field = field
             };

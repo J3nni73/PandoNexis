@@ -5,13 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Litium.Accelerator.Builders.Checkout;
 using Litium.Accelerator.Constants;
+using Litium.Accelerator.Extensions;
 using Litium.Accelerator.Routing;
-using Litium.Accelerator.ValidationRules;
 using Litium.FieldFramework.FieldTypes;
 using Litium.Globalization;
 using Litium.Runtime.AutoMapper;
 using Litium.Sales;
 using Litium.Sales.Payments.PaymentFlowActions;
+using Litium.Validations;
 using Litium.Web;
 using Litium.Web.Models.Websites;
 using Litium.Websites;
@@ -114,6 +115,17 @@ namespace Litium.Accelerator.Mvc.Controllers.Checkout
             }
 
             var model = await _checkoutViewModelBuilder.BuildAsync(cartContext);
+
+            try
+            {
+                await cartContext.ValidateAsync();
+            }
+            catch (ValidationException ex)
+            {
+                await ex.ProcessPostActionsAsync(cartContext);
+                model.ErrorMessages.Add("general", new List<string> { ex.Message });
+            }
+
             return View(model);
         }
 
@@ -126,8 +138,9 @@ namespace Litium.Accelerator.Mvc.Controllers.Checkout
             {
                 await cartContext.ValidateAsync();
             }
-            catch (CartContextValidationException ex)
+            catch (ValidationException ex)
             {
+                await ex.ProcessPostActionsAsync(cartContext);
                 await SetDefaultPaymentMethod(cartContext);
                 var model = await _checkoutViewModelBuilder.BuildAsync(cartContext);
                 model.ErrorMessages.Add("general", new List<string> { ex.Message });
@@ -142,6 +155,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Checkout
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error when placing an order");
+                await ex.ProcessPostActionsAsync(cartContext);
                 await SetDefaultPaymentMethod(cartContext);
                 var model = await _checkoutViewModelBuilder.BuildAsync(cartContext);
                 model.ErrorMessages.Add("general", new List<string> { "checkout.generalerror".AsWebsiteText() });
