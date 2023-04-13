@@ -82,6 +82,8 @@ namespace Litium.Accelerator.Mvc.Controllers
             var _PNFrameworkService = HttpContext.RequestServices.GetRequiredService<PNFrameworkService>();
             ViewData["PageCssClass"] = _PNFrameworkService.GetCurrentPageBodyCssClass();
 
+            ViewData["IsSessionInit"] = string.IsNullOrEmpty(HttpContext.Session.GetString("_IsSessionInit"));
+
             var _routeRequestLookupInfoAccessor = HttpContext.RequestServices.GetRequiredService<RouteRequestLookupInfoAccessor>();
             if (!_routeRequestLookupInfoAccessor.RouteRequestLookupInfo.IsInAdministration)
             {

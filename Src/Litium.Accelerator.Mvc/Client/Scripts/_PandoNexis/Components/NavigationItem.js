@@ -1,12 +1,18 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import { translate } from '../../Services/translation';
 import constants from '../../constants';
+import PnIcon from './PnIcon';
 
 const NavigationItem = ({ links = [], contentLink = null }) => {
     const menuRef = useRef(null);
+    const [mainMenuActive, setMainMenuActive] = useState(false);
     const toggleMenu = (e) => {
         e.preventDefault();
-        menuRef.current.classList.toggle('navbar__menu--show');
+        const classList = menuRef?.current?.classList;
+        if (classList) {
+            classList.toggle('navbar__menu--show');
+        }
+        setMainMenuActive(!mainMenuActive);
     };
     const additionClass =
         contentLink && contentLink.attributes
@@ -20,20 +26,22 @@ const NavigationItem = ({ links = [], contentLink = null }) => {
 
     return (
         <Fragment>
-            {!contentLink ? (
-                <a
-                    className="navbar__link--block navbar__icon--menu navbar__icon"
+            {!contentLink && links.length > 0 ? (
+                <button className={`navbar__link--block navbar__icon--menu navbar__icon nav__hamburger-icon ${mainMenuActive ? 'active' : ''}`}
+
                     onClick={toggleMenu}
                     rel="nofollow"
-                    href="#"
-                    title={translate('general.menu') || 'menu'}
-                ></a>
+                    title={translate('general.menu') || 'menu'}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             ) : (
                 <Fragment>
                     <a
-                        className={`navbar__link ${selectedClass} ${
-                            hasChildrenClass || ''
-                        } ${additionClass || ''}`}
+                        className={`navbar__link ${selectedClass} ${hasChildrenClass || ''
+                            } ${additionClass || ''}`}
                         href={contentLink.url || '#'}
                         dangerouslySetInnerHTML={{ __html: contentLink.name }}
                     ></a>
@@ -53,7 +61,9 @@ const NavigationItem = ({ links = [], contentLink = null }) => {
                             <span
                                 className="navbar__icon navbar__icon--close"
                                 onClick={toggleMenu}
-                            ></span>
+                            >
+                                <PnIcon iconName="close" title="close" width="24" height="24" cssClass="" />
+                            </span>
                         ) : (
                             <Fragment>
                                 <i

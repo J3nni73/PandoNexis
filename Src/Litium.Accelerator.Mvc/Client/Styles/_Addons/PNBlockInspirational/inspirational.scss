@@ -1,32 +1,59 @@
 $inspiration-block-color-primary: $block-background1;
 $inspiration-block-color-secondary: $block-background2;
 $inspiration-block-color-tertiary: $block-background3;
+$inspiration-block-color-text-secondary: rgba($block-background2, .75);
 
 .inspirational-block {
     display: flex;
     flex-direction: column;
-    margin: rem(20px) 0;
+    margin: 0; //rem(20px) 0;
+
+    font-size: 18px;
+    font-weight: 300;
+
+    h2 {
+        font-size: rem(32px);
+    }
+
+    h3 {
+        font-size: rem(26px);
+    }
+
+    h4 {
+        font-size: rem(24px);
+    }
 
     @include mobile {
         max-height: none;
-        margin: rem(20px 0);
+
+        h2 {
+            font-size: rem(28px);
+        }
+
+        h3 {
+            font-size: rem(24px);
+        }
+
+        h4 {
+            font-size: rem(20px);
+        }
     }
 
-    .primaryColor, .color__primary {
+    &.primaryColor, &.color__primary {
         background-color: $inspiration-block-color-primary;
     }
 
-    .secondaryColor, .color__secondary {
+    &.secondaryColor, &.color__secondary {
         background-color: $inspiration-block-color-secondary;
     }
 
-    .thirdColor, .color__tertiary {
+    &.thirdColor, &.color__tertiary {
         background-color: $inspiration-block-color-tertiary;
     }
 
     &__title {
-        font-size: rem(36px);
-        color: $color-primary;
+        font-size: $fontsize-h2;
+        color: $solution-color;
 
         &.white {
             color: $color-white;
@@ -34,15 +61,17 @@ $inspiration-block-color-tertiary: $block-background3;
     }
 
     &__subtitle {
-        font-size: rem($fontsize-large);
+        font-size: rem(20px);
+        color: $inspiration-block-color-text-secondary;
         /*font-weight: $font-weight-extra-bold;*/
         text-transform: uppercase;
+        line-height: 1;
+        margin: 0;
     }
 
     &__text {
         max-height: 75%;
         overflow: hidden;
-        font-size: rem($fontsize-large);
 
         @include mobile {
             max-height: none;
@@ -73,7 +102,7 @@ $inspiration-block-color-tertiary: $block-background3;
             height: rem(44px);
             border-radius: rem(50px);
             border: 2px solid $color-primary;
-            color: $color-primary;
+            color: $solution-color;
             padding: 0.5rem 1rem;
             display: flex;
             justify-content: center;
@@ -109,16 +138,17 @@ $inspiration-block-color-tertiary: $block-background3;
         }
     }
 
-    &__item-reverse, &__item {
-        display: flex;
-        max-height: 40rem;
-        min-height: 30rem;
-        width: 100%;
-        padding: rem(0 8px);
+    &__item {
+        &, &-reverse {
+            max-height: 40rem;
+            min-height: 30rem;
+            display: flex;
 
-        @include mobile {
-            display: grid;
-            max-height: none;
+            @include mobile {
+                display: block;
+                max-height: none;
+                min-height: 0;
+            }
         }
     }
 
@@ -161,13 +191,14 @@ $inspiration-block-color-tertiary: $block-background3;
             max-width: 100%;
             max-height: none;
             min-height: 0;
+            padding: rem(12px 24px);
         }
 
         &.extra-padding {
             padding: rem(90px);
 
             @include mobile-tablet {
-                padding: rem(50px);
+                padding: rem(16px 32px);
             }
         }
     }
@@ -182,7 +213,7 @@ $inspiration-block-color-tertiary: $block-background3;
 
         &__text-only {
             padding: 3rem;
-            background-color: rgba(lighten($solution-background-transparent, 10%), .8);
+            background-color: $solution-background-primary;
             width: 100%;
             height: 100%;
 
@@ -198,6 +229,8 @@ $inspiration-block-color-tertiary: $block-background3;
         @include mobile {
             min-width: 100%;
             max-width: 100%;
+            max-height: none;
+            min-height: 0;
         }
     }
 }

@@ -46,6 +46,10 @@ $hero-block-color-tertiary: $block-background3;
         margin: 1rem 0;
         align-items: center;
 
+        @include mobile-small {
+            align-items: flex-start;
+        }
+
         &.primaryColor, &.color__primary {
             background-color: $hero-block-color-primary;
         }
@@ -71,12 +75,13 @@ $hero-block-color-tertiary: $block-background3;
 
         @media (max-width: 640px) {
             padding-left: rem(50px);
+            margin-top: rem(64px);
         }
 
         &__title {
             /*font-weight: $font-weight-extra-black;*/
             /*font-size: $fontsize-large-heading;*/
-            color: $color-white;
+            color: $hero-alt-color;
             letter-spacing: 0.06em;
             text-transform: uppercase;
             line-height: 1;
@@ -89,7 +94,7 @@ $hero-block-color-tertiary: $block-background3;
                 letter-spacing: 0.06em;
                 text-transform: uppercase;
                 line-height: 1;
-                color: $hero-alt-color;
+                color: $color-white;
             }
 
             &, &-alt-color {

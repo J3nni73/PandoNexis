@@ -77,9 +77,32 @@
     filter: $filter-type+unquote('(#{$filter-amount})');
 }
 
-@mixin chevron($size: 7px, $color: $color-white, $angle: 0) {
+
+// For a blury bg use
+@mixin backdrop-filter($filters) {
+    -webkit-backdrop-filter: $filters;
+    backdrop-filter: $filters;
+    //background-blend-mode: overlay;
+}
+
+@mixin blurry-backdrop($blurAmount: 4px, $useSaturate: true, $saturate: 180%, $brightness: 1.04 ) {
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        @if $useSaturate {
+            @include backdrop-filter(saturate($saturate) brightness($brightness) blur($blurAmount));
+        }
+        @else {
+            @include backdrop-filter(brightness(1.2) blur($blurAmount));
+        }
+    }
+}
+
+// Chevron / Arrow
+// Examples:
+// Arrow down:
+//      @include chevron(7px, $color-black, 45, 2px);
+@mixin chevron($size: 7px, $color: $color-white, $angle: 0, $border-width: 1px) {
     border: solid $color;
-    border-width: 0 1px 1px 0;
+    border-width: 0 rem($border-width) rem($border-width) 0;
     display: inline-block;
     padding: $size;
     pointer-events: none;

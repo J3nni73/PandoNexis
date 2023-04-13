@@ -28,11 +28,11 @@
 
     99% {
         opacity: .3;
-        @include filter(blur, .2rem);
+        @include filter(blur, .3rem);
     }
 
     100% {
         opacity: .3;
-        @include filter(blur, 0.2rem);
+        @include filter(blur, 0.3rem);
     }
 }

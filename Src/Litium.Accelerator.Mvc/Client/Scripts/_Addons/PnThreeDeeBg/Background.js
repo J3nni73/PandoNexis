@@ -15,7 +15,7 @@ const Background = (props) => {
         mouseControls: false,
         touchControls: false,
         gyroControls: false,
-        scale: 2.0,
+        scale: 2.0, 
         color1: 0x303904,
         color2: 0x52047f,
         THREE: THREE
