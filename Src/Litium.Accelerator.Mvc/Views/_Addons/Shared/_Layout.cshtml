@@ -1,7 +1,7 @@
 @using Litium.Accelerator.Mvc.Controllers.Framework
 @using System.Globalization
 @using Microsoft.AspNetCore.Http
-@{   
+@{
     var bareLayout = (bool?)ViewContext.RouteData.DataTokens["BareLayout"] == true;
     var pageCssClass = ViewData["PageCssClass"];
     var sessionInitClass = (bool)ViewData["IsSessionInit"] ? "session__init" : "";
@@ -18,21 +18,23 @@
 </head>
 <body class="@pageCssClass @sessionInitClass @isInAdmin">
     <div class="pn-main-background" id="pnMainBackground"></div>
-    <vc:body-start-layout-controller />
-    @if (!bareLayout)
-    {
-        <vc:header-layout-controller />
-        <vc:bread-crumbs-layout-controller />
-    }
-    <main class="main-content">
-        @RenderBody()
-    </main>
-    @if (!bareLayout)
-    {
-        <vc:footer-layout-controller />
-    }
-    <div id="globalNotification"></div>
-    @RenderSection("js", false)
-    <vc:body-end-layout-controller />
+    <section class="pn-page__wrapper">
+        <vc:body-start-layout-controller />
+        @if (!bareLayout)
+        {
+            <vc:header-layout-controller />
+            <vc:bread-crumbs-layout-controller />
+        }
+        <main class="main-content">
+            @RenderBody()
+        </main>
+        @if (!bareLayout)
+        {
+            <vc:footer-layout-controller />
+        }
+        <div id="globalNotification"></div>
+        @RenderSection("js", false)
+        <vc:body-end-layout-controller />
+    </section>
 </body>
 </html>

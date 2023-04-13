@@ -12,6 +12,10 @@
     &__section {
         padding-bottom: rem(44px);
         word-break: break-word;
+
+        @include tablet-all {
+            padding: rem(0 32px);
+        }
     }
 
     a, &__link {

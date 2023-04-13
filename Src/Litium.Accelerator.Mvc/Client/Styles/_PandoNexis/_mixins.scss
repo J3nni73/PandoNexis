@@ -16,6 +16,12 @@
     }
 }
 
+@mixin tablet-all {
+    @media (min-width: #{$large-mobile-width}) and (max-width: #{$desktop-width - 1px}) {
+        @content;
+    }
+}
+
 @mixin scale($ratioX, $ratioY: 1) {
     -webkit-transform: scale($ratioX, $ratioY);
     -moz-transform: scale($ratioX, $ratioY);

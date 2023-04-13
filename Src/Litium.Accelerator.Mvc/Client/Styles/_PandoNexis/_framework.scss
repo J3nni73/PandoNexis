@@ -19,13 +19,13 @@
 .main-content {
     position: relative;
     z-index: 2;
-    padding-top: rem(24px);
+    padding-top: rem(20px);
 
     @include mobile {
         overflow-x: hidden;
 
         > div.row {
-            padding: rem(0 24px 24px 24px);
+            padding: rem(0 16px 24px 16px);
         }
     }
 }
