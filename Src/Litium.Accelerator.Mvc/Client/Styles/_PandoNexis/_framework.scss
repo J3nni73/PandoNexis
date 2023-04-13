@@ -22,8 +22,11 @@
     padding-top: rem(24px);
 
     @include mobile {
-        padding: rem(24px);
         overflow-x: hidden;
+
+        > div.row {
+            padding: rem(0 24px 24px 24px);
+        }
     }
 }
 
