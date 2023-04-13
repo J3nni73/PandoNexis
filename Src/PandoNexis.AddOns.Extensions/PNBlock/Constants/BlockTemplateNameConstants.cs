@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PandoNexis.AddOns.Extensions.Block.Constants
+﻿namespace PandoNexis.AddOns.Extensions.Block.Constants
 {
     public static class BlockTemplateNameConstants
     {

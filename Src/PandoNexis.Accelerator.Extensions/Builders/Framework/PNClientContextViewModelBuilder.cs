@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using Litium.Accelerator.Builders.Framework;
+﻿using Litium.Accelerator.Builders.Framework;
 using Litium.Accelerator.Constants;
 using Litium.Accelerator.Routing;
 using Litium.Accelerator.Utilities;
-using Litium.Accelerator.ViewModels.Framework;
 using Litium.FieldFramework.FieldTypes;
 using Litium.Runtime.AutoMapper;
 using Litium.Sales;
@@ -11,11 +9,10 @@ using Litium.Web.Models;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Http;
 using PandoNexis.Accelerator.Extensions.ViewModels.Framework;
-using System.Linq;
 
 namespace PandoNexis.Accelerator.Extensions.Builders.Framework
 {
-	public class PNClientContextViewModelBuilder : ClientContextViewModelBuilder
+    public class PNClientContextViewModelBuilder : ClientContextViewModelBuilder
 	{
 		private readonly RequestModelAccessor _requestModelAccessor;
 		public PNClientContextViewModelBuilder(IAntiforgery antiforgery,

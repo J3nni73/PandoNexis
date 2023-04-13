@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using Litium.Runtime.AutoMapper;
 using Litium.Web.Models.Blocks;
-using JetBrains.Annotations;
 using Litium.Accelerator.Builders;
 using PandoNexis.AddOns.Extensions.Block.Constants;
 using Litium.Accelerator.Extensions;
 using Litium.Web.Models;
-using System.Globalization;
 using PandoNexis.Accelerator.Extensions.ViewModels;
 
 namespace PandoNexis.AddOns.Extensions.Block.HeroBlock

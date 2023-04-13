@@ -11,14 +11,8 @@ using Litium.Runtime.DependencyInjection;
 using Litium.Sales;
 using Litium.Web.Models.Products;
 using PandoNexis.Accelerator.Extensions.Extensions;
-using PandoNexis.Accelerator.Extensions.Framework.ViewModels;
 using PandoNexis.Accelerator.Extensions.ModelServices;
 using PandoNexis.Accelerator.Extensions.ViewModel.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PandoNexis.Accelerator.Extensions.Builders.Product
 {

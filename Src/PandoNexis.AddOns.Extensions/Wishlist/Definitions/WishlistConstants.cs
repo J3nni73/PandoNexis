@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PandoNexis.AddOns.Extensions.Wishlist.Definitions
+﻿namespace PandoNexis.AddOns.Extensions.Wishlist.Definitions
 {
     public static class WishlistConstants
     {

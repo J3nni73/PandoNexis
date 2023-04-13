@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Web;
 using Litium.FieldFramework;
 using Litium.Runtime.AutoMapper;

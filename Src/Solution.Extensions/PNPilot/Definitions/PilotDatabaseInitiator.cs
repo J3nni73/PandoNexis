@@ -3,13 +3,6 @@ using PandoNexis.Accelerator.Extensions.Database.Constants;
 using PandoNexis.Accelerator.Extensions.Database.Objects;
 using PandoNexis.Accelerator.Extensions.Database.Services;
 using Solution.Extensions.PNPilot.Constants;
-using Solution.Extensions.PNPilot.Services;
-using Solution.Extensions.PNPilot.Services.DALServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Solution.Extensions.PNPilot.Definitions
 {

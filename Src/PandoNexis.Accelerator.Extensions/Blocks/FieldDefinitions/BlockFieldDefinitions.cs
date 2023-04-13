@@ -3,11 +3,6 @@ using Litium.Blocks;
 using Litium.FieldFramework;
 using Litium.FieldFramework.FieldTypes;
 using PandoNexis.Accelerator.Extensions.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PandoNexis.Accelerator.Extensions.Block.FieldDefinitions
 {

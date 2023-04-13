@@ -1,8 +1,6 @@
 ﻿using Litium.Websites;
 using Litium.FieldFramework;
-using System.Collections.Generic;
 using Litium.Accelerator.Constants;
-using Litium.Accelerator.Definitions;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 
 namespace PandoNexis.Accelerator.Extensions.Definitions.Pages.Article

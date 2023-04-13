@@ -1,13 +1,7 @@
-﻿using Litium.Accelerator.Definitions;
-using Litium.Blocks;
+﻿using Litium.Blocks;
 using Litium.FieldFramework;
 using PandoNexis.Accelerator.Extensions.Constants;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PandoNexis.Accelerator.Extensions.Blocks.TextBlock
 {

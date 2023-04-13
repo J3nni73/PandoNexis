@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Solution.Extensions.PNPilot.Constants
+﻿namespace Solution.Extensions.PNPilot.Constants
 {
     public static class PilotConstants
     {

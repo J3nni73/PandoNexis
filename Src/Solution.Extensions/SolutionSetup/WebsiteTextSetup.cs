@@ -1,9 +1,6 @@
 ﻿using Litium.Accelerator.Definitions;
 using Litium.Runtime;
 using Litium.Accelerator.Definitions.WebsiteTexts;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Solution.Extensions.SolutionSetup
 {

@@ -3,7 +3,6 @@ using Litium.Sales;
 using Litium.Sales.Payments;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 
 namespace Litium.Accelerator.ViewModels.Checkout
 {

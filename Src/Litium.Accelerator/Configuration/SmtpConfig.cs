@@ -1,6 +1,4 @@
-﻿using Litium.ComponentModel;
-
-namespace Litium.Accelerator.Configuration
+﻿namespace Litium.Accelerator.Configuration
 {
     /// <summary>
     /// SmtpServer configuration.

@@ -1,10 +1,7 @@
 ﻿using Litium.Accelerator.Utilities;
 using Litium.Media;
-using Litium.Web.Administration.Media;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Nest;
-using NLog.Fluent;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Processors;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
 //using PandoNexis.AddOns.Extensions.PNGenericDataView.ViewModels;
@@ -14,11 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using File = Litium.Media.File;
 using Newtonsoft.Json;
-using DocumentFormat.OpenXml.Office2010.Excel;
 using Litium.Websites;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 

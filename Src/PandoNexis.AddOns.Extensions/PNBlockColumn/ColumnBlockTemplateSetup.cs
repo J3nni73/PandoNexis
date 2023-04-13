@@ -1,5 +1,4 @@
-﻿using Litium.Accelerator.Definitions;
-using Litium.Blocks;
+﻿using Litium.Blocks;
 using Litium.FieldFramework;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 using PandoNexis.AddOns.Extensions.Block.Constants;

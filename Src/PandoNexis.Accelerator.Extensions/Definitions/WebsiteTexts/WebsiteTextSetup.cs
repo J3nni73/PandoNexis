@@ -1,11 +1,8 @@
 ﻿using Litium.Runtime;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Litium.Accelerator.Definitions.WebsiteTexts
 {
-  
+
     public class WebsiteTextSetup : IAsyncAutostart
     {
         private readonly WebsiteTextService _websiteTextService;

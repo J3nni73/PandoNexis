@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Litium.Runtime.AutoMapper;
-using JetBrains.Annotations;
 using Litium.Accelerator.Builders;
 using PandoNexis.AddOns.Extensions.Block.Constants;
 using Litium.FieldFramework;

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Litium.Accelerator.Constants;
 using Litium.Accelerator.Definitions;
 using Litium.Accelerator.Mvc.Controllers._PandoNexis.ArticleWithoutLeftMeny;
-using Litium.Accelerator.Mvc.Controllers.Blocks;
 using Litium.Accelerator.Mvc.Controllers.PandoNexis.Blocks;
 using Litium.FieldFramework;
 using Litium.Runtime.AutoMapper;

@@ -1,9 +1,7 @@
 ﻿using Litium.Accelerator.Constants;
-using Litium.Accelerator.Definitions;
 using Litium.FieldFramework;
 using Litium.Websites;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
-using PNFieldTemplateConstants = PandoNexis.Accelerator.Extensions.Constants.PageFieldTemplateConstants;
 
 namespace PandoNexis.AddOns.Extensions.PNPortalPage
 {

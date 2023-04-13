@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Litium.Accelerator.ViewModels.Media;
 using Litium.FieldFramework;
-using Litium.Media;
 using Litium.Runtime.AutoMapper;
 using Litium.Web.Models;
 

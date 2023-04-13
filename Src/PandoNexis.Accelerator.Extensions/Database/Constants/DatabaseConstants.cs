@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PandoNexis.Accelerator.Extensions.Database.Constants
+﻿namespace PandoNexis.Accelerator.Extensions.Database.Constants
 {
     public static class DatabaseConstants
     {

@@ -1,18 +1,8 @@
 ﻿using Litium.Runtime.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PandoNexis.Accelerator.Extensions.Database.Objects;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
-using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using PandoNexis.Accelerator.Extensions.Database.Constants;
-using MetadataExtractor.Formats.Xmp;
-using Litium.Web.Security;
 
 namespace PandoNexis.Accelerator.Extensions.Database.Services
 {

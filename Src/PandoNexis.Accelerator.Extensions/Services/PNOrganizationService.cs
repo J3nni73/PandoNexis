@@ -1,6 +1,5 @@
 ﻿using Litium.Accelerator.Constants;
 using Litium.Accelerator.Routing;
-using Litium.Accelerator.Services;
 using Litium.Accelerator.Utilities;
 using Litium.Customers;
 using Litium.Globalization;

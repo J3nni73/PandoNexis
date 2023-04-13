@@ -5,7 +5,6 @@ using Litium.Sales;
 using Litium.Sales.Factory;
 using Litium.Security;
 using Litium.Validations;
-using Litium.Web;
 using Litium.Websites;
 
 namespace Litium.Accelerator.ValidationRules

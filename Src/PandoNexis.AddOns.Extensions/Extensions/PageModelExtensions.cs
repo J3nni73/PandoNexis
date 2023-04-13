@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using Litium.Accelerator.Constants;
+﻿using Litium.Accelerator.Constants;
 using Litium.FieldFramework;
 using Litium.Runtime.AutoMapper;
 using Litium.Web.Models.Websites;

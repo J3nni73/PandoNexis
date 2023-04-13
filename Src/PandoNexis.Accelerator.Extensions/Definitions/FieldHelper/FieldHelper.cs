@@ -1,18 +1,10 @@
-﻿using Litium.Accelerator.Constants;
-using Litium.FieldFramework;
+﻿using Litium.FieldFramework;
 using Litium.FieldFramework.FieldTypes;
 using Litium.Globalization;
 using Litium.Products;
 using Litium.Runtime.DependencyInjection;
 using Litium.Security;
 using Litium.Websites;
-using Microsoft.AspNetCore.WebUtilities;
-using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PandoNexis.Accelerator.Extensions.Definitions.FieldHelper
 {

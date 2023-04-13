@@ -1,5 +1,4 @@
 ﻿using Litium.FieldFramework;
-using System.Collections.Generic;
 using System.Globalization;
 using Litium.FieldFramework.FieldTypes;
 

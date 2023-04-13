@@ -5,7 +5,6 @@ using PandoNexis.AddOns.Extensions.Block.Constants;
 using Litium.FieldFramework;
 using System.Globalization;
 using Litium.Web.Models;
-using PandoNexis.Accelerator.Extensions;
 
 namespace PandoNexis.AddOns.Extensions.Block.ColumnBlock
 {

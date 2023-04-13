@@ -1,5 +1,4 @@
 ﻿using Litium.Accelerator.Builders;
-using Litium.Accelerator.ViewModels.Block;
 using Litium.Runtime.AutoMapper;
 using Litium.Web.Models.Blocks;
 using Litium.FieldFramework;

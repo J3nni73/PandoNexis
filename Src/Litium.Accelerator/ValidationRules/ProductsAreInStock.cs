@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ using Litium.Products.StockStatusCalculator;
 using Litium.Sales;
 using Litium.Security;
 using Litium.Validations;
-using Litium.Web;
 using Litium.Websites;
 
 namespace Litium.Accelerator.ValidationRules

@@ -5,7 +5,6 @@ using Litium.Accelerator.Builders;
 using PandoNexis.AddOns.Extensions.Block.Constants;
 using Litium.Accelerator.Extensions;
 using Litium.Web.Models;
-using System.Globalization;
 
 namespace PandoNexis.AddOns.Extensions.Block.ImageStatsBlock
 {

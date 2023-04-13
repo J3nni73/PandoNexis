@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers
+﻿namespace PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers
 {
     public class FieldTemplateChanges
     {

@@ -1,9 +1,4 @@
 ﻿using Litium.Runtime.DependencyInjection;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PandoNexis.AddOns.Extensions.Wishlist.Services
 {

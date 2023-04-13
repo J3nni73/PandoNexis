@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Litium.Accelerator.Constants;
 using Litium.Accelerator.Definitions;
 using Litium.Products;
 using Litium.Runtime.AutoMapper;

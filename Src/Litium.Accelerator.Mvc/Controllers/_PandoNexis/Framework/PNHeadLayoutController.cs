@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using Litium.Accelerator.Builders.Framework;
 using Litium.Accelerator.ViewModels.Framework;
 using Microsoft.AspNetCore.Mvc;
-using PandoNexis.Accelerator.Extensions.Builders.Framework;
-using PandoNexis.Accelerator.Extensions.ViewModels.Framework;
 
 namespace Litium.Accelerator.Mvc.Controllers._PandoNexis.Framework
 {

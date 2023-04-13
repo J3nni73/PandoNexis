@@ -1,5 +1,4 @@
-﻿using Litium.Accelerator.Builders.Block;
-using Litium.Web.Models.Blocks;
+﻿using Litium.Web.Models.Blocks;
 using Microsoft.AspNetCore.Mvc;
 using PandoNexis.AddOns.Extensions.Block.InspirationalBlock;
 

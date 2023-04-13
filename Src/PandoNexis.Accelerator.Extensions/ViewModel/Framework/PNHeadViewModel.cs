@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using Litium.Runtime.AutoMapper;
+﻿using Litium.Runtime.AutoMapper;
 using Litium.Accelerator.ViewModels.Framework;
 using AutoMapper;
 

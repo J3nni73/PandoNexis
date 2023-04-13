@@ -1,5 +1,3 @@
-using System;
-
 namespace Litium.Accelerator.MvcCore.Models
 {
     public class ErrorViewModel

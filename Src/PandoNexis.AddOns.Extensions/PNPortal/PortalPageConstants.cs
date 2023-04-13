@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PandoNexis.AddOns.Extensions.PNPortalPage
+﻿namespace PandoNexis.AddOns.Extensions.PNPortalPage
 {
-  
+
     public static class PortalPageFieldNameConstants
     {
         public static string PortalPageTitle = "PortalPageTitle";

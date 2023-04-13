@@ -1,7 +1,4 @@
-﻿using Litium.Accelerator.ViewModels.Search;
-using System.Collections.Generic;
-using Litium.Accelerator.Builders;
-using Litium.Web.Models;
+﻿using Litium.Web.Models;
 using AutoMapper;
 using Litium.Accelerator.ViewModels.Framework;
 using Litium.Runtime.AutoMapper;

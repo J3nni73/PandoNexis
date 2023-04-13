@@ -5,14 +5,8 @@ using Litium.Products;
 using Litium.Security;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 using Litium.Blocks;
-using DocumentFormat.OpenXml.EMMA;
-using Litium.Web.Administration.WebApi.Blocks.EditorHandlers;
-using Litium.Accelerator.Constants;
-using PandoNexis.Accelerator.Extensions.Constants;
 using CategoryService = Litium.Blocks.CategoryService;
-using System.Drawing;
 using Litium.Globalization;
-using System.Collections.Generic;
 using Litium.Media;
 using Litium.Customers;
 
