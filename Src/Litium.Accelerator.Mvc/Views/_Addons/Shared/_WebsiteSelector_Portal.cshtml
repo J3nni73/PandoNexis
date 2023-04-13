@@ -1,0 +1,34 @@
+﻿@model PandoNexis.Accelerator.Extensions.Framework.ViewModels.PNHeaderViewModel
+@{
+    var isPortal = @Model.PortalData.IsPortal;
+    var largeBackgroundImageUrl = Model.PortalData.LargeBackgroundImageUrl;
+}
+
+@if (isPortal)
+{
+    <div class="main-portal" style="@(string.IsNullOrWhiteSpace(largeBackgroundImageUrl)? string.Empty : "background-image: url(" + largeBackgroundImageUrl + ")")">
+        @if (@Model.Channels.Any())
+        {
+            var currentLanguage = @Model.Channels.FirstOrDefault(x => x.Key.ToString() == Model.ChannelId);
+
+            <div class="main-portal__window">
+                <h1>@Html.WebSiteString("websiteselector.portalheading")</h1>
+                <p>@Html.WebSiteString("websiteselector.portaltext")</p>
+                <ul id="websitePicker@(Model.Area)" class="website-selector__items row small-up-2">
+                    @foreach (var channel in Model.Channels)
+                    {
+                        if (channel.Key.ToString() != Model.ChannelId)
+                        {
+                            <li class="columns">
+                                <a title="@channel.Value.CountryName" href="@channel.Value.Url" target="@(channel.Value.LinkToNewWindow?"_blank":"_self")">
+                                    <img src="@channel.Value.IconUrl" alt="@(channel.Value.CountryName)" class="website-selector__img" />
+                                    @channel.Value.CountryName
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+}

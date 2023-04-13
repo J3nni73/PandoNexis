@@ -1,13 +1,13 @@
-$image-stats-alt-color: #eeea86;
-$image-stats-background-color: $solution-background-dark-transparent;//rgba($color-primary, .8);
-
 .image-stats-block {
-    display: flex;
-    background-color: $image-stats-background-color;
+    background-color: $solution-background-primary;
     height: rem(450px);
-    margin: 2rem 0;
+    margin: 2rem 0 0 0;
 
-    @media (max-width: 650px) {
+    > .row {
+        max-width: none;
+    }
+
+    @include mobile-small {
         height: auto;
     }
 
@@ -15,65 +15,80 @@ $image-stats-background-color: $solution-background-dark-transparent;//rgba($col
         display: flex;
         padding: 0;
 
-        @media (max-width: 650px) {
+        @include mobile-small {
             display: grid;
         }
     }
 
     &__image-title-wrapper {
-        width: 50%;
-        position: relative;
-
-        @media (max-width: 650px) {
-            width: 100%;
-        }
+        height: rem(450px);
+        width: 100%;
 
         &__text-holder {
             position: absolute;
-            max-width: 84%;
+            max-width: 30%;
+            padding-top: rem(100px);
             left: 8%;
-            height: 100%; //28.125rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin: auto;
 
-            @media (max-width: 800px) {
+            @include mobile {
                 left: 5%;
-                padding-top: 2rem;
-                width: 90%;
+                padding-top: rem(32px);
+                font-size: rem(16px);
             }
 
-            @media (max-width: 650px) {
+            @include mobile-small {
+                font-size: rem(14px);
                 max-width: none;
             }
         }
 
-        &__title, &__title-alt-color {
-            /* font-weight: $font-weight-extra-black;
-            font-size: $fontsize-large-heading;*/
+        &__title {
             line-height: rem(50px);
             color: $color-white;
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            font-weight: 900;
-            font-size: rem(50px);
-            line-height: 3.125rem;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: .06em;
-
-            @media (max-width: 800px) {
-                /*font-size: $fontsize-large;*/
-            }
+            font-size: rem(32px);
         }
 
         &__title-alt-color {
-            /*color: $color-accent;*/
-            /*          font-weight: $font-weight-extra-black;
-            font-size: $fontsize-large-heading;*/
-            color: rgba($image-stats-alt-color, .9);
+            line-height: rem(50px);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: rem(24px);
         }
+
+        @include mobile {
+            &__text-holder {
+                left: 5%;
+                padding-top: rem(32px);
+                font-size: rem(20px);
+            }
+
+            &__title {
+                line-height: 1.4;
+            }
+
+            &__title-alt-color {
+                line-height: 2;
+            }
+
+            &__title, &__title-alt-color {
+                font-size: rem(18px);
+            }
+        }
+
+        @include mobile-small {
+            &__text-holder {
+                font-size: rem(28px);
+                max-width: none;
+            }
+
+            &__title, &__title-alt-color {
+                font-size: rem(28px);
+            }
+        }
+
+
 
         img {
             width: 100%;
@@ -86,44 +101,64 @@ $image-stats-background-color: $solution-background-dark-transparent;//rgba($col
         display: grid;
         grid-template-columns: auto auto;
         justify-content: center;
-        align-items: top;
-        width: 50%;
-        //background-color: $color-primary;
-        padding: 2rem;
-        gap: rem(36px);
-        height: auto;
-        margin: auto;
+        align-items: center;
+        background-color: $solution-background-primary;
+        padding: rem(64px 32px);
+        gap: rem(0 100px);
+        width: 100%;
 
-        @media (max-width: 800px) {
-            gap: 1rem;
+        @include mobile {
+            padding: rem(32px);
+            grid-template-columns: auto;
+            gap: rem(0 50px);
         }
 
-        @media (max-width: 650px) {
+        @include mobile-small {
+            gap: rem(20px 0);
             width: 100%;
         }
 
         @media (max-width: $large-mobile-width) {
-            grid-template-columns: auto;
         }
 
         &__items {
-            max-width: rem(250px);
+            max-width: rem(350px);
+            font-size: rem(22px);
 
             &__text-highlight {
-                color: $color-white;
+                color: rgba($block-background2, .75);
                 font-weight: $font-weight-extra-bold;
-                line-height: rem(70px);
-                font-size: rem($fontsize-x-large-heading);
+                line-height: 1.2;
 
-                @media (max-width: 800px) {
-                    font-size: rem($fontsize-large-heading);
+                > * {
+                    margin: 0;
                 }
             }
 
             &__text {
                 color: $color-white;
-                font-size: rem($fontsize-large);
-                /*font-weight: $font-weight-black;*/
+                line-height: 2.2;
+            }
+
+            @include mobile {
+                font-size: rem(16px);
+
+                &__text-highlight {
+                    font-size: rem(16px);
+                    line-height: normal;
+                }
+
+                &__text {
+                    & > * {
+                        margin: 0;
+                    }
+                }
+            }
+
+            @include mobile-small {
+                &__text-highlight {
+                    font-size: rem(24px);
+                }
             }
         }
     }

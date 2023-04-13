@@ -49,9 +49,10 @@
                 <a href="@Model.StartPageUrl" class="header__logo-mobile">
                     @Html.ImageFor(x => x.Logo, maxSize: new System.Drawing.Size(-1, logoHeight), renderSizeAttributes: true, responsiveDefinition: responsiveDefinition)
                 </a>
+                <div class="pn-header__powered-by-litium"><span class="pn-icon" data-icon-name="powered-by" data-title="@Html.WebSiteString("solution.poweredby")" data-width="65" data-height="15"></span><span class="pn-icon" data-icon-name="litium" data-title="Litium" data-width="65" data-height="15"></span></div>
             </section>
         </div>
-
+ 
         <div class="small-2 large-4 columns text--right">
             <div class="pn-header__components">
 

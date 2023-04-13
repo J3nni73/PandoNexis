@@ -1,0 +1,44 @@
+﻿@model PandoNexis.Accelerator.Extensions.Framework.ViewModels.PNHeaderViewModel
+@{
+    var isPortal = @Model.PortalData.IsPortal;
+    var areaClass = @Model.Area.ToLower();
+}
+@if (!isPortal && @Model.Channels.Any())
+{
+    var currentLanguage = @Model.Channels.FirstOrDefault(x => x.Key.ToString() == Model.ChannelId);
+
+    <div class="website-selector website-selector-@(areaClass)">
+        @if (@Model.Area == "Header")
+        {
+        <div class="website-selector-header__current">
+            <label for='websiteSelectorCheckbox'>
+                <img src="@(currentLanguage.Value.IconUrl)" alt="@(currentLanguage.Value.CountryName)" class="website-selector__img" />
+                @currentLanguage.Value.CountryName
+                <i class="arrow__dropdown"></i>
+            </label>
+        </div>
+        <input id='websiteSelectorCheckbox' type='checkbox' />
+        }
+        <ul id="websitePicker@(Model.Area)" class="website-selector-@(areaClass)__items">
+            @if (@Model.Area != "Header")
+            {
+                <li class="website-selector__current">
+                    <img src="@(currentLanguage.Value.IconUrl)" title="@currentLanguage.Value.CountryName" alt="@(currentLanguage.Value.CountryName)" class="website-selector__img" />
+                    @currentLanguage.Value.CountryName
+                </li>
+            }
+            @foreach (var channel in Model.Channels)
+            {
+                if (channel.Key.ToString() != Model.ChannelId)
+                {
+                    <li>
+                        <a href="@channel.Value.Url" title="@channel.Value.CountryName" target="@(channel.Value.LinkToNewWindow?"_blank":"_self")">
+                            <img src="@channel.Value.IconUrl" alt="@(channel.Value.CountryName)" class="website-selector__img" />
+                            @channel.Value.CountryName
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+}

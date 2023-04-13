@@ -8,16 +8,16 @@ import WAVES from "./vendor/vanta.waves";
 import * as THREE from 'three';
 const Background = (props) => {
     const [vantaEffect, setVantaEffect] = useState(0);
-    const [theme, setTheme] = useState(props.theme || 'waves');
+    const [theme, setTheme] = useState(props.theme || 'cells');
     const mainBg = useRef(null);
     const cellsOptions = {
-        backgroundColor: 0xffffff,
+        backgroundColor: 0x170322,
         mouseControls: false,
         touchControls: false,
         gyroControls: false,
-        scale: 1.0,
-        color1: 0x020096,
-        color2: 0xffffff,
+        scale: 2.0,
+        color1: 0x303904,
+        color2: 0x52047f,
         THREE: THREE
     };
     const cloudOptions = {
