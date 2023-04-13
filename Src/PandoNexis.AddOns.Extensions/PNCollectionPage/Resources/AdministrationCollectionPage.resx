@@ -131,6 +131,20 @@
 	<data name="fielddefinition.websitearea.collectionpagedescription.description" xml:space="preserve">
 		<value>Alternative description of the page as child to collectionpage.</value>
 	</data>
+
+	<data name="fielddefinition.websitearea.collectionpagelink.name" xml:space="preserve">
+		<value>Page link</value>
+	</data>
+	<data name="fielddefinition.websitearea.collectionpagelink.description" xml:space="preserve">
+		<value>Page link to another page</value>
+	</data>
+	<data name="fielddefinition.websitearea.collectionpagelinktext.name" xml:space="preserve">
+		<value>Text for the page link</value>
+	</data>
+	<data name="fielddefinition.websitearea.collectionpagelinktext.description" xml:space="preserve">
+		<value>Text for the page link</value>
+	</data>
+
 	<data name="fielddefinition.websitearea.collectionpageimage.name" xml:space="preserve">
 		<value>Alternative collectionpage image</value>
 	</data>

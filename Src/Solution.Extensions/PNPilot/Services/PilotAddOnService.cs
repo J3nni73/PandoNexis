@@ -4,7 +4,6 @@ using Litium.FieldFramework;
 using Litium.Products;
 using Litium.Runtime.DependencyInjection;
 using Litium.Security;
-using PandoNexis.AddOns.Extensions.Services.PNStockService;
 using Solution.Extensions.PNPilot.Objects;
 using System;
 using System.Collections.Generic;

@@ -1,23 +1,25 @@
-﻿@using Litium.Web.Models;
+@using Litium.Web.Models;
 @using Litium.Accelerator.Constants;
 @using System.Drawing;
 @model PandoNexis.AddOns.Extensions.PNCollectionPage.CollectionPageViewModel
 @{
+    var linkToPage = Model.Link != null ? Model.Link.Href : string.Empty;
     var responsiveDefinition = new ResponsiveImageDefinition()
             {
                 SrcSets = new SrcSetDefinition[]
-                                        {
+                                {
             new (400),
             new (800),
             new (1000),
             new (1314),
-                                        },
+                                },
                 Sizes = new SizeDefinition[]
-                                        {
+                                {
             new ("100vw"),
-                                        },
+                                },
             };
 }
+
 
 @await Component.BlockContainerAsync(Model.Blocks, BlockContainerNameConstant.Header)
 <div class="row">
@@ -42,6 +44,7 @@
         </section>
     </div>
 </div>
-<div class="collection-page" id="collectionPage" data-collection-page-system-id="@Model.PageId"></div>
+
+<div class="collection-page" id="collectionPage" data-collection-page-system-id="@Model.PageId" data-link="@linkToPage" data-link-text="@Model.LinkText"></div>
 
 @await Component.BlockContainerAsync(Model.Blocks, BlockContainerNameConstant.Main)

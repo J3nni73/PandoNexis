@@ -1,0 +1,27 @@
+$pn-info-label-border: none; //1px solid rgba($solution-line-color, .05);
+$pn-info-label-padding: 0;
+
+.pn-info-label {
+    width: auto;
+    min-width: rem(120px);
+    display: inline-block;
+
+    &__person-info {
+        display: inline-block;
+        color: $solution-link-color;
+        width: auto;
+        padding: rem($pn-info-label-padding);
+        border: $pn-info-label-border;
+        opacity: 0;
+        @include animation(0, 0.5s, fade-in, ease-in-out);
+        position: relative;
+        bottom: rem(8px);
+        font-size: rem(12px);
+        opacity: .85;
+        font-style: italic;
+
+        letter-spacing: h3 {
+            font-size: rem(8px);
+        }
+    }
+}

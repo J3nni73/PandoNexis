@@ -1,0 +1,38 @@
+@keyframes fade-in-background {
+    0% {
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 0;
+    }
+
+    99% {
+        opacity: .3;
+    }
+
+    100% {
+        opacity: .3;
+    }
+}
+
+@keyframes fade-in-blurry-background {
+    0% {
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 0;
+        @include filter(blur, .2rem);
+    }
+
+    99% {
+        opacity: .3;
+        @include filter(blur, .2rem);
+    }
+
+    100% {
+        opacity: .3;
+        @include filter(blur, 0.2rem);
+    }
+}

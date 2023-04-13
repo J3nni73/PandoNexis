@@ -3,12 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import DynamicComponent from './Components/DynamicComponent';
 
-// ADDONS IMPORT
-import GenericGridViewContainer from './_Addons/GenericGridView/Containers/GenericGridView.container';
-import FieldConfiguratorContainer from './_Addons/GenericGridView/Containers/FieldConfigurator.container';
-import DropZoneContainer from './_Addons/GenericGridView/Containers/DropZone.container';
-import HeaderInformationDataContainer from './_Addons/GenericGridView/Containers/HeaderInformationData.container';
-// END ADDONS IMPORT
+//PandoNexis: BEGIN IMPORT
+//PandoNexis: END IMPORT
 
 import './pandoNexis.events.js';
 import './pandoNexis.functions.js';
@@ -54,7 +50,6 @@ const initNewBuyButton = (button) => {
 }
 
 export const bootstrapPNComponents = () => {
-
     // PRODUCT PAGE IMAGES
     const lightBoxImagesEl = document.getElementById('lightBoxImages');
     if (lightBoxImagesEl) {
@@ -98,65 +93,50 @@ export const bootstrapPNComponents = () => {
             );
         });
     }
-    
+
     // ADDONS
+
+//PandoNexis: BEGIN  COMPONENT
+    // CollectionPage
+    const collectionPage = document.getElementById("collectionPage");
+    if (collectionPage) {
+        const CollectionPage = DynamicComponent({
+            loader: () => import('./_Addons/PNCollectionPage/Components/CollectionPageContainer'),
+        });
+
+        const { collectionPageSystemId, link, linkText } = collectionPage.dataset;
+        renderReact(
+            <Provider store={window.__pn.store}>
+                <CollectionPage {...{ collectionPageSystemId, link, linkText }} />
+            </Provider>,
+            collectionPage
+        );
+    }
+    // END CollectionPage
     // Logged on info
-    //const loggedOnInfoLabels = document.querySelectorAll('.pn-info-label');
-    //if (loggedOnInfoLabels) {
-    //    const LoggedOnInfoLabel = DynamicComponent({
-    //        loader: () => import('./_Addons/LoggedOnInfoLabel/Components/LoggedOnInfoLabelContainer'),
-    //    });
+    const loggedOnInfoLabels = document.querySelectorAll('.pn-info-label');
+    if (loggedOnInfoLabels) {
+        const LoggedOnInfoLabel = DynamicComponent({
+            loader: () => import('./_Addons/PNLoggedOnInfoLabel/Components/LoggedOnInfoLabelContainer'),
+        });
 
-    //    loggedOnInfoLabels.forEach((elem, index) => {
-    //        const { heading } = elem.dataset;
-    //        renderReact(
-    //            <Provider store={window.__pn.store}>
-    //                <LoggedOnInfoLabel getData={index === 0} heading={heading || ''} />
-    //            </Provider>,
-    //            elem
-    //        );
-    //    });
-    //}
+        loggedOnInfoLabels.forEach((elem, index) => {
+            const { heading } = elem.dataset;
+            renderReact(
+                <Provider store={window.__pn.store}>
+                    <LoggedOnInfoLabel getData={index === 0} heading={heading || ''} />
+                </Provider>,
+                elem
+            );
+        });
+    }
     // END Logged on info
-
-    // 3D Background
-    const threeDBg = document.getElementById("pnMainBackground");
-    if (threeDBg) {
-        const ThreeDBg = DynamicComponent({
-            loader: () => import('./_Addons/PnThreeDeeBg/Background'),
-        });
-        renderReact(
-            <Provider store={window.__pn.store}>
-                <ThreeDBg />
-            </Provider>,
-            threeDBg
-        );
-    }
-    // END 3D Background
-
-    // MediaCatalog
-    const mediaCatalog = document.getElementById("media-catalog");
-    if (mediaCatalog) {
-        const MediaCatalog = DynamicComponent({
-            loader: () => import('./_Addons/MediaCatalog/Components/MediaCatalogContainer'),
-        });
-        const { mediaFolderId, mediaFolderAlternativeName, mediaFolderAlternativeView } = mediaCatalog.dataset;
-        const useAltMediaView = mediaFolderAlternativeView?.toLowerCase() === 'true';
-        renderReact(
-            <Provider store={window.__pn.store}>
-                <MediaCatalog mediaFolderId={mediaFolderId} alternativeFolderName={mediaFolderAlternativeName} useAltMediaView={useAltMediaView} />
-            </Provider>,
-            mediaCatalog
-        );
-    }
-    // END MediaCatalog
-
     // OrganizationSelector
     const organizationSelectors = document.querySelectorAll(".pn-organization-selector");
     if (organizationSelectors) {
 
         const OrganizationSelector = DynamicComponent({
-            loader: () => import('./_Addons/OrganizationSelector/Components/OrganizationSelectorContainer'),
+            loader: () => import('./_Addons/PNOrganizationSelector/Components/OrganizationSelectorContainer'),
         });
         Array.from(organizationSelectors).forEach(
             (organizationSelector) => {
@@ -169,118 +149,21 @@ export const bootstrapPNComponents = () => {
             });
     }
     // END OrganizationSelector
-
-    // Show Infinite scroll Button
-    const infiniteScrollButton = document.getElementById("InfiniteScroll");
-    if (infiniteScrollButton) {
-        const InfiniteScrollButton = DynamicComponent({
-            loader: () => import('./_Addons/InfiniteScrollButton/Components/InfiniteScrollButtonContainer'),
+ 
+    // 3D Background
+    const threeDBg = document.getElementById("pnMainBackground");
+    if (threeDBg) {
+        const ThreeDBg = DynamicComponent({
+            loader: () => import('./_Addons/PNThreeDeeBg/Background'),
         });
-        const { elementQs, totalPages, totalCount, currentPageIndex, pageSize, url, scrollType } = infiniteScrollButton.dataset;
         renderReact(
             <Provider store={window.__pn.store}>
-                <InfiniteScrollButton {...{ elementQs, url, scrollType }} totalPages={parseInt(totalPages)} totalCount={parseInt(totalCount)} currentPageIndex={parseInt(currentPageIndex)} pageSize={parseInt(pageSize)} />
+                <ThreeDBg />
             </Provider>,
-            infiniteScrollButton
+            threeDBg
         );
     }
-    // END Show Infinite Scroll Button
+    // END 3D Background
 
-    // CollectionPage
-    const collectionPage = document.getElementById("collectionPage");
-    if (collectionPage) {
-        const CollectionPage = DynamicComponent({
-            loader: () => import('./_Addons/CollectionPage/Components/CollectionPageContainer'),
-        });
-
-        const { collectionPageSystemId, link, linkText } = collectionPage.dataset;
-        renderReact(
-            <Provider store={window.__pn.store}>
-                <CollectionPage {...{ collectionPageSystemId, link, linkText }} />
-            </Provider>,
-            collectionPage
-        );
-    }
-    // END CollectionPage
-
-    // PortalPage
-    const portalPage = document.getElementById("portalPage");
-    if (portalPage) {
-        const PortalPage = DynamicComponent({
-            loader: () => import('./_Addons/PortalPage/Components/PortalPageContainer'),
-        });
-        
-        const { portalPageSystemId, link, linkText } = portalPage.dataset;
-      
-        renderReact(
-            <Provider store={window.__pn.store}>
-                <PortalPage {...{ portalPageSystemId, link, linkText }} />
-            </Provider>,
-            portalPage
-        );
-    }
-    // END PortalPage
-
-    // GenericGridView
-    document.querySelectorAll('[data-field-configuration]').forEach((elem) => {
-        ReactDOM.render(
-            <Provider store={window.__pn.store}>
-                <FieldConfiguratorContainer type={elem.dataset.fieldConfiguration} />
-            </Provider>,
-            elem
-        );
-    });
-
-    document.querySelectorAll('[data-grid-view]').forEach((elem) => {
-        console.log(elem.dataset.gridView);
-        ReactDOM.render(
-            <Provider store={window.__pn.store}>
-                <GenericGridViewContainer type={elem.dataset.gridView} />
-            </Provider>,
-            elem
-        );
-    });
-
-    document.querySelectorAll('[data-dropzone]').forEach((elem) => {
-        ReactDOM.render(
-            <Provider store={window.__pn.store}>
-                <DropZoneContainer type={elem.dataset.dropzone} />
-            </Provider>,
-            elem
-        );
-    });
-
-
-    const reorderBtn = document.querySelectorAll('reorder-button');
-    if (reorderBtn.length > 0) {
-        const ReorderButton = DynamicComponent({
-            loader: () => import('./Components/ReorderButton'),
-        });
-        Array.from(reorderBtn).forEach(
-            (button) => {
-                const { cssClass, orderId, title } = button.dataset;
-                const label = button.innerText;
-                renderReact(
-                    <Provider store={window.__pn.store}>
-                        <ReorderButton {...{ label, title, cssClass, orderId }} />
-                    </Provider>,
-                    button
-                );
-            }
-        );
-    }
-
-    const headerInformationData = document.getElementById('headerInformationData');
-    if (headerInformationData) {
-        ReactDOM.render(
-            <Provider store={window.__pn.store}>
-                <HeaderInformationDataContainer />
-            </Provider>,
-            headerInformationData
-        );
-    }
-    // END GenericGridView
-
-    // END ADDONS
-
+//PandoNexis: END COMPONENT
 }

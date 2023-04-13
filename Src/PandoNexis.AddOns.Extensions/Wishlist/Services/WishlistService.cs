@@ -1,6 +1,4 @@
 ﻿using Litium.Runtime.DependencyInjection;
-using PandoNexis.AddOns.Extensions.Services.PNStockService;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;

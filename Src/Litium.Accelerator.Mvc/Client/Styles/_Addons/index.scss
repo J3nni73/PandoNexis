@@ -1,15 +1,10 @@
-
-// Addons
-@import 'pn-accordion';
-@import 'MediaCatalog/index';
-@import 'CollectionPage/collectionpage';
-@import 'PortalPage/portalpage';
-@import 'GenericGridView/index';
-@import 'ThreeDeeBg/index';
-
-@import 'Block/inspirational';
-@import 'Block/column';
-@import 'Block/image-stats';
-@import 'Block/hero';
-@import 'Block/info-tile';
-@import 'Block/usp'; 
+@import 'PNBlockColumn/index';
+@import 'PNBlockHero/index';
+@import 'PNBlockImageStats/index';
+@import 'PNBlockInfoTile/index';
+@import 'PNBlockInspirational/index';
+@import 'PNBlockUsp/index';
+@import 'PNCollectionPage/index';
+@import 'PNLoggedOnInfoLabel/index';
+@import 'PNOrganizationSelector/index';
+@import 'PNThreeDeeBg/index';

@@ -6,9 +6,8 @@ namespace PandoNexis.AddOns.Extensions.PNLoggedOnInfoLabel.Builders
 {
     using Litium.Accelerator.Utilities;
     using PandoNexis.AddOns.Extensions.PNLoggedOnInfoLabel.ViewModels;
-    using PandoNexis.AddOns.Extensions.PNOrganizationSelector.ViewModels;
 
-    public class LoggedOnInfoLabelBuilder : IViewModelBuilder<OrganizationSelectorAutocompleteViewModel>
+    public class LoggedOnInfoLabelBuilder : IViewModelBuilder<PersonInfo>
     {
         private readonly PersonService _personService;
         private readonly SecurityContextService _securityContextService;
@@ -21,7 +20,7 @@ namespace PandoNexis.AddOns.Extensions.PNLoggedOnInfoLabel.Builders
             _personStorage = personStorage;
         }
 
-        public virtual PersonInfo Build()
+        public async virtual Task<PersonInfo> BuildAsync()
         {
             PersonInfo personInfo = new();
 
@@ -34,16 +33,21 @@ namespace PandoNexis.AddOns.Extensions.PNLoggedOnInfoLabel.Builders
             var currentPerson = _personService.Get(personSystemId.Value);
             var currentOrganization = _personStorage.CurrentSelectedOrganization;
             personInfo = new() {
-                FirstName = currentPerson.FirstName,
-                Surname = currentPerson.LastName,
-                Email = currentPerson.Email,
-                OrgId = currentOrganization != null ? currentOrganization.Id : string.Empty,
-                OrganizationName = currentOrganization != null ? currentOrganization.Name : string.Empty,
+                FirstName = GetCleanString(currentPerson.FirstName),
+                Surname = GetCleanString(currentPerson.LastName),
+                Email = GetCleanString(currentPerson.Email),
+                OrgId = currentOrganization != null ? GetCleanString(currentOrganization.Id) : string.Empty,
+                OrganizationName = currentOrganization != null ? GetCleanString(currentOrganization.Name) : string.Empty,
                 Tel = string.Empty,
                 AdditionalInfo = string.Empty,
             };
             
             return personInfo;
+        }
+
+        private string GetCleanString(string stringVal)
+        {
+            return stringVal ?? string.Empty;
         }
     }
 }

@@ -14,6 +14,12 @@ $color-black-lighter: #565656 !default;
 $color-white: #fff !default;
 $color-white-dark: #fbfbfb !default;
 
+$color-primary: #111 !default;
+$color-primary-dark: #000 !default;
+$color-error: rgb(255,200,155) !default;
+$color-success: #60a060 !default;
+
+$color-link: #0099ff !default;
 $color-grey-lightest: #f2f2f2 !default;
 $color-grey-lighter: #eee !default;
 $color-grey-light: #ddd !default;
@@ -22,11 +28,30 @@ $color-grey-dark: #bbb !default;
 $color-grey-darker: #aaa !default;
 $color-grey-darkest: #595959 !default;
 
+// Top: Uncomment js-event scroll if you want to listen to if page has scrolled or not
+// Useful when you want to change sticky header on scroll
+$solution-use-sticky-header: true; 
 $color-secondary: #ffc444 !default;
+$solution-placeholder-bg: rgb(103, 103, 100);
+$solution-placeholder-text-color: rgba(60, 60, 60, .7);
+$solution-link-color: $color-grey-darkest;
+$solution-link-color-hover: rgb(81,0,126);
+$solution-page-link-color: rgba(225,225,225, .85);
+$solution-color-text-highlight: rgba(255,196,68,.75);
+$solution-page-link-color-hover: desaturate(lighten($solution-link-color-hover, 50%), .6); //rgba(255,255,255, .9);
 
 $solution-color: rgba($color-white, .7);
 $solution-line-color: rgba($color-white, .2);
+$solution-line-color: rgba($color-grey-lightest, .2);
+$solution-page-font-color: rgba(255,255,255, 1);
+$solution-breadcrumb-font-color: rgba(255,255,255, 1);
+
 $solution-border-color-solid: #706a89;
+
+$solution-background: rgba(0,30,54,1); //#170322;
+$solution-background-transparent: rgba($solution-background,.3);
+$solution-background-dark-transparent: rgba($solution-background,.8);
+
 $solution-link-color: $solution-color;
 $solution-link-color-hover: $color-white;
 $solution-body-bg-color: #170322;
@@ -40,6 +65,21 @@ $solution-color-yellow: $color-secondary;
 $solution-color-text-highlight: rgba(255,196,68,.75);
 
 $solution-button-background-primary: rgba(132, 132, 25, 0.8);
+$solution-megamenu-background-color: rgb(240,240,255);
+
+$solution-icon-color: rgba($solution-link-color, .4);
+$solution-icon-color-mobile: rgba($solution-link-color, .6);
+$solution-icon-hover-color: rgba($solution-link-color-hover, .8); //rgba($solution-link-color, .9);
+
+$solution-button-primary-color: rgb(164, 164, 73);
+
+$header-bg-color-dark: #336655;
+$header-bg-color-light: #fefeff; 
+
+/* Scrollbar */
+$scrollbar-bg-color: rgb(35,182,183);
+$scrollbar-bg-color-hover: $solution-background-transparent;
+
 
 $color-primary: #111 !default;
 $color-primary-dark: #000 !default;
@@ -60,6 +100,8 @@ $fontsize-h3: 20px;
 $fontsize-h2: 22px;
 $fontsize-h1: 24px;
 
+$fontsize-large-heading: 44px;
+$fontsize-x-large-heading: 60px;
 /* Breakpoints */
 /*$mobile-width: 320px;
 $large-mobile-width: 500px;
@@ -70,6 +112,7 @@ $mobile-width: map-get($breakpoints, small-medium); // OLD: 320px;
 $large-mobile-width: map-get($breakpoints, medium);
 $tablet-width: map-get($breakpoints, large); // OLD: 1024px;
 $desktop-width: map-get($breakpoints, xxlarge); // OLD: 1440px;
+$page-width: map-get($breakpoints, xlarge);
 
 /* Navigation bar */
 $navbar-width: 300px;

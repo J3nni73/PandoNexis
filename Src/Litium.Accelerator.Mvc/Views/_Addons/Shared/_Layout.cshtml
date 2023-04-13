@@ -1,0 +1,37 @@
+@using Litium.Accelerator.Mvc.Controllers.Framework
+@using System.Globalization
+@using Microsoft.AspNetCore.Http
+@{   
+    var bareLayout = (bool?)ViewContext.RouteData.DataTokens["BareLayout"] == true;
+    var pageCssClass = ViewData["PageCssClass"];
+    var isInAdmin = (bool)ViewData["IsInAdmin"] ? "is-in-admin" : "";
+    var isLoggedOn = User.Identity.IsAuthenticated;
+}
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentUICulture.Parent.Name">
+<head>
+    @*<vc:head-layout-controller />*@
+    <vc:pn-head-layout-controller />
+    @RenderSection("head", false)
+    <vc:client-context-controller />
+</head>
+<body class="@pageCssClass @isInAdmin">
+    <div class="pn-main-background" id="pnMainBackground"></div>
+    <vc:body-start-layout-controller />
+    @if (!bareLayout)
+    {
+        <vc:header-layout-controller />
+        <vc:bread-crumbs-layout-controller />
+    }
+    <main class="main-content">
+        @RenderBody()
+    </main>
+    @if (!bareLayout)
+    {
+        <vc:footer-layout-controller />
+    }
+    <div id="globalNotification"></div>
+    @RenderSection("js", false)
+    <vc:body-end-layout-controller />
+</body>
+</html>

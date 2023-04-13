@@ -1,14 +1,18 @@
-﻿@model Litium.Accelerator.ViewModels.Framework.HeaderViewModel
+@model Litium.Accelerator.ViewModels.Framework.HeaderViewModel
 @using Litium.Web.Mvc
+@using PandoNexis.Accelerator.Extensions.Framework.ViewModels;
 @{
+    var extendedModel = (PNHeaderViewModel)Model;
+
     var logoHeight = Model.IsBigHeader ? 60 : 50;
     var headerClass = Model.IsBigHeader ? "extended-header" : "compact-header";
     var currentPage = User.Identity.IsAuthenticated ? Model.MyPage : Model.LoginPage;
+    var pageCssClass = ViewData["PageCssClass"] as string;
 
     var responsiveDefinition = new ResponsiveImageDefinition
             {
                 SrcSets = new SrcSetDefinition[]
-                                {
+                                                                        {
             new (174),
             new (180),
             new (200),
@@ -16,16 +20,22 @@
             new (260),
             new (300),
             new (340),
-                                },
+                                                                        },
                 Sizes = new SizeDefinition[]
-                                {
+                                                                        {
             new ("(min-width: 1040px)", "calc(1.02vw + 156px)"),
             new ("(min-width: 420px)", "203px"),
             new ("calc(89vw - 153px)"),
-                                },
+                                                                        },
             };
 }
 
+@*PandoNexis: BEGIN ADDON WebsiteSelector*@
+@if (extendedModel.GetType() != typeof(string))
+{
+    @await Html.PartialAsync("_WebsiteSelector_Portal", extendedModel)
+}
+@*PandoNexis: END ADDON END WebsiteSelector*@
 <header id="header" role="banner" class="pn-header">
     <div class="row pn-header__row @headerClass align-center">
         <div class="small-2 large-4 columns">
@@ -36,15 +46,18 @@
         <div class="small-8 large-4 columns text--center">
             <section class="pn-header__center-container">
                 <div id="quickSearch"></div>
-                 <a href="@Model.StartPageUrl" class="header__logo-mobile">
-                @Html.ImageFor(x => x.Logo, maxSize: new System.Drawing.Size(-1, logoHeight), renderSizeAttributes: true, responsiveDefinition: responsiveDefinition)
-            </a>
-                <div class="pn-header__powered-by-litium"><span class="pn-icon" data-icon-name="powered-by" data-title="@Html.WebSiteString("solution.poweredby")" data-width="65" data-height="15"></span><span class="pn-icon" data-icon-name="litium" data-title="Litium" data-width="65" data-height="15"></span></div>
+                <a href="@Model.StartPageUrl" class="header__logo-mobile">
+                    @Html.ImageFor(x => x.Logo, maxSize: new System.Drawing.Size(-1, logoHeight), renderSizeAttributes: true, responsiveDefinition: responsiveDefinition)
+                </a>
             </section>
         </div>
 
         <div class="small-2 large-4 columns text--right">
             <div class="pn-header__components">
+
+
+
+
                 @if (Model.TopLinkList.Any())
                 {
                     foreach (var link in Model.TopLinkList)
@@ -59,13 +72,19 @@
                         }
                     }
                 }
-                <div class="profile">
-                    <a href="@currentPage.Href" class="profile__link--block" rel="nofollow" alt="@currentPage.Text" title="@currentPage.Text">
-                        <span class="pn-icon" data-icon-name="account" data-width="32" data-height="32" data-title="@Html.WebSiteString("solution.account")"></span>
-                        <span class="profile__title">@currentPage.Text</span>
-                    </a>
-                </div>
-                <div id="miniCart" class="cart cart--mini"></div>
+                @if (extendedModel.VisibleLogin)
+                {
+                    <div class="profile">
+                        <a href="@currentPage.Href" class="profile__link--block" rel="nofollow" alt="@currentPage.Text" title="@currentPage.Text">
+                            <span class="pn-icon" data-icon-name="account" data-width="32" data-height="32" data-title="@Html.WebSiteString("solution.account")"></span>
+                            <span class="profile__title">@currentPage.Text</span>
+                        </a>
+                    </div>
+                }
+                @if (extendedModel.VisibleCheckout)
+                {
+                    <div id="miniCart" class="cart cart--mini"></div>
+                }
             </div>
         </div>
         <div class="row navbar__wrapper">
