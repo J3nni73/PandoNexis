@@ -164,6 +164,30 @@
     background: -ms-linear-gradient(#{$deg}deg, $color-start $start-position, $color-end $end-position);
 }
 
+@mixin scroll-styling($width: 12px) {
+    /* width */
+    &::-webkit-scrollbar {
+        width: $width;
+    }
+    /* Track */
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 2px;
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: rgba($bg-color-odd-row, .3);
+        border-radius: 2px;
+    }
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        /*@include bg--violet;*/
+        border: 1px solid rgba($color-navy, .3);
+        background: rgba($color-navy, .2);
+    }
+}
+
+
 /*  timing function options:
     inherit|ease|ease-in|ease-out|ease-in-out|linear|step-start|step-end    */
 

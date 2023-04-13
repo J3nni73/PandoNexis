@@ -92,6 +92,8 @@ namespace Litium.Accelerator.Mvc.Controllers
             else
             {
                 ViewData["IsInAdmin"] = true;
+                ViewData["IsSessionInit"] = false;
+
             }
 
             HttpContext.Session.SetString("_IsSessionInit", "true");

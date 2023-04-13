@@ -1,16 +1,26 @@
-﻿@model Litium.Accelerator.ViewModels.Framework.HeadViewModel
+@model PandoNexis.Accelerator.Extensions.ViewModels.Framework.PNHeadViewModel
 @using Litium.Web.Mvc
-@using PandoNexis.Accelerator.Extensions.ViewModels.Framework;
+@using PandoNexis.Accelerator.Extensions.ViewModels.Framework
 
 @{
-    var extendedModel = (PNHeadViewModel) Model;
-    var pnHeadDataList = extendedModel?.PNHeadDataList;
+    //var extendedModel = (PNHeadViewModel) Model;
+    var pnHeadDataList = new List<string>();
+    var cssFileName = "site";
+
+    @*PandoNexis: BEGIN ADDON PNHeadAlternativeLinks*@
+    pnHeadDataList = Model.PNHeadDataList;
+    @*PandoNexis: END ADDON PNHeadAlternativeLinks*@
+
+
+    @*PandoNexis: BEGIN ADDON PNStylingByChannel*@
+    cssFileName = Model.CssFileName ?? "site";
+    @*PandoNexis: END ADDON PNStylingByChannel*@
 }
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>@Model.Title</title>
-<link rel="stylesheet" type="text/css" href="/ui/css/site.min.css" asp-append-version="true" />
+<link rel="stylesheet" type="text/css" href="/ui/css/@(string.IsNullOrWhiteSpace(cssFileName)?"site":cssFileName).min.css" asp-append-version="true" />
 @foreach (var fav in Model.Favicons)
 {
     <link rel="@fav.Rel" href="@fav.Href" type="@fav.Type" />
@@ -55,7 +65,7 @@
     <meta property="og:locale" content="@Model.OpenGraph.Locale" />
     <meta property="og:site_name" content="@Model.OpenGraph.WebSiteTitle" />
 
-    @if (pnHeadDataList != null)
+    @if (pnHeadDataList != null && pnHeadDataList.Count>0)
     {
         foreach (var pnHeadData in pnHeadDataList)
         {

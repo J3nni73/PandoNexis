@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import DynamicComponent from './Components/DynamicComponent';
 
 //PandoNexis: BEGIN IMPORT
+import PNGenericDataViewContainer from './_Addons/PNGenericDataView/Components/PNGenericDataView.container';
 //PandoNexis: END IMPORT
 
 import './pandoNexis.events.js';
@@ -113,6 +114,23 @@ export const bootstrapPNComponents = () => {
         );
     }
     // END CollectionPage
+// PNGenericDataView
+    const pnGenericDataView = document.querySelectorAll("[data-generic-view]");
+    
+    if (pnGenericDataView) {
+      
+        pnGenericDataView.forEach((elem, index) => {
+
+            const { appendToQuerySelector, viewTypes, dataType } = elem.dataset;
+            renderReact(
+                <Provider store={window.__pn.store}>
+                    <PNGenericDataViewContainer {...{ viewTypes, dataType }} />
+                </Provider>,
+                elem
+            );
+        });
+    }
+    // END PNGenericDataView
     // Logged on info
     const loggedOnInfoLabels = document.querySelectorAll('.pn-info-label');
     if (loggedOnInfoLabels) {
