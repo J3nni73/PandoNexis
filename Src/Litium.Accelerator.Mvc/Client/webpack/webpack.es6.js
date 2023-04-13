@@ -12,12 +12,21 @@ const CSS_DIR = path.resolve(ROOT, 'Styles');
 const common = require('./webpack.common.js');
 const { merge } = require('webpack-merge');
 
+// PandoNexis:
+//      Skapa flera CSSer genom att skapa nya entry-Arrays -- Dess namn är den som kommer att skapas under '/wwwroot/ui/css/[namn].min.css'
+//      Dessa har sina egna namn de lyssnar på genom path.resolve
+
 module.exports = merge(common, {
     target: ['web'],
     entry: {
         app: [
             path.resolve(JS_DIR, 'index.js'),
+        ],
+        site: [
             path.resolve(CSS_DIR, 'site.scss'),
+        ],
+        siteclean: [
+            path.resolve(CSS_DIR, 'siteclean.scss'), // PandoNexis Added
         ],
     },
     output: {
@@ -49,7 +58,7 @@ module.exports = merge(common, {
             },
         }),
         new MiniCssExtractPlugin({
-            filename: '../css/site.min.css',
+            filename: '../css/[name].min.css', // PandoNexis Changed
         }),
         // new BundleAnalyzerPlugin(),
     ],
