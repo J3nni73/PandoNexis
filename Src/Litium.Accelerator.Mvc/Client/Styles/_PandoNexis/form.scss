@@ -7,6 +7,6 @@ input {
 
 select {
     &, &.form__input {
-        background: rgba($solution-body-bg-color, .92) !important;
+        background: $solution-form-input-bg !important;
     }
 }
