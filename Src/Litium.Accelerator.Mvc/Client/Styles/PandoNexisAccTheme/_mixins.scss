@@ -65,9 +65,9 @@
         @include link--black-light;
         display: flex;
         align-items: center;
-        &:hover {
+       /* &:hover {
             background-color: $color-grey-lighter;
-        }
+        }*/
     }
     & > &__link--block > &__icon {
         font-style: normal;
