@@ -114,17 +114,17 @@ export const bootstrapPNComponents = () => {
         );
     }
     // END CollectionPage
-// PNGenericDataView
-    const pnGenericDataView = document.querySelectorAll("[data-generic-view]");
-    
+    // PNGenericDataView
+    const pnGenericDataView = document.querySelectorAll(".generic-data-view__container");
+
     if (pnGenericDataView) {
-      
+
         pnGenericDataView.forEach((elem, index) => {
 
-            const { appendToQuerySelector, viewTypes, dataType } = elem.dataset;
+            const { appendToQuerySelector, page, viewTypes, dataType } = elem.dataset;
             renderReact(
                 <Provider store={window.__pn.store}>
-                    <PNGenericDataViewContainer {...{ viewTypes, dataType }} />
+                    <PNGenericDataViewContainer pageSystemId={page} {...{ viewTypes, dataType }} />
                 </Provider>,
                 elem
             );
