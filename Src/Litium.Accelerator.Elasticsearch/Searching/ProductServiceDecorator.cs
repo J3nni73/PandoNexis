@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Litium.Accelerator.Search;
 using Litium.Accelerator.Services;
 using Litium.Accelerator.ViewModels.Search;
 using Litium.Runtime.DependencyInjection;

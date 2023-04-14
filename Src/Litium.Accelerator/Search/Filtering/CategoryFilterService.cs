@@ -77,18 +77,18 @@ namespace Litium.Accelerator.Search.Filtering
             _eventBroker.Subscribe<FieldDefinitionCreated>(_ => ClearCache());
             _eventBroker.Subscribe<FieldDefinitionDeleted>(_ => ClearCache());
             _eventBroker.Subscribe<FieldDefinitionUpdated>(_ => ClearCache());
-            _eventBroker.Subscribe<SettingChanged>(async x =>
+            _eventBroker.Subscribe<SettingChanged>(x =>
             {
                 if (string.Equals(FilterService._key, x.Key, StringComparison.OrdinalIgnoreCase) && x.PersonSystemId == Guid.Empty)
                 {
-                    await ClearCache();
+                    ClearCache();
                 }
             });
 
-            Task ClearCache()
+            void ClearCache()
             {
                 _cache.Clear();
-                return _eventBroker.PublishAsync(EventScope.Remote, new PurgeFilterCache());
+                _eventBroker.Publish(EventScope.Remote, new PurgeFilterCache());
             }
             return ValueTask.CompletedTask;
         }

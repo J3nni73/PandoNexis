@@ -11,7 +11,6 @@ using Litium.Runtime.AutoMapper;
 using Litium.Runtime.DependencyInjection;
 using Litium.Web.Models;
 using Litium.Web.Models.Products;
-using Litium.Web.Routing;
 
 namespace Litium.Accelerator.Builders.Product
 {
@@ -19,15 +18,11 @@ namespace Litium.Accelerator.Builders.Product
     {
         private readonly FieldDefinitionService _fieldDefinitionService;
         private readonly NamedServiceFactory<FieldFormatter> _fieldFormatterServiceFactory;
-        private readonly RouteRequestLookupInfoAccessor _routeRequestLookupInfoAccessor;
 
-        public ProductFieldViewModelBuilder(FieldDefinitionService fieldDefinitionService,
-            NamedServiceFactory<FieldFormatter> fieldFormatterServiceFactory,
-            RouteRequestLookupInfoAccessor routeRequestLookupInfoAccessor)
+        public ProductFieldViewModelBuilder(FieldDefinitionService fieldDefinitionService, NamedServiceFactory<FieldFormatter> fieldFormatterServiceFactory)
         {
             _fieldDefinitionService = fieldDefinitionService;
             _fieldFormatterServiceFactory = fieldFormatterServiceFactory;
-            _routeRequestLookupInfoAccessor = routeRequestLookupInfoAccessor;
         }
 
         public IEnumerable<ProductFieldViewModel> Build([NotNull] ProductModel productModel, [NotNull] string fieldGroup, bool includeBaseProductFields = true, bool includeVariantFields = true, bool includeHiddenFields = false, bool includeEmptyFields = false)
@@ -137,15 +132,6 @@ namespace Litium.Accelerator.Builders.Product
             if (fieldDefinition.FieldType == SystemFieldTypeConstants.Editor)
             {
                 return CreateModel("Field", fieldDefinition, cultureInfo, new FieldFormatArgs { Culture = cultureInfo }, fieldFormatter, value.MapTo<EditorString>().Value);
-            }
-
-            if (fieldDefinition.FieldType == SystemFieldTypeConstants.Link)
-            {
-                return CreateModel("LinkField", fieldDefinition, cultureInfo, new LinkFieldFormatArgs
-                {
-                    Culture = cultureInfo,
-                    ChannelSystemId = _routeRequestLookupInfoAccessor.RouteRequestLookupInfo?.Channel?.SystemId
-                }, fieldFormatter, value);
             }
 
             return CreateModel("Field", fieldDefinition, cultureInfo, new FieldFormatArgs { Culture = cultureInfo }, fieldFormatter, value);

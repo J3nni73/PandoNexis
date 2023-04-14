@@ -1,6 +1,7 @@
 ﻿using System;
 using Litium.Accelerator.Extensions;
 using Litium.Accelerator.Routing;
+using Litium.Accelerator.Services;
 using Litium.Accelerator.ViewModels;
 using Litium.Accelerator.ViewModels.Product;
 using Litium.Globalization;

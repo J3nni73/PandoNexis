@@ -25,6 +25,8 @@ namespace Litium.Accelerator.ViewModels.Product
         public string StockStatusDescription { get; set; }
         public string Url { get; set; }
         public bool UseVariantUrl { get; set; }
-        
+        //PandoExtensions: begin
+        public string ExtendedDescription { get; set; }
+        //PandoExtensions: end
     }
 }

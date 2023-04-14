@@ -9,6 +9,7 @@ using Litium.Accelerator.Services;
 using Litium.Common;
 using Litium.Customers;
 using Litium.FieldFramework;
+using Litium.FieldFramework.Internal;
 using Litium.Products;
 using Litium.Runtime;
 using Litium.Security;

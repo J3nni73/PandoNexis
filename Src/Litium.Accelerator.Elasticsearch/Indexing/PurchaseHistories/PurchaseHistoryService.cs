@@ -92,7 +92,7 @@ namespace Litium.Accelerator.Search.Indexing.PurchaseHistories
                 {
                     if (newItem.Value.Count != oldItem.Count)
                     {
-                        await TriggerEvent();
+                        TriggerEvent();
                         continue;
                     }
 
@@ -111,17 +111,17 @@ namespace Litium.Accelerator.Search.Indexing.PurchaseHistories
 
                     if (!allEqual)
                     {
-                        await TriggerEvent();
+                        TriggerEvent();
                     }
                 }
                 else
                 {
-                    await TriggerEvent();
+                    TriggerEvent();
                 }
 
-                Task TriggerEvent()
+                void TriggerEvent()
                 {
-                    return _eventBroker.PublishAsync(new ReindexVariant
+                    _eventBroker.Publish(new ReindexVariant
                     {
                         VariantSystemId = systemId
                     });
@@ -132,7 +132,7 @@ namespace Litium.Accelerator.Search.Indexing.PurchaseHistories
             {
                 if (_keyLookupService.TryGetSystemId<Variant>(item.Key, out var systemId))
                 {
-                    await _eventBroker.PublishAsync(new ReindexVariant
+                    _eventBroker.Publish(new ReindexVariant
                     {
                         VariantSystemId = systemId
                     });

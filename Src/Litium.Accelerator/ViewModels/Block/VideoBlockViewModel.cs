@@ -5,6 +5,7 @@ using JetBrains.Annotations;
 using Litium.Accelerator.Constants;
 using Litium.FieldFramework.FieldTypes;
 using Litium.Web.Models;
+using System.Globalization;
 using Litium.Accelerator.Builders;
 
 namespace Litium.Accelerator.ViewModels.Block

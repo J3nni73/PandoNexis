@@ -5,6 +5,7 @@ using Litium.Accelerator.Constants;
 using Litium.Accelerator.Utilities;
 using Litium.Accelerator.ViewModels.Persons;
 using Litium.Customers;
+using Litium.Customers.Queryable;
 using Litium.Data;
 using Litium.Runtime.AutoMapper;
 

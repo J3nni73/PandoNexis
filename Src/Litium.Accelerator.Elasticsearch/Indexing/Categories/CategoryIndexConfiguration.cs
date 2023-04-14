@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Globalization;
+using System.Threading.Tasks;
 using Litium.Data;
 using Litium.Products;
 using Litium.Search;
 using Litium.Search.Indexing;
 using Microsoft.Extensions.Localization;
+using Nest;
 
 namespace Litium.Accelerator.Search.Indexing.Categories
 {

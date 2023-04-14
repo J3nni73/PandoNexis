@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Litium.Accelerator.Extensions;
 using Litium.Accelerator.Routing;
+using Litium.Accelerator.Search;
 using Litium.Accelerator.Utilities;
 using Litium.Accelerator.ViewModels.Brand;
 using Litium.Accelerator.ViewModels.Search;

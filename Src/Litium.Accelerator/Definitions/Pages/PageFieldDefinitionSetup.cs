@@ -15,10 +15,7 @@ namespace Litium.Accelerator.Definitions.Pages
             fields.AddRange(GeneralFields());
             fields.AddRange(LoginPageFields());
             fields.AddRange(MegaMenuPageFields());
-            fields.ForEach(field => {
-                field.UseInStorefront = true;
-                field.UseInSearchEngine = true;
-            });
+            fields.ForEach(field =>field.UseInStorefront = true);
             return fields;
         }
 

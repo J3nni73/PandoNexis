@@ -22,7 +22,6 @@ namespace Litium.Accelerator.Definitions.Blocks
             foreach (var field in fields)
             {
                 field.UseInStorefront = true;
-                field.UseInSearchEngine = true;
             }
             return fields;
         }

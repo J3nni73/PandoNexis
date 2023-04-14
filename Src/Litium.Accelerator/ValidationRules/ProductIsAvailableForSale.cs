@@ -5,7 +5,7 @@ using Litium.Sales;
 using Litium.Sales.Factory;
 using Litium.Security;
 using Litium.Validations;
-using Litium.Websites;
+using Litium.Web;
 
 namespace Litium.Accelerator.ValidationRules
 {
@@ -18,26 +18,17 @@ namespace Litium.Accelerator.ValidationRules
         private readonly SecurityContextService _securityContextService;
         private readonly CountryService _countryService;
         private readonly CurrencyService _currencyService;
-        private readonly WebsiteService _websiteService;
-        private readonly ChannelService _channelService;
-        private readonly LanguageService _languageService;
 
         public ProductIsAvailableForSale(
             ISalesOrderRowFactory salesOrderRowFactory,
             SecurityContextService securityContextService,
             CountryService countryService,
-            CurrencyService currencyService,
-            WebsiteService websiteService,
-            ChannelService channelService,
-            LanguageService languageService)
+            CurrencyService currencyService)
         {
             _salesOrderRowFactory = salesOrderRowFactory;
             _securityContextService = securityContextService;
             _countryService = countryService;
             _currencyService = currencyService;
-            _websiteService = websiteService;
-            _channelService = channelService;
-            _languageService = languageService;
         }
 
         public override ValidationResult Validate(ValidateCartContextArgs entity, ValidationMode validationMode)
@@ -59,22 +50,9 @@ namespace Litium.Accelerator.ValidationRules
                                               CurrencySystemId = _currencyService.Get(order.CurrencyCode)?.SystemId ?? Guid.Empty
                                           }));
 
-                if (orderRows.Any(result => result is null))
+                if (orderRows.Any(result => result == null))
                 {
-                    var channel = _channelService.Get(order.ChannelSystemId.GetValueOrDefault());
-                    var website = channel is null
-                        ? null
-                        : _websiteService.Get(channel.WebsiteSystemId.GetValueOrDefault());
-
-                    var culture = _languageService.Get(channel?.WebsiteLanguageSystemId.GetValueOrDefault() ?? Guid.Empty)?.CultureInfo
-                        ?? _languageService.GetDefault().CultureInfo;
-
-                    var formattableText = (website is null
-                           ? null
-                           : website.Texts["sales.validation.product.nolongeravailableforsale", culture])
-                           ?? "Some products are no longer available for sale, since last time the cart was re-calculated. Please check your shopping cart before placing the order.";
-
-                    result.AddError("Cart", formattableText);
+                    result.AddError("Cart", "sales.validation.product.nolongeravailableforsale".AsWebsiteText());
                 }
             }
 

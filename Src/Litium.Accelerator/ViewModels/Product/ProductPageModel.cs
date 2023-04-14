@@ -3,6 +3,7 @@ using AutoMapper;
 using Litium.Runtime.AutoMapper;
 using Litium.Web.Models.Products;
 using System.Collections.Generic;
+using System.Linq;
 using Litium.Accelerator.ViewModels.Brand;
 using Litium.Products;
 

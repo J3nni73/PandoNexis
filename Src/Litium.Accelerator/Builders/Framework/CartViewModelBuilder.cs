@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using Litium.Accelerator.Builders.Order;
 using Litium.Accelerator.Constants;
 using Litium.Accelerator.Extensions;
 using Litium.Accelerator.Routing;

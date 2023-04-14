@@ -141,7 +141,6 @@ namespace Litium.Accelerator.Definitions.Websites
             foreach (var field in fields)
             {
                 field.UseInStorefront = true;
-                field.UseInSearchEngine = true;
             }
             return fields;
         }

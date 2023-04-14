@@ -393,10 +393,6 @@ namespace Litium.Accelerator.Definitions.Products
                 },
             };
 
-            fields.ForEach(fields =>
-            {
-                fields.UseInSearchEngine = true;
-            });
             return fields;
         }
     }
