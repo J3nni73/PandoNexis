@@ -29,7 +29,7 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Product
         private readonly PNSecurityService _PNSecurityService;
 
         public PNProductFieldViewModelBuilder(FieldDefinitionService fieldDefinitionService, NamedServiceFactory<FieldFormatter> fieldFormatterServiceFactory, PersonService personService, SecurityContextService securityContextService, FileService fileService, PNFieldService pNFieldService, PNSecurityService pNSecurityService, RouteRequestLookupInfoAccessor routeRequestLookupInfoAccessor)
-             : base(fieldDefinitionService, fieldFormatterServiceFactory)
+             : base(fieldDefinitionService, fieldFormatterServiceFactory, routeRequestLookupInfoAccessor)
         {
             _fieldDefinitionService = fieldDefinitionService;
             _fieldFormatterServiceFactory = fieldFormatterServiceFactory;
