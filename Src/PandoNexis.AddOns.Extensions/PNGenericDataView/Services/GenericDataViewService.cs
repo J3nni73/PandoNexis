@@ -20,7 +20,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
             var settings = new GenericDataViewSettings();
             var page = _pageService.Get(pageSystemId);
 
-            settings.DisplayTypes = page.Fields.GetValue<IList<string>>(PageFieldNameConstants.DisplayTypes).ToList();
+            settings.DisplayTypes = page.Fields.GetValue<IList<string>>(PageFieldNameConstants.DisplayTypes)?.ToList()??new List<string>();
             settings.ColumnsInsideContainerSmall =  page.Fields.GetValue<int>(PageFieldNameConstants.ColumnsInsideContainerSmall);
             settings.ColumnsInsideContainerMedium  = page.Fields.GetValue<int>(PageFieldNameConstants.ColumnsInsideContainerMedium);
             settings.ColumnsInsideContainerLarge = page.Fields.GetValue<int>(PageFieldNameConstants.ColumnsInsideContainerLarge);
