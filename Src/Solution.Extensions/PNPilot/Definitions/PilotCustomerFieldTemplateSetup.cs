@@ -1,6 +1,7 @@
 ﻿using Litium.Customers;
 using Litium.FieldFramework;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
+using PandoNexis.AddOns.Extensions.PNNoErp.Constants;
 using Solution.Extensions.PNPilot.Constants;
 
 namespace Solution.Extensions.PNPilot.Definitions
@@ -17,6 +18,9 @@ namespace Solution.Extensions.PNPilot.Definitions
                 GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "General", PilotFieldNameConstants.WorkItemPrefix),
                 GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "General", PilotFieldNameConstants.NextId),
                 GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, "Logs", ContactLoggConstants.ContactLogg),
+
+                GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, NoErpOrderAdminConstants.NoErp ,NoErpOrderAdminConstants.Authorization),
+                GetOrganizationField(PilotFieldTemplateConstants.PilotCustomer, NoErpOrderAdminConstants.NoErp ,NoErpOrderAdminConstants.BaseUrl)
             };
 
             return templateChanges;

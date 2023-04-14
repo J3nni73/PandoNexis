@@ -1,0 +1,8 @@
+﻿@using PandoNexis.AddOns.Extensions.PNGenericDataView.ViewModels;
+@model PandoNexis.AddOns.Extensions.PNGenericDataView.ViewModels.GenericDataViewModel
+
+@if (Model.PageSystemId!=Guid.Empty)
+{ 
+  <div class="generic-data-view__container" id="generic-data-view-container" data-page="@Model.PageSystemId"></div>
+
+}

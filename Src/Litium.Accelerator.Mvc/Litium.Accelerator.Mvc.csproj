@@ -36,6 +36,7 @@
     <Folder Include="Views\_PandoNexis\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Views\_Addons\GenericDataView\Index.cshtml" />
     <None Include="Views\_PandoNexis\Framework\ClientContext.cshtml" />
     <None Include="Views\_Solution\Framework\CenteredHeader.cshtml" />
   </ItemGroup>
