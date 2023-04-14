@@ -14,7 +14,7 @@
         word-break: break-word;
 
         @include tablet-all {
-            padding: rem(0 32px);
+            padding: rem(0 32px 44px 32px);
         }
     }
 
