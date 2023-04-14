@@ -1,5 +1,4 @@
 ﻿using Litium.Accelerator.Routing;
-using Litium.Accelerator.Services;
 using Litium.Runtime.AutoMapper;
 using Litium.Runtime.DependencyInjection;
 using Litium.Web;
@@ -7,12 +6,7 @@ using Litium.Web.Models.Websites;
 using Litium.Websites;
 using PandoNexis.Accelerator.Extensions.Builders;
 using PandoNexis.Accelerator.Extensions.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PandoNexis.AddOns.Extensions.PNCollectionPage
 {

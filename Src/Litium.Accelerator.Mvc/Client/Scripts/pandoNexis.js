@@ -3,18 +3,80 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import DynamicComponent from './Components/DynamicComponent';
 
-// ADDONS IMPORT
-import GenericGridViewContainer from './_Addons/GenericGridView/Containers/GenericGridView.container';
-import FieldConfiguratorContainer from './_Addons/GenericGridView/Containers/FieldConfigurator.container';
-import DropZoneContainer from './_Addons/GenericGridView/Containers/DropZone.container';
-import HeaderInformationDataContainer from './_Addons/GenericGridView/Containers/HeaderInformationData.container';
-import PnBackground from './_Addons/PnThreeDeeBg/Background';
-// END ADDONS IMPORT
+//PandoNexis: BEGIN IMPORT
+import PNGenericDataViewContainer from './_Addons/PNGenericDataView/Components/PNGenericDataView.container';
+//PandoNexis: END IMPORT
 
 import './pandoNexis.events.js';
 import './pandoNexis.functions.js';
 
-export const pnBootstrapComponents = (store) => {
+const renderReact = (element, container, callback) => {
+    window.__pn.registeredContainers.push(container);
+    ReactDOM.render(element, container, callback);
+};
+
+window.__pn = {
+    ...window.__pn,
+    initNewBuyButton: (button) => {
+        initNewBuyButton(button);
+    },
+    cache: {}, // for storing cache data for current request
+};
+
+const initNewBuyButton = (button) => {
+    const BuyButton = DynamicComponent({
+        loader: () => import('./Components/BuyButton'),
+    });
+    const {
+        articleNumber,
+        quantityFieldId,
+        href,
+        cssClass,
+        label,
+    } = button.dataset;
+    renderReact(
+        <Provider store={window.__pn.store}>
+            <BuyButton
+                {...{
+                    label,
+                    articleNumber,
+                    quantityFieldId,
+                    href,
+                    cssClass,
+                }}
+            />
+        </Provider>,
+        button
+    );
+}
+
+export const bootstrapPNComponents = () => {
+    // PRODUCT PAGE IMAGES
+    const lightBoxImagesEl = document.getElementById('lightBoxImages');
+    if (lightBoxImagesEl) {
+        const LightboxImages = DynamicComponent({
+            loader: () => import('./_Solution/Components/LightboxImages'),
+        });
+        import('./Reducers/LightboxImages.reducer').then(
+            ({ lightboxImages }) => {
+                window.__pn.store.injectReducer('lightboxImages', lightboxImages);
+                const rootElement = lightBoxImagesEl;
+                const images = Array.from(
+                    rootElement.querySelectorAll('template')
+                ).map((img) => ({
+                    html: img.innerHTML,
+                    src: img.dataset.src,
+                }));
+                renderReact(
+                    <Provider store={window.__pn.store}>
+                        <LightboxImages images={images} />
+                    </Provider>,
+                    lightBoxImagesEl
+                );
+            }
+        );
+    }
+    // END PRODUCT PAGE IMAGES
 
     // ICONS
     const iconEls = document.querySelectorAll('.pn-icon');
@@ -25,7 +87,7 @@ export const pnBootstrapComponents = (store) => {
         iconEls.forEach((elem) => {
             const { iconName, title, width, height } = elem.dataset;
             ReactDOM.render(
-                <Provider store={store}>
+                <Provider store={window.__pn.store}>
                     <PnIcon iconName={iconName} title={title} width={width} height={height} />
                 </Provider>,
                 elem
@@ -34,111 +96,92 @@ export const pnBootstrapComponents = (store) => {
     }
 
     // ADDONS
-    // MediaCatalog
-    const mediaCatalog = document.getElementById("media-catalog");
-    if (mediaCatalog) {
-        const MediaCatalog = DynamicComponent({
-            loader: () => import('./_Addons/MediaCatalog/Components/MediaCatalogContainer'),
-        });
-        const { mediaFolderId, mediaFolderAlternativeName, mediaFolderAlternativeView } = mediaCatalog.dataset;
-        const useAltMediaView = mediaFolderAlternativeView?.toLowerCase() === 'true';
-        renderReact(
-            <Provider store={store}>
-                <MediaCatalog mediaFolderId={mediaFolderId} alternativeFolderName={mediaFolderAlternativeName} useAltMediaView={useAltMediaView} />
-            </Provider>,
-            mediaCatalogs
-        );
-    }
-    // END MediaCatalog
+
+//PandoNexis: BEGIN  COMPONENT
     // CollectionPage
     const collectionPage = document.getElementById("collectionPage");
     if (collectionPage) {
         const CollectionPage = DynamicComponent({
-            loader: () => import('./_Addons/CollectionPage/Components/CollectionPageContainer'),
+            loader: () => import('./_Addons/PNCollectionPage/Components/CollectionPageContainer'),
         });
 
-        const { collectionPageSystemId } = collectionPage.dataset;
+        const { collectionPageSystemId, link, linkText } = collectionPage.dataset;
         renderReact(
-            <Provider store={store}>
-                <CollectionPage {...{ collectionPageSystemId }} />
+            <Provider store={window.__pn.store}>
+                <CollectionPage {...{ collectionPageSystemId, link, linkText }} />
             </Provider>,
             collectionPage
         );
     }
     // END CollectionPage
+// PNGenericDataView
+    const pnGenericDataView = document.querySelectorAll("[data-generic-view]");
+    
+    if (pnGenericDataView) {
+      
+        pnGenericDataView.forEach((elem, index) => {
 
-    // PN 3D background
-    const pnMainBackground = document.getElementById("pnMainBackground");
-    if (pnMainBackground) {
-        ReactDOM.render(
-            <Provider store={store}>
-                <PnBackground />
-            </Provider>,
-            pnMainBackground
-        );
-    }
-
-    // END PN 3D background
-
-    // GenericGridView
-    document.querySelectorAll('[data-field-configuration]').forEach((elem) => {
-        ReactDOM.render(
-            <Provider store={store}>
-                <FieldConfiguratorContainer type={elem.dataset.fieldConfiguration} />
-            </Provider>,
-            elem
-        );
-    });
-
-    document.querySelectorAll('[data-grid-view]').forEach((elem) => {
-        console.log(elem.dataset.gridView);
-        ReactDOM.render(
-            <Provider store={store}>
-                <GenericGridViewContainer type={elem.dataset.gridView} />
-            </Provider>,
-            elem
-        );
-    });
-
-    document.querySelectorAll('[data-dropzone]').forEach((elem) => {
-        ReactDOM.render(
-            <Provider store={store}>
-                <DropZoneContainer type={elem.dataset.dropzone} />
-            </Provider>,
-            elem
-        );
-    });
-
-
-    const reorderBtn = document.querySelectorAll('reorder-button');
-    if (reorderBtn.length > 0) {
-        const ReorderButton = DynamicComponent({
-            loader: () => import('./Components/ReorderButton'),
+            const { appendToQuerySelector, viewTypes, dataType } = elem.dataset;
+            renderReact(
+                <Provider store={window.__pn.store}>
+                    <PNGenericDataViewContainer {...{ viewTypes, dataType }} />
+                </Provider>,
+                elem
+            );
         });
-        Array.from(reorderBtn).forEach(
-            (button) => {
-                const { cssClass, orderId, title } = button.dataset;
-                const label = button.innerText;
+    }
+    // END PNGenericDataView
+    // Logged on info
+    const loggedOnInfoLabels = document.querySelectorAll('.pn-info-label');
+    if (loggedOnInfoLabels) {
+        const LoggedOnInfoLabel = DynamicComponent({
+            loader: () => import('./_Addons/PNLoggedOnInfoLabel/Components/LoggedOnInfoLabelContainer'),
+        });
+
+        loggedOnInfoLabels.forEach((elem, index) => {
+            const { heading } = elem.dataset;
+            renderReact(
+                <Provider store={window.__pn.store}>
+                    <LoggedOnInfoLabel getData={index === 0} heading={heading || ''} />
+                </Provider>,
+                elem
+            );
+        });
+    }
+    // END Logged on info
+    // OrganizationSelector
+    const organizationSelectors = document.querySelectorAll(".pn-organization-selector");
+    if (organizationSelectors) {
+
+        const OrganizationSelector = DynamicComponent({
+            loader: () => import('./_Addons/PNOrganizationSelector/Components/OrganizationSelectorContainer'),
+        });
+        Array.from(organizationSelectors).forEach(
+            (organizationSelector) => {
                 renderReact(
-                    <Provider store={store}>
-                        <ReorderButton {...{ label, title, cssClass, orderId }} />
+                    <Provider store={window.__pn.store}>
+                        <OrganizationSelector />
                     </Provider>,
-                    button
+                    organizationSelector
                 );
-            }
-        );
+            });
     }
-
-    const headerInformationData = document.getElementById('headerInformationData');
-    if (headerInformationData) {
-        ReactDOM.render(
-            <Provider store={store}>
-                <HeaderInformationDataContainer />
+    // END OrganizationSelector
+ 
+    // 3D Background
+    const threeDBg = document.getElementById("pnMainBackground");
+    if (threeDBg) {
+        const ThreeDBg = DynamicComponent({
+            loader: () => import('./_Addons/PNThreeDeeBg/Background'),
+        });
+        renderReact(
+            <Provider store={window.__pn.store}>
+                <ThreeDBg />
             </Provider>,
-            headerInformationData
+            threeDBg
         );
     }
-    // END GenericGridView
+    // END 3D Background
 
-    // END ADDONS
-};
+//PandoNexis: END COMPONENT
+}

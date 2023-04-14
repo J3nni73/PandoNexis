@@ -12,7 +12,6 @@ using Litium.Accelerator.Services;
 using Litium.Accelerator.Utilities;
 using Litium.Accelerator.ViewModels.Checkout;
 using Litium.Accelerator.ViewModels.Persons;
-using Litium.ComponentModel;
 using Litium.Customers;
 using Litium.FieldFramework;
 using Litium.FieldFramework.FieldTypes;

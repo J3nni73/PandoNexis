@@ -8,13 +8,14 @@ import app, { createReducer } from './reducers';
 import { historyMiddleware } from './Middlewares/History.middleware';
 import MiniCart from './_Solution/Components/MiniCart'; // Pando Nexis Change. Old:  './Components/MiniCart';
 import QuickSearch from './_Solution/Components/QuickSearch'; // Pando Nexis Change. Old:  './Components/QuickSearch';
-import Navigation from './_PandoNexis/Components/Navigation'; // Pando Nexis Change. Old:  './Components/Navigation'; 
-import FacetedSearch from './Components/FacetedSearch';
-import FacetedSearchCompactContainer from './Components/FacetedSearchCompactContainer';
+import Navigation from './_PandoNexis/Components/Navigation'; // Pando Nexis Change. Old:  './ Components / Navigation'; 
+import FacetedSearch from './_PandoNexis/Components/FacetedSearch'; // Pando Nexis Change. Old: './Components/FacetedSearch';
+import FacetedSearchCompactContainer from './_PandoNexis/Components/FacetedSearchCompactContainer'; // Pando Nexis Change. Old: './Components/FacetedSearchCompactContainer'
 import DynamicComponent from './Components/DynamicComponent';
 
 // Pando Nexis JS
-import {pnBootstrapComponents} from './pandoNexis.js';
+import { bootstrapPNComponents } from './pandoNexis.js';
+window.__pn = window.__pn || {};
 // END Pando Nexis JS
 
 window.__litium = window.__litium || {};
@@ -53,6 +54,7 @@ const renderReact = (element, container, callback) => {
     registeredContainers.push(container);
     ReactDOM.render(element, container, callback);
 };
+
 
 window.onunload = () => {
     // make sure components are unmounted, redux's listener are unsubscribed
@@ -136,29 +138,7 @@ const bootstrapComponents = () => {
             document.getElementById('checkout')
         );
     }
-    if (document.getElementById('lightBoxImages')) {
-        const LightboxImages = DynamicComponent({
-            loader: () => import('./Components/LightboxImages'),
-        });
-        import('./Reducers/LightboxImages.reducer').then(
-            ({ lightboxImages }) => {
-                store.injectReducer('lightboxImages', lightboxImages);
-                const rootElement = document.getElementById('lightBoxImages');
-                const images = Array.from(
-                    rootElement.querySelectorAll('template')
-                ).map((img) => ({
-                    html: img.innerHTML,
-                    src: img.dataset.src,
-                }));
-                renderReact(
-                    <Provider store={store}>
-                        <LightboxImages images={images} />
-                    </Provider>,
-                    document.getElementById('lightBoxImages')
-                );
-            }
-        );
-    }
+    
 
     if (document.querySelectorAll('.slider').length > 0) {
         const Slider = DynamicComponent({
@@ -223,8 +203,13 @@ const bootstrapComponents = () => {
         );
     }
 
-    // Pando Nexis bootstrap
-    pnBootstrapComponents(store);
+    // Pando Nexis trigger components
+    window.__pn.store = store; 
+    window.__pn.registeredContainers = registeredContainers;
+    if (bootstrapPNComponents) {
+        bootstrapPNComponents();
+    }
+    // END Pando Nexis trigger components
 };
 
 bootstrapComponents();

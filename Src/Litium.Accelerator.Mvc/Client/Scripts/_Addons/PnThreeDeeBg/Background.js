@@ -1,6 +1,9 @@
 import React, { Fragment, useState, useEffect, useRef, memo } from "react";
 import CELLS from "./vendor/vanta.cells";
 import CLOUDS2 from "./vendor/vanta.clouds";
+import HALO from "./vendor/vanta.halo";
+import RIPPLE from "./vendor/vanta.ripple";
+import WAVES from "./vendor/vanta.waves";
 
 import * as THREE from 'three';
 const Background = (props) => {
@@ -12,7 +15,7 @@ const Background = (props) => {
         mouseControls: false,
         touchControls: false,
         gyroControls: false,
-        scale: 1.0,
+        scale: 2.0, 
         color1: 0x303904,
         color2: 0x52047f,
         THREE: THREE
@@ -31,14 +34,64 @@ const Background = (props) => {
         texturePath: "./images/noise.png",
         THREE: THREE
     };
+    const haloOptions = {
+        mouseEase: false,
+        mouseControls: false,
+        touchControls: false,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        THREE: THREE
+    };
+    const rippleOptions = {
+        color1: 0xeeaaff,
+        color2: 0xcceeff,
+        backgroundColor: 0x000010,
+        amplitudeFactor: 1.0,
+        ringFactor: 4.0,
+        rotationFactor: 0.1,
+        speed: 1.0,
+        scaleMobile: 4,
+        THREE: THREE
+    };
+
+    const waveOptions = {
+        mouseControls: false,
+        touchControls: false,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0x005588,
+        shininess: 30,
+        waveHeight: 15,
+        waveSpeed: .4,
+        THREE: THREE
+    };
     const [effectLoaded, setEffectLoaded] = useState(false);
     useEffect(() => {
         if (vantaEffect && effectLoaded) {
             vantaEffect.destroy();
-            setVantaEffect(
-                theme === 'clouds' ?
-                    CLOUDS2({ ...cloudOptions, el: mainBg.current }) :
-                    CELLS({ ...cellsOptions, el: mainBg.current }));
+            switch (theme) {
+                case 'clouds':
+                    setVantaEffect(CLOUDS2({ ...cloudOptions, el: mainBg.current }));
+                    break;
+                case 'cells':
+                    setVantaEffect(CELLS({ ...cellsOptions, el: mainBg.current }));
+                    break;
+                case 'halo':
+                    setVantaEffect(HALO({ ...haloOptions, el: mainBg.current }));
+                    break;
+                case 'ripple':
+                    setVantaEffect(RIPPLE({ ...haloOptions, el: mainBg.current }));
+                    break;
+                case 'waves':
+                    setVantaEffect(WAVES({ ...waveOptions, el: mainBg.current }));
+                    break;
+
+                default: break;
+            }
         }
         return () => {
             if (vantaEffect) vantaEffect.destroy();
@@ -47,17 +100,31 @@ const Background = (props) => {
 
     useEffect(() => {
         if (!vantaEffect) {
-            setVantaEffect(
-                theme === 'clouds' ?
-                    CLOUDS2({ ...cloudOptions, el: mainBg.current }) :
-                    CELLS({ ...cellsOptions, el: mainBg.current }));
+            switch (theme) {
+                case 'clouds':
+                    setVantaEffect(CLOUDS2({ ...cloudOptions, el: mainBg.current }));
+                    break;
+                case 'cells':
+                    setVantaEffect(CELLS({ ...cellsOptions, el: mainBg.current }));
+                    break;
+                case 'halo':
+                    setVantaEffect(HALO({ ...haloOptions, el: mainBg.current }));
+                    break;
+                case 'ripple':
+                    setVantaEffect(RIPPLE({ ...rippleOptions, el: mainBg.current }));
+                    break;
+                case 'waves':
+                    setVantaEffect(WAVES({ ...waveOptions, el: mainBg.current }));
+                    break;
+                default: break;
+            }
             setEffectLoaded(true);
         }
         return () => {
             if (vantaEffect) vantaEffect.destroy();
         };
     }, [vantaEffect]);
-
+    //return null;
     return (
         <Fragment>
             <div className={`pn-main-background__container pn-main-background__${theme}`} ref={mainBg}>

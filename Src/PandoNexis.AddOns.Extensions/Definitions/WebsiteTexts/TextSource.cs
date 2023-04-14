@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PandoNexis.AddOns.Extensions.Definitions.WebsiteTexts
+﻿namespace PandoNexis.AddOns.Extensions.Definitions.WebsiteTexts
 {
     public class TextSource : IWebsiteTextSource
     {

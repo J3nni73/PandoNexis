@@ -1,0 +1,68 @@
+.brand-block {
+    color: $color-primary;
+    background-color: rgba(255,255,255,.2);
+    padding: rem(15px);
+    margin-bottom: rem(15px);
+    @include border-radius(rem(24px));
+    border: 1px solid rgba(255,255,255,.4);
+    @include backdrop-filter(blur(24px));
+    @include box-shadow(0, 0, 14px,0, rgba($general-shadow-color, .2), inset);
+
+
+    > .column-block {
+        padding: rem(0 24px);
+        margin-bottom: 0;
+    }
+
+    @include mobile {
+        margin: rem(8px -8px);
+        border-radius: 0;
+    }
+
+    img {
+        max-height: rem(222px);
+        object-fit: contain;
+        object-position: center;
+    }
+
+    &__header {
+        margin: auto;
+        max-width: rem(400px);
+        text-align: center;
+    }
+
+    &__title {
+        font-size: rem(36px);
+        border-bottom: 4px solid $solution-line-color;
+        padding: rem(10px 0 5px);
+        margin-bottom: rem(10px);
+        color: $color-black-light;
+    }
+
+    &__link {
+        font-style: italic;
+        text-decoration: underline;
+        color: $color-black-light;
+        text-align: center;
+        display: block;
+        letter-spacing: .05rem;
+
+        &:focus, &:active, &:hover {
+            color: $solution-link-color-hover;
+        }
+    }
+
+    &__image-link {
+        padding: rem(10px 0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__image {
+        width: 100%;
+        max-width: 100%;
+    }
+}

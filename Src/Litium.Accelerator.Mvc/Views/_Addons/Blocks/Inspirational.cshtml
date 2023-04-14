@@ -1,12 +1,15 @@
-﻿@using PandoNexis.AddOns.Extensions.Block.InspirationalBlock
+@using PandoNexis.AddOns.Extensions.Block.InspirationalBlock
 @model InspirationalBlockViewModel
 @{
     var sectionsclass = string.Empty;
     var negativeMargin = string.Empty;
+    var isFullWidthTopClass = string.Empty;
     var fullWidth = string.Empty;
     var extraPadding = string.Empty;
     var textColor = string.Empty;
-    var backgroundColor = Model.Background;
+    var test = Model.Background;
+    var textBackgroundColor = !Model.UseFullWidthBackgroundColor?Model.Background: string.Empty;
+    var fullWidthBackgroundColor = Model.UseFullWidthBackgroundColor?Model.Background: string.Empty;
     //if (backgroundColor == "thirdColor")
     //{
     //    textColor = "white";
@@ -17,12 +20,13 @@
     }
     if (Model.FullWidth)
     {
+        isFullWidthTopClass = "is-full-width";
         extraPadding = "extra-padding";
     }
 }
 @if (Model.Items.Any())
 {
-    <div class="inspirational-block @backgroundColor">
+    <div class="inspirational-block @fullWidthBackgroundColor @isFullWidthTopClass">
         @if (Model.Items.Any())
         {
             @foreach (var item in Model.Items)
@@ -39,7 +43,7 @@
 
                 <div class="@sectionsclass @fullWidth">
                     @*section1*@
-                    <div class="inspirational-block__sectionleft @extraPadding">
+                    <div class="inspirational-block__sectionleft @extraPadding @textBackgroundColor">
                         <h3 class="inspirational-block__subtitle">
                             @item.BlockSubTitle
                         </h3>

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Litium.Accelerator.Definitions.WebsiteTexts
+﻿namespace Litium.Accelerator.Definitions.WebsiteTexts
 {
     public class TextSource : IWebsiteTextSource
     {

@@ -537,6 +537,7 @@ namespace Litium.Accelerator.Search.Indexing.Products
                     case SystemFieldTypeConstants.MultirowText:
                     case SystemFieldTypeConstants.Object:
                     case SystemFieldTypeConstants.Pointer:
+                    case SystemFieldTypeConstants.Link:
                         // skip adding the tag, it is data that not should be filtered on
                         continue;
 

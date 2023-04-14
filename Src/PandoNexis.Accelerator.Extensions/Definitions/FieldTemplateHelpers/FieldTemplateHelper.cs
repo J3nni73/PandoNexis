@@ -1,13 +1,6 @@
-﻿using Litium.Accelerator.Constants;
-using Litium.Connect.Erp.Import;
-using Litium.FieldFramework;
+﻿using Litium.FieldFramework;
 using Litium.Runtime.DependencyInjection;
 using PandoNexis.Accelerator.Extensions.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers
 {
@@ -69,6 +62,20 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers
             return new FieldTemplateChanges()
             {
                 TemplateType = FieldTemplateHelperConstants.FileFieldTemplate,
+                DisplayTemplate = "",
+                TemplateName = template,
+                FieldGroupType = FieldTemplateHelperConstants.FieldTemplateFieldGroup,
+                FieldGroupName = fieldgroup,
+                Field = field
+            };
+
+        }
+        public FieldTemplateChanges GetOrganizationField(string template, string fieldgroup, string field)
+        {
+
+            return new FieldTemplateChanges()
+            {
+                TemplateType = FieldTemplateHelperConstants.OrganizationFieldTemplate,
                 DisplayTemplate = "",
                 TemplateName = template,
                 FieldGroupType = FieldTemplateHelperConstants.FieldTemplateFieldGroup,

@@ -1,4 +1,4 @@
-﻿@using PandoNexis.AddOns.Extensions.Block.HeroBlock
+@using PandoNexis.AddOns.Extensions.Block.HeroBlock
 @model HeroBlockViewModel
 @{
     var narrow = string.Empty;
@@ -35,7 +35,6 @@
             {
                 <h2 class="hero-block__text-wrapper__title-alt-color">@Model.BlockTitle2</h2>
             }
-            
             @if (!string.IsNullOrEmpty(Model.BlockSubTitle))
             {
                 <h3 class="hero-block__text-wrapper__subtitle">@Model.BlockSubTitle</h3>
@@ -65,7 +64,7 @@
             {
                 <div class="overlay"></div>
             }
-            @Html.ImageFor(x => Model.BlockMobilImage)
+            @Html.ImageFor(x => Model.BlockMobileImage)
         </div>
         <div class="hero-block__image @overlayImageLeftPosition">
             @Html.ImageFor(x => Model.BlockOverlayImage)

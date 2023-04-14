@@ -19,7 +19,6 @@ namespace Litium.Accelerator.Mvc
 
         public IConfiguration Configuration { get; }
 
-
         // This method gets called by the runtime. Use this method to add services to the container.
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Simplification", "RCS1021:Convert lambda expression body to expression-body.", Justification = "<Pending>")]
         public void ConfigureServices(IServiceCollection services)
@@ -27,7 +26,7 @@ namespace Litium.Accelerator.Mvc
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = _ => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
                 options.Secure = CookieSecurePolicy.SameAsRequest;
             });
@@ -48,10 +47,10 @@ namespace Litium.Accelerator.Mvc
             {
                 options.ViewLocationFormats.Add("/Views/Blocks/{0}" + RazorViewEngine.ViewExtension);
             })
-            #if DEBUG
+#if DEBUG
             .AddRazorRuntimeCompilation()
 #endif
-                        .AddNewtonsoftJson();
+            .AddNewtonsoftJson();
 
             services.AddSession(options =>
             {

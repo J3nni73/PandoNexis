@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Litium.Accelerator.Builders;
+﻿using Litium.Accelerator.Builders;
 
 namespace PandoNexis.AddOns.Extensions.PNOrganizationSelector.ViewModels
 {

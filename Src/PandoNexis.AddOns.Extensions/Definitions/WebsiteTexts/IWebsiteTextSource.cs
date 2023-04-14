@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Litium.Runtime.DependencyInjection;
+﻿using Litium.Runtime.DependencyInjection;
 
 namespace PandoNexis.AddOns.Extensions.Definitions.WebsiteTexts
 {

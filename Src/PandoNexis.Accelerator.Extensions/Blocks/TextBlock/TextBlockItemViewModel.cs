@@ -4,7 +4,6 @@ using JetBrains.Annotations;
 using Litium.Accelerator.Builders;
 using Litium.FieldFramework;
 using System.Globalization;
-using Litium.Web.Models;
 using PandoNexis.Accelerator.Extensions.ViewModels;
 using PandoNexis.Accelerator.Extensions.Constants;
 

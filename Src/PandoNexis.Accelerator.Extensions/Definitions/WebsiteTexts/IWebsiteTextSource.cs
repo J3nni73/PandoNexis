@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Litium.Runtime.DependencyInjection;
+﻿using Litium.Runtime.DependencyInjection;
 
 namespace Litium.Accelerator.Definitions.WebsiteTexts
 {

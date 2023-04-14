@@ -1,0 +1,156 @@
+$column-text-color: $solution-page-font-color;
+
+.column-block {
+    padding: 2rem 0;
+
+    &__subtitle {
+        /*font-weight: $font-weight-extra-bold;*/
+        /*font-size: $fontsize-sub-text;*/
+        color: $column-text-color;
+        text-transform: uppercase;
+        margin-bottom: rem(8px);
+    }
+
+    &__title {
+        /*font-weight: $font-weight-normal;*/
+        font-size: $fontsize-h2;
+        color: $column-text-color;
+        padding-bottom: 1rem;
+    }
+
+    &__text-wrapper {
+        display: flex;
+        padding-bottom: rem(44px);
+        gap: 1rem;        
+        @media (max-width: $large-mobile-width) {
+            display: grid;
+            gap: 0;
+            padding-bottom: rem(20px);
+        }
+    }
+
+    &__text {
+        /* font-weight: $font-weight-bold;*/
+        font-size: $fontsize-normal;
+        color: $column-text-color;
+    }
+
+    &__items {
+        padding-bottom: rem(70px);
+    }
+
+    &__item-row {
+
+
+        &__header-wrapper {
+            padding-bottom: rem(24px);
+            align-items: center;
+        }
+
+        &__title {
+            /*font-weight: $font-weight-extra-bold;*/
+            /*font-size: $fontsize-sub-text;*/
+            color: $column-text-color;
+            text-transform: uppercase;
+            word-break: break-word;
+            padding-right: 1rem;
+            margin: 0;
+            font-size: rem(20px);
+        }
+
+        &__text {
+            /*font-size: $fontsize-sub-text;*/
+            /*font-weight: $font-weight-bold;*/
+        }
+
+        &__image-wrapper {
+            width: rem(69px);
+            height: rem(69px);
+        }
+    }
+
+    &__summary {
+        background-color: $color-primary;
+        padding: rem(40px) 0;
+
+        &__text {
+            color: $color-white;
+            line-height: 1.7;
+
+            li {
+                list-style-type: disc;
+                margin-left: 1rem;
+                /*font-weight: $font-weight-black;*/
+            }
+
+            p {
+                /* font-size: $fontsize-sub-text;
+                font-weight: $font-weight-bold;*/
+            }
+
+            h1,
+            h2,
+            h3 {
+                /*font-weight: $font-weight-normal;*/
+            }
+        }
+
+        &__button-subtext-wrapper {
+            padding-top: 1rem;
+        }
+
+        &__subtext {
+            color: $color-white;
+            /* font-weight: $font-weight-black;
+            font-size: $fontsize-base;*/
+        }
+
+        &__button {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+
+            .primaryCTA {
+                min-width: rem(212px);
+                width: auto;
+                height: rem(44px);
+                border-radius: rem(50px);
+                border: 2px solid $column-text-color;
+                color: $column-text-color;
+                padding: 0.5rem 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /*font-weight: $font-weight-bold;*/
+                background-color: $color-white;
+            }
+
+            .secondaryCTA {
+                min-width: rem(212px);
+                width: auto;
+                height: rem(44px);
+                border-radius: rem(50px);
+                padding: 0.5rem 1rem;
+                color: $color-white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /*font-weight: $font-weight-bold;*/
+            }
+
+            .thirdCTA {
+                min-width: rem(212px);
+                width: auto;
+                height: rem(44px);
+                border-radius: rem(50px);
+                border: 2px solid $color-white;
+                padding: 0.5rem 1rem;
+                color: $color-white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /*font-weight: $font-weight-bold;*/
+            }
+        }
+    }
+}

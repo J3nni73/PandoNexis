@@ -1,13 +1,15 @@
 $bg-color-dark: #cceaff;
-$bg-color-odd-row: #aabbcc;
+$bg-color-odd-row: #99aabb;
 $off-canvas-bg-color-dark: $bg-color-dark;
 $off-canvas-bg-color-light: rgba($bg-color-light, .95);
 
-$header-bg-color-dark: $bg-color-odd-row;
-$header-bg-color-light: $bg-color-light;
+$grid-view-icon-color: #abbee0;
+$grid-view-header-bg-color-dark: $bg-color-odd-row;
+$grid-view-header-bg-color-light: $bg-color-light;
 $gridview-background-angle: 50;
 
 .generic-grid-view {
+    font-family: $font-family-condensed;
     font-size: $fontsize-small;
 
     &-container {
@@ -18,14 +20,14 @@ $gridview-background-angle: 50;
             position: sticky;
             left: 0;
             padding: 4px;
+            border-spacing: 0;
         }
 
         .row {
             max-width: none;
             /*@include box-shadow(0, 0, 6px, 0, rgba(0, 0, 0, 0.14));*/
 
-            // Todo: PN ADD LATER
-            // @include image-border-tiny;
+            @include image-border-tiny;
             background: rgba(255, 255, 255, .8);
         }
 
@@ -195,6 +197,7 @@ $gridview-background-angle: 50;
         /* Breaks height (and autocomplete gets hidden) when few items in grid */
         /* @include table-scroll; */
 
+
         border-collapse: collapse;
         width: 100%;
         margin-bottom: 1rem;
@@ -207,7 +210,7 @@ $gridview-background-angle: 50;
         //display: flex;
 
         @include mobile {
-            max-height: none;
+            // max-height: none;
             min-height: auto;
             margin-bottom: 0;
         }
@@ -231,9 +234,9 @@ $gridview-background-angle: 50;
         }
         /* Handle on hover */
         &::-webkit-scrollbar-thumb:hover {
-            // Todo: PN ADD LATER
-            // @include bg--violet;
-            border: 1px solid rgba($breadcrumbs-bg-color-dark-base, .6);
+            /*@include bg--violet;*/
+            border: 1px solid rgba($color-navy, .3);
+            background: rgba($color-navy, .2);
         }
     }
 
@@ -254,7 +257,7 @@ $gridview-background-angle: 50;
                 opacity: .6;
 
                 svg {
-                    fill: darken($bg-color-odd-row, 20%);
+                    fill: lighten($grid-view-icon-color, 10%);
                 }
             }
 
@@ -265,7 +268,7 @@ $gridview-background-angle: 50;
                 svg {
                     height: rem(20px);
                     width: rem(20px);
-                    fill: darken($bg-color-odd-row, 30%);
+                    fill: lighten($grid-view-icon-color, 5%);
                 }
 
                 &:hover {
@@ -284,8 +287,6 @@ $gridview-background-angle: 50;
                 &:hover {
                     opacity: 1;
                 }
-                // Todo: PN ADD LATER
-                // @include close-btn;
             }
         }
 
@@ -303,8 +304,8 @@ $gridview-background-angle: 50;
                 @include transition(background, 0.3s);
                 content: '';
                 position: absolute;
-                background: rgba($header-bg-color-dark, .3);
-                border: 1px solid rgba($header-bg-color-dark, .4);
+                background: rgba($grid-view-header-bg-color-dark, .3);
+                border: 1px solid rgba($grid-view-header-bg-color-dark, .4);
                 left: rem(-4px);
                 top: 0;
                 width: rem(54px);
@@ -312,7 +313,7 @@ $gridview-background-angle: 50;
                 padding: 0;
                 opacity: 1;
 
-                @include box-shadow(3px, 3px, 6px, 0px, rgba(darken($header-bg-color-dark, 20%), 0.2));
+                @include box-shadow(3px, 3px, 6px, 0px, rgba(darken($grid-view-header-bg-color-dark, 20%), 0.2));
             }
 
             & > span {
@@ -337,10 +338,10 @@ $gridview-background-angle: 50;
                     width: rem(32px);
                     height: rem(32px);
                     left: rem(-16px);
-                    background: rgba(darken($header-bg-color-dark, 20%), .8);
-                    border: 1px solid rgba($header-bg-color-dark, 0);
+                    background: rgba(darken($grid-view-header-bg-color-dark, 20%), .8);
+                    border: 1px solid rgba($grid-view-header-bg-color-dark, 0);
                     @include rotate(45);
-                    @include box-shadow(0, 0, 1px, 0px, rgba(darken($header-bg-color-dark, 20%), 0.9));
+                    @include box-shadow(0, 0, 1px, 0px, rgba(darken($grid-view-header-bg-color-dark, 20%), 0.9));
                 }
 
                 > span {
@@ -372,7 +373,7 @@ $gridview-background-angle: 50;
             display: block;
             border: 5px solid rgba(darken($bg-color-odd-row, 5%), .64);
             background: rgba(255,255,255,.98);
-            @include box-shadow(14px, 14px, 8px, 0px, rgba(darken($header-bg-color-dark, 20%), 0.3));
+            @include box-shadow(14px, 14px, 8px, 0px, rgba(darken($grid-view-header-bg-color-dark, 20%), 0.3));
             //box-shadow: 0 0 8px rgba($color-primary, .5);
         }
 
@@ -420,13 +421,6 @@ $gridview-background-angle: 50;
         }
 
         @include mobile {
-            position: fixed;
-            top: 131px;
-            left: 1px;
-            margin: 1px;
-            width: calc(100vw - 4px);
-            height: calc(100vh - 84px);
-            overflow-y: auto;
 
             &__grid {
                 grid-template-columns: repeat(2, .5fr);
@@ -438,6 +432,8 @@ $gridview-background-angle: 50;
         width: 100%;
         overflow-x: auto;
         position: relative;
+        border-spacing: 0;
+        color: $color-navy;
 
         thead th,
         thead td,
@@ -456,7 +452,15 @@ $gridview-background-angle: 50;
             left: 0;
             top: 0px;
             z-index: 3;
-            font-size: rem(14px);
+            font-size: rem(12px);
+            color: $color-navy;
+            font-style: italic;
+            letter-spacing: .001rem;
+            font-weight: 500;
+            background: rgba($color-white, .9);
+            border-bottom: 2px solid $bg-color-odd-row;
+            padding: rem(4px 6px);
+            text-align: left;
 
             &.ascending::after {
                 content: '\21E9';
@@ -478,12 +482,9 @@ $gridview-background-angle: 50;
 
         tbody {
             tr:nth-child(odd) {
-                @include gradient($gridview-background-angle,rgba($bg-color-odd-row, .5), lighten($bg-color-odd-row, 25%));
-                @include box-shadow(0, 0, 3px, 0px, rgba(darken($bg-color-odd-row, 20%), 0.34), inset);
-                border-bottom: 1px solid rgba($bg-color-odd-row, 0.9);
-                border-top: 1px solid rgba($bg-color-odd-row, 0.9);
-                // Todo: PN ADD LATER
-                //@include image-border-tiny;
+                @include gradient($gridview-background-angle,rgba($bg-color-odd-row, .5), lighten($bg-color-odd-row, 5%));
+                border-bottom: 1px solid rgba(darken($bg-color-odd-row, 20%), 0.9);
+                border-top: 1px solid rgba(darken($bg-color-odd-row, 20%), 0.9);
             }
 
             tr:nth-child(even) {
@@ -517,7 +518,7 @@ $gridview-background-angle: 50;
         margin: auto;
         height: 100%;
         color: rgba($bg-color-odd-row, .6);
-        text-shadow: 4px 16px 10px rgba($color-primary, .2);
+        text-shadow: 6px 10px 4px rgba($color-primary, .1);
     }
 
     &__settings {
@@ -571,8 +572,7 @@ $gridview-background-angle: 50;
         }
 
         &-send {
-            // Todo: PN ADD LATER
-            // @include generalGridViewButton;
+            @include generalGridViewButton;
         }
     }
 
@@ -617,7 +617,7 @@ $gridview-background-angle: 50;
     &__dropdown-list {
         margin: 0;
         height: rem(32px);
-        padding: rem(6px);
+        padding: rem(4px);
         // width: fit-content;
 
         &[name='Quantity'] {
@@ -646,8 +646,7 @@ $gridview-background-angle: 50;
         &-export {
             margin-left: auto;
             @extend .button;
-            // Todo: PN ADD LATER
-            // @include button-gradient($color-orange);
+            @include button-gradient($color-orange);
 
             &:hover {
                 opacity: .8;
@@ -658,9 +657,7 @@ $gridview-background-angle: 50;
                 justify-self: center;
                 right: auto;
                 margin: auto;
-                // Todo: PN ADD LATER
-                // @include button-gradient($color-grey-darker);
-
+                @include button-gradient($color-grey-darker);
                 text-align: center;
                 width: auto;
             }
@@ -748,7 +745,7 @@ $gridview-background-angle: 50;
                         width: 100%;
                         height: 30px;
                         background: rgba($bg-color-dark, .98);
-                        color: $solution-color;
+                        color: $color-primary;
                         border-radius: 5px;
                         padding: 2px 8px;
                         font-size: rem($fontsize-tiny);
@@ -784,15 +781,13 @@ $gridview-background-angle: 50;
             color: transparent;
             height: 1px;
             border: none;
-            border-bottom: .2px dotted rgba($color-navy, .6);
         }
 
         button {
             margin-left: 16px;
 
             &.button-orange {
-                // Todo: PN ADD LATER
-                // @include button-gradient($color-orange);
+                @include button-gradient($color-orange);
             }
 
             width: 100% !important;
@@ -1024,8 +1019,7 @@ $gridview-background-angle: 50;
             transition: 0.2s;
             margin-bottom: 0;
             margin-right: 9px;
-            // Todo: PN ADD LATER
-            // @include gradient-bg(to right, $color-orange, darken($color-orange,10%));
+            @include gradient-bg(to right, $color-orange, darken($color-orange,10%));
 
             &:hover {
                 opacity: .8;

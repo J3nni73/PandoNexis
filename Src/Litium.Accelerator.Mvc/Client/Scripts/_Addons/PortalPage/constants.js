@@ -1,0 +1,2 @@
+export const PORTAL_PAGE_LOAD = 'PORTAL_PAGE_LOAD';
+export const PORTAL_PAGE_ERROR = 'PORTAL_PAGE_ERROR';

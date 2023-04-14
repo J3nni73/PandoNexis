@@ -1,8 +1,8 @@
 ﻿namespace PandoNexis.AddOns.Extensions.PNLoggedOnInfoLabel.ViewModels
 {
-    using System;
+    using Litium.Accelerator.Builders;
 
-    public class PersonInfo
+    public class PersonInfo: IViewModel
     {
         public string OrgId { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty;

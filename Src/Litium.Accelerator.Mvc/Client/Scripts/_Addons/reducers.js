@@ -1,13 +1,12 @@
-// Link in all MAIN addon reducers here
+import { pnCollectionPage } from './PNCollectionPage/reducers';
+import { pnGenericDataView } from './PNGenericDataView/reducers';
+import { pnLoggedOnInfoLabel } from './PNLoggedOnInfoLabel/reducers';
+import { pnOrganizationSelector } from './PNOrganizationSelector/reducers';
 
-import { pnMediaCatalog } from './MediaCatalog/reducers';
-import { pnCollectionPage } from './CollectionPage/reducers';
-import { pnGenericGridView } from './GenericGridView/reducers';
 
 export const addonReducers = {
-    ...pnMediaCatalog,  
     ...pnCollectionPage,
-    ...pnGenericGridView,
+    ...pnGenericDataView,
+    ...pnLoggedOnInfoLabel,
+    ...pnOrganizationSelector,
 };
-
-

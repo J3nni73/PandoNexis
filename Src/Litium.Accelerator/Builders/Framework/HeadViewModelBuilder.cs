@@ -39,7 +39,7 @@ namespace Litium.Accelerator.Builders.Framework
             _filterService = filterService;
         }
 
-        public HeadViewModel Build()
+        public virtual HeadViewModel Build()
         {
             var websiteModel = _requestModelAccessor.RequestModel.WebsiteModel;
             var pageModel = _requestModelAccessor.RequestModel.CurrentPageModel;

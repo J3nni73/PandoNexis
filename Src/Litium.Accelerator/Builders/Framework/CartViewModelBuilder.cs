@@ -60,7 +60,7 @@ namespace Litium.Accelerator.Builders.Framework
             _unitOfMeasurementService = unitOfMeasurementService;
         }
 
-        public CartViewModel Build(CartContext cartContext)
+        public virtual CartViewModel Build(CartContext cartContext)
         {
             if (cartContext is null)
             {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Litium.Accelerator.Builders.Menu;
@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
-//PandoExtensions: begin
+//PandoNexis: BEGIN EXTENSION
 using PandoNexis.Accelerator.Extensions.Services;
-//PandoExtensions: end
+//PandoNexis: END EXTENSION
+
+
 
 namespace Litium.Accelerator.Mvc.Controllers
 {
@@ -66,16 +68,23 @@ namespace Litium.Accelerator.Mvc.Controllers
             {
                 var menuModel = menuViewModelBuilder.Build();
                 masterName = menuModel.ShowLeftColumn
-                    //PandoExtensions: begin
+                    //PandoNexis: BEGIN EXTENSION
                     ? "~/Views/_PandoNexis/Shared/_LayoutWithLeftColumn.cshtml"
                     : "~/Views/_PandoNexis/Shared/_Layout.cshtml";
+
+                //PandoNexis: BEGIN ADDON PNThreeDeeBg
+                masterName = menuModel.ShowLeftColumn
+                    ? "~/Views/_Addons/Shared/_LayoutWithLeftColumn.cshtml"
+                    : "~/Views/_Addons/Shared/_Layout.cshtml";
+                //PandoNexis: END ADDON PNThreeDeeBg
             }
 
             var _PNFrameworkService = HttpContext.RequestServices.GetRequiredService<PNFrameworkService>();
             ViewData["PageCssClass"] = _PNFrameworkService.GetCurrentPageBodyCssClass();
-            
-            var _routeRequestLookupInfoAccessor = HttpContext.RequestServices.GetRequiredService<RouteRequestLookupInfoAccessor>();
+
             ViewData["IsSessionInit"] = string.IsNullOrEmpty(HttpContext.Session.GetString("_IsSessionInit"));
+
+            var _routeRequestLookupInfoAccessor = HttpContext.RequestServices.GetRequiredService<RouteRequestLookupInfoAccessor>();
             if (!_routeRequestLookupInfoAccessor.RouteRequestLookupInfo.IsInAdministration)
             {
                 ViewData["IsInAdmin"] = false;
@@ -84,11 +93,13 @@ namespace Litium.Accelerator.Mvc.Controllers
             {
                 ViewData["IsInAdmin"] = true;
                 ViewData["IsSessionInit"] = false;
-            }
-            
-            HttpContext.Session.SetString("_IsSessionInit", "true");
 
+            }
+
+            HttpContext.Session.SetString("_IsSessionInit", "true");
+            //ViewData["PaginationType"] = _infinityScrollService.GetPaginationType();
             //PandoExtensions: end
+            //PandoNexis: END EXTENSION
             ViewData["MasterName"] = masterName;
 
             return base.View(viewName, model);

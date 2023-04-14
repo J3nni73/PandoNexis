@@ -1,0 +1,47 @@
+﻿@using Litium.Web.Models;
+@using Litium.Accelerator.Constants;
+@using System.Drawing;
+@model PandoNexis.AddOns.Extensions.PNPortalPage.PortalAppPageViewModel
+@{
+    var responsiveDefinition = new ResponsiveImageDefinition()
+            {
+                SrcSets = new SrcSetDefinition[]
+                                        {
+            new (400),
+            new (800),
+            new (1000),
+            new (1314),
+                                        },
+                Sizes = new SizeDefinition[]
+                                        {
+            new ("100vw"),
+                                        },
+            };
+}
+
+@await Component.BlockContainerAsync(Model.Blocks, BlockContainerNameConstant.Header)
+<div class="row">
+    <div class="small-12 medium-8 columns">
+        @if (Model.Image != null)
+        {
+            <figure>
+                @Html.ImageFor(x => x.Image, maxSize: new Size(786, -1), renderSizeAttributes: true, responsiveDefinition: responsiveDefinition)
+                @if (!string.IsNullOrWhiteSpace(Model.Image.Alt))
+                {
+                    <figcaption>@Model.Image.Alt</figcaption>
+                }
+            </figure>
+        }
+        <h1>@Model.Title</h1>
+        @if (!string.IsNullOrWhiteSpace(Model.Introduction))
+        {
+            <p class="intro">@Model.Introduction</p>
+        }
+        <section class="portal-page__main-text">
+            @Html.Raw(Model.Text)
+        </section>
+    </div>
+</div>
+<div class="portal-page" id="portalPage" data-portal-page-system-id="@Model.PageId"></div>
+
+@await Component.BlockContainerAsync(Model.Blocks, BlockContainerNameConstant.Main)

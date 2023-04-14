@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using Litium.Accelerator.Constants;
-using Litium.Accelerator.Definitions;
+﻿using Litium.Accelerator.Definitions;
 using Litium.FieldFramework;
-using Litium.FieldFramework.FieldTypes;
 using Litium.Products;
 
 namespace PandoNexis.Accelerator.Extensions.Definitions.Products

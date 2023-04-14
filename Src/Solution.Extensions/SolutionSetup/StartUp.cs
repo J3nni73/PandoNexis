@@ -1,14 +1,8 @@
 ﻿using Litium.Accelerator.Definitions;
 using Litium.Runtime;
-using Litium.FieldFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Litium.Security;
-using PandoNexis.AddOns.Extensions.PNFilesToFieldConnect;
 using PandoNexis.Accelerator.Extensions.Database.Services;
+using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 
 namespace Solution.Extensions.SolutionSetup
 {
@@ -20,17 +14,20 @@ namespace Solution.Extensions.SolutionSetup
         private readonly IEnumerable<IDefinitionInit> _extraInit;
         private readonly SecurityContextService _securityContextService;
         private readonly IEnumerable<DatabaseInitiator> _databaseInitiator;
+        private readonly IEnumerable<FieldHelper> _fieldHelper;
 
         public Startup(
             IEnumerable<IDefinitionInit> extraInit,
             IEnumerable<IDefinitionSetup> extraSetup,
             SecurityContextService securityContextService,
-            IEnumerable<DatabaseInitiator> databaseInitiator)
+            IEnumerable<DatabaseInitiator> databaseInitiator,
+            IEnumerable<FieldHelper> fieldHelper)
         {
             _extraInit = extraInit;
             _extraSetup = extraSetup;
             _securityContextService = securityContextService;
             _databaseInitiator = databaseInitiator;
+            _fieldHelper = fieldHelper;
         }
 
         public void Start()
@@ -40,6 +37,12 @@ namespace Solution.Extensions.SolutionSetup
                 foreach (var item in _databaseInitiator)
                 {
                     item.GetCheckDatabaseObjects();
+                }
+
+                foreach(var item in _fieldHelper)
+                {
+                    item.HandleFieldOptions();
+                    item.HandleMultiFieldFields();
                 }
 
             }

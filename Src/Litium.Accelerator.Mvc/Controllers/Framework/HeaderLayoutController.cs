@@ -1,4 +1,4 @@
-﻿using Litium.Accelerator.ViewModels.Framework;
+using Litium.Accelerator.ViewModels.Framework;
 using Litium.Accelerator.Builders.Framework;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
@@ -26,8 +26,9 @@ namespace Litium.Accelerator.Mvc.Controllers.Framework
         {
             var viewModel = _headerViewModelBuilder.Build();
             //return View("~/Views/Framework/Header.cshtml", viewModel);
+
             //PandoExtensions: begin
-            return View("~/Views/_Solution/Framework/CenteredHeader.cshtml", viewModel);
+            return View("~/Views/_Solution/Framework/CenteredHeader.cshtml", viewModel); 
             //PandoExtensions: end
         }
     }

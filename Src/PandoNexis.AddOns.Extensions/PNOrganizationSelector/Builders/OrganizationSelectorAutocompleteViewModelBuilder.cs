@@ -23,7 +23,7 @@ namespace PandoNexis.AddOns.Extensions.PNOrganizationSelector.Builders
             _PNOrganizationService = pNOrganizationService;
         }
 
-        public virtual OrganizationSelectorAutocompleteViewModel Build()
+        public async virtual Task<OrganizationSelectorAutocompleteViewModel> BuildAsync()
         {
             var result = new List<OrganizationItem>();
             var organizationSelectorAutocompleteViewModel = new OrganizationSelectorAutocompleteViewModel();

@@ -7,11 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Litium.Web.WebApi.Abstractions" Version="8.7.2" />
+    <PackageReference Include="Litium.Web.WebApi.Abstractions" Version="8.8.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PandoNexis.AddOns.Extensions\PandoNexis.AddOns.Extensions.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PNPilot\Processors\" />
+  </ItemGroup>
+	
+	<ItemGroup>
+		<LitiumLocalization Include="PNPilot\Definitions\Administration*.resx" />
+	</ItemGroup>
 
 </Project>

@@ -23,6 +23,10 @@
 
     @include mobile {
         overflow-x: hidden;
+
+        > div.row {
+            padding: rem(0 16px 24px 16px);
+        }
     }
 }
 

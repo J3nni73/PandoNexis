@@ -1,5 +1,5 @@
 @mixin image-border-tiny {
-    @include box-shadow(2px, 0, 10px, -2px, rgba($bg-color-dark2, 0.64));
+    @include box-shadow(2px, 0, 10px, -2px, rgba($bg-color-dark, 0.64));
     border: 1px solid rgba(255,255,255,.4);
 }
 @mixin bg--violet {
@@ -14,6 +14,51 @@
     background: linear-gradient(to right, $breadcrumbs-bg-color-light, lighten($breadcrumbs-bg-color-dark,10%)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+@mixin button--underline {
+    &:not(.product-detail__buy-button) {
+        &:after {
+            content: '';
+            border: 1px solid $custom-green-dark;
+            border-radius: 4px;
+            background-color: $custom-green-dark;
+            width: 100%;
+            position: absolute;
+            bottom: -5px;
+            height: 3px;
+            left: 1px;
+            transition: all;
+            transition-duration: .2s;
+        }
+
+        color: inherit;
+        width: auto;
+        position: relative;
+        margin: 0;
+        padding: 0 !important;
+
+        &, &:active, &:hover, &:link {
+            background: none;
+        }
+
+        &:not(.disabled) {
+            &:hover {
+                background: none;
+                opacity: .95;
+
+                &:after {
+                    /*width: 95%;
+                left: calc(3% + 1px);*/
+                    margin-left: 4%;
+                    width: 92%;
+                }
+            }
+        }
+
+        &.disabled {
+            cursor: default;
+        }
+    }
+}
 @mixin generalGridViewButton {
     margin: rem(0 0 0 4px);
     height: 2rem;
@@ -64,14 +109,14 @@
     align-items: center;
     justify-content: center;
     margin: auto;
-    @include box-shadow(0, 0, 8px, 0, rgba($bg-color-dark2, 0.44));
+    @include box-shadow(0, 0, 8px, 0, rgba($bg-color-dark, 0.44));
     text-shadow: 0 1px 1px rgba($color-primary, .1);
-    border: .5px solid rgba($bg-color-dark2, 0.44);
+    border: .5px solid rgba($bg-color-dark, 0.44);
 
     &:hover {
-        color: rgba(lighten($bg-color-dark2, 20%), .8);
-        @include box-shadow(0, 0, 4px, 0, rgba(lighten($bg-color-dark2, 20%), 0.84));
-        border: .5px solid rgba(lighten($bg-color-dark2, 20%), 0.44);
+        color: rgba(lighten($bg-color-dark, 20%), .8);
+        @include box-shadow(0, 0, 4px, 0, rgba(lighten($bg-color-dark, 20%), 0.84));
+        border: .5px solid rgba(lighten($bg-color-dark, 20%), 0.44);
         text-shadow: none;
     }
 }

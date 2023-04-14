@@ -149,6 +149,7 @@
 
                 &--show {
                     transform: translateX(0);
+                    @include backdrop-filter(blur(24px));
                 }
             }
         }
@@ -197,25 +198,28 @@
         }
 
         &--menu {
-            &:before {
+            /*  &:before {
                 content: '';
                 display: inline-block;
                 @include icon;
                 @include icon--menu;
-            }
+            }*/
         }
 
         &--close {
             font-size: rem(24px);
             line-height: rem(24px);
-            margin-left: auto;
+            margin: rem(16px 8px auto auto);
 
-            &:before {
+            svg {
+                fill: rgba(255,255,255,.8);
+            }
+            /*&:before {
                 content: '';
                 display: inline-block;
                 @include icon--medium;
                 @include icon--cross;
-            }
+            }*/
         }
 
         &--open {

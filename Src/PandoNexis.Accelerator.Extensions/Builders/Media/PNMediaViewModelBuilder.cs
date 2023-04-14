@@ -4,7 +4,6 @@ using Litium.Runtime.AutoMapper;
 using PandoNexis.Accelerator.Extensions.ViewModel.Media;
 using Litium.Web.Administration.WebApi.Media.ViewModels;
 using JetBrains.Annotations;
-using Litium.Accelerator.Builders.Product;
 using Litium.Runtime.DependencyInjection;
 
 namespace PandoNexis.Accelerator.Extensions.Builders.Media
@@ -28,6 +27,10 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Media
 
         private MediaFilesAndFolders CreateStructure(Folder folder)
         {
+            if(folder==null || folder.SystemId == Guid.Empty)
+            {
+                return null;
+            }
             var childFolders = _folderService.GetChildFolders(folder.SystemId);
             List<MediaFilesAndFolders> filesAndFolders = null;
             if (childFolders != null && childFolders.Count() > 0)

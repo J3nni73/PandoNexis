@@ -1,6 +1,10 @@
 .subnav {
     margin-bottom: rem(16px);
 
+    @include tablet{
+        padding: rem(0 12px);
+    }
+
     &--compact {
         padding: rem(0 20px 10px);
     }

@@ -7,6 +7,6 @@
     <EmbeddedResource Include="dist\*.js.map" Condition=" '$(Configuration)' == 'Debug' " />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Litium.Web.Administration.Abstractions" Version="8.7.2" />
+    <PackageReference Include="Litium.Web.Administration.Abstractions" Version="8.8.0" />
   </ItemGroup>
 </Project>

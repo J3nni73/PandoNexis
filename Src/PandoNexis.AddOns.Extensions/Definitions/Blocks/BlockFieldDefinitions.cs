@@ -1,14 +1,8 @@
 ﻿using Litium.Accelerator.Definitions;
-using Litium.Accelerator.Search;
 using Litium.Blocks;
 using Litium.FieldFramework;
 using Litium.FieldFramework.FieldTypes;
 using PandoNexis.AddOns.Extensions.Block.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PandoNexis.AddOns.Extensions.Definitions.Blocks
 {
@@ -38,7 +32,7 @@ namespace PandoNexis.AddOns.Extensions.Definitions.Blocks
                 {
                     MultiCulture = false,
                 },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.BlockMobilImage, SystemFieldTypeConstants.MediaPointerImage)
+                new FieldDefinition<BlockArea>(BlockFieldNameConstants.BlockMobileImage, SystemFieldTypeConstants.MediaPointerImage)
                 {
                     MultiCulture = false,
                 },

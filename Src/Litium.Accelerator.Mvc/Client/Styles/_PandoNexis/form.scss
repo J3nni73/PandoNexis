@@ -1,0 +1,12 @@
+input {
+    @include input-placeholder {
+        /*font-style: italic;
+        color: rgba($solution-link-color, .8);*/
+    }
+}
+
+select {
+    &, &.form__input {
+        background: rgba($solution-body-bg-color, .92) !important;
+    }
+}

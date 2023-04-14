@@ -16,12 +16,33 @@
     }
 }
 
+@mixin tablet-all {
+    @media (min-width: #{$large-mobile-width}) and (max-width: #{$desktop-width - 1px}) {
+        @content;
+    }
+}
+
 @mixin scale($ratioX, $ratioY: 1) {
     -webkit-transform: scale($ratioX, $ratioY);
     -moz-transform: scale($ratioX, $ratioY);
     -ms-transform: scale($ratioX, $ratioY);
     -o-transform: scale($ratioX, $ratioY);
     transform: scale($ratioX, $ratioY);
+}
+
+@mixin gradient-bg ($direction: to right, $from-color, $to-color, $width: 100%) {
+    position: relative;
+    width: $width;
+    background: $from-color;
+    background: -webkit-linear-gradient($direction, $from-color, $to-color);
+    background: linear-gradient($direction, $from-color, $to-color);
+}
+
+@mixin transform($transforms) {
+    -webkit-transform: $transforms;
+    -moz-transform: $transforms;
+    -ms-transform: $transforms;
+    transform: $transforms;
 }
 
 @mixin rotate( $degrees ) {
@@ -62,9 +83,32 @@
     filter: $filter-type+unquote('(#{$filter-amount})');
 }
 
-@mixin chevron($size: 7px, $color: $color-white, $angle: 0) {
+
+// For a blury bg use
+@mixin backdrop-filter($filters) {
+    -webkit-backdrop-filter: $filters;
+    backdrop-filter: $filters;
+    //background-blend-mode: overlay;
+}
+
+@mixin blurry-backdrop($blurAmount: 4px, $useSaturate: true, $saturate: 180%, $brightness: 1.04 ) {
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        @if $useSaturate {
+            @include backdrop-filter(saturate($saturate) brightness($brightness) blur($blurAmount));
+        }
+        @else {
+            @include backdrop-filter(brightness(1.2) blur($blurAmount));
+        }
+    }
+}
+
+// Chevron / Arrow
+// Examples:
+// Arrow down:
+//      @include chevron(7px, $color-black, 45, 2px);
+@mixin chevron($size: 7px, $color: $color-white, $angle: 0, $border-width: 1px) {
     border: solid $color;
-    border-width: 0 1px 1px 0;
+    border-width: 0 rem($border-width) rem($border-width) 0;
     display: inline-block;
     padding: $size;
     pointer-events: none;
@@ -99,6 +143,19 @@
     -moz-border-radius-bottomleft: $bottomleft;
 }
 
+@mixin button-gradient($bg, $color: #fff, $direction: to right, $width: 100%) {
+    @include gradient-bg($direction, $bg, darken($bg,10%), $width);
+
+    &:hover:not([disabled]) {
+        @include gradient-bg($direction, lighten(rgba($bg, .9),5%), $bg, $width);
+        opacity: .9;
+    }
+
+    &[disabled] {
+        background-color: desaturate($bg, 80%) !important;
+    }
+}
+
 @mixin gradient($deg: 90, $color-start: $color-white, $color-end: #595959, $start-position: 0%, $end-position: 100%) {
     background: linear-gradient(#{$deg}deg, $color-start $start-position, $color-end $end-position);
     background: -moz-linear-gradient(#{$deg}deg, $color-start $start-position, $color-end $end-position);
@@ -106,6 +163,30 @@
     background: -o-linear-gradient(#{$deg}deg, $color-start $start-position, $color-end $end-position);
     background: -ms-linear-gradient(#{$deg}deg, $color-start $start-position, $color-end $end-position);
 }
+
+@mixin scroll-styling($width: 12px) {
+    /* width */
+    &::-webkit-scrollbar {
+        width: $width;
+    }
+    /* Track */
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 2px;
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: rgba($bg-color-odd-row, .3);
+        border-radius: 2px;
+    }
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        /*@include bg--violet;*/
+        border: 1px solid rgba($color-navy, .3);
+        background: rgba($color-navy, .2);
+    }
+}
+
 
 /*  timing function options:
     inherit|ease|ease-in|ease-out|ease-in-out|linear|step-start|step-end    */
@@ -133,4 +214,22 @@
     animation-fill-mode: $fillmode;
     animation-iteration-count: $iterationCount;
     animation-timing-function: $timingFunction;
+}
+
+@mixin input-placeholder {
+    &::-webkit-input-placeholder {
+        @content
+    }
+
+    &:-moz-placeholder {
+        @content
+    }
+
+    &::-moz-placeholder {
+        @content
+    }
+
+    &:-ms-input-placeholder {
+        @content
+    }
 }
