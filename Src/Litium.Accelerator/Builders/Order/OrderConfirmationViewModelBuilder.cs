@@ -22,7 +22,7 @@ namespace Litium.Accelerator.Builders.Order
             _cartContextAccessor = cartContextAccessor;
         }
 
-        public OrderConfirmationViewModel Build(PageModel pageModel, Guid orderSystemId)
+        public virtual OrderConfirmationViewModel Build(PageModel pageModel, Guid orderSystemId)
         {
             var model = pageModel.MapTo<OrderConfirmationViewModel>();
             var order = _orderOverviewService.Get(orderSystemId);

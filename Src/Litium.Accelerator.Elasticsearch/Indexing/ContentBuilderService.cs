@@ -36,14 +36,14 @@ namespace Litium.Accelerator.Search.Indexing
             _keyLookupService = keyLookupService;
 
             eventBroker.Subscribe<ClearFieldCache>(_ => _fieldCache.Clear());
-            eventBroker.Subscribe<FieldDefinitionCreated>(_ => eventBroker.Publish(EventScope.LocalAndRemote, new ClearFieldCache()));
-            eventBroker.Subscribe<FieldDefinitionUpdated>(_ => eventBroker.Publish(EventScope.LocalAndRemote, new ClearFieldCache()));
-            eventBroker.Subscribe<FieldDefinitionDeleted>(_ => eventBroker.Publish(EventScope.LocalAndRemote, new ClearFieldCache()));
-            eventBroker.Subscribe<SettingChanged>(x =>
+            eventBroker.Subscribe<FieldDefinitionCreated>(_ => eventBroker.PublishAsync(EventScope.LocalAndRemote, new ClearFieldCache()));
+            eventBroker.Subscribe<FieldDefinitionUpdated>(_ => eventBroker.PublishAsync(EventScope.LocalAndRemote, new ClearFieldCache()));
+            eventBroker.Subscribe<FieldDefinitionDeleted>(_ => eventBroker.PublishAsync(EventScope.LocalAndRemote, new ClearFieldCache()));
+            eventBroker.Subscribe<SettingChanged>(async x =>
             {
                 if (x.Key.StartsWith("IndexingTemplateFields:", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    eventBroker.Publish(EventScope.LocalAndRemote, new ClearFieldCache());
+                    await eventBroker.PublishAsync(EventScope.LocalAndRemote, new ClearFieldCache());
                 }
             });
         }
@@ -99,6 +99,7 @@ namespace Litium.Accelerator.Search.Indexing
                     case SystemFieldTypeConstants.Object:
                     case SystemFieldTypeConstants.Pointer:
                     case SystemFieldTypeConstants.Boolean:
+                    case SystemFieldTypeConstants.Link:
                     case "FilterFields":
                     case "MediaPointerImageArray":
                         break;

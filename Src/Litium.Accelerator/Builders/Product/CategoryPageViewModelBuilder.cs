@@ -41,7 +41,7 @@ namespace Litium.Accelerator.Builders.Product
             _landingPageByFieldTemplateCache = landingPageByFieldTemplateCache;
         }
 
-        public async Task<CategoryPageViewModel> BuildAsync(Guid categorySystemId, DataFilterBase dataFilter = null)
+        public virtual async Task<CategoryPageViewModel> BuildAsync(Guid categorySystemId, DataFilterBase dataFilter = null)
         {
             if (categorySystemId == Guid.Empty)
             {

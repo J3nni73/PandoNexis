@@ -68,7 +68,7 @@ namespace Litium.Accelerator.Builders.Checkout
             var orderDetails = cartContext?.Cart.Order;
             var countryCode = orderDetails?.CountryCode ?? requestModel.CountryModel.Country.Id;
             var currencyCode = orderDetails?.CurrencyCode ?? _currencyService.Get(requestModel.CountryModel.Country.CurrencySystemId)?.Id;
-
+            
             var deliveryMethods = _deliveryMethodViewModelBuilder.Build(countryCode, currencyCode);
             var paymentOptions = _paymentOptionViewModelBuilder.Build(cartContext);
             _signInUrlResolver.TryGet(_routeRequestLookupInfoAccessor.RouteRequestLookupInfo, out var loginPageUrl);

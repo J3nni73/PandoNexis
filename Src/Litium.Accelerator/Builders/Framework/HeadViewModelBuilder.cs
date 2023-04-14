@@ -26,7 +26,7 @@ namespace Litium.Accelerator.Builders.Framework
         private readonly RouteRequestInfoAccessor _routeRequestInfoAccessor;
         private readonly RequestModelAccessor _requestModelAccessor;
 
-        public HeadViewModelBuilder(RouteRequestInfoAccessor routeRequestInfoAccessor, RequestModelAccessor requestModelAccessor, MetaService metaService, OpenGraphViewModelBuilder openGraphViewModelBuilder, MetaService.CanonicalSettings canonicalSettings, MetaService.RobotsSettings robotsSettings, TrackingScriptService trackingScriptService, FaviconViewModelBuilder faviconViewModelBuilder, FilterService filterService)
+        public HeadViewModelBuilder(RouteRequestInfoAccessor routeRequestInfoAccessor, RequestModelAccessor requestModelAccessor, MetaService metaService,OpenGraphViewModelBuilder openGraphViewModelBuilder,MetaService.CanonicalSettings canonicalSettings,MetaService.RobotsSettings robotsSettings,TrackingScriptService trackingScriptService,FaviconViewModelBuilder faviconViewModelBuilder, FilterService filterService)
         {
             _routeRequestInfoAccessor = routeRequestInfoAccessor;
             _requestModelAccessor = requestModelAccessor;
@@ -73,7 +73,7 @@ namespace Litium.Accelerator.Builders.Framework
             {
                 return;
             }
-
+            
             var firstFilterName = searchQuery.Tags.Keys.Select(x => x.ToLowerInvariant()).FirstOrDefault();
             var indexFirstFilterName = firstFilterName != null && _filterService.IndexFilter(firstFilterName);
 

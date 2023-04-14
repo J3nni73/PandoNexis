@@ -95,7 +95,7 @@ namespace Litium.Accelerator.Builders.Order
         public virtual OrderViewModel Build(Guid id, bool print)
             => Build(_requestModelAccessor.RequestModel.CurrentPageModel, id, print);
 
-        public OrderViewModel Build(PageModel pageModel, Guid id, bool print)
+        public virtual OrderViewModel Build(PageModel pageModel, Guid id, bool print)
         {
             var model = pageModel.MapTo<OrderViewModel>();
 
@@ -117,7 +117,7 @@ namespace Litium.Accelerator.Builders.Order
             return model;
         }
 
-        public OrderDetailsViewModel Build(OrderOverview orderOverview)
+        public virtual OrderDetailsViewModel Build(OrderOverview orderOverview)
         {
             var order = orderOverview.SalesOrder;
             if (order == null)

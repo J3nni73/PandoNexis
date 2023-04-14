@@ -61,7 +61,7 @@ namespace Litium.Accelerator.Builders.Product
                             model = CreateModel(fieldDefinition, cultureInfo, culture);
                         }
 
-                        if (model is not null)
+                        if(model is not null)
                         {
                             result.Add(model);
                         }
@@ -85,7 +85,7 @@ namespace Litium.Accelerator.Builders.Product
                             continue;
                         }
 
-
+                        
                         var culture = fieldDefinition.MultiCulture ? cultureInfo.Name : "*";
                         if (productModel.SelectedVariant.Fields.TryGetValue(field, culture, out var value))
                         {
@@ -109,7 +109,7 @@ namespace Litium.Accelerator.Builders.Product
                             }
                         }
                     }
-                }
+                }             
             }
 
             return result;
