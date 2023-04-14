@@ -41,7 +41,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
         }
         public override void HandleMultiFieldFields()
         {
-            throw new NotImplementedException();
+           
         }
     }
 }

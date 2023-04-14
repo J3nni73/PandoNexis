@@ -110,7 +110,7 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.FieldHelper
             {
                 names.Add(language.Id, optionValue);
             }
-            new FieldOptionChanges
+            result = new FieldOptionChanges
             {
                 FieldDefinitionId = fieldDefinitionId,
                 Area = area,
