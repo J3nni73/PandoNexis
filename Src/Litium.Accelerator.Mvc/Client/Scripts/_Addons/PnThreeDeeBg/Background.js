@@ -9,6 +9,7 @@ import * as THREE from 'three';
 const Background = (props) => {
     const [vantaEffect, setVantaEffect] = useState(0);
     const [theme, setTheme] = useState(window.channel && window.channel === 'siteclean' ? 'waves' : props.theme || 'waves');
+    
     const mainBg = useRef(null);
     const cellsOptions = {
         backgroundColor: 0x170322,
