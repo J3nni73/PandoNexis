@@ -1,0 +1,131 @@
+$button-general-height: 50px;
+$button-general-shadow-color: rgb(46,46,80);
+
+$button-general-primary-color: $solution-button-primary-color;
+$button-general-secondary-color: #ff6a00;
+$button-general-tertiary-color: $solution-color-beige;
+
+$button-general-text-color: $color-white;
+$button-general-max-width: 200px;
+$button-general-jusify: center;
+$button-general-margin: 12px 0;
+
+.button, .form__button {
+    @include transition;
+    font-size: rem(16px);
+    padding: rem(6px 32px);
+    cursor: pointer;
+    outline: none;
+    color: $button-general-text-color;
+    //text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: rem($button-general-height);
+    font-size: rem(14px);
+    font-weight: 600;
+    background-color: $button-general-primary-color;
+    @include border-radius(rem(20px));
+    @include box-shadow(0, 0, 0, 0, rgba($button-general-shadow-color, 0));
+    justify-self: $button-general-jusify;
+    margin: rem($button-general-margin);
+    width: auto;
+    line-height: 1;
+    flex: 1 1 auto;
+    max-width: rem($button-general-max-width);
+
+    &--left {
+        margin-left: 0;
+    }
+    max-width: 200px;
+
+    &--right {
+        margin-right: 0;
+    }
+
+    &--center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &:not(.product__buy-button) {
+        min-height: rem($button-general-height);
+    }
+
+    &, &.disabled {
+        background-color: $button-general-primary-color;
+    }
+
+    &:hover {
+        @include box-shadow(0, 0, 6px, 0, rgba($button-general-shadow-color, .2));
+        background-color: rgba($button-general-primary-color, .8);
+        //color: $color-full-black;
+    }
+
+    &:focus {
+        background-color: rgba($button-general-primary-color, 1);
+        //color: $color-full-black;
+    }
+
+    &.link {
+        text-decoration: underline;
+        background-color: transparent;
+        color: $color-link;
+        border: none;
+    }
+
+    &.expanded {
+        @include button-expand;
+    }
+
+    &.rounded {
+        @include border-rounded;
+    }
+
+    &[disabled] {
+        background-color: $color-grey-darkest;
+    }
+
+    &__primary, &.firstButton {
+
+        &, &.disabled {
+            background-color: $button-general-primary-color;
+        }
+
+        &:hover, &:focus {
+            background-color: rgba($button-general-primary-color, .8);
+        }
+    }
+
+    &__secondary, &.secondButton {
+        &, &.disabled {
+            background-color: $button-general-secondary-color;
+        }
+
+
+        &:hover, &:focus {
+            background-color: rgba($button-general-secondary-color, .8);
+        }
+    }
+
+    &__tertiary, &.thirdButton {
+
+        &, &.disabled {
+            background-color: $button-general-tertiary-color;
+        }
+
+        &:hover, &:focus {
+            background-color: rgba($button-general-tertiary-color, .8);
+        }
+    }
+
+    &.disabled {
+        pointer-events: none;
+        color: $color-full-black;
+    }
+
+    &--expand {
+        width: 100%;
+        max-width: none;
+    }
+}

@@ -18,9 +18,6 @@ $color-success: #60a060 !default;
 $color-link: #0099ff !default;
 $solution-body-bg-color: #170322;
 
-$solution-color: rgba($color-white, .7);
-$solution-form-input-bg: rgba(255,255,255,.98);
-
 $color-grey-lightest: #f2f2f2 !default;
 $color-grey-lighter: #eee !default;
 $color-grey-light: #ddd !default;
@@ -53,8 +50,10 @@ $solution-background-transparent: rgba($solution-background,.3);
 $solution-background-dark-transparent: rgba($solution-background,.8);
 $solution-background-primary: $solution-background-transparent;
 $solution-color-yellow: $color-secondary;
+$solution-color: rgba($color-white, .7);
+$solution-form-input-bg: rgba(255,255,255,.98);
 
-$solution-megamenu-background-color: rgb(240,240,255);
+$solution-megamenu-background-color: rgb(240,240,255, .98);
 
 $solution-icon-color: rgba($solution-link-color, .4);
 $solution-icon-color-mobile: rgba($solution-link-color, .6);

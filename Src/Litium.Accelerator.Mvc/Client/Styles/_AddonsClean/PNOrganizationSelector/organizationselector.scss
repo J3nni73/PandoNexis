@@ -1,0 +1,71 @@
+$pn-organization-selector-shadow-color: $color-grey-darkest;
+
+.pn-organization-selector {
+    position: relative;
+    z-index: 10;
+
+    &__icon {
+        fill: $solution-icon-color;
+    }
+
+    &__container {
+        position: absolute;
+        z-index: 10;
+        top: rem(56px);
+        right: rem(16px);
+
+        @include mobile {
+            position: static;
+            margin-right: rem(4px);
+            margin-top: rem(2px);
+
+            .pn-info-label__person-info {
+                display: none;
+            }
+        }
+    }
+
+    &__icon {
+        @include transition;
+        @include link--block;
+        padding: rem(8px);
+        fill: $solution-icon-color;
+
+        &:hover {
+            fill: $solution-icon-hover-color;
+        }
+
+        @include mobile {
+            margin: 0;
+            position: static;
+        }
+
+        cursor: pointer;
+    }
+
+    &__form {
+        h3 {
+            font-size: rem(14px);
+            color: $solution-link-color;
+        }
+
+        .select-org-list {
+            @include border-radius(5px);
+            font-size: rem(14px);
+            cursor: pointer;
+        }
+
+        > div {
+            @include animation(0, 0.3s, fade-in, ease-in-out);
+            background: rgba(lighten($solution-megamenu-background-color, 20%), .95);
+            position: absolute;
+            top: 100%;
+            right: rem(-16px);
+            padding: rem(16px);
+            width: rem(200px);
+            border: 1px solid $solution-line-color;
+            @include border-radius(5px);
+            @include box-shadow(0, 0, 6px, 0, rgba($pn-organization-selector-shadow-color, .25));
+        }
+    }
+}

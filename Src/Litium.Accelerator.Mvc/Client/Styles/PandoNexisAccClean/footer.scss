@@ -1,24 +1,28 @@
 .footer {
-    margin-top: 0;
+    margin-top: rem(30px);
     padding-top: rem(15px);
-    border-top: 1px solid $color-primary;
-    color: $color-primary;
+    border-top: 1px solid rgba($color-text-primary, .2);
+    color: $color-text-primary;
     font-weight: 300;
     width: 100%;
     max-width: none;
 
+    @include gradient(90, rgba(0,0,0, .8), rgba(0,0,0, .2), 0, 90%);
+
     &__section {
-        padding-bottom: rem(15px);
+        padding-bottom: rem(44px);
         word-break: break-word;
 
         @include tablet-all {
-            padding: rem(0 32px);
+            padding: rem(0 32px 44px 32px);
         }
     }
 
     a, &__link {
+        @include transition;
+
         &, &:visited, &:focus {
-            color: $color-primary;
+            color: $solution-link-color;
             font-weight: 300;
             text-decoration: none;
         }
