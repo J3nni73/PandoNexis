@@ -1,0 +1,15 @@
+input {
+    @include input-placeholder {
+        /*font-style: italic;
+        color: rgba($solution-link-color, .8);*/
+    }
+
+    @include border-radius(rem(4px));
+}
+
+select {
+    &, &.form__input {
+        background: $solution-form-input-bg !important;
+        @include border-radius(rem(4px));
+    }
+}
