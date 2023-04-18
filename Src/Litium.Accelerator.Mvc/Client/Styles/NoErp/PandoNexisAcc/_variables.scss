@@ -72,7 +72,7 @@ $color-text-primary-highlight: lighten($solution-color-purple-light, 40%);
 $solution-button-background-primary: rgba(132, 132, 25, 0.8);
 $solution-megamenu-background-color: rgb(240,240,255);
 
-$solution-button-primary-color: rgb(164, 164, 73);
+$solution-button-primary-color: $litium-blue1; //rgb(164, 164, 73);
 
 $header-bg-color-dark: #336655;
 $header-bg-color-light: #fefeff;
