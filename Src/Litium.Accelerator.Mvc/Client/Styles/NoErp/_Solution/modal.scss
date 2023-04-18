@@ -1,0 +1,370 @@
+$modal-content-bg-color: #fefeff;
+$modal-font-family: font-family;
+$modal-bg-color-dark: #aaaaee;
+$modal-bg-color-light: #ccccee;
+$modal-border-color: $color-navy;
+
+@mixin modal-bg--body {
+    background: #ECE9E6; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+@mixin modal-icon--logo-bg($color: 333) {
+    //background-image: url('../../images/bpt/blueprinttoys_logo_transparent.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@mixin modal-bg--scrollbar-hover {
+    background: $breadcrumbs-bg-color-dark; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, $breadcrumbs-bg-color-light, lighten($breadcrumbs-bg-color-dark,10%)); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, $breadcrumbs-bg-color-light, lighten($breadcrumbs-bg-color-dark,10%)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+@mixin modal-close-btn {
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    @include border-radius(0,0,rem(25px), rem(25px));
+    padding: rem(10px 20px 8px 20px);
+    background: #fff;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    @include box-shadow(0, 0, 8px, 0, rgba($modal-bg-color-dark, 0.44));
+    text-shadow: 0 1px 1px rgba($color-primary, .1);
+    border: none;
+
+    &:hover {
+        color: rgba(lighten($modal-bg-color-dark, 20%), .8);
+        @include box-shadow(0, 0, 4px, 0, rgba(lighten($modal-bg-color-dark, 20%), 0.84));
+        border: .5px solid rgba(lighten($modal-bg-color-dark, 20%), 0.24);
+        text-shadow: none;
+    }
+}
+
+
+.ReactModal__Overlay {
+    z-index: 10;
+    background: rgba($color-navy-dark, .9) !important;
+}
+
+.ReactModal__Body--open .header__logo img {
+    opacity: .98;
+}
+
+.ReactModal__Content {
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    // background-image: url(../../images/bpt/playBg.png);
+    //
+
+    &:before {
+        content: '';
+        z-index: -1;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        @include modal-icon--logo-bg;
+        background-size: 150%;
+        background-attachment: fixed;
+    }
+
+    .ReactModal__Content {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 1;
+        @include modal-icon--logo-bg;
+        background-size: 80%;
+        background-attachment: fixed;
+        @include modal-bg--body;
+    }
+
+    &-content {
+        position: fixed;
+        margin: auto;
+        min-width: 400px;
+        min-height: 200px;
+        padding: 1.5rem 0.5rem 0.5rem 0.5rem;
+        width: 35%;
+        max-height: 90%;
+        top: 50%;
+        left: 50%;
+        //transform: translate(-50%, -50%);
+        overflow-y: auto;
+        // background-image: url(../../images/bpt/playBg.png);
+        background-color: $header-bg-color-light;
+        @include box-shadow(5px, 5px, 16px, 0, rgba(darken($modal-border-color, 20%), .8));
+        border: 5px solid rgba($modal-border-color, .64);
+        outline: none;
+        border-radius: rem(16px);
+        @include transition(all, 1s);
+        @include transform(scale(1) translate(-50%, -50%));
+        @include animation(0, .3s, bounce-in);
+        /* width */
+        &::-webkit-scrollbar {
+            width: 12px;
+        }
+        /* Track */
+        &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 2px;
+        }
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: rgba($color-cyan, .3);
+            border-radius: 2px;
+        }
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            @include modal-bg--scrollbar-hover;
+            border: 1px solid rgba($color-cyan, .6);
+        }
+
+        @include mobile {
+            width: 100%;
+        }
+
+        @include tablet {
+            width: 55%;
+        }
+
+        .closeBtn {
+            /*display: flex;
+            justify-content: flex-end;*/
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 100;
+
+            @include border-radius(25px);
+
+            button {
+                display: flex;
+                color: rgba($modal-border-color, .45);
+                font-family: $modal-font-family;
+                @include modal-close-btn;
+                width: rem(48px);
+                height: rem(32px);
+                /*border-top-right-radius: 10px !important;
+                border-top-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+                border-bottom-left-radius: 0 !important;*/
+                border-top: none;
+                border-right: none;
+
+                &:hover {
+                    opacity: .8;
+                    color: rgba($modal-border-color, .85);
+                    @include box-shadow(0, 0, 12px, 0, rgba(darken($modal-border-color, 20%), .1));
+                }
+            }
+        }
+
+        &__addAllImages {
+            position: absolute;
+            top: rem(-10px);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            margin-top: rem(16px);
+            z-index: 10;
+            min-width: rem(80px);
+            left: 50%;
+            @include transform(translateX(-50%));
+
+            &__add-all-btn {
+                padding: 10px 16px;
+                font-size: 0.75rem;
+                position: absolute;
+                z-index: -1;
+                opacity: 0;
+                transition: all 0.4s ease-in-out 0s;
+                min-width: rem(80px);
+
+                &.active {
+                    z-index: 1;
+                    opacity: 1;
+                    top: -14px;
+                }
+            }
+        }
+        // Start Style  Images Modal
+        &-images {
+            &__upload-image-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+
+                button {
+                    padding: rem(20px 20px 28px 20px);
+                    @include gradient-bg(to right, rgba($modal-border-color, 0.94), darken(rgba($modal-border-color, 0.94),10%));
+                    color: $color-white;
+                    margin: 0;
+                    width: 100%;
+                    height: 100%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: end;
+                    justify-content: center;
+
+                    &:hover {
+                        text-shadow: 0px 0px 6px rgba(0, 0, 0, .4);
+                        opacity: .7;
+                    }
+                }
+            }
+
+            &__container {
+                margin: rem(-24px -8px 64px -8px);
+                border: #fff solid 5px;
+                background: rgba(255, 255, 255, .99);
+                padding: rem(40px 20px 50px 20px);
+                box-shadow: 0 0 8px rgba($color-primary, .5);
+                position: relative;
+                z-index: 5;
+                //pointer-events: none;
+
+                .img-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-gap: 5px;
+
+                    &-item {
+                        position: relative;
+                        width: 90%;
+                        max-width: 100px;
+                        margin: auto;
+                        //border: 1px solid rgba(200,200,200,.5);
+                        box-shadow: 0 0 14px rgba($color-primary, .4);
+
+                        .content-overlay {
+                            background: $color-white-transparent1;
+                            position: absolute;
+                            height: 99%;
+                            width: 100%;
+                            left: 0;
+                            top: 0;
+                            bottom: 0;
+                            right: 0;
+                            opacity: 0;
+                            -webkit-transition: all 0.4s ease-in-out 0s;
+                            -moz-transition: all 0.4s ease-in-out 0s;
+                            transition: all 0.4s ease-in-out 0s;
+                        }
+
+                        .modal-content-img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+
+                        &:hover .content-overlay {
+                            opacity: 1;
+                        }
+
+                        &-crud {
+                            opacity: 1;
+                            -webkit-transition: all 0.3s ease-in-out 0s;
+                            -moz-transition: all 0.3s ease-in-out 0s;
+                            transition: all 0.3s ease-in-out 0s;
+
+                            &__remove {
+                                top: -1px;
+                                right: -1px;
+                                position: absolute;
+                                font-size: 1.2rem;
+                                font-weight: 600;
+                                line-height: 1;
+                                color: rgba(0, 0, 0, 0.5);
+                                cursor: pointer;
+                                border: none;
+                                -webkit-transition: all 0.3s ease-in-out 0s;
+                                -moz-transition: all 0.3s ease-in-out 0s;
+                                transition: all 0.3s ease-in-out 0s;
+                                border: 1px solid rgba(0, 0, 0, .1);
+                                background: rgba(255, 255, 255, .8);
+                                border-radius: 0 !important;
+                                padding: 2px 4px;
+
+                                &:hover {
+                                    text-shadow: 0px 0px 6px rgba(0, 0, 0, .8);
+                                    opacity: .94;
+                                    color: $color-white;
+                                    background: rgba($custom-color-red-hover, .8);
+                                }
+                            }
+
+                            &__add {
+                                // bottom: -50px;
+                                // right: 0;
+                                // position: absolute;
+                                padding: rem(10px);
+                                background: rgba($color-navy, 0.6);
+                                color: $color-white;
+                                width: 100%;
+                                cursor: pointer;
+
+                                &:hover {
+                                    background: rgba($color-navy, 0.94);
+                                    text-shadow: 0px 0px 6px rgba(0, 0, 0, .4);
+                                }
+                            }
+                        }
+
+                        .img-grid-item {
+                            //pointer-events: auto !important;
+                            cursor: pointer;
+                            position: relative;
+                            z-index: 100;
+
+                            &-crud {
+                                top: 50%;
+                                left: 50%;
+                                opacity: 1;
+                            }
+                        }
+                    }
+
+                    @include mobile {
+                        grid-template-columns: repeat(2, 1fr);
+
+                        .modal-content-img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.rmdp-container input,
+.rmdp-container {
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    height: 39px;
+}

@@ -1,0 +1,13 @@
+$gutter-large: map-get($grid-column-gutter, medium);
+$gutter-small: map-get($grid-column-gutter, small);
+
+$color-full-black: #000;
+$page-width: 1344px;
+
+$block-background1: transparent;
+$block-background2: $solution-color-yellow;
+$block-background3: #dfe0e4;
+
+$general-shadow-color: rgb(245,246,255);
+
+$solution-gutter: map-get($grid-column-gutter, medium);

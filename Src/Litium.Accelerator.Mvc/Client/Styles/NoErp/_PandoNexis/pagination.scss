@@ -1,0 +1,21 @@
+
+@include mobile {
+    .pagination {
+        &__item {
+            margin: rem(0 8px);
+        }
+
+        &__link {
+            &--current {
+                &,
+                &:hover,
+                &:active,
+                &:focus {
+                }
+            }
+
+            &--disabled {
+            }
+        }
+    }
+}

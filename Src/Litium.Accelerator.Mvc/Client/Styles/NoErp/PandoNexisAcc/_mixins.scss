@@ -98,38 +98,38 @@
     height: rem(10px);
 }
 @mixin icon--bag($color: 333) {
-    background: url('../../images/bag.svg') center no-repeat;
+    background: url('../../../images/bag.svg') center no-repeat;
 }
 @mixin icon--profile($color: 333) {
-    background: url('../../images/user.svg') center no-repeat;
+    background: url('../../../images/user.svg') center no-repeat;
 }
 @mixin icon--magnifier($color: 333) {
-    background: url('../../images/magnifier.svg') center no-repeat;
+    background: url('../../../images/magnifier.svg') center no-repeat;
 }
 @mixin icon--menu($color: 555) {
-    background: url('../../images/menu.svg') center no-repeat;
+    background: url('../../../images/menu.svg') center no-repeat;
 }
 @mixin icon--cross($color: 333) {
-    background: url('../../images/cross.svg') center no-repeat;
+    background: url('../../../images/cross.svg') center no-repeat;
 }
 @mixin icon--caret-down($color: 333) {
-    background: url('../../images/caret-down.svg') center no-repeat;
+    background: url('../../../images/caret-down.svg') center no-repeat;
 }
 @mixin icon--checked($color: 333) {
-    background: url('../../images/checked.svg') center no-repeat;
+    background: url('../../../images/checked.svg') center no-repeat;
 }
 @mixin icon--pencil($color: 333) {
-    background: url('../../images/pencil.svg') center no-repeat;
+    background: url('../../../images/pencil.svg') center no-repeat;
 }
 @mixin icon--bin($color: 333) {
-    background: url('../../images/bin.svg') center no-repeat;
+    background: url('../../../images/bin.svg') center no-repeat;
 }
 @mixin icon--rotate-arrow($color: 333) {
-    background: url('../../images/rotate-arrow.svg') center no-repeat;
+    background: url('../../../images/rotate-arrow.svg') center no-repeat;
 }
 @mixin icon--close($color: 333) {
-    background: url('../../images/close.svg') center no-repeat;
+    background: url('../../../images/close.svg') center no-repeat;
 }
 @mixin icon--check-mark($color: 333) {
-    background: url('../../images/check-mark.svg') center no-repeat;
+    background: url('../../../images/check-mark.svg') center no-repeat;
 }

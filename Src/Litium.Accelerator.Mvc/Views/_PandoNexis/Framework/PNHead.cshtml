@@ -74,4 +74,11 @@
     }
 }
 
+@if (!string.IsNullOrWhiteSpace(cssFileName))
+{
+    <script>
+        window.channel = '@cssFileName';
+    </script>
+}
+
 @Html.Raw(Model.TrackingScripts)

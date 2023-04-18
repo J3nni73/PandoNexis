@@ -1,0 +1,235 @@
+@mixin mobile-mini {
+    @media (max-width: #{$mobile-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin mobile-small {
+    @media (max-width: #{$large-mobile-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin tablet-small {
+    @media (min-width: #{$large-mobile-width}) and (max-width: #{$tablet-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin tablet-all {
+    @media (min-width: #{$large-mobile-width}) and (max-width: #{$desktop-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin scale($ratioX, $ratioY: 1) {
+    -webkit-transform: scale($ratioX, $ratioY);
+    -moz-transform: scale($ratioX, $ratioY);
+    -ms-transform: scale($ratioX, $ratioY);
+    -o-transform: scale($ratioX, $ratioY);
+    transform: scale($ratioX, $ratioY);
+}
+
+@mixin gradient-bg ($direction: to right, $from-color, $to-color, $width: 100%) {
+    position: relative;
+    width: $width;
+    background: $from-color;
+    background: -webkit-linear-gradient($direction, $from-color, $to-color);
+    background: linear-gradient($direction, $from-color, $to-color);
+}
+
+@mixin transform($transforms) {
+    -webkit-transform: $transforms;
+    -moz-transform: $transforms;
+    -ms-transform: $transforms;
+    transform: $transforms;
+}
+
+@mixin rotate( $degrees ) {
+    -webkit-transform: rotate(#{$degrees}deg);
+    -moz-transform: rotate(#{$degrees}deg);
+    -ms-transform: rotate(#{$degrees}deg);
+    -o-transform: rotate(#{$degrees}deg);
+    transform: rotate(#{$degrees}deg);
+    filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
+    -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=-#{sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+    zoom: 1;
+}
+
+@mixin rotate-width-text($degrees) {
+    -webkit-transform: translate3d(0,0,0) rotate($degrees);
+    -moz-transform: translate3d(0,0,0) rotate($degrees);
+    -ms-transform: translate3d(0,0,0) rotate($degrees);
+    -o-transform: translate3d(0,0,0) rotate($degrees);
+    transform: translate3d(0,0,0) rotate($degrees);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=#{-1*sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)})";
+    filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod='auto expand', M11=#{cos($degrees)}, M12=#{-1*sin($degrees)}, M21=#{sin($degrees)}, M22=#{cos($degrees)});
+}
+
+// grayscale      ex: filter: grayscale(100%);
+// sepia          ex: filter: sepia(100%);
+// saturate       ex: filter: saturate(0%);
+// hue-rotate     ex: filter: hue-rotate(45deg);
+// invert         ex: filter: invert(100%);
+// brightness     ex: filter: brightness(15%);
+// contrast       ex: filter: contrast(200%);
+// blur           ex: filter: blur(2px);
+
+@mixin filter($filter-type,$filter-amount) {
+    -webkit-filter: $filter-type+unquote('(#{$filter-amount})');
+    -moz-filter: $filter-type+unquote('(#{$filter-amount})');
+    -ms-filter: $filter-type+unquote('(#{$filter-amount})');
+    -o-filter: $filter-type+unquote('(#{$filter-amount})');
+    filter: $filter-type+unquote('(#{$filter-amount})');
+}
+
+
+// For a blury bg use
+@mixin backdrop-filter($filters) {
+    -webkit-backdrop-filter: $filters;
+    backdrop-filter: $filters;
+    //background-blend-mode: overlay;
+}
+
+@mixin blurry-backdrop($blurAmount: 4px, $useSaturate: true, $saturate: 180%, $brightness: 1.04 ) {
+    @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        @if $useSaturate {
+            @include backdrop-filter(saturate($saturate) brightness($brightness) blur($blurAmount));
+        }
+        @else {
+            @include backdrop-filter(brightness(1.2) blur($blurAmount));
+        }
+    }
+}
+
+// Chevron / Arrow
+// Examples:
+// Arrow down:
+//      @include chevron(7px, $color-black, 45, 2px);
+@mixin chevron($size: 7px, $color: $color-white, $angle: 0, $border-width: 1px) {
+    border: solid $color;
+    border-width: 0 rem($border-width) rem($border-width) 0;
+    display: inline-block;
+    padding: $size;
+    pointer-events: none;
+    @include rotate($angle);
+}
+
+@mixin box-shadow($top, $left, $blur, $spread, $color, $inset: false) {
+    @if $inset {
+        -webkit-box-shadow: inset $left $top $blur $spread $color;
+        -moz-box-shadow: inset $left $top $blur $spread $color;
+        box-shadow: inset $left $top $blur $spread $color;
+    }
+    @else {
+        -webkit-box-shadow: $left $top $blur $spread $color;
+        -moz-box-shadow: $left $top $blur $spread $color;
+        box-shadow: $left $top $blur $spread $color;
+    }
+}
+
+@mixin border-radius($topleft, $topright: $topleft, $bottomright: $topleft, $bottomleft: $topleft) {
+    border-top-left-radius: $topleft;
+    border-top-right-radius: $topright;
+    border-bottom-right-radius: $bottomright;
+    border-bottom-left-radius: $bottomleft;
+    -webkit-border-top-left-radius: $topleft;
+    -webkit-border-top-right-radius: $topright;
+    -webkit-border-bottom-right-radius: $bottomright;
+    -webkit-border-bottom-left-radius: $bottomleft;
+    -moz-border-radius-topleft: $topleft;
+    -moz-border-radius-topright: $topright;
+    -moz-border-radius-bottomright: $bottomright;
+    -moz-border-radius-bottomleft: $bottomleft;
+}
+
+@mixin button-gradient($bg, $color: #fff, $direction: to right, $width: 100%) {
+    @include gradient-bg($direction, $bg, darken($bg,10%), $width);
+
+    &:hover:not([disabled]) {
+        @include gradient-bg($direction, lighten(rgba($bg, .9),5%), $bg, $width);
+        opacity: .9;
+    }
+
+    &[disabled] {
+        background-color: desaturate($bg, 80%) !important;
+    }
+}
+
+@mixin gradient($deg: 90, $color-start: $color-white, $color-end: #595959, $start-position: 0%, $end-position: 100%) {
+    background: linear-gradient(#{$deg}deg, $color-start $start-position, $color-end $end-position);
+    background: -moz-linear-gradient(#{$deg}deg, $color-start $start-position, $color-end $end-position);
+    background: -webkit-linear-gradient(#{$deg}deg, $color-start $start-position, $color-end $end-position);
+    background: -o-linear-gradient(#{$deg}deg, $color-start $start-position, $color-end $end-position);
+    background: -ms-linear-gradient(#{$deg}deg, $color-start $start-position, $color-end $end-position);
+}
+
+@mixin scroll-styling($width: 12px) {
+    /* width */
+    &::-webkit-scrollbar {
+        width: $width;
+    }
+    /* Track */
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey;
+        border-radius: 2px;
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: rgba($bg-color-odd-row, .3);
+        border-radius: 2px;
+    }
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        /*@include bg--violet;*/
+        border: 1px solid rgba($color-navy, .3);
+        background: rgba($color-navy, .2);
+    }
+}
+
+
+/*  timing function options:
+    inherit|ease|ease-in|ease-out|ease-in-out|linear|step-start|step-end    */
+
+/*  animation-fill-mode: 
+    none|forwards|backwards|both|initial|inherit;   */
+
+/// Example animation usage
+/// @include animation(0, 0.5s, fade-in, ease-in-out);
+@mixin animation ($delay, $duration, $animation, $timingFunction: ease-in-out, $fillmode: forwards, $iterationCount: 1) {
+    -webkit-animation-name: $animation;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-delay: $delay;
+    -webkit-animation-fill-mode: $fillmode;
+    -webkit-animation-iteration-count: $iterationCount;
+    -webkit-animation-timing-function: $timingFunction;
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-fill-mode: $fillmode;
+    -moz-animation-iteration-count: $iterationCount;
+    -moz-animation-timing-function: $timingFunction;
+    animation: $animation;
+    animation-duration: $duration;
+    animation-delay: $delay;
+    animation-fill-mode: $fillmode;
+    animation-iteration-count: $iterationCount;
+    animation-timing-function: $timingFunction;
+}
+
+@mixin input-placeholder {
+    &::-webkit-input-placeholder {
+        @content
+    }
+
+    &:-moz-placeholder {
+        @content
+    }
+
+    &::-moz-placeholder {
+        @content
+    }
+
+    &:-ms-input-placeholder {
+        @content
+    }
+}

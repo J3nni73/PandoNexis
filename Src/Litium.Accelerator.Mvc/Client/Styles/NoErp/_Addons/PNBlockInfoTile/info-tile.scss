@@ -1,0 +1,243 @@
+.info-tile {
+    width: 100%;
+    justify-content: center;
+    margin: 3rem 0;
+    padding: 2rem;
+
+    &.primaryColor {
+        background-color: $color-white;
+    }
+
+    &.secondaryColor {
+        /*background-color: $color-grey-5;*/
+    }
+
+    &.thirdColor {
+        /*background-color: $color-primary-25;*/
+    }
+
+    &__title-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 1rem;
+
+        &__title {
+            font-weight: $font-weight-normal;
+            /*font-size: $fontsize-x-large;*/
+            color: $color-primary;
+            text-align: center;
+        }
+
+        &__subtitle {
+            /*font-weight: $font-weight-black;*/
+            /*font-size: $fontsize-base;*/
+            color: $color-primary;
+            padding-bottom: 1rem;
+            text-align: center;
+        }
+
+        &__text {
+            /*font-size: $fontsize-base;*/
+            font-weight: $font-weight-bold;
+            max-width: rem(630px);
+            text-align: center;
+            padding-bottom: 2.5rem;
+        }
+    }
+
+    &__items {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        padding: 0 1rem;
+
+        @media (max-width: $tablet-width) {
+            display: grid;
+            grid-template-columns: auto auto;
+        }
+
+        @media (max-width: 680px) {
+            display: grid;
+            grid-template-columns: auto;
+        }
+
+        &__item {
+            display: grid;
+            max-width: rem(380px);
+            min-height: auto;
+            padding: 2rem;
+            min-width: 25%;
+
+            &:first-child {
+                background-color: $color-primary;
+                color: $color-white;
+            }
+
+            &:nth-child(2) {
+                /*background-color: $color-primary-lighter;*/
+                color: $color-primary;
+            }
+
+            &:nth-child(3) {
+                /*background-color: $color-primary-40;*/
+                color: $color-primary;
+            }
+
+            &.link-only-layout {
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                align-items: center;
+                font-size: $fontsize-h3;
+            }
+
+            &__title-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: rem(10px);
+
+                &__title {
+                    font-size: $fontsize-h3;
+                }
+
+                &__image-holder {
+                    width: rem(65px);
+                    height: rem(65px);
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+
+            &__text {
+                padding-top: 1rem;
+
+                &.fade-text {
+                    -webkit-mask-image: linear-gradient(180deg,#000 0,transparent);
+                    mask-image: linear-gradient(180deg,#000 0,transparent);
+                }
+            }
+
+            .text2 {
+                display: none;
+            }
+
+            .js-toggle-class {
+                &.active {
+                    p.info-tile__items__item__load-more__link {
+                        display: none;
+                    }
+
+                    p.info-tile__items__item__load-more__show-less {
+                        display: flex !important;
+                    }
+
+                    .info-tile__items__item.text2 {
+                        display: block !important;
+                        background: transparent;
+                        color: inherit;
+                        width: auto;
+                        padding: 0;
+                    }
+
+                    .info-tile__items__item__text.fade-text {
+                        -webkit-mask-image: none;
+                        mask-image: none;
+                    }
+                }
+            }
+
+            &__load-more {
+                &__link {
+                    /*font-weight: $font-weight-black;*/
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    gap: rem(10px);
+
+                    &:after {
+                        content: '';
+                        display: block;
+                        width: 1rem;
+                        height: 1rem;
+                        /*@include icon--arrow-blue-tiny();*/
+                        transform: rotate(90deg);
+                    }
+                }
+
+                &__show-less {
+                    /*font-weight: $font-weight-black;*/
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    display: none;
+                    align-items: center;
+                    gap: rem(10px);
+
+                    &:after {
+                        content: '';
+                        display: block;
+                        width: 1rem;
+                        height: 1rem;
+                        /*@include icon--arrow-blue-tiny();*/
+                        transform: rotate(-90deg);
+                    }
+                }
+            }
+
+            &__button-holder {
+                .primaryCTA {
+                    color: $color-white;
+                    /*font-weight: $font-weight-black;*/
+                    display: flex;
+                    align-items: center;
+                    gap: rem(5px);
+                    text-transform: uppercase;
+
+                    &:after {
+                        content: '';
+                        display: block;
+                        width: 3rem;
+                        height: 2rem;
+                        /*@include icon--arrow-blue();*/
+                    }
+                }
+
+                .secondaryCTA {
+                    color: $color-white;
+                    /*       font-weight: $font-weight-black;*/
+                    display: flex;
+                    align-items: center;
+                    gap: rem(10px);
+                    text-transform: uppercase;
+
+                    &:after {
+                        content: '';
+                        display: block;
+                        width: 1rem;
+                        height: 1rem;
+                        /*@include icon--arrow-blue-tiny();*/
+                    }
+                }
+
+                .thirdCTA {
+                    color: $color-white;
+                    /*font-weight: $font-weight-black;*/
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: rem(10px);
+                    text-transform: uppercase;
+                    border-radius: rem(50px);
+                    border: 2px solid $color-white;
+                    padding: 0.5rem 2rem;
+                }
+            }
+        }
+    }
+}

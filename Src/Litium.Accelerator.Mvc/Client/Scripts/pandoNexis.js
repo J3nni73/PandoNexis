@@ -174,9 +174,10 @@ export const bootstrapPNComponents = () => {
         const ThreeDBg = DynamicComponent({
             loader: () => import('./_Addons/PNThreeDeeBg/Background'),
         });
+        const { theme } = threeDBg.dataset;
         renderReact(
             <Provider store={window.__pn.store}>
-                <ThreeDBg />
+                <ThreeDBg theme={theme} />
             </Provider>,
             threeDBg
         );

@@ -1,0 +1,31 @@
+// Card
+$cardcolor-hover-time: .3s;
+$cardcolor-border: rgba(255,255,255,.5);
+$cardcolor-border-radius: 0;
+$cardcolor-border-radius-hover: 4px;
+$cardcolor-shadow-top: 0;
+$cardcolor-shadow-left: 0;
+$cardcolor-shadow-blur: 2px;
+$cardcolor-shadow-spread: 0;
+$cardcolor-shadow-spread-hover: 1px;
+$cardcolor-shadow-blur-hover: 32px;
+$cardcolor-shadow-color: rgb(46,46,80);
+$cardcolor-background: #fff;
+
+.pn-card {
+    overflow: hidden;
+    transition: all $cardcolor-hover-time;
+    border: 1px solid rgba($cardcolor-border, .2);
+    border-radius: rem($cardcolor-border-radius);
+    @include box-shadow($cardcolor-shadow-top, $cardcolor-shadow-left, $cardcolor-shadow-blur, $cardcolor-shadow-spread, rgba($cardcolor-shadow-color, .2));
+    position: relative;
+    z-index: 100;
+    background: $cardcolor-background;
+    
+    &:hover {
+        @include scale(102%);
+        border-radius: rem($cardcolor-border-radius-hover);
+        border: 1px solid rgba($cardcolor-border, .8);
+        @include box-shadow($cardcolor-shadow-top, $cardcolor-shadow-left, $cardcolor-shadow-blur-hover, $cardcolor-shadow-spread-hover, rgba($cardcolor-shadow-color, .1));
+    }
+}

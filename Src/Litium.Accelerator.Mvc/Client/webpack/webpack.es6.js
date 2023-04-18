@@ -25,8 +25,8 @@ module.exports = merge(common, {
         site: [
             path.resolve(CSS_DIR, 'site.scss'),
         ],
-        siteclean: [
-            path.resolve(CSS_DIR, 'siteclean.scss'), // PandoNexis Added
+        sitenoerp: [
+            path.resolve(CSS_DIR, 'sitenoerp.scss'), // PandoNexis Added
         ],
     },
     output: {

@@ -1,0 +1,7 @@
+@mixin icon-pn--cart-add($color: 333) {
+    background: url('../../../images/pandoNexis/shopping_cart_add.svg') center no-repeat;
+}
+
+@mixin icon-pn--read-more($color: 333) {
+    background: url('../../../images/pandoNexis/read_more.svg') center no-repeat;
+}

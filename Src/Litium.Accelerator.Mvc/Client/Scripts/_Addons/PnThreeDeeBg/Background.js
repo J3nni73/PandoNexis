@@ -8,7 +8,8 @@ import WAVES from "./vendor/vanta.waves";
 import * as THREE from 'three';
 const Background = (props) => {
     const [vantaEffect, setVantaEffect] = useState(0);
-    const [theme, setTheme] = useState(props.theme || 'cells');
+    const [theme, setTheme] = useState(window.channel && window.channel === 'sitenoerp' ? 'waves' : props.theme || 'waves');
+    
     const mainBg = useRef(null);
     const cellsOptions = {
         backgroundColor: 0x170322,
