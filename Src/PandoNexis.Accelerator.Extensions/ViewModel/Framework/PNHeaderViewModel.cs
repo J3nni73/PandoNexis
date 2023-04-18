@@ -15,7 +15,7 @@ namespace PandoNexis.Accelerator.Extensions.Framework.ViewModels
         //PandoNexis Websiteselector end
 
         //PandoNexis Visibility begin
-        public bool VisibleLogin { get; set; }
+        public bool VisibleLogin { get; set; } = true;
         public bool VisibleCheckout { get; set; }
         //PandoNexis Visibility end
 
