@@ -3,7 +3,6 @@ using Litium.Runtime;
 
 namespace PandoNexis.AddOns.Extensions.Definitions.WebsiteTexts
 {
-    [Autostart]
     public class WebsiteTextSetup : IAsyncAutostart
     {
         private readonly WebsiteTextService _websiteTextService;
