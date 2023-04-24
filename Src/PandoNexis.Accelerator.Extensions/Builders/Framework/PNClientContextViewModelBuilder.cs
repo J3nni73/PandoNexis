@@ -3,6 +3,7 @@ using Litium.Accelerator.Constants;
 using Litium.Accelerator.Routing;
 using Litium.Accelerator.Utilities;
 using Litium.FieldFramework.FieldTypes;
+using Litium.Globalization;
 using Litium.Runtime.AutoMapper;
 using Litium.Sales;
 using Litium.Web.Models;
@@ -15,19 +16,20 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Framework
     public class PNClientContextViewModelBuilder : ClientContextViewModelBuilder
 	{
 		private readonly RequestModelAccessor _requestModelAccessor;
-		public PNClientContextViewModelBuilder(IAntiforgery antiforgery,
+        public PNClientContextViewModelBuilder(IAntiforgery antiforgery,
 			IHttpContextAccessor httpContextAccessor,
 			RequestModelAccessor requestModelAccessor,
 			CartContextAccessor cartContextAccessor,
 			PersonStorage personStorage,
 			SiteSettingViewModelBuilder siteSettingViewModelBuilder,
 			CartViewModelBuilder cartViewModelBuilder,
-			NavigationViewModelBuilder navigationViewModelBuilder) : base(antiforgery,
+			NavigationViewModelBuilder navigationViewModelBuilder,
+            IsoCountryService isoCountryService) : base(antiforgery,
 												httpContextAccessor,
 												requestModelAccessor,
 												cartContextAccessor,
-												personStorage, siteSettingViewModelBuilder, cartViewModelBuilder, navigationViewModelBuilder
-												)
+												personStorage, siteSettingViewModelBuilder, cartViewModelBuilder, navigationViewModelBuilder, isoCountryService
+                                                )
         {
 			_requestModelAccessor = requestModelAccessor;
 

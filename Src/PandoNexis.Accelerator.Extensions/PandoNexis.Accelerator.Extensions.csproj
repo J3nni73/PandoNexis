@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Litium.Web.Administration.Application" Version="8.8.0" />
-    <PackageReference Include="Litium.Web.WebApi.Abstractions" Version="8.8.0" />
+    <PackageReference Include="Litium.Web.Administration.Application" Version="8.9.1" />
+    <PackageReference Include="Litium.Web.WebApi.Abstractions" Version="8.9.1" />
   </ItemGroup>
 <ItemGroup>
     <LitiumLocalization Include="Resources\Administration*.resx" />

@@ -1,4 +1,4 @@
-using Litium.Accelerator.ViewModels.Framework;
+﻿using Litium.Accelerator.ViewModels.Framework;
 using Litium.Accelerator.Builders.Framework;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;

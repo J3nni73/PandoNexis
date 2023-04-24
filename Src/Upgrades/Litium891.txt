@@ -1,0 +1,13 @@
+changed
+C:\Projects\PandoNexisAccelerator\Src\Litium.Accelerator\Builders\Menu\MenuViewModelBuilder.cs 
+C:\Projects\PandoNexisAccelerator\Src\Litium.Accelerator\Builders\Order\OrderViewModelBuilder.cs
+
+
+
+removed
+C:\Projects\PandoNexisAccelerator\Src\Litium.Accelerator\ValidationRules\CartContextValidationException.cs
+C:\Projects\PandoNexisAccelerator\Src\Litium.Accelerator.Mvc\IndentityServer\IdentityCert.rsa
+
+
+why different?
+C:\Projects\PandoNexisAccelerator\Src\Litium.Accelerator.Mvc\Controllers\Blocks\BannerBlockController.cs

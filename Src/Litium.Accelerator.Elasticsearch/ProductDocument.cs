@@ -67,7 +67,7 @@ namespace Litium.Accelerator.Search
 
         public class PriceItem
         {
-            public Guid SystemId { get; set; }
+            public ISet<Guid> PriceListSystemIds { get; } = new HashSet<Guid>();
 
             public Guid CountrySystemId { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Litium.Accelerator.Builders.Product;
 using Litium.Web.Models.Products;

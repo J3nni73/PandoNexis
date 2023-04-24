@@ -7,7 +7,7 @@
     <ProjectReference Include="..\Litium.Accelerator\Litium.Accelerator.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Litium.Elasticsearch.Abstractions" Version="8.8.0" />
+    <PackageReference Include="Litium.Elasticsearch.Abstractions" Version="8.9.1" />
   </ItemGroup>
   <ItemGroup>
     <LitiumLocalization Include="Resources\*.resx" />
