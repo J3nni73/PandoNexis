@@ -36,6 +36,7 @@ namespace Solution.Extensions.Definitions
 
         public override IEnumerable<FieldTemplate> GetTemplates()
         {
+
             var fieldTemplates = new List<FieldTemplate>();
             var templateChanges = new List<FieldTemplateChanges>();
             var newTemplates = new List<FieldTemplate>();
