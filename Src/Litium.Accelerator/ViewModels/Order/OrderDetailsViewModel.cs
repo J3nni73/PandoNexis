@@ -8,6 +8,7 @@ using Litium.Runtime.AutoMapper;
 using Litium.Web.Models;
 using Litium.Sales;
 using Litium.Web.Models.Products;
+using Litium.Globalization;
 
 namespace Litium.Accelerator.ViewModels.Order
 {
@@ -45,7 +46,7 @@ namespace Litium.Accelerator.ViewModels.Order
         {
             cfg.CreateMap<Address, DeliveryItem.AddressItem>()
                .ForMember(x => x.Zip, m => m.MapFrom(x => x.ZipCode))
-               .ForMember(x => x.Country, m => m.MapFrom(address => string.IsNullOrEmpty(address.Country) ? string.Empty : new RegionInfo(address.Country).DisplayName));
+               .ForMember(x => x.Country, m => m.MapFrom<CountryNameResolver>());
         }
 
         public class CustomerInfoModel
@@ -95,6 +96,26 @@ namespace Litium.Accelerator.ViewModels.Order
         {
             public string AcceptConditionsText { get; set; }
             public string TermsAndAgreement { get; set; }
+        }
+
+        private sealed class CountryNameResolver : IValueResolver<Address, DeliveryItem.AddressItem, string>
+        {
+            private readonly IsoCountryService _isoCountryService;
+
+            public CountryNameResolver(IsoCountryService isoCountryService)
+            {
+                _isoCountryService = isoCountryService;
+            }
+
+            public string Resolve(Address source, DeliveryItem.AddressItem destination, string destMember, ResolutionContext context)
+            {
+                if (string.IsNullOrWhiteSpace(source.Country))
+                {
+                    return string.Empty;
+                }
+
+                return _isoCountryService.Get(source.Country)?.EnglishName;
+            }
         }
     }
 }

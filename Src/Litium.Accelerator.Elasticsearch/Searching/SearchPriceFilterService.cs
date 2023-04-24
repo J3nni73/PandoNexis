@@ -47,7 +47,7 @@ namespace Litium.Accelerator.Search.Searching
                         yield return q => q.Nested(n => n
                                 .Path(x => x.Prices)
                                 .Query(nq
-                                    => nq.Term(t => t.Field(f => f.Prices[0].SystemId).Value(item))
+                                    => nq.Term(t => t.Field(f => f.Prices[0].PriceListSystemIds).Value(item))
                                     && nq.Term(t => t.Field(f => f.Prices[0].CountrySystemId).Value(countrySystemId))
                                     && nq.Term(t => t.Field(f => f.Prices[0].IsCampaignPrice).Value(false))
                                     && nq.Range(t => isShowPriceWithVat
@@ -69,7 +69,7 @@ namespace Litium.Accelerator.Search.Searching
                         yield return q => q.Nested(n => n
                               .Path(x => x.Prices)
                               .Query(nq
-                                  => nq.Term(t => t.Field(f => f.Prices[0].SystemId).Value(item))
+                                  => nq.Term(t => t.Field(f => f.Prices[0].PriceListSystemIds).Value(item))
                                   && nq.Term(t => t.Field(f => f.Prices[0].IsCampaignPrice).Value(true))
                                    && nq.Range(t => isShowPriceWithVat
                                         ? t.Field(f =>  f.Prices[0].PriceIncludeVat)
@@ -89,7 +89,7 @@ namespace Litium.Accelerator.Search.Searching
                 {
                     yield return q => q.Bool(b => b
                         .Must(nq
-                            => nq.Term(t => t.Field(f => f.Prices[0].SystemId).Value(item))
+                            => nq.Term(t => t.Field(f => f.Prices[0].PriceListSystemIds).Value(item))
                             && nq.Term(t => t.Field(f => f.Prices[0].CountrySystemId).Value(countrySystemId))
                             && nq.Term(t => t.Field(f => f.Prices[0].IsCampaignPrice).Value(false))
                         )
@@ -100,7 +100,7 @@ namespace Litium.Accelerator.Search.Searching
                 {
                     yield return q => q.Bool(b => b
                         .Must(nq
-                            => nq.Term(t => t.Field(f => f.Prices[0].SystemId).Value(item))
+                            => nq.Term(t => t.Field(f => f.Prices[0].PriceListSystemIds).Value(item))
                             && nq.Term(t => t.Field(f => f.Prices[0].IsCampaignPrice).Value(true))
                         )
                     );

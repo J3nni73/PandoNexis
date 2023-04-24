@@ -19,6 +19,7 @@ namespace Litium.Accelerator.Builders.MyPages
         private readonly SecurityContextService _securityContextService;
         private readonly CountryService _countryService;
         private readonly PersonStorage _personStorage;
+        private readonly IsoCountryService _isoCountryService;
         private readonly PersonService _personService;
 
         public MyPagesViewModelBuilder(
@@ -26,12 +27,14 @@ namespace Litium.Accelerator.Builders.MyPages
             SecurityContextService securityContextService,
             PersonService personService,
             CountryService countryService,
-            PersonStorage personStorage)
+            PersonStorage personStorage,
+            IsoCountryService isoCountryService)
         {
             _requestModelAccessor = requestModelAccessor;
             _securityContextService = securityContextService;
             _countryService = countryService;
             _personStorage = personStorage;
+            _isoCountryService = isoCountryService;
             _personService = personService;
         }
 
@@ -111,7 +114,7 @@ namespace Litium.Accelerator.Builders.MyPages
         {
             var countries = _countryService.GetAll().Where(x => _requestModelAccessor.RequestModel.ChannelModel.Channel.CountryLinks.Any(y => y.CountrySystemId == x.SystemId)).Select(country => new SelectListItem
                 {
-                    Text = new RegionInfo(country.Id).DisplayName,
+                    Text = _isoCountryService.Get(country.Id)?.EnglishName,
                     Value = country.Id
                 });
             return countries;

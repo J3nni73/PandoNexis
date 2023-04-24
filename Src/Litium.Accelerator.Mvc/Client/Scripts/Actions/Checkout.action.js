@@ -261,7 +261,7 @@ const _submit = (url, model, dispatch) => {
 export const saveCustomerDetail = (data) => (dispatch, getState) => {
     const { payload } = getState().checkout;
     const updatedData = { ...payload, ...data };
-    return put('api/checkout/setCustomerDetail', updatedData)
+    return put('/api/checkout/setCustomerDetail', updatedData)
         .then((response) => response.json())
         .then(() => dispatch(setStatusSubmitButton(true)))
         .catch((ex) => {
