@@ -22,6 +22,7 @@ namespace Litium.Accelerator.Builders.Framework
         private readonly SiteSettingViewModelBuilder _siteSettingViewModelBuilder;
         private readonly CartViewModelBuilder _cartViewModelBuilder;
         private readonly NavigationViewModelBuilder _navigationViewModelBuilder;
+        private readonly IsoCountryService _isoCountryService;
         private readonly IAntiforgery _antiforgery;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly RequestModelAccessor _requestModelAccessor;
@@ -36,7 +37,8 @@ namespace Litium.Accelerator.Builders.Framework
             PersonStorage personStorage,
             SiteSettingViewModelBuilder siteSettingViewModelBuilder,
             CartViewModelBuilder cartViewModelBuilder,
-            NavigationViewModelBuilder navigationViewModelBuilder)
+            NavigationViewModelBuilder navigationViewModelBuilder,
+            IsoCountryService isoCountryService)
         {
             _antiforgery = antiforgery;
             _httpContextAccessor = httpContextAccessor;
@@ -46,6 +48,7 @@ namespace Litium.Accelerator.Builders.Framework
             _siteSettingViewModelBuilder = siteSettingViewModelBuilder;
             _cartViewModelBuilder = cartViewModelBuilder;
             _navigationViewModelBuilder = navigationViewModelBuilder;
+            _isoCountryService = isoCountryService;
         }
 
         public async Task<ClientContextViewModel> BuildAsync()
@@ -61,7 +64,7 @@ namespace Litium.Accelerator.Builders.Framework
                 Navigation = await _navigationViewModelBuilder.BuildAsync(),
                 Countries = _requestModelAccessor.RequestModel.ChannelModel.Channel.CountryLinks
                             .Select(link => link.CountrySystemId.MapTo<Country>())
-                            .Select(country => new ListItem(new RegionInfo(country.Id).DisplayName, country.Id))
+                            .Select(country => new ListItem(_isoCountryService.Get(country.Id)?.EnglishName, country.Id))
                             .OrderBy(country => country.Text)
                             .ToList(),
                 RequestVerificationToken = requestVerification,

@@ -40,6 +40,7 @@ namespace Litium.Accelerator.Builders.Order
         private readonly CountryService _countryService;
         private readonly TaggingService _taggingService;
         private readonly OrderHelperService _orderHelperService;
+		private readonly IsoCountryService _isoCountryService;
         private readonly ShippingProviderService _shippingProviderService;
         private readonly StateTransitionsService _stateTransitionsService;
         private readonly PageService _pageServcie;
@@ -70,7 +71,8 @@ namespace Litium.Accelerator.Builders.Order
             StateTransitionsService stateTransitionsService,
             CountryService countryService,
             TaggingService taggingService,
-            OrderHelperService orderHelperService)
+            OrderHelperService orderHelperService,
+            IsoCountryService isoCountryService)
         {
             _requestModelAccessor = requestModelAccessor;
             _fieldDefinitionService = fieldDefinitionService;
@@ -88,6 +90,7 @@ namespace Litium.Accelerator.Builders.Order
             _countryService = countryService;
             _taggingService = taggingService;
             _orderHelperService = orderHelperService;
+      		_isoCountryService = isoCountryService;
             _shippingProviderService = shippingProviderService;
             _stateTransitionsService = stateTransitionsService;
         }
@@ -185,7 +188,7 @@ namespace Litium.Accelerator.Builders.Order
                     Address1 = shippingAddress?.Address1,
                     Zip = shippingAddress?.ZipCode,
                     City = shippingAddress?.City,
-                    Country = string.IsNullOrEmpty(shippingAddress?.Country) ? string.Empty : new RegionInfo(shippingAddress.Country).DisplayName
+                    Country = string.IsNullOrEmpty(shippingAddress?.Country) ? string.Empty : _isoCountryService.Get(shippingAddress.Country)?.EnglishName
                 },
                 MerchantOrganizationNumber = _personStorage.CurrentSelectedOrganization?.Id,
                 CompanyName = shippingAddress?.OrganizationName,

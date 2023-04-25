@@ -51,13 +51,12 @@ namespace Litium.Accelerator.Builders.Menu
                 switch (pageTypeName)
                 {
                     case null:
-                    case PageTemplateNameConstants.Brand:
                         return new MenuViewModel()
                         {
                             ShowLeftColumn = false
                         };
-                        //case PageTemplateNameConstants.Brand:
-                        //    showleftColumn = filterNavigation == NavigationType.Filter && website.InBrandPages();
+                    case PageTemplateNameConstants.Brand:
+                        showleftColumn = filterNavigation == NavigationType.Filter && website.InBrandPages();
                         break;
                     case PageTemplateNameConstants.ProductList:
                         showleftColumn = filterNavigation == NavigationType.Filter && website.InProductListPages();

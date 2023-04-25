@@ -4,6 +4,10 @@ ready(function () {
     
 });
 
+// Uncomment if we want to listen to scrolled window
+document.addEventListener('scroll', () => {
+    document.documentElement.dataset.scroll = window.scrollY;
+});
 
 function ready(callbackFunc) {
     if (document.readyState !== 'loading') {

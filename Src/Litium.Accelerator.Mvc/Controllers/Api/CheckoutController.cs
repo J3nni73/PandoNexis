@@ -133,6 +133,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api
             }
             catch (ValidationException ex)
             {
+                await ex.ProcessPostActionsAsync(cartContext);
                 ModelState.AddModelError("general", ex.Message);
                 return BadRequest(ModelState);
             }
@@ -212,7 +213,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api
                 await cartContext.SelectShippingOptionAsync(selectShippingOptionArgs);
                 if (model.PaymentWidget != null)
                 {
-                    model.PaymentWidget = _paymentOptionViewModelBuilder.BuildWidget(cartContext, selectedDeliveryMethod.Id);
+                    model.PaymentWidget = _paymentOptionViewModelBuilder.BuildWidget(cartContext, model.SelectedPaymentMethod.Id);
                 }
                 return Ok(model);
             }

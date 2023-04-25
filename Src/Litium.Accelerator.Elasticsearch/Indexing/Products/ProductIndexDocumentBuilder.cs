@@ -219,7 +219,7 @@ namespace Litium.Accelerator.Search.Indexing.Products
                     }
 
                     Dictionary<Guid, decimal> appliedCountries;
-                    if(priceList.CountryLinks is null || priceList.CountryLinks.Count == 0)
+                    if (priceList.CountryLinks is null || priceList.CountryLinks.Count == 0)
                     {
                         appliedCountries = countries;
                     }
@@ -229,16 +229,18 @@ namespace Litium.Accelerator.Search.Indexing.Products
                         appliedCountries = new Dictionary<Guid, decimal>(countries.Where(x => priceListCountryLinkSystemIds.Contains(x.Key)));
                     }
 
-                    foreach (var (countrySystemId , vatRate) in appliedCountries)
+                    foreach (var (countrySystemId, vatRate) in appliedCountries)
                     {
-                        yield return new ProductDocument.PriceItem
-                            {
-                                IsCampaignPrice = false,
-                                SystemId = priceList.SystemId,
-                                PriceIncludeVat = priceList.IncludeVat ? price.Price : price.Price * (1 + vatRate),
-                                PriceExcludeVat = priceList.IncludeVat ? price.Price / (1 + vatRate) : price.Price,
-                                CountrySystemId = countrySystemId
-                            };
+                        var model = new ProductDocument.PriceItem
+                        {
+                            IsCampaignPrice = false,
+                            PriceIncludeVat = priceList.IncludeVat ? price.Price : price.Price * (1 + vatRate),
+                            PriceExcludeVat = priceList.IncludeVat ? price.Price / (1 + vatRate) : price.Price,
+                            CountrySystemId = countrySystemId
+                        };
+
+                        model.PriceListSystemIds.Add(priceList.SystemId);
+                        yield return model;
                     }
                 }
             }
@@ -464,7 +466,7 @@ namespace Litium.Accelerator.Search.Indexing.Products
 
         private void PopulatePrices(ProductDocument model, Context context, IList<Variant> variants)
         {
-            if(!context.ChannelCountryLinks.TryGetValue(model.ChannelSystemId, out var countrySystemIds) || countrySystemIds.Count == 0)
+            if (!context.ChannelCountryLinks.TryGetValue(model.ChannelSystemId, out var countrySystemIds) || countrySystemIds.Count == 0)
             {
                 return;
             }
@@ -478,21 +480,46 @@ namespace Litium.Accelerator.Search.Indexing.Products
             foreach (var price in allPrices
                 .Where(x => !x.IsCampaignPrice))
             {
-                model.Prices.Add(price);
+                var priceModel = model.Prices.FirstOrDefault(x =>
+                    x.PriceIncludeVat == price.PriceIncludeVat
+                    && x.CountrySystemId == price.CountrySystemId
+                    && !x.IsCampaignPrice);
+
+                if (priceModel is null)
+                {
+                    model.Prices.Add(priceModel = new ProductDocument.PriceItem
+                    {
+                        CountrySystemId = price.CountrySystemId,
+                        PriceIncludeVat = price.PriceIncludeVat,
+                        PriceExcludeVat = price.PriceExcludeVat
+                    });
+                }
+
+                priceModel.PriceListSystemIds.UnionWith(price.PriceListSystemIds);
             }
 
             foreach (var item in allPrices
                 .Where(x => x.IsCampaignPrice)
-                .GroupBy(x => x.SystemId)
-                .Select(x => new { x.Key, PriceIncludeVat = x.Min(z => z.PriceIncludeVat), PriceExcludeVat =  x.Min(z => z.PriceExcludeVat)}))
+                .GroupBy(x => new { x.PriceListSystemIds, x.CountrySystemId })
+                .Select(x => new { x.Key, PriceIncludeVat = x.Min(z => z.PriceIncludeVat), PriceExcludeVat = x.Min(z => z.PriceExcludeVat) }))
             {
-                model.Prices.Add(new ProductDocument.PriceItem
+                var priceModel = model.Prices.FirstOrDefault(x =>
+                    x.PriceIncludeVat == item.PriceIncludeVat
+                    && x.CountrySystemId == item.Key.CountrySystemId
+                    && x.IsCampaignPrice);
+
+                if (priceModel is null)
                 {
-                    IsCampaignPrice = true,
-                    SystemId = item.Key,
-                    PriceIncludeVat = item.PriceIncludeVat,
-                    PriceExcludeVat  = item.PriceExcludeVat
-                });
+                    model.Prices.Add(priceModel = new ProductDocument.PriceItem
+                    {
+                        IsCampaignPrice = true,
+                        CountrySystemId = item.Key.CountrySystemId,
+                        PriceIncludeVat = item.PriceIncludeVat,
+                        PriceExcludeVat = item.PriceExcludeVat
+                    });
+                }
+
+                priceModel.PriceListSystemIds.UnionWith(item.Key.PriceListSystemIds);
             }
         }
 
