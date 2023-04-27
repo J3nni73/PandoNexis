@@ -47,7 +47,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
 
         public abstract Task<object> HandleFormData(string data);
 
-        public abstract Task<object> UpdateRow(string data);
+        public abstract Task<GenericDataContainer> UpdateField(GenericDataField fieldData);
 
 
     }

@@ -14,13 +14,49 @@ import {
 
 const rootRoute = '/api/genericdataview/';
 
+export const isFieldValid = (theValue, validationRules) => {
+    let isValid = true;
+    if (validationRules) {
+        for(let i = 0; i < validationRules.length; i++) {
+            const obj = validationRules[i];
+            if (obj.rule === 'IsRequired') {
+                if (theValue.trim().length < 1) {
+                    alert(obj.errorMessage);
+                    isValid = false;
+                    break;
+                }
+            }
+            else {
+                const regex = new RegExp(obj.rule);
+                const result = regex.test(theValue);
+                if (!result) {
+                    alert(obj.errorMessage);
+                    isValid = false;
+                    break;
+                }
+            }
+        }
+    }
+    return isValid;
+};
 
-export const update = (pageSystemId, data, fields, isInModal=false, entitySystemId='') => (dispatch, getState) => {
+export const update = (pageSystemId, data, fields, isInModal = false, entitySystemId = '') => (dispatch, getState) => {
+    
+    var field = fields.find(x => x.fieldID === data.fieldID);
+    if (field && field.settings && field.settings.validationRules) {
+       
+        isFieldValid(data.fieldValue, field.settings.validationRules);
+        //alert(JSON.stringify(field.settings.validationRules));
+        return;
+    }   
+
+
   dispatch({
       type: isInModal ? GENERIC_MODAL_DATA_CONTAINER_UPDATE : GENERIC_DATA_CONTAINER_UPDATE,
     payload: { data, fields },
   });
   // console.log('Update Row --', type, data, fields);
+    
     return patch(rootRoute + pageSystemId, data)
     .then((response) => response.json())
       .then((response) => dispatch(checkDataContainerResponse(response, fields, isInModal, entitySystemId)))

@@ -10,5 +10,6 @@
         public static string AvailableFields = "AvailableFields";
         public static string DefaultFields = "DefaultFields";
         public static string EditableFields = "EditableFields";
+        public static string RequiredFields = "RequiredFields";
     }
 }

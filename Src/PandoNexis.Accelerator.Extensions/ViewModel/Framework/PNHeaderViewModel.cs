@@ -19,6 +19,15 @@ namespace PandoNexis.Accelerator.Extensions.Framework.ViewModels
         public bool VisibleCheckout { get; set; }
         //PandoNexis Visibility end
 
+        //PandoNexis HeaderBannerMessage begin
+        public bool ShowHeaderBannerMessage { get; set; } = false;
+        public string HeaderBannerMessage { get; set; } = string.Empty;
+        //PandoNexis HeaderBannerMessage end
+
+        //PandoNexis HeaderUSPs begin
+        public string HeaderUsps { get; set; } = string.Empty;
+        //PandoNexis HeaderUSPs end
+
         //PandoNexis: END MODEL
         public void Configure(IMapperConfigurationExpression cfg)
         {

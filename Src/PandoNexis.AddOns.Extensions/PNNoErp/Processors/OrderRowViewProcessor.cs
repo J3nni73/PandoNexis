@@ -99,7 +99,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
             throw new NotImplementedException();
         }
 
-        public override Task<object> UpdateRow(string data)
+        public override Task<GenericDataContainer> UpdateField(GenericDataField fieldData)
         {
             throw new NotImplementedException();
         }

@@ -1,0 +1,22 @@
+//PandoNexis: BEGIN COMPONENT  
+    // OrganizationSelector
+    const organizationSelectors = document.querySelectorAll(".pn-organization-selector");
+    if (organizationSelectors) {
+
+        const OrganizationSelector = DynamicComponent({
+            loader: () => import('./_Addons/PNOrganizationSelector/Components/OrganizationSelectorContainer'),
+        });
+        Array.from(organizationSelectors).forEach(
+            (organizationSelector) => {
+                renderReact(
+                    <Provider store={window.__pn.store}>
+                        <OrganizationSelector />
+                    </Provider>,
+                    organizationSelector
+                );
+            });
+    }
+    // END OrganizationSelector
+//PandoNexis: END COMPONENT  
+
+

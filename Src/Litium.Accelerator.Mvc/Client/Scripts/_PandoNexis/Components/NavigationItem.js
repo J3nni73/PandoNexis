@@ -3,7 +3,7 @@ import { translate } from '../../Services/translation';
 import constants from '../../constants';
 import PnIcon from './PnIcon';
 
-const NavigationItem = ({ links = [], contentLink = null }) => {
+const NavigationItem = ({ links = [], contentLink = null, subLevel = 0 }) => {
     const menuRef = useRef(null);
     const [mainMenuActive, setMainMenuActive] = useState(false);
     const toggleMenu = (e) => {
@@ -24,6 +24,18 @@ const NavigationItem = ({ links = [], contentLink = null }) => {
     const hasNameOrChildren = (link) =>
         link.name || (link.links || []).length > 0;
 
+    const getLowerLevelLinkCountClass = (amount) => {
+        if (amount > 40) {
+            return "large";
+        }
+        else if (amount > 20) {
+            return "medium";
+        }
+        return "small";
+    };
+    if (!contentLink && links?.length < 1) {
+        return null;
+    }
     return (
         <Fragment>
             {!contentLink && links.length > 0 ? (
@@ -42,7 +54,7 @@ const NavigationItem = ({ links = [], contentLink = null }) => {
                     <a
                         className={`navbar__link ${selectedClass} ${hasChildrenClass || ''
                             } ${additionClass || ''}`}
-                        href={contentLink.url || '#'}
+                        href={contentLink?.url || '#'}
                         dangerouslySetInnerHTML={{ __html: contentLink.name }}
                     ></a>
                     {links.length > 0 && (
@@ -61,9 +73,7 @@ const NavigationItem = ({ links = [], contentLink = null }) => {
                             <span
                                 className="navbar__icon navbar__icon--close"
                                 onClick={toggleMenu}
-                            >
-                                <PnIcon iconName="close" title="close" width="24" height="24" cssClass="" />
-                            </span>
+                            > <PnIcon iconName="close" title="close" width="24" height="24" cssClass="" /></span>
                         ) : (
                             <Fragment>
                                 <i
@@ -80,7 +90,7 @@ const NavigationItem = ({ links = [], contentLink = null }) => {
                             </Fragment>
                         )}
                     </div>
-                    <ul className="navbar__menu-links">
+                    <ul className={`navbar__menu-links sub-level-${subLevel} sub-links-count-${links?.length || 0} ${subLevel === 2 ? getLowerLevelLinkCountClass(links?.length || 0) : ''}`}>
                         {links.length > 0 &&
                             links.map(
                                 (link, index) =>
@@ -92,6 +102,7 @@ const NavigationItem = ({ links = [], contentLink = null }) => {
                                             <NavigationItem
                                                 links={link.links}
                                                 contentLink={link}
+                                                subLevel={subLevel + 1}
                                             />
                                         </li>
                                     )

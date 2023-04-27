@@ -84,6 +84,20 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers
             };
 
         }
+        public FieldTemplateChanges GetPersonField(string template, string fieldgroup, string field)
+        {
+
+            return new FieldTemplateChanges()
+            {
+                TemplateType = FieldTemplateHelperConstants.PersonFieldTemplate,
+                DisplayTemplate = "",
+                TemplateName = template,
+                FieldGroupType = FieldTemplateHelperConstants.FieldTemplateFieldGroup,
+                FieldGroupName = fieldgroup,
+                Field = field
+            };
+
+        }
         public FieldTemplateChanges GetProductField(string template, string productFieldGroup, string fieldgroup, string field)
         {
             return new FieldTemplateChanges()

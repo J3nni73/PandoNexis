@@ -36,7 +36,6 @@ namespace Solution.Extensions.Definitions
 
         public override IEnumerable<FieldTemplate> GetTemplates()
         {
-
             var fieldTemplates = new List<FieldTemplate>();
             var templateChanges = new List<FieldTemplateChanges>();
             var newTemplates = new List<FieldTemplate>();
@@ -92,6 +91,9 @@ namespace Solution.Extensions.Definitions
                             case FieldTemplateHelperConstants.OrganizationFieldTemplate:
                                 fieldTemplate = GetOrganizationFieldTemplate(template.Key, changes, newTemplates);
                                 break;
+                            case FieldTemplateHelperConstants.PersonFieldTemplate:
+                                fieldTemplate = GetPersonFieldTemplate(template.Key, changes, newTemplates);
+                                break;
                         }
                         if (fieldTemplate != null)
                             fieldTemplates.Add(fieldTemplate);
@@ -99,6 +101,53 @@ namespace Solution.Extensions.Definitions
                 }
             }
             return fieldTemplates;
+        }
+        private FieldTemplate? GetPersonFieldTemplate(string templateId, List<FieldTemplateChanges> changes, List<FieldTemplate> newTemplates)
+        {
+            var groups = changes.GroupBy(i => i.FieldGroupName);
+            var customerFieldTemplate = newTemplates.FirstOrDefault(i => i.Id == templateId) as PersonFieldTemplate;
+            if (customerFieldTemplate == null)
+                return null;
+
+            var newcustomerFieldTemplate = new PersonFieldTemplate(templateId);
+            newcustomerFieldTemplate.FieldGroups = new List<FieldTemplateFieldGroup>();
+            foreach (var group in customerFieldTemplate.FieldGroups)
+            {
+                var newGroup = new FieldTemplateFieldGroup()
+                {
+                    Id = group.Id,
+                    Collapsed = group.Collapsed,
+                };
+                foreach (var field in group.Fields)
+                {
+                    newGroup.Fields.Add(field);
+                }
+                newcustomerFieldTemplate.FieldGroups.Add(newGroup);
+            }
+
+            foreach (var change in changes)
+            {
+
+                if (newcustomerFieldTemplate.FieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) == null)
+                {
+                    newcustomerFieldTemplate.FieldGroups.Add(new FieldTemplateFieldGroup()
+                    {
+                        Id = change.FieldGroupName,
+                        Collapsed = false,
+                        Localizations =  {
+                                            ["sv-SE"] = { Name = change.FieldGroupName },
+                                            ["en-US"] = { Name = change.FieldGroupName }
+                                         },
+                    });
+                }
+
+                if (newcustomerFieldTemplate.FieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) != null)
+                {
+                    newcustomerFieldTemplate.FieldGroups.FirstOrDefault(i => i.Id == change.FieldGroupName)?.Fields.Add(change.Field);
+                }
+            }
+
+            return newcustomerFieldTemplate;
         }
         private FieldTemplate? GetOrganizationFieldTemplate(string templateId, List<FieldTemplateChanges> changes, List<FieldTemplate> newTemplates)
         {
