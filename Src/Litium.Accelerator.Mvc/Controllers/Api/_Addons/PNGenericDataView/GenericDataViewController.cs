@@ -203,28 +203,17 @@ namespace Litium.Accelerator.Mvc.Controllers.Api._Addons.PNGenericDataView
 
         [HttpPatch]
         [Route("{type}")]
-        public async Task<IActionResult> UpdateRow(string type)
+        public async Task<IActionResult> UpdateField(string type, object fieldData) 
         {
 
-            HttpContext.Request.EnableBuffering();
-            Request.Body.Position = 0;
-            using (StreamReader stream = new StreamReader(HttpContext.Request.Body))
+            if (Guid.TryParse(type, out Guid pageSystemId))
             {
-                var task = stream
-                    .ReadToEndAsync()
-                    .ContinueWith(t =>
-                    {
-                        var res = t.Result;
-                        // TODO: Handle the post result!
-                        return res;
-                    });
 
-                // await processing of the result
-                task.Wait();
-                var result = task.Result;
-                var dataViewRow = await (await GetProcessor(type)).UpdateRow(result);
+                var result = JsonConvert.DeserializeObject<GenericDataField>(fieldData.ToString());
+                var dataViewRow = await (await GetProcessor(pageSystemId)).UpdateField(result);
                 if (dataViewRow != null)
                     return Ok(dataViewRow);
+
             }
 
             return BadRequest();

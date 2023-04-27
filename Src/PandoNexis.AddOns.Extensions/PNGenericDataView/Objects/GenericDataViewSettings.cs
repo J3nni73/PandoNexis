@@ -18,5 +18,6 @@
         public int ColumnsWithContainersSmall { get; set; } = 1;
         public int ColumnsWithContainersMedium { get; set; } = 2;
         public int ColumnsWithContainersLarge { get; set; } = 3;
+        public string AlignContainers { get; set; }  = string.Empty;    
     }
 }

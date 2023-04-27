@@ -41,10 +41,11 @@ export const DataContainer = React.memo(
                     reset({ [key]: form[key] });
                     return {
                         ...payload,
+                        fieldID: key,
+                        fieldValue: form[key],
                         [key]: form[key],
                     };
                 }, identifierField);
-
                 onDataContainerChange(data, fields, isInModal);
             }
         };

@@ -30,9 +30,14 @@ const PNGenericDataViewContainer = ({
         dispatch(loadAction(pageSystemId, params));
     }
 
-    const onDataContainerChange = (data, item, isInModal = false, entitySystemId='') => {
+    const onDataContainerChange = (data, item, isInModal = false, entitySystemId = '') => {
+        
         var currentEnvPageSystemId = isInModal ? modalPageSystemId || pageSystemId : pageSystemId;
-        dispatch(updateAction(currentEnvPageSystemId, data, item, isInModal, entitySystemId));
+        const selectedValueObject = {
+            ...item,
+            ...data
+        };
+        dispatch(updateAction(currentEnvPageSystemId, selectedValueObject, item, isInModal, entitySystemId));
     }
 
     const getGenericDataViewForExport = () => {

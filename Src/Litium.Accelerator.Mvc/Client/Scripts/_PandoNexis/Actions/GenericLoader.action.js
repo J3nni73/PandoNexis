@@ -1,11 +1,17 @@
 let loaderCounter = 0;
-export const toggleGenericLoader = (visible) => () => {
-    let loaderEl = document.getElementById('mainGenericLoader');
+export const toggleGenericLoader = (visible, type ='spinner') => () => {
+   // type = 'ripple' or 'spinner'
+    let loaderEl = document.getElementById('mainGenericLoader__' + type);
 
     if (!loaderEl) {
         loaderEl = document.createElement('div');
-        loaderEl.id = 'mainGenericLoader';
-        loaderEl.classList = 'generic-loader';
+        loaderEl.id = 'mainGenericLoader__' + type;
+        loaderEl.classList = 'generic-loader__' + type;
+
+        if (type === 'ripple') {
+            loaderEl.innerHTML = '<div></div><div></div>';
+        }
+
         document.querySelector('body').append(loaderEl);
     }
 

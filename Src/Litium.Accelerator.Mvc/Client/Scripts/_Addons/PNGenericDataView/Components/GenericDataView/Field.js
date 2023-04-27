@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 //import AutocompleteField from './SpecialFields/Autocomplete';
 import ButtonField from './SpecialFields/ButtonField';
@@ -14,6 +14,11 @@ export const GenericDataViewField = React.forwardRef(
         },
         ref
     ) => {
+        let isRequired = false;
+        if (fieldSettings && fieldSettings.validationRules) {
+            isRequired = fieldSettings.validationRules.find(x => x.rule === 'IsRequired') ? true : false;
+        }
+
         const onEnterKeyPress = function (event) {
             if (event.keyCode === 13 && event.target.nodeName === 'INPUT') {
                 var parent = event.target.closest('tr');
@@ -46,7 +51,6 @@ export const GenericDataViewField = React.forwardRef(
                 elem = elem.nextElementSibling;
             }
         };
-
         const common = {
             ...ref,
             className: 'generic-data-view__input',
@@ -65,10 +69,13 @@ export const GenericDataViewField = React.forwardRef(
                     defaultValue={props.fieldName || ''}
                     title={name}
                     {...common}
+                    
                 />
             );
         }
-      
+
+
+
         //else if (type === 'TextOption' || type === 'dropdown') {
         //    return (
         //        <DropdownField
@@ -166,6 +173,8 @@ export const GenericDataViewField = React.forwardRef(
                             <input
                                 onKeyDown={(event) => onEnterKeyPress(event)}
                                 type="text"
+                                onKeyUp={(e) => isValid(e.target)} 
+                                required={isRequired}
                                 {...common}
                             />
                             {suffix}
@@ -178,6 +187,7 @@ export const GenericDataViewField = React.forwardRef(
                             <input
                                 onKeyDown={(event) => onEnterKeyPress(event)}
                                 type="number"
+                                required={isRequired}
                                 {...common}
                             />
                             {suffix}
@@ -186,7 +196,7 @@ export const GenericDataViewField = React.forwardRef(
                 default:
                     return (
                         <>
-                            <input type="hidden" {...common} />
+                            <input type="hidden" {...common} required={isRequired}  />
                             <span className="generic-data-view__simple-text" title={props.defaultValue}>{props.defaultValue}
                                 {suffix}</span>
                         </>

@@ -37,6 +37,8 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
                 
                 // Generic grid view - FORM
                 "genericdataview.form.button.open.quickbuy".AsWebsiteTextDefinition("Quick buy settings", "Inställningar för Quick buy", clientAvailable: true, serverAvailable: false),
+                "genericdataview.validationrulemessage.isrequired".AsWebsiteTextDefinition("This field is requiered", "Detta fält är obligatoriskt", clientAvailable: true, serverAvailable: true),
+                "genericdataview.validationrulemessage.email".AsWebsiteTextDefinition("Please enter a valid email", "Vänligen ange en giltig email", clientAvailable: true, serverAvailable: true)
             };
         }
     }

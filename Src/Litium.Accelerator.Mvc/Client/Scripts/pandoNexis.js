@@ -129,7 +129,35 @@ export const bootstrapPNComponents = () => {
                 elem
             );
         });
-    }
+
+        document.querySelectorAll('[data-dropzone]').forEach((elem) => {
+            ReactDOM.render(
+                <Provider store={window.__pn.store}>
+                    <DropZoneContainer type={elem.dataset.dropzone} />
+                </Provider>,
+                elem
+            );
+        });
+
+        const reorderBtn = document.querySelectorAll('reorder-button');
+        if (reorderBtn.length > 0) {
+            const ReorderButton = DynamicComponent({
+                loader: () => import('./Components/ReorderButton'),
+            });
+            Array.from(reorderBtn).forEach(
+                (button) => {
+                    const { cssClass, orderId, title } = button.dataset;
+                    const label = button.innerText;
+                    renderReact(
+                        <Provider store={window.__pn.store}>
+                            <ReorderButton {...{ label, title, cssClass, orderId }} />
+                        </Provider>,
+                        button
+                    );
+                }
+            );
+        }
+    } 
     // END PNGenericDataView
     // Logged on info
     const loggedOnInfoLabels = document.querySelectorAll('.pn-info-label');

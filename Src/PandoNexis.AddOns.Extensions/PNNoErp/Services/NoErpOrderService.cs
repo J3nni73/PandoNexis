@@ -20,8 +20,6 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Services
             return orders;
         }
 
-
-
         public Order CreateShippment(Guid orderSystemId)
         {
             var order = _litiumOrderService.CreateShippment(orderSystemId).Result;

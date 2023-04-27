@@ -4,6 +4,7 @@ using Litium.Accelerator.ViewModels.Search;
 using Litium.FieldFramework;
 using Litium.Runtime.DependencyInjection;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
+using PandoNexis.AddOns.Extensions.PNGenericDataView.Services;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
 {
@@ -12,12 +13,14 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
     {
         private readonly RequestModelAccessor _requestModelAccessor;
         private readonly ProductSearchService _productSearchService;
+        
 
         private const string AreaSource = "ProductData";
         public ProductDataProcessor(FieldTemplateService fieldTemplateService,
                                     RequestModelAccessor requestModelAccessor,
                                     ProductSearchService productSearchService,
-                                    FieldDefinitionService fieldDefinitionService) : base(fieldTemplateService, fieldDefinitionService)
+                                    FieldDefinitionService fieldDefinitionService,
+                                    GenericDataViewService genericDataViewService) : base(fieldTemplateService, fieldDefinitionService, genericDataViewService)
         {
             _requestModelAccessor = requestModelAccessor;
             _productSearchService = productSearchService;
@@ -79,7 +82,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
             throw new NotImplementedException();
         }
 
-        public override async Task<object> UpdateRow(string data)
+        public override async Task<GenericDataContainer> UpdateField(GenericDataField fieldData)
         {
             throw new NotImplementedException();
         }

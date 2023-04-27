@@ -5,6 +5,7 @@ using Litium.Web.Administration.FieldFramework;
 using Newtonsoft.Json;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
+using PandoNexis.AddOns.Extensions.PNGenericDataView.Services;
 using System.Globalization;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
@@ -12,14 +13,17 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
     [Service(ServiceType = typeof(ProductDataViewBase), Lifetime = DependencyLifetime.Transient, NamedService = true)]
     public abstract class ProductDataViewBase : IGenericDataViewProcessor
     {
+        private readonly GenericDataViewService _genericDataViewService;
         private readonly FieldTemplateService _fieldTemplateService;
         private readonly FieldDefinitionService _fieldDefinitionService;
 
-        protected ProductDataViewBase(FieldTemplateService fieldTemplateService, 
-                                        FieldDefinitionService fieldDefinitionService)
+        protected ProductDataViewBase(FieldTemplateService fieldTemplateService,
+                                        FieldDefinitionService fieldDefinitionService,
+                                        GenericDataViewService genericDataViewService)
         {
             _fieldTemplateService = fieldTemplateService;
             _fieldDefinitionService = fieldDefinitionService;
+            _genericDataViewService = genericDataViewService;
         }
 
         public abstract Task<object> GetDataForm(string data);
@@ -31,7 +35,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
 
         public abstract Task<object> HandleFormData(string data);
 
-        public abstract Task<object> UpdateRow(string data);
+        public abstract Task<GenericDataContainer> UpdateField(GenericDataField fieldData);
         public virtual GenericDataContainer GetFields(string templateId)
         {
             var container = new GenericDataContainer();
@@ -48,7 +52,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
                 {
                     FieldID = fieldDefinition.Id,
                     FieldName = fieldDefinition.GetEntityName(CultureInfo.CurrentCulture),
-                    FieldType = fieldDefinition.FieldType,
+                    FieldType = _genericDataViewService.GetDataViewFieldType( fieldDefinition.FieldType),
                 };
                 dataField.Settings.Editable = editableFields?.Contains(field) != null ? true : false;
 

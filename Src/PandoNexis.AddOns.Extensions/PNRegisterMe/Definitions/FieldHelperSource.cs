@@ -1,12 +1,11 @@
 ﻿using Litium.FieldFramework;
-using Litium.FieldFramework.FieldTypes;
 using Litium.Globalization;
 using Litium.Security;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
-using PandoNexis.AddOns.Extensions.PNNoErp.Constants;
+using PandoNexis.AddOns.Extensions.PNRegisterMe.Constants;
 
-namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
+namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Definitions
 {
     public class FieldHelperSource : FieldHelper
     {
@@ -16,13 +15,12 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
 
         public override void HandleFieldOptions()
         {
-            var changes = new List<FieldOptionChanges>(){
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.DataArea, ProcessorConstants.ProductArea),
+            var changes = new List<FieldOptionChanges>()
+            {
                 GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.DataArea, ProcessorConstants.CustomerArea),
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.AlignContainers, PageFieldOptionValues.Left),
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.AlignContainers, PageFieldOptionValues.Center),
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.AlignContainers, PageFieldOptionValues.Right),
-                };
+                GetFieldOption(FieldHelperConstants.WebsiteArea,PageFieldNameConstants.AreaSource, RegisterMeConstants.RegisterMePerson),
+                GetFieldOption(FieldHelperConstants.WebsiteArea,PageFieldNameConstants.AreaSource, RegisterMeConstants.RegisterMeOrganization),
+            };
 
             UpdateFieldOptions(changes);
 
@@ -30,7 +28,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
         }
         public override void HandleMultiFieldFields()
         {
-            throw new NotImplementedException();
+            return ;
         }
     }
 }

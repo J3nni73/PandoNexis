@@ -87,6 +87,16 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
                 new FieldDefinition<WebsiteArea>(PageFieldNameConstants.ColumnsWithContainersSmall, SystemFieldTypeConstants.Int),
                 new FieldDefinition<WebsiteArea>(PageFieldNameConstants.ColumnsWithContainersMedium, SystemFieldTypeConstants.Int),
                 new FieldDefinition<WebsiteArea>(PageFieldNameConstants.ColumnsWithContainersLarge, SystemFieldTypeConstants.Int),
+                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.AlignContainers, SystemFieldTypeConstants.TextOption)
+                {
+                    Option = new TextOption {
+                        MultiSelect = false,
+                        Items = new List<TextOption.Item>
+                        {
+                         
+                        }
+                    }
+                },
             };
             return fields;
         }
