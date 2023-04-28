@@ -4,7 +4,10 @@ import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
 import { GenericDataViewField } from '../../Field';
 import { any } from 'array-flat-polyfill';
-
+import { FieldErrorMsg, getFieldData } from '../viewFunctions';
+import { checkFormField } from '../../../../Actions/GenericDataContainer.action';
+import { buttonClick } from '../../../../Actions/GenericDataContainerField.action';
+import { loadModal } from '../../../../Actions/GenericDataView.action';
 //import { DndContext } from '@dnd-kit/core';
 //import { Draggable } from '../../../../../../_PandoNexis/Components/Draggable';
 //import { Droppable } from '../../../../../../_PandoNexis/Components/Droppable';
@@ -38,32 +41,92 @@ export const DataContainer = React.memo(
         onlyShowTaskName = true
 
     }) => {
-        const { register, handleSubmit, reset, formState: { dirtyFields, isSubmitted }, } = useForm();
+        const { register, handleSubmit, setFocus, reset, formState: { dirtyFields, isSubmitted }, } = useForm();
         const [cardFields, setCardFields] = useState([]);
         const [currentStatus, setCurrentStatus] = useState(settings?.currentStatus);
         const [nextAvailableStatus, setNewAvailableStatus] = useState(settings?.possibleNextStatusList);
         const [cardIngressField, setCardIngressField] = useState(null);
+        const [errorObject, setErrorObject] = useState(null);
         const dragItem = useRef();
         const dragOverItem = useRef();
         let tempStatus = null;
         let initialOffset = null;
         let currentOffset = null;
 
-        const onBlur = (form) => {
-            const identifierField = { EntitySystemId: fields[0].entitySystemId };
+        const isContainerValid = (identifierField, form, theFormFields) => {
+            let isFullFormCheck = false;
+            if (theFormFields === undefined) {
+                isFullFormCheck = true;
+                theFormFields = form;
+            }
 
-            // Only submit changed field(s) along with identifier field
-            if (Object.keys(dirtyFields).length) {
-                const data = Object.keys(dirtyFields).reduce((payload, key) => {
-                    reset({ [key]: form[key] });
-                    return {
-                        ...payload,
-                        [key]: form[key],
-                    };
+            if (Object.keys(theFormFields).length) {
+
+                let errorObjects = [];
+                const FullData = Object.keys(theFormFields).reduce((payload, key) => {
+                    //console.log("key", form[key]);
+                    var errObj = checkFormField({
+                        fieldID: key,
+                        fieldValue: form[key],
+                        field: fields.find(x => x.fieldID === key)
+                    });
+
+                    if (errObj) {
+                        errorObjects.push(errObj);
+                        return null;
+                    }
+                    else {
+                        if (!isFullFormCheck) {
+                            reset({ [key]: form[key] });
+                            const data = getFieldData(payload, form, key);
+                            onDataContainerChange(data, fields, isInModal);
+                            return data;
+                        }
+                        return null;
+                    }
                 }, identifierField);
 
-                onDataContainerChange(data, fields, isInModal);
+                return errorObjects;
             }
+        }
+
+        const onButtonClick = (form, useConfirmation, fieldSettings, confirmationText, fieldId) => {
+            const entitySystemId = fields[0].entitySystemId;
+            const identifierField = { entitySystemId };
+            const errObjs = isContainerValid(identifierField, form);
+            setErrorObject(errObjs);
+            if (!errObjs) {
+                return true;
+            }
+            if (useConfirmation) {
+                if (!confirm(confirmationText)) {
+                    return false;
+                }
+            }
+            if (fieldSettings?.buttonOpenInModal) {
+                const modalSettings = {
+                    modalPageSystemId: fieldSettings.modalPageSystemId,
+                    entitySystemId,
+
+                };
+                dispatch(loadModal(modalSettings));
+                return;
+            }
+
+            const selectedValueObject = {
+                value: '',
+                name: '',
+                entitySystemId,
+                dataContainerIndex,
+            };
+
+            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject));
+        };
+
+        const onBlur = (form) => {
+            const identifierField = { EntitySystemId: fields[0].entitySystemId };
+            const errObjs = isContainerValid(identifierField, form, dirtyFields);
+            setErrorObject(errObjs);
         };
 
         useEffect(() => {
@@ -214,6 +277,7 @@ export const DataContainer = React.memo(
                                                         defaultValue={cleanData(cardIngressField.fieldValue, cardIngressField.fieldType) || ''}
                                                         title={cardIngressField.fieldName}
                                                         name={cardIngressField.fieldID}
+                                                        setErrorObject={setErrorObject}
                                                         onBlur={
                                                             cardIngressField.fieldType !== 'autocomplete' && cardIngressField.fieldType !== 'dropdown' && cardIngressField.fieldType !== 'productimageupload'
                                                                 ? handleSubmit(onBlur)
@@ -283,6 +347,7 @@ export const DataContainer = React.memo(
                                                                 defaultValue={cleanData(fieldValue, fieldType) || ''}
                                                                 title={fieldName}
                                                                 name={fieldID}
+                                                                setErrorObject={setErrorObject}
                                                                 onBlur={
                                                                     fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload'
                                                                         ? handleSubmit(onBlur)
@@ -301,6 +366,7 @@ export const DataContainer = React.memo(
                                                                     fieldType === 'dropdown' || fieldType === 'productimageupload' ? dropDownOptions : null
                                                                 }
                                                             />
+                                                            {errorObject && <FieldErrorMsg fieldID={fieldID} errObjs={errorObject} />}
                                                             {settings.errorFieldMessage && (
                                                                 <span
                                                                     className="generic-data-view__error-field-message"

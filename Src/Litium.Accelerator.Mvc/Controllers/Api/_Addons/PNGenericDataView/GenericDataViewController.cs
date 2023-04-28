@@ -205,7 +205,6 @@ namespace Litium.Accelerator.Mvc.Controllers.Api._Addons.PNGenericDataView
         [Route("{type}")]
         public async Task<IActionResult> UpdateField(string type, object fieldData) 
         {
-
             if (Guid.TryParse(type, out Guid pageSystemId))
             {
 
