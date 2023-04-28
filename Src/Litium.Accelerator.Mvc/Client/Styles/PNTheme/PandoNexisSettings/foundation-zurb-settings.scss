@@ -1,0 +1,14 @@
+﻿
+$breakpoints: ( 
+    small: 0, 
+    small-medium: 320px,
+    medium: 500px, //640px, 
+    large: 1024px, 
+    xlarge: 1200px, 
+    xxlarge: 1440px,
+);
+
+$grid-column-gutter: ( 
+    small: 10px, 
+    medium: 15px, 
+);
