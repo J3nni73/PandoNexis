@@ -9,7 +9,7 @@ import DropdownField from './SpecialFields/DropdownField';
 
 export const GenericDataViewField = React.forwardRef(
     (
-        { type, fieldId, isEditable = false, fieldSettings, entitySystemId, dataContainerIndex, suffix, title, dropDownOptions,
+        { type, fieldId, isEditable = false, fieldSettings, entitySystemId, dataContainerIndex, suffix, title, dropDownOptions, setErrorObject, onButtonClick,
             ...props
         },
         ref
@@ -20,8 +20,8 @@ export const GenericDataViewField = React.forwardRef(
         }
 
         const onEnterKeyPress = function (event) {
-            if (event.keyCode === 13 && event.target.nodeName === 'INPUT') {
-                var parent = event.target.closest('tr');
+            if ((event.keyCode === 13 || event.keyCode === 9) && event.target.nodeName === 'INPUT') {
+                var parent = event.target.closest('.row');
                 var currentElementName = event.target.name;
                 var matchingInput = nextUntil(
                     parent,
@@ -33,13 +33,14 @@ export const GenericDataViewField = React.forwardRef(
             }
         };
         const nextUntil = function (elem, selector) {
+
             if (!Element.prototype.matches) {
                 Element.prototype.matches =
                     Element.prototype.msMatchesSelector ||
                     Element.prototype.webkitMatchesSelector;
             }
             elem = elem.nextElementSibling;
-
+            
             while (elem) {
                 if (
                     elem.querySelector(selector) &&
@@ -67,8 +68,11 @@ export const GenericDataViewField = React.forwardRef(
                     dataContainerIndex={dataContainerIndex}
                     fieldSettings={fieldSettings}
                     defaultValue={props.fieldName || ''}
+                    setErrorObject={setErrorObject}
                     title={name}
-                    {...common}
+                    onButtonClick={onButtonClick}
+                    
+                    {...ref}
                     
                 />
             );
@@ -173,7 +177,6 @@ export const GenericDataViewField = React.forwardRef(
                             <input
                                 onKeyDown={(event) => onEnterKeyPress(event)}
                                 type="text"
-                                onKeyUp={(e) => isValid(e.target)} 
                                 required={isRequired}
                                 {...common}
                             />

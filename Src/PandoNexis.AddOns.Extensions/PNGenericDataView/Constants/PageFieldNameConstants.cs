@@ -15,16 +15,17 @@
         public const string ColumnsWithContainersMedium = "ColumnsWithContainersMedium";
         public const string ColumnsWithContainersLarge = "ColumnsWithContainersLarge";
 
-        public const string AlignContainers = "AlignContainers";
-
         // ReactPage
         public const string ReactClass = "ReactClass";
         public const string HasMegaMenu = "HasMegaMenu";
-    }
-    public static class PageFieldOptionValues
-    {
-        public const string Left = "left";
-        public const string Center = "center";
-        public const string Right = "right";
+
+        public const string AlignContainers = "AlignContainers";
+
+        public static class PageFieldOptionValues
+        {
+            public const string Left = "left";
+            public const string Center = "center";
+            public const string Right = "right";
+        }
     }
 }

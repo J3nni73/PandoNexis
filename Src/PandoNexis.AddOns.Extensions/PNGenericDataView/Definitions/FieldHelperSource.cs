@@ -5,6 +5,7 @@ using Litium.Security;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNNoErp.Constants;
+using static PandoNexis.AddOns.Extensions.PNGenericDataView.Constants.PageFieldNameConstants;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
 {

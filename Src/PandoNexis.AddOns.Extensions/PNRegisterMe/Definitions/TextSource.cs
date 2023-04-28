@@ -29,7 +29,8 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Definitions
                 
                 // NoErp-orders
                 "registerme.headertexts.saveperson".AsWebsiteTextDefinition("Save person", "Spara person", clientAvailable: true, serverAvailable: true),
-                
+                "registerme.headertexts.checkcode".AsWebsiteTextDefinition("Validate code", "Kontrollera kod", clientAvailable: true, serverAvailable: true),
+
             };
         }
     }

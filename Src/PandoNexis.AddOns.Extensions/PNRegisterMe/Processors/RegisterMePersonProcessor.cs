@@ -36,6 +36,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
         private readonly PersonService _personService;
         private readonly RequestModelAccessor _requestModelAccessor;
         private readonly SecurityContextService _securityContextService;
+        private int _addedButtons = 0;
         public RegisterMePersonProcessor(FieldDefinitionService fieldDefinitionService,
                                     FieldTemplateService fieldTemplateService,
                                     GenericDataViewService genericDataViewService,
@@ -53,18 +54,47 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
 
         public async override Task<GenericDataView> GetDataView(Guid pageSystemId, string data)
         {
-            var person = SetOrCreatePerson(new PersonWithProperties());
-
-
             var view = new GenericDataView();
             view.Settings = GetDataViewSettings(pageSystemId);
-            var container = BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson), person);
-            view.DataContainers.Add(container);
 
+            if (!IsValidated())
+            {
+                var container = BuildCodeContainer(_addedButtons);
+                view.DataContainers.Add(container);
+            }
+            else
+            {
+                var person = SetOrCreatePerson(new PersonWithProperties());
+                var container = BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson), person);
+                view.DataContainers.Add(container);
+            }
             return view;
+        }
+
+        public GenericDataContainer BuildCodeContainer(int buttons)
+        {
+            var fields = GetFields(RegisterMeConstants.RegisterMePerson);
+            var container = new GenericDataContainer();
+            var website = _requestModelAccessor.RequestModel.WebsiteModel.Website;
+            container.Fields.Add(CodeField(website));
+            container.Fields.Add(CheckCodeButton(website));
+
+            while(fields.Fields.Count()+ buttons> container.Fields.Count())
+            {
+                container.Fields.Add(EmptyField(website));
+            }
+
+
+            return container;
         }
         public async override Task<GenericDataContainer> UpdateField(GenericDataField fieldData)
         {
+            if (fieldData.FieldID == "codeField")
+            {
+                var data = fieldData.FieldValue ?? "123123";
+                _sessionStorage.SetValue(RegisterMeConstants.Code, data);
+                return BuildCodeContainer(_addedButtons);
+            }
             var person = GetPerson();
             if (person.SystemId.ToString() != fieldData.EntitySystemId) return null;
             if (person.fields.ContainsKey(fieldData.FieldID))
@@ -99,14 +129,13 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                 field.EntitySystemId = person.SystemId.ToString();
             }
             result.Fields.Add(SavePersonAsGenericField(person, _requestModelAccessor.RequestModel.WebsiteModel.Website));
-
+            _addedButtons++ ;
             return result;
 
         }
 
         public async override Task<GenericDataContainer> ButtonClick(GenericDataField fieldData)
         {
-
             if (Guid.TryParse(fieldData.EntitySystemId, out Guid personSystemId))
             {
                 var container = new GenericDataContainer();
@@ -114,6 +143,17 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
 
                 switch (fieldData.FieldID)
                 {
+                    case RegisterMeConstants.CheckCode:
+                        {
+                            if (Validate())
+                            {
+                                return BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson), SetOrCreatePerson(new PersonWithProperties()));
+                            }
+                            else
+                            {
+                                return BuildCodeContainer(_addedButtons);
+                            }
+                        }
                     case RegisterMeConstants.SavePerson:
                         var person = GetPerson();
                         var template = _fieldTemplateService.Get<PersonFieldTemplate>(typeof(CustomerArea), DefaultWebsiteFieldValueConstants.CustomerTemplateId);
@@ -135,14 +175,52 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                         };
                         return container;
                     case "AddPerson":
-                        var addPerson = SetOrCreatePerson(new PersonWithProperties());
-                        container = BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson), addPerson);
+                        container = BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson), SetOrCreatePerson(new PersonWithProperties()));
                         return container;
 
                 }
             }
             return null;
 
+        }
+
+        public GenericDataField CheckCodeButton(Website website)
+        {
+            var result = new GenericDataField();
+
+            result.EntitySystemId = Guid.Empty.ToString();
+            result.FieldID = "CheckCode";
+            result.FieldName = "addons.registerme.headertexts.checkcode".AsWebsiteText(website);
+            result.FieldType = "button";
+            result.Settings.ButtonText = "addons.registerme.headertexts.checkcode".AsWebsiteText(website);
+            result.Settings.HideButton = false;
+
+            return result;
+        }
+        public GenericDataField EmptyField(Website website)
+        {
+            var result = new GenericDataField();
+
+            result.EntitySystemId = Guid.Empty.ToString();
+            result.FieldID = RegisterMeConstants.SavePerson;
+            result.FieldName = "addons.registerme.headertexts.saveperson".AsWebsiteText(website);
+            result.FieldType = "button";
+            result.Settings.ButtonText = "addons.registerme.headertexts.saveperson".AsWebsiteText(website);
+            result.Settings.HideButton = true;
+
+            return result;
+        }
+        public GenericDataField CodeField(Website website)
+        {
+            var field = new GenericDataField();
+
+            field.FieldName = "Code";
+            field.EntitySystemId = Guid.Empty.ToString();
+            field.FieldID = "codeField";
+            field.FieldType = "string";
+            field.FieldValue = _sessionStorage.GetValue<string>(RegisterMeConstants.Code) ?? string.Empty;
+            field.Settings.Editable = true;
+            return field;
         }
         public GenericDataField SavePersonAsGenericField(PersonWithProperties person, Website website)
         {
@@ -189,6 +267,23 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
             if (personFromSession == null)
                 personFromSession = new PersonWithProperties() { SystemId = Guid.NewGuid() };
             return personFromSession;
+        }
+        private bool IsValidated()
+        {
+            var result = _sessionStorage.GetValue<bool>(RegisterMeConstants.Validated);
+
+            return result;
+        }
+        private bool Validate()
+        {
+            string code = _sessionStorage.GetValue<string>(RegisterMeConstants.Code) ?? string.Empty;
+            if (code.ToUpper() == RegisterMeConstants.ValidCode.ToUpper())
+            {
+                _sessionStorage.SetValue(RegisterMeConstants.Validated, true);
+
+            }
+
+            return IsValidated();
         }
         private PersonWithProperties SetOrCreatePerson(PersonWithProperties person)
         {

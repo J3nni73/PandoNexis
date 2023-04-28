@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import PropTypes, { object } from 'prop-types';
 import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
 import { GenericDataViewField } from '../../Field';
 import { any } from 'array-flat-polyfill';
+import { checkFormField } from '../../../../Actions/GenericDataContainer.action';
+import { buttonClick } from '../../../../Actions/GenericDataContainerField.action';
+import { loadModal } from '../../../../Actions/GenericDataView.action';
 
+import { FieldErrorMsg, getFieldData } from '../viewFunctions';
 /**
  *
  * @param {Array} fields - List of columns to display in the data container.
  * @param {Array} editableFieldIds - List of editable columns that can be updated in the data view.
  */
+
 
 export const DataContainer = React.memo(
     ({
@@ -28,26 +34,97 @@ export const DataContainer = React.memo(
         ingressField,
 
     }) => {
-        const { register, handleSubmit, reset, formState: { dirtyFields, isSubmitted }, } = useForm();
+        const { register, handleSubmit, setFocus, watch, reset, getValues, formState: { dirtyFields, isSubmitted, errors }, } = useForm();
         const [cardFields, setCardFields] = useState([]);
+        const [isFormValid, setIsFormValid] = useState(false);
         const [cardIngressField, setCardIngressField] = useState(null);
+        const [errorObject, setErrorObject] = useState(null);
+        const dispatch = useDispatch();
+
+        const isContainerValid = (identifierField, form, theFormFields) => {
+            let isFullFormCheck = false;
+            if (theFormFields === undefined) {
+                isFullFormCheck = true;
+                theFormFields = form;
+            }
+            
+            if (Object.keys(theFormFields).length) {
+              
+                let errorObjects = [];
+                const FullData = Object.keys(theFormFields).reduce((payload, key) => {
+                    //console.log("key", form[key]);
+                    var errObj = checkFormField({
+                        fieldID: key,
+                        fieldValue: form[key],
+                        field: fields.find(x => x.fieldID === key)
+                    });
+                   
+                    if (errObj) {
+                        errorObjects.push(errObj);
+                        return null;
+                    }
+                    else {
+                        if (!isFullFormCheck) {
+                            reset({ [key]: form[key] });
+                            const data = getFieldData(payload, form, key);
+                            onDataContainerChange(data, fields, isInModal);
+                            return data;
+                        }
+                        return null;
+                    }
+                }, identifierField);
+                             
+                return errorObjects;
+            }
+        }
+
+        const onButtonClick = (form) => {
+            //windows.currGenDW_useConfirmation = useConfirmation;
+            //windows.currGenDW_fieldSettings = fieldSettings;
+            //windows.currGenDW_fieldSettings = fieldSettings;
+            //windows.currGenDW_confirmationText = confirmationText;
+            //windows.currGenDW_fieldId = fieldId;
+            const useConfirmation = currGenDW_useConfirmation;
+            const fieldSettings = currGenDW_fieldSettings;
+            const confirmationText = currGenDW_confirmationText;
+            const fieldId = currGenDW_fieldId;
+
+            const entitySystemId = fields[0].entitySystemId;
+            const identifierField = { entitySystemId };
+            const errObjs = isContainerValid(identifierField, form);
+            setErrorObject(errObjs);
+            if (!errObjs) {
+                return true;
+            }
+            
+            if (useConfirmation) {
+                if (!confirm(confirmationText)) {
+                    return false;
+                }
+            }
+            if (fieldSettings?.buttonOpenInModal) {
+                const modalSettings = {
+                    modalPageSystemId: fieldSettings.modalPageSystemId,
+                    entitySystemId,
+
+                };
+                dispatch(loadModal(modalSettings));
+                return;
+            }
+
+            const selectedValueObject = {
+                value: '',
+                name: '',
+                entitySystemId,
+                dataContainerIndex,
+            };
+            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject));
+        };
 
         const onBlur = (form) => {
             const identifierField = { EntitySystemId: fields[0].entitySystemId };
-
-            // Only submit changed field(s) along with identifier field
-            if (Object.keys(dirtyFields).length) {
-                const data = Object.keys(dirtyFields).reduce((payload, key) => {
-                    reset({ [key]: form[key] });
-                    return {
-                        ...payload,
-                        fieldID: key,
-                        fieldValue: form[key],
-                        [key]: form[key],
-                    };
-                }, identifierField);
-                onDataContainerChange(data, fields, isInModal);
-            }
+            const errObjs = isContainerValid(identifierField, form, dirtyFields);
+            setErrorObject(errObjs);
         };
 
         useEffect(() => {
@@ -60,7 +137,6 @@ export const DataContainer = React.memo(
                 }
             }
             setCardFields(fields);
-
         }, []);
 
         // Reset container form state when fields are updated
@@ -78,8 +154,9 @@ export const DataContainer = React.memo(
             }
         }, [fields]);
 
-        //// If there is and error reset form fields
+        // If there is and error reset form fields
         //useEffect(() => {
+        //    alert(2);
         //    if (error) {
         //        reset(
         //            fields.reduce(
@@ -106,11 +183,12 @@ export const DataContainer = React.memo(
         if (!cardFields && !cardIngressField) {
             return null;
         }
+
         return (
             <div className="columns" >
                 {error && (
                     <div colSpan={fields.length} className="generic-data-view__error">
-                        {error.message || error.toString() || 'There was an error.'}
+                        {error.message || error.title || error.toString() || 'There was an error.'}
                     </div>
                 )}
                 <div className="card">
@@ -123,12 +201,18 @@ export const DataContainer = React.memo(
                                 defaultValue={cleanData(cardIngressField.fieldValue, cardIngressField.fieldType) || ''}
                                 title={cardIngressField.fieldName}
                                 name={cardIngressField.fieldID}
+                                setErrorObject={setErrorObject}
+                                onButtonClick={
+                                    cardIngressField.fieldType === 'button'
+                                        ? handleSubmit(onButtonClick)
+                                        : null
+                                }
                                 onBlur={
                                     cardIngressField.fieldType !== 'autocomplete' && cardIngressField.fieldType !== 'dropdown' && cardIngressField.fieldType !== 'productimageupload'
                                         ? handleSubmit(onBlur)
                                         : null
                                 }
-                                onChange={
+                                onFieldChange={
                                     cardIngressField.fieldType === 'dropdown' || cardIngressField.fieldType === 'productimageupload' ? handleSubmit(onBlur) : null
                                 }
                                 aria-labelledby={cardIngressField.fieldName}
@@ -161,66 +245,73 @@ export const DataContainer = React.memo(
                                 <div
                                     key={`field-${fieldIndex}-${fieldName}`}
                                     {...register(fieldID)}
-                                style={
-                                    isLoading
-                                        ? {
-                                            opacity: 0.5,
-                                            backgroundColor: settings.backgroundColor || null,
-                                        }
-                                        : { backgroundColor: settings.backgroundColor || null }
-                                }
-                                className={classNames(
-                                    {
-                                        'generic-data-view__error': error,
-                                    },
-                                    `${fieldsToShow.includes(fieldIndex) ? '' : 'fieldToHide'} columns`
-                                )}
-                            >
-                                {settings.fieldMessage && (
-                                    <span
-                                        className="generic-data-view__field-message"
-                                        dangerouslySetInnerHTML={{ __html: settings.fieldMessage }}
-                                    ></span>
-                                )}
+                                    style={
+                                        isLoading
+                                            ? {
+                                                opacity: 0.5,
+                                                backgroundColor: settings.backgroundColor || null,
+                                            }
+                                            : { backgroundColor: settings.backgroundColor || null }
+                                    }
+                                    className={classNames(
+                                        {
+                                            'generic-data-view__error': error,
+                                        },
+                                        `${fieldsToShow.includes(fieldIndex) ? '' : 'fieldToHide'} columns`
+                                    )}
+                                >
+                                    {settings.fieldMessage && (
+                                        <span
+                                            className="generic-data-view__field-message"
+                                            dangerouslySetInnerHTML={{ __html: settings.fieldMessage }}
+                                        ></span>
+                                    )}
                                     {showTitles && fieldType !== 'button' &&
-                                    <b>{fieldName}</b>
-                                }
-                                <GenericDataViewField
+                                        <b>{fieldName}</b>
+                                    }
+                                    <GenericDataViewField
                                         isEditable={settings && settings.editable}
-                                    type={fieldType}
-                                    suffix={fieldSuffix}
-                                    defaultValue={cleanData(fieldValue, fieldType) || ''}
-                                    title={fieldName}
-                                    name={fieldID}
-                                    onBlur={
-                                        fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload'
-                                            ? handleSubmit(onBlur)
-                                            : null
-                                    }
-                                    onChange={
-                                        fieldType === 'dropdown' || fieldType === 'productimageupload' ? handleSubmit(onBlur) : null
-                                    }
-                                    aria-labelledby={fieldName}
-                                    entitySystemId={entitySystemId}
-                                    dataContainerIndex={dataContainerIndex}
-                                    fieldId={fieldID}
-                                    fieldSettings={settings}
-                                    ref={register}
-                                    dropDownOptions={
-                                        fieldType === 'dropdown' || fieldType === 'productimageupload' ? dropDownOptions : null
-                                    }
-                                />
-                                {settings.errorFieldMessage && (
-                                    <span
-                                        className="generic-data-view__error-field-message"
-                                        dangerouslySetInnerHTML={{
-                                            __html: settings.errorFieldMessage,
-                                        }}
-                                    ></span>
-                                )}
-                            </div>
-                        )
-                    )}
+                                        type={fieldType}
+                                        suffix={fieldSuffix}
+                                        defaultValue={cleanData(fieldValue, fieldType) || ''}
+                                        title={fieldName}
+                                        name={fieldID}
+                                        setErrorObject={setErrorObject}
+                                        onButtonClick={
+                                            fieldType === 'button'
+                                                ? handleSubmit(onButtonClick)
+                                                : null
+                                        }
+                                        onBlur={
+                                            fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload'
+                                                ? handleSubmit(onBlur)
+                                                : null
+                                        }
+                                        onChange={
+                                            fieldType === 'dropdown' || fieldType === 'productimageupload' ? handleSubmit(onBlur) : null
+                                        }
+                                        aria-labelledby={fieldName}
+                                        entitySystemId={entitySystemId}
+                                        dataContainerIndex={dataContainerIndex}
+                                        fieldId={fieldID}
+                                        fieldSettings={settings}
+                                        ref={register}
+                                        dropDownOptions={
+                                            fieldType === 'dropdown' || fieldType === 'productimageupload' ? dropDownOptions : null
+                                        }
+                                    />
+                                    {errorObject && <FieldErrorMsg fieldID={fieldID} errObjs={errorObject} />}
+                                    {settings.errorFieldMessage && (
+                                        <span
+                                            className="generic-data-view__error-field-message"
+                                            dangerouslySetInnerHTML={{
+                                                __html: settings.errorFieldMessage,
+                                            }}
+                                        ></span>
+                                    )}
+                                </div>
+                            )
+                        )}
                     </div>
                 </div>
             </div>

@@ -1,38 +1,25 @@
 import React, { Component, Fragment } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { translate } from '../../../../../Services/translation';
-import { buttonClick } from '../../../Actions/GenericDataContainerField.action';
-import { loadModal } from '../../../Actions/GenericDataView.action';
+//import { useForm } from 'react-hook-form';
 
 export const ButtonField = ({
-    type, fieldId, isEditable = false, fieldSettings, entitySystemId, dataContainerIndex, suffix, defaultValue, title, dropDownOptions, useConfirmation, confirmationText, 
-    ...props }
+    type, fieldId, isEditable = false, fieldSettings, entitySystemId, dataContainerIndex, suffix, defaultValue, title, dropDownOptions, useConfirmation, confirmationText, setErrorObject, onButtonClick,
+    ...props },
+    ref
 ) => {
     const dispatch = useDispatch();
-    const postValue = () => {
-        if (useConfirmation) {
-            if (!confirm(confirmationText)) {
-                return false;
-            }
-        }
+    //const { handleSubmit, getValues, dirtyFields } = useForm();
+    //console.log("theFormValues", JSON.stringify(theFormValues));
+    const buttonClick = (e) => {
+        // Check validation
+        window.currGenDW_useConfirmation = useConfirmation;
+        window.currGenDW_fieldSettings = fieldSettings;
+        window.currGenDW_fieldSettings = fieldSettings;
+        window.currGenDW_confirmationText = confirmationText;
+        window.currGenDW_fieldId = fieldId;
 
-        if (fieldSettings?.buttonOpenInModal) {
-            const modalSettings = {
-                modalPageSystemId: fieldSettings.modalPageSystemId,
-                entitySystemId,
-                             
-            };
-            dispatch(loadModal(modalSettings));
-            return;
-        }
-
-        const selectedValueObject = {
-            value: '',
-            name: '',
-            entitySystemId,
-            dataContainerIndex,
-        };
-        dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject));
+        onButtonClick(e);
     };
 
     return (
@@ -46,15 +33,14 @@ export const ButtonField = ({
                         {fieldSettings.iconClass ? (
                             <i
                                 className={fieldSettings.iconClass}
-                                onClick={(event) => this.postValue()}
-                                title={ defaultValue || fieldSettings.placeholderText || ''}
+                                onClick={(event) => buttonClick(event)}
+                                title={defaultValue || fieldSettings.placeholderText || ''}
                             ></i>
                         ) : (
                             <button
                                 className="generic-data-view__button-field-post-button"
-                                onClick={(event) => postValue()}
-                            >
-                                {fieldSettings.buttonText}
+                                    onClick={(event) => buttonClick(event)}
+                            >{fieldSettings.buttonText}
                             </button>
                         )}
                     </Fragment>
