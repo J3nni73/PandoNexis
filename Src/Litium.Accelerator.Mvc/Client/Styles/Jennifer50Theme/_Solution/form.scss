@@ -1,0 +1,30 @@
+$form-active-color: $solution-color-text-highlight;// #ffc444;
+.form {
+    &__input, &__select {
+        padding-right: rem(32px);
+        background-size: rem(12px 12px);
+        line-height: 30px !important;
+        display: inline-block;
+        
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        &:focus {
+            &:hover {
+                border-color: $form-active-color;
+            }
+
+            > option {
+                appearance: none;
+                line-height: 30px !important;
+                display: inline-block;
+
+                &:hover, &:checked {
+                    box-shadow: 0 0 10px 100px $form-active-color inset !important;
+                    background-color: $form-active-color !important;
+                }
+            }
+        }
+    }
+}

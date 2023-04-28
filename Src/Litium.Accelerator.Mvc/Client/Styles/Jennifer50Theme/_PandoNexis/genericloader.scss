@@ -1,0 +1,137 @@
+$border-width: rem(8px);
+$loader-width: rem(120px);
+$color-loader: rgb(46,46,80);
+$border-color: rgba(darken($color-loader, 10%), .4);
+
+.generic-loader {
+    &.active {
+        position: fixed;
+        top: rem(300px);
+        left: 50%;
+        margin-left: -($loader-width/2);
+        border: $border-width solid #f3f3f3;
+        border-radius: 50%;
+        border-top: $border-width solid $border-color;
+        border-bottom: $border-width solid $border-color;
+        width: $loader-width;
+        height: $loader-width;
+        opacity: .5;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+        z-index: 2001;
+    }
+
+    &.for-iframe {
+        position: absolute;
+        top: rem(60px);
+    }
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.loader__container {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50px, -50px);
+
+    // &__loadingspinner {
+    //     pointer-events: none;
+    //     width: 5.5em;
+    //     height: 5.5em;
+    //     border: 0.4em solid transparent;
+    //     border-color: #eee;
+    //     border-top-color: #3E67EC;
+    //     border-bottom-color: #3E67EC;
+    //     border-radius: 50%;
+    //     animation: loadingspin 1s linear infinite;
+    // }
+
+    &--text {
+        top: 0;
+        left: 50%;
+        transform: translate(-50px, -50px);
+        position: relative;
+        width: 150px;
+        display: flex;
+
+        &::after {
+            content: '';
+            pointer-events: none;
+            width: 5.5em;
+            height: 5.5em;
+            border: 0.4em solid transparent;
+            border-color: #eee;
+            border-top-color: #3E67EC;
+            border-bottom-color: #3E67EC;
+            border-radius: 50%;
+            animation: loadingspin 1s linear infinite;
+            z-index: 2022;
+            position: absolute;
+            top: -28px;
+            left: -9%;
+        }
+
+        @keyframes loadingspin {
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+    }
+
+    &--btn {
+        display: inline-block;
+        position: relative;
+        width: 25px;
+        height: auto;
+        padding: 9px;
+
+        &::after {
+            content: "";
+            pointer-events: none;
+            width: 0.5em;
+            height: 0.5em;
+            border: 0.4em solid transparent;
+            border-color: #eee;
+            border-top-color: #3E67EC;
+            border-bottom-color: #3E67EC;
+            border-radius: 50%;
+            animation: loadingspin 1s linear infinite;
+            z-index: 2022;
+            position: absolute;
+            top: 30%;
+            left: 3%;
+        }
+
+        .button__text {
+            margin-bottom: 0;
+            margin-right: 20px;
+        }
+
+        @keyframes loadingspin {
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+    }
+
+}

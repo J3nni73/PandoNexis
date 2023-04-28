@@ -28,6 +28,8 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Definitions
                GetPersonField(RegisterMeConstants.RegisterMePerson, ProcessorConstants.EditableFields, SystemFieldDefinitionConstants.Email),
                GetPersonField(RegisterMeConstants.RegisterMePerson, ProcessorConstants.RequiredFields, SystemFieldDefinitionConstants.Email),
 
+               GetPersonField(CustomerTemplateIdConstants.OrganizationTemplate, "General", RegisterMeConstants.AddedByRegisterMeForm),
+
             };
 
 

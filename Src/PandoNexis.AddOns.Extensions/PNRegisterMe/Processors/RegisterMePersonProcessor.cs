@@ -123,6 +123,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                         {
                             newPerson.Fields.AddOrUpdateValue(field.Key, field.Value);
                         }
+                        newPerson.Fields.AddOrUpdateValue(RegisterMeConstants.AddedByRegisterMeForm, true);
                         using (_securityContextService.ActAsSystem())
                         {
                             _personService.Create(newPerson);

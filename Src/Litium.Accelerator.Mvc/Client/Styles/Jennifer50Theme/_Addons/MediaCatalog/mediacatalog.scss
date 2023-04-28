@@ -1,0 +1,782 @@
+$media-catalog-cardcolor-hover-time: .3s;
+$media-catalog-cardcolor-border: rgba(255,255,255,.5);
+$media-catalog-cardcolor-border-radius: 3px;
+$media-catalog-cardcolor-border-radius-hover: 4px;
+$media-catalog-cardcolor-shadow-top: 2px;
+$media-catalog-cardcolor-shadow-left: 1px;
+$media-catalog-cardcolor-shadow-blur: 3px;
+$media-catalog-cardcolor-shadow-spread: 0;
+$media-catalog-cardcolor-shadow-spread-hover: 1px;
+$media-catalog-cardcolor-shadow-blur-hover: 32px;
+$media-catalog-cardcolor-shadow-color: rgb(46,46,80);
+
+$media-catalog-folder-bg: rgb(40,100,200);
+$media-catalog-search-button-bg: rgba(40,100,200, .5);
+$media-catalog-file-bg: rgba($media-catalog-search-button-bg, 0.2);
+$media-catalog-folder-bg: darken(desaturate($media-catalog-folder-bg, 40%),10%);
+
+$media-catalog-tag-bg: rgba(40,100,200, .5);
+$media-catalog-table-row-bg: rgba(210,210,210,.1);
+
+$media-catalog-search-border-color: rgba(200,200,200, .7);
+
+$media-catalog-background-angle: 50;
+$media-catalog-background-color-start: #8e9eab;
+$media-catalog-background-color-start: rgba($media-catalog-background-color-start, .5);
+$media-catalog-background-color-end: #eef2f3;
+$media-catalog-background-color-end: rgba($media-catalog-background-color-end, .1);
+
+$media-catalog-folder-container-background: rgba(100, 100, 100, .06);
+$media-catalog-folder-container-border-color: rgba(255, 255, 255, .98);
+$media-catalog-search-height: 40px;
+
+
+.p__media-catalog {
+    .breadcrumbs {
+        margin-bottom: 0;
+    }
+
+    h1 {
+        margin-top: rem(44px);
+    }
+
+    .main-content {
+        text-align: center;
+        min-height: calc(100vh - 90px);
+        @include gradient($media-catalog-background-angle, $media-catalog-background-color-start, $media-catalog-background-color-end);
+    }
+
+    .footer{
+        margin-top: 0;
+    }
+}
+
+@mixin mediaCatalogIcon {
+    background-position: center 90%;
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-color: #fff;
+}
+
+@mixin redText {
+    font-weight: 500;
+    letter-spacing: .15rem;
+    color: rgba(200,100,100,.96);
+    cursor: pointer;
+    height: rem(32px);
+}
+
+.media-catalog {
+    margin-top: 0;
+    margin-bottom: rem(144px);
+    position: relative;
+    text-align: center;
+
+    &__header {
+        position: relative;
+    }
+
+    &__no-files {
+        margin-top: rem(44px);
+        @include redText;
+    }
+
+    &__search {
+        width: 460px;
+        max-width: 100%;
+        height: rem($media-catalog-search-height);
+        @include border-radius(24px);
+        padding: 0;
+        margin: rem(8px auto);
+        border: 1px solid $media-catalog-search-border-color;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+
+        input {
+            &[type="search"] {
+                width: 100%;
+                padding: rem(3px 80px 6px 16px);
+                outline: none;
+                border: none;
+                background: transparent;
+                height: 100%;
+                box-shadow: none;
+            }
+        }
+
+        &-filter-remove {
+            @include redText;
+
+            i {
+                letter-spacing: .1rem;
+                font-weight: 600;
+            }
+        }
+
+        &-button {
+            @include transition;
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            background: rgba(40,100,200, .5);
+            width: 80px;
+            text-align: center;
+            font-size: rem(12px);
+            font-weight: 600;
+            letter-spacing: .2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+
+            &:hover {
+                background: rgba($media-catalog-search-button-bg, .3);
+                letter-spacing: .1rem;
+            }
+
+            &--disabled {
+                background: rgba($media-catalog-search-button-bg, .5);
+                pointer-events: none;
+                opacity: .6;
+            }
+        }
+    }
+
+    &__view-toggler {
+        position: absolute;
+        right: 0;
+        top: rem(2px);
+        border-radius: rem( 8px);
+
+        &-grid {
+            @include icon-pn--grid-view;
+        }
+
+        &-list {
+            @include icon-pn--list-view;
+        }
+
+        &-grid, &-list {
+            @include transition;
+            @include icon;
+            background-size: 80%;
+            background-position: center center;
+            background-color: rgba(215,215,215,.9);
+            border: 1px solid rgba(255,255,255,1);
+            display: inline-block;
+            margin: rem(4px 8px);
+            width: rem(32px);
+            height: rem(32px);
+            cursor: pointer;
+
+            @include box-shadow(1px, 1px, 4px, 0, rgba($media-catalog-cardcolor-shadow-color, .1));
+            opacity: .4;
+
+            &:hover {
+                @include box-shadow(1px, 1px, 8px, 0, rgba($media-catalog-cardcolor-shadow-color, .2));
+                background-color: rgba(235,235,235,.6);
+                opacity: .9;
+            }
+
+            &--active {
+                background-color: rgba(255,255,255,.98);
+                @include box-shadow(1px, 1px, 4px, 0, rgba($media-catalog-cardcolor-shadow-color, .3));
+                border: 1px solid rgba(185,185,185,1);
+                pointer-events: none;
+                opacity: .6;
+            }
+        }
+
+        &-list {
+        }
+
+        @include mobile {
+            right: calc(50% - 50px);
+            transform: transateX(50%);
+        }
+    }
+
+    h2 {
+        margin-bottom: 0;
+        font-size: rem(16px);
+        line-height: rem(2ppx);
+        font-weight: 400;
+        border: 1px solid rgba(185,185,185,.8);
+        padding: rem(8px);
+        background: rgba($media-catalog-cardcolor-shadow-color, .03);
+        @include border-radius(4px);
+
+        span {
+            &:not(.media-catalog__folder-back-link) {
+                display: inline-block;
+                font-size: rem(20px);
+                margin-left: rem(6px);
+                font-weight: 600;
+                font-style: italic;
+            }
+        }
+
+        @include mobile {
+            padding-top: rem(40px);
+        }
+    }
+
+    &__file {
+        height: 0;
+        padding-bottom: calc(100% - 32px);
+
+        &[class^="media-catalog__file--"] {
+            @include icon-pn--file-doc;
+            background-color: $media-catalog-file-bg;
+        }
+
+        &--xml {
+            //@include icon-pn--file-xml;
+            @include icon-pn--file-doc;
+        }
+
+        &--xls, &--xlsx, &--xltm, &--xltx, &--xlsm, &--xlsb {
+            // @include icon-pn--file-excel;
+            @include icon-pn--file-doc;
+        }
+
+        &--doc {
+            @include icon-pn--file-doc;
+        }
+
+        &--zip {
+            @include icon-pn--file-zip;
+        }
+
+        &--pdf {
+            @include icon-pn--file-pdf;
+        }
+
+        &--doc, &--zip, &--pdf, &--xml, &--xls, &--xlsx, &--xltm, &--xltx, &--xlsm, &--xlsb {
+            background-color: $media-catalog-file-bg;
+        }
+
+        @include mediaCatalogIcon;
+        background-position: center center;
+        background-size: 90%;
+        background-color: $media-catalog-file-bg;
+
+        &--small {
+            height: rem(64px);
+            width: rem(64px);
+            padding: 0;
+            display: inline-block;
+        }
+
+        &-data {
+            font-style: italic;
+            font-weight: 600;
+
+            span {
+                font-style: normal;
+                font-weight: 400;
+            }
+        }
+    }
+
+    figcaption {
+        transition: all .3s;
+        max-height: rem(24px);
+        font-size: rem(12px);
+        background: rgba(254,254,255,.98);
+        overflow: hidden;
+        position: absolute;
+        width: calc(100% - 2px);
+        left: rem(1px);
+        text-align: center;
+        padding: 0;
+        z-index: 800;
+        @include box-shadow(0, 0, 0, 1px, rgba($media-catalog-cardcolor-shadow-color, .3));
+        margin-top: rem(4px);
+        opacity: .74;
+
+        ul {
+            transition: all .3s;
+            opacity: 0;
+        }
+
+        h4 {
+            font-size: rem(14px);
+            color: rgba(0,0,0,1);
+            text-transform: uppercase;
+            padding-top: rem(2px);
+            position: relative;
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 1px;
+                right: 6px;
+                z-index: 77;
+                width: rem(44px);
+                height: calc(100% - 2px);
+                @include icon-pn--info;
+                @include mediaCatalogIcon;
+                background-color: transparent;
+                background-position: center center;
+                background-size: contain;
+                opacity: .8;
+            }
+        }
+
+        &:hover {
+            opacity: 1;
+            max-height: 850px;
+            padding: rem(8px);
+            border: none;
+            @include box-shadow($media-catalog-cardcolor-shadow-top, $media-catalog-cardcolor-shadow-left, $media-catalog-cardcolor-shadow-blur, $media-catalog-cardcolor-shadow-spread, rgba($media-catalog-cardcolor-shadow-color, .5));
+            z-index: 1800;
+
+            ul {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__breadcrumb {
+        padding-left: rem(24px);
+        @include icon-pn--folder-open;
+        background-position: left center;
+        background-size: rem(24px);
+        display: inline-block;
+        margin: rem(0 auto 8px auto);
+
+        span {
+            display: inline-block;
+            font-style: italic;
+            padding-left: rem(24px);
+            position: relative;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: .04rem;
+
+            &:after {
+                content: '/';
+                position: absolute;
+                left: rem(10px);
+            }
+
+            &:last-child {
+                cursor: default;
+                pointer-events: none;
+            }
+        }
+    }
+
+    &__folder {
+        &-text {
+            position: absolute;
+            text-align: center;
+            bottom: rem(8px);
+            font-size: rem(8px);
+            color: rgba(0,0,0,0.75);
+            text-transform: uppercase;
+            z-index: 300;
+            display: none;
+        }
+
+        &-heading {
+            position: relative;
+        }
+
+        &-back-link {
+            cursor: pointer;
+            position: absolute;
+            left: 0;
+            top: rem(5px);
+            padding: rem(0 24px 0 40px);
+            letter-spacing: .08px;
+            font-size: rem(14px);
+            font-weight: 600;
+            font-style: italic;
+            color: rgba(44, 111, 222, .9);
+
+            @include transition;
+            width: auto;
+            border: 1px solid rgba(255,255,255,1);
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            margin-left: rem(6px);
+            @include box-shadow(1px, 1px, 4px, 0, rgba($media-catalog-cardcolor-shadow-color, .2));
+            @include border-radius(8px);
+            opacity: .8;
+            background-color: rgba(255,255,255,.6);
+            height: calc(100% - 10px);
+
+            &:after {
+                @include transition;
+                content: '';
+                position: absolute;
+                left: 6px;
+                top: 3px;
+                width: rem(25px);
+                height: 100%;
+                @include icon-pn--arrow-back;
+                @include icon;
+                padding: 0;
+                margin: 0;
+                background-position: center center;
+                background-size: rem(24px);
+                @include rotate(90);
+                opacity: .4;
+            }
+
+            &:hover {
+                background-color: rgba(255,255,255,.8);
+                @include box-shadow(0, 0, 8px, 0, rgba($media-catalog-cardcolor-shadow-color, .2));
+                opacity: .98;
+
+                &:after {
+                    opacity: .9;
+                }
+            }
+        }
+
+        &-data {
+            margin-bottom: rem(8px);
+            // Alternative folder view
+            .media-catalog__icon {
+
+                &-folder {
+                    height: rem(40px);
+                    width: 100%;
+                    position: relative;
+                    padding: 0;
+                    margin-bottom: rem(4px);
+                    overflow: hidden;
+                    opacity: 0;
+                    @include animation(0.5s, 0.5s, fade-in, ease-in-out);
+                    cursor: pointer;
+
+                    &-text {
+                        padding: 0;
+                        font-size: rem(12px);
+                        margin-top: rem(4px);
+                        width: 100%;
+                        text-align: center;
+                        line-height: 1;
+                    }
+
+                    &-item {
+                        @include transition;
+                        position: absolute;
+                        left: 50%;
+                        top: 0;
+                        transform: translateX(-50%);
+                        fill: $media-catalog-folder-bg;
+
+                        &--closed {
+                            opacity: .7;
+                        }
+
+                        &--open {
+                            opacity: 0;
+                        }
+                    }
+
+                    &:hover {
+                        .media-catalog__icon-folder-item {
+                            &--closed {
+                                opacity: 0;
+                            }
+
+                            &--open {
+                                opacity: .7;
+                            }
+                        }
+                    }
+                }
+            }
+            // END Alternative folder view
+            &-item {
+                position: absolute;
+                bottom: 65%;
+                transform: translateY(25%);
+                //margin-top: 44px;
+                font-weight: 600;
+                line-height: 1;
+                z-index: 200;
+                color: rgba(0,0,0,.5);
+                font-size: rem(14px);
+                text-align: center;
+            }
+
+            .pn-card {
+                width: 100%;
+                height: 0;
+                padding-bottom: 65%;
+                display: flex;
+                justify-content: center;
+                cursor: pointer;
+                position: relative;
+                overflow: initial;
+                z-index: 10;
+                margin-bottom: rem(24px);
+                background-color: #fff;
+
+                > div {
+                    transition: all .3s;
+                    @include rotate(1);
+                }
+
+                @include box-shadow($media-catalog-cardcolor-shadow-top, 0, $media-catalog-cardcolor-shadow-blur, $media-catalog-cardcolor-shadow-spread - 1px, rgba($media-catalog-cardcolor-shadow-color, .5));
+
+                &:before, &:after {
+                    transition: all .3s;
+                    content: '';
+                    position: absolute;
+                    top: 0px;
+                    left: -2px;
+                    z-index: 1;
+                    width: 100%;
+                    height: 100%;
+                    @include rotate(5);
+                    border-radius: $media-catalog-cardcolor-border-radius;
+                    background-color: #fff;
+                    border: 1px solid rgba(205,205,205,1);
+                }
+
+                &:after {
+                    @include icon-pn--folder;
+                    @include mediaCatalogIcon;
+                    background-color: $media-catalog-folder-bg;
+                    @include rotate(1);
+                    top: -2px;
+                    left: -1px;
+                    z-index: 2;
+                }
+
+                &:hover {
+                    z-index: 10;
+                    @include icon-pn--folder;
+                    @include mediaCatalogIcon;
+                    @include box-shadow(1px, 0, $media-catalog-cardcolor-shadow-blur + 10px, 0, rgba($media-catalog-cardcolor-shadow-color, .3));
+
+                    &:before, &:after {
+                        @include icon-pn--folder-open;
+                        @include mediaCatalogIcon;
+                        z-index: -1;
+                        @include rotate(0);
+                        left: 0;
+                    }
+
+                    &:after {
+                        background-color: $media-catalog-folder-bg;
+                        left: 0;
+                    }
+
+                    > div {
+                        @include rotate(0);
+                    }
+                }
+            }
+        }
+    }
+
+    &__files {
+        &-tag-extension {
+            @include transition;
+            position: absolute;
+            top: rem(-4px);
+            right: rem(-8px);
+            padding: rem(4px);
+            min-width: rem(44px);
+            background: $media-catalog-tag-bg;
+            border: 1px solid rgba(255,255,255,0);
+            display: flex;
+            color: #fff;
+            align-content: center;
+            font-size: rem(12px);
+            font-weight: 600;
+            justify-content: center;
+            @include rotate(15);
+            @include border-radius(rem(20px));
+            @include box-shadow(0, 0, 2px, 0, rgba($media-catalog-cardcolor-shadow-color, .3));
+        }
+
+        &-card {
+            margin-top: rem(35px);
+            margin-bottom: rem(15px);
+            height: 0;
+            padding-bottom: 100%;
+            position: relative;
+            overflow: hidden;
+
+            &:hover {
+                overflow: initial;
+
+                .media-catalog__files-tag-extension {
+                    @include box-shadow(2px, 0, 6px, 0, rgba($media-catalog-cardcolor-shadow-color, .5));
+                    background: darken($media-catalog-tag-bg, 10%);
+                    border: 1px solid rgba(0,0,0,.1);
+                    @include border-radius(rem(100px));
+                    padding: rem(10px 2px);
+                    transform: translateY(-6px);
+                }
+
+                &:after {
+                    transition: all .3s;
+                    content: '';
+                    position: absolute;
+                    top: rem(-16px);
+                    left: 50%;
+                    z-index: 500;
+                    width: rem(32px);
+                    height: rem(32px);
+                    border-radius: rem(4px);
+                    transform: translateX(-50%);
+                    @include icon-pn--file-download;
+                    @include box-shadow(0, 0, $media-catalog-cardcolor-shadow-blur - 1px, 1px, rgba($media-catalog-cardcolor-shadow-color, .2));
+                    background-color: rgba(255,255,255,1);
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    pointer-events: none;
+                    opacity: .75;
+                }
+            }
+        }
+
+        .column {
+            position: relative;
+
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: rem(-16px);
+                left: 0;
+                height: 1px;
+                width: 100%;
+                border-bottom: 1px solid rgba(100,100,100,.1);
+            }
+        }
+    }
+
+    &__table {
+        &-header {
+            padding: rem(4px 0);
+            margin-bottom: rem(2px);
+            font-size: rem(12px);
+            font-weight: 600;
+            font-style: italic;
+            text-transform: uppercase;
+            background: $media-catalog-table-row-bg;
+            @include box-shadow(1px, 1px, 4px, 0, rgba($media-catalog-cardcolor-shadow-color, .2));
+
+            @include mobile {
+                display: none;
+            }
+        }
+
+        &-row {
+            margin-bottom: rem(4px);
+            background: $media-catalog-table-row-bg;
+            padding: rem(4px 0);
+            display: flex;
+            align-items: center;
+            font-size: rem(12px);
+
+            img {
+                max-height: rem(64px);
+                object-fit: contain;
+            }
+
+            @include mobile {
+                padding: rem(8px 0);
+            }
+        }
+
+        &-image {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        &-data {
+            > div {
+                &:nth-child(odd) {
+                    @include mobile {
+                        margin: rem(0 -8px);
+                        padding: rem(6px);
+                        background: darken($media-catalog-table-row-bg, 50%);
+                    }
+                }
+            }
+        }
+
+        &-image {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        &-button a {
+            @include border-radius(rem(6px));
+            @include transition;
+            background: $media-catalog-search-button-bg;
+            padding: rem(0 44px 0 8px);
+            height: rem(32px);
+            width: auto;
+            position: relative;
+            display: flex;
+            margin-right: 44px;
+            align-items: center;
+            line-height: 1;
+            margin: 0 0 0 auto;
+            max-width: rem(150px);
+            font-size: rem(12px);
+            font-weight: 600;
+            opacity: .7;
+            @include box-shadow(0, 0, $media-catalog-cardcolor-shadow-blur - 1px, 1px, rgba($media-catalog-cardcolor-shadow-color, .2));
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: rem(6px);
+                z-index: 500;
+                width: rem(24px);
+                height: 100%;
+                @include icon-pn--file-download;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center center;
+                opacity: .75;
+            }
+
+            &:hover {
+                opacity: .9;
+                color: rgba(255,255,255,.75);
+            }
+
+            @include mobile {
+                max-width: 100%;
+                margin: rem(8px 0);
+                height: rem(40px);
+            }
+        }
+    }
+}
+
+.grid-view {
+    .media-catalog {
+        &__files {
+        }
+    }
+}
+
+.list-view {
+    .media-catalog {
+        &__files {
+        }
+    }
+}

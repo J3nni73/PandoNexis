@@ -1,0 +1,4 @@
+.footer {
+    @include solution-header-bg;
+    border-color: rgba($solution-placeholder-bg, .2);
+}

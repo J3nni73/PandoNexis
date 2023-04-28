@@ -1,0 +1,53 @@
+$color-full-black: #000;
+$snow: #F9F9F9;
+$iron: #CCCCCC;
+$oil: #333333;
+$jet: #222222;
+$custom-color-red: #cc3333;
+$custom-color-red2: #a32929;
+$custom-color-red-hover: #af2c2c;
+$custom-filter-color: $jet;
+$custom-filter-selected-background: $oil;
+$color-green: rgb(146,192,62);
+$color-orange: rgb(236,103,36);
+$color-cyan: rgb(35,182,183);
+$color-magenta: rgb(229,37,130);
+
+$bg-color-purple-base: rgb(106, 103, 255);
+$bg-color-purple: rgba($bg-color-purple-base, .7);
+$bg-color-light: #fefeff;
+
+$color-grey-darkest: #999 !default;
+$custom-box-shadow-color: rgba(0, 0, 0, 0.15);
+
+$color-navy: rgb(35, 41, 87);
+$color-navy-dark: rgb(15, 21, 37);
+$color-navy-transparent: rgba($color-navy, 0.6);
+$color-navy-transparent2: rgba($color-navy, 0.95);
+$color-white-transparent1: rgba($color-white, 0.6);
+$color-white-transparent2: rgba($color-white, 0.9);
+
+$breadcrumbs-bg-color-dark-base: $color-green; //rgb(106, 103, 255); //#ECE9E6;
+$breadcrumbs-bg-color-dark: rgba($breadcrumbs-bg-color-dark-base, .7); //#ECE9E6;
+$breadcrumbs-bg-color-light-base: rgb(250,255,250);
+$breadcrumbs-bg-color-light: rgba($breadcrumbs-bg-color-light-base,.7);
+
+$custom-pistage: rgb(182, 212, 155);
+$custom-pistage-lighten50: scale-color($custom-pistage, $lightness: 50%);
+$custom-pistage-lighten30: scale-color($custom-pistage, $lightness: 70%);
+$custom-pistage-lighten10: scale-color($custom-pistage, $lightness: 90%);
+
+$header-height: 80px;
+/* Font size */
+$fontsize-tiny: 10px;
+$fontsize-small: 12px;
+$fontsize-normal: 14px;
+$fontsize-large: 16px;
+$fontsize-h4: 18px;
+$fontsize-h3: 20px;
+$fontsize-h2: 22px;
+$fontsize-h1: 24px;
+$color-grey-5: #ccc !default;
+$font-weight-normal:400;
+$font-weight-bold: 600;
+$font-weight-extra-bold: 800;

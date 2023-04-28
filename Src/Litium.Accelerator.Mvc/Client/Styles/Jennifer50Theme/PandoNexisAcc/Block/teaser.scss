@@ -1,0 +1,12 @@
+.teaser {
+    position: relative;
+
+    img {
+        @include blurry-backdrop(1.5rem);
+    }
+
+    &, p, img {
+        display: block;
+        width: 100%;
+    }
+}

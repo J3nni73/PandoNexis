@@ -7,6 +7,6 @@
 
         public const string SavePerson = "SavePerson";
 
-
+        public const string AddedByRegisterMeForm = "AddedByForm";
     }   
 }

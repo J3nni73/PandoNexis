@@ -1,0 +1,54 @@
+.footer {
+    margin-top: rem(30px);
+    padding-top: rem(15px);
+    border-top: 1px solid rgba($color-text-primary, .2);
+    color: $color-text-primary;
+    font-weight: 300;
+    width: 100%;
+    max-width: none;
+
+    @include gradient(90, rgba(0,0,0, .8), rgba(0,0,0, .2), 0, 90%);
+
+    &__section {
+        padding-bottom: rem(44px);
+        word-break: break-word;
+
+        @include tablet-all {
+            padding: rem(0 32px 44px 32px);
+        }
+    }
+
+    a, &__link {
+        @include transition;
+
+        &, &:visited, &:focus {
+            color: $solution-link-color;
+            font-weight: 300;
+            text-decoration: none;
+        }
+
+        &:hover {
+            color: $solution-link-color-hover;
+        }
+    }
+
+    &__header {
+        font-weight: 700;
+        font-size: $fontsize-h4;
+        margin: 4px 0 8px 0;
+        display:none;
+    }
+
+    ul {
+        padding-left: 0;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    p {
+        line-height: 1.5em;
+        margin: 0 0 10px 0;
+    }
+}
