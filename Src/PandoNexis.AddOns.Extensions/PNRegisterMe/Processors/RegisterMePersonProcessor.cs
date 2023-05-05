@@ -36,7 +36,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
         private readonly PersonService _personService;
         private readonly RequestModelAccessor _requestModelAccessor;
         private readonly SecurityContextService _securityContextService;
-        private int _addedButtons = 0;
+        private int _addedButtons = 1;
         public RegisterMePersonProcessor(FieldDefinitionService fieldDefinitionService,
                                     FieldTemplateService fieldTemplateService,
                                     GenericDataViewService genericDataViewService,
@@ -129,7 +129,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                 field.EntitySystemId = person.SystemId.ToString();
             }
             result.Fields.Add(SavePersonAsGenericField(person, _requestModelAccessor.RequestModel.WebsiteModel.Website));
-            _addedButtons++ ;
+           
             return result;
 
         }
@@ -164,6 +164,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                             newPerson.Fields.AddOrUpdateValue(field.Key, field.Value);
                         }
                         newPerson.Fields.AddOrUpdateValue(RegisterMeConstants.AddedByRegisterMeForm, true);
+                        newPerson.Fields.AddOrUpdateValue(RegisterMeConstants.DateAdded, DateTime.Now);
                         using (_securityContextService.ActAsSystem())
                         {
                             _personService.Create(newPerson);
@@ -244,7 +245,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
             result.FieldID = "Response";
             result.FieldName = "Tack för din anmälan";
             result.FieldType = "text";
-            result.FieldValue = "Festen kommer hållas i Helsingborg 7 Juli 15:00 till sent, du kommer bli kontaktad inför på mailadressen du angett för vidare instruktioner.";
+            result.FieldValue = "Festen kommer hållas i Helsingborg 7 Juli 15:00 till sent, du kommer bli kontaktad inför festen på mailadressen du angett för vidare instruktioner.";
 
             return result;
         }

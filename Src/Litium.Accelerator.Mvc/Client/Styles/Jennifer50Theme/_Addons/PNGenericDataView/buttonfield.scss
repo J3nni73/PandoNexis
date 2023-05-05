@@ -7,7 +7,8 @@
             padding: 0;
 
             > div {
-                display: inline;
+                display: flex;
+                justify-content:center;
             }
         }
 

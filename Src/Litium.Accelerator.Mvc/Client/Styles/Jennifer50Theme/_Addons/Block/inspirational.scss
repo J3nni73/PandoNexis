@@ -163,6 +163,7 @@ $inspiration-block-color-text-secondary: rgba($block-background2, .75);
     &__image-wrapper {
         width: 100%;
         height: 100%;
+        @include box-shadow(0, 0, 14px,0, rgba($general-shadow-color, .2), inset);
 
         img {
             width: 100%;

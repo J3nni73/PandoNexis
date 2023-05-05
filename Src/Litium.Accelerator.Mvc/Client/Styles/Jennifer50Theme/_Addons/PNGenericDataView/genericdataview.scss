@@ -260,7 +260,7 @@ $dataview-general-font-size: rem($fontsize-large);
     }
 
     &__wrapper {
-        max-height: calc(100vh - 240px);
+        max-height: calc(100vh - 112px);
         //overflow: hidden;
         overflow: scroll;
         @include scroll-styling(8px);
@@ -322,7 +322,16 @@ $dataview-general-font-size: rem($fontsize-large);
         display: block;
         padding: 0;
         margin: 0;
-        color: $alert-color;
+        color: red;
+        font-style: italic;
+        font-size: rem(12px);
+    }
+
+    &__error-field {
+        display: block;
+        padding: 0;
+        margin: 0;
+        color: red;
         font-style: italic;
         font-size: rem(12px);
     }
@@ -403,7 +412,7 @@ $dataview-general-font-size: rem($fontsize-large);
         width: 20px;
         height: 20px;
         transition: width 0.5s;
-        display:none;
+        display: none;
 
         &__icon {
             &-close, &-settings {
@@ -796,7 +805,7 @@ $dataview-general-font-size: rem($fontsize-large);
         position: absolute;
         right: 44px;
         margin-top: -54px;
-        display:none;
+        display: none;
 
         @include mobile {
             margin: auto;

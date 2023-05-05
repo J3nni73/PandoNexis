@@ -17,21 +17,20 @@ body {
             &__row {
                 > div:not(.text--center), .quick-search {
                     opacity: 0;
-                    @include animation(0.5s, 5.5s, session-start-fade-in, ease-in-out);
+                    @include animation(0, 0.3s, session-start-fade-in, ease-in-out);
                 }
             }
 
             .header {
                 &__logo-mobile {
                     opacity: 0;
-                    @include animation(0.5s, 5.5s, session-start-fade-in, ease-in-out);
+                    @include animation(0, 0.3s, session-start-fade-in, ease-in-out);
                 }
             }
 
             border-color: rgba($solution-border-color-solid, 0);
-            @include animation(0.5s, 5.5s, session-start-header, ease-in-out);
-
-         /*   &__powered-by-litium {
+            @include animation(0, 0.3s, session-start-header, ease-in-out);
+            /*   &__powered-by-litium {
                 position: relative;
                 @include scale(400%, 400%);
                 top: calc(50vh - 100px);
@@ -62,23 +61,23 @@ body {
 
         footer.footer, .breadcrumbs {
             opacity: 0;
-            @include animation(0.5s, 7.5s, session-start-fade-in, ease-in-out);
+            @include animation(0, 0.3s, session-start-fade-in, ease-in-out);
         }
 
         .main-content {
             opacity: 0;
             padding-top: rem(128px);
-            @include animation(1.5s, 5.5s, session-start-content, ease-in-out);
+            @include animation(0, 0.3s, session-start-content, ease-in-out);
         }
 
         body {
             max-height: 100vh;
-            @include animation(1.5s, 5.5s, session-start-body, ease-in-out);
+            @include animation(0, 0.3s, session-start-body, ease-in-out);
         }
 
         .pn-page__wrapper {
             max-height: 100vh;
-            @include animation(1.5s, 5.5s, session-start-page-wrapper, ease-in-out);
+            @include animation(0, 0.3s, session-start-page-wrapper, ease-in-out);
         }
     }
 
@@ -86,11 +85,11 @@ body {
         .pn-icon {
             &__litium {
                 opacity: 0;
-                @include animation(0.5s, 1.5s, fade-in, ease-in-out);
+                @include animation(0, 0.3s, fade-in, ease-in-out);
             }
 
             &__powered-by {
-                @include animation(0.5s, 1.5s, fade-in, ease-in-out);
+                @include animation(0, 0.3s, fade-in, ease-in-out);
             }
         }
     }

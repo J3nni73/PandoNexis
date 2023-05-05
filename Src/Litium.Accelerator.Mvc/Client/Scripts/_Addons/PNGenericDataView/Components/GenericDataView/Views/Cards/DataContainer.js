@@ -78,12 +78,7 @@ export const DataContainer = React.memo(
             }
         }
 
-        const onButtonClick = (form) => {
-            //windows.currGenDW_useConfirmation = useConfirmation;
-            //windows.currGenDW_fieldSettings = fieldSettings;
-            //windows.currGenDW_fieldSettings = fieldSettings;
-            //windows.currGenDW_confirmationText = confirmationText;
-            //windows.currGenDW_fieldId = fieldId;
+        const onButtonClick = (form) => {        
             const useConfirmation = currGenDW_useConfirmation;
             const fieldSettings = currGenDW_fieldSettings;
             const confirmationText = currGenDW_confirmationText;
@@ -202,6 +197,7 @@ export const DataContainer = React.memo(
                                 title={cardIngressField.fieldName}
                                 name={cardIngressField.fieldID}
                                 setErrorObject={setErrorObject}
+
                                 onButtonClick={
                                     cardIngressField.fieldType === 'button'
                                         ? handleSubmit(onButtonClick)

@@ -22,6 +22,30 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Definitions
                     CanBeGridFilter = true,
                     MultiCulture = false,
                 },
+                new FieldDefinition<CustomerArea>(RegisterMeConstants.Allergies, SystemFieldTypeConstants.Text)
+                {
+                    CanBeGridColumn = true,
+                    CanBeGridFilter = true,
+                    MultiCulture = false,
+                },
+                new FieldDefinition<CustomerArea>(RegisterMeConstants.DateAdded, SystemFieldTypeConstants.DateTime)
+                {
+                    CanBeGridColumn = true,
+                    CanBeGridFilter = true,
+                    MultiCulture = false,
+                },
+                new FieldDefinition<CustomerArea>(RegisterMeConstants.PersonInfo, SystemFieldTypeConstants.Text)
+                {
+                    CanBeGridColumn = true,
+                    CanBeGridFilter = true,
+                    MultiCulture = false,
+                }, 
+                new FieldDefinition<CustomerArea>(RegisterMeConstants.UserName, SystemFieldTypeConstants.Text)
+                {
+                    CanBeGridColumn = true,
+                    CanBeGridFilter = true,
+                    MultiCulture = false,
+                }
             };
             return fields;
         }

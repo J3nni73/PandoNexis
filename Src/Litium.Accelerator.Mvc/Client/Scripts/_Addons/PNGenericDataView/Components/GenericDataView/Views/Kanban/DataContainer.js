@@ -1,4 +1,5 @@
 import React, { useEffect, useState, Fragment, useRef } from 'react';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import PropTypes, { object } from 'prop-types';
 import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
@@ -47,6 +48,7 @@ export const DataContainer = React.memo(
         const [nextAvailableStatus, setNewAvailableStatus] = useState(settings?.possibleNextStatusList);
         const [cardIngressField, setCardIngressField] = useState(null);
         const [errorObject, setErrorObject] = useState(null);
+        const dispatch = useDispatch();
         const dragItem = useRef();
         const dragOverItem = useRef();
         let tempStatus = null;
@@ -90,7 +92,12 @@ export const DataContainer = React.memo(
             }
         }
 
-        const onButtonClick = (form, useConfirmation, fieldSettings, confirmationText, fieldId) => {
+        const onButtonClick = (form) => {
+            const useConfirmation = currGenDW_useConfirmation;
+            const fieldSettings = currGenDW_fieldSettings;
+            const confirmationText = currGenDW_confirmationText;
+            const fieldId = currGenDW_fieldId;
+
             const entitySystemId = fields[0].entitySystemId;
             const identifierField = { entitySystemId };
             const errObjs = isContainerValid(identifierField, form);
@@ -98,6 +105,7 @@ export const DataContainer = React.memo(
             if (!errObjs) {
                 return true;
             }
+
             if (useConfirmation) {
                 if (!confirm(confirmationText)) {
                     return false;
@@ -119,11 +127,10 @@ export const DataContainer = React.memo(
                 entitySystemId,
                 dataContainerIndex,
             };
-
             dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject));
         };
 
-        const onBlur = (form) => {
+        const onBlur = (form) => {           
             const identifierField = { EntitySystemId: fields[0].entitySystemId };
             const errObjs = isContainerValid(identifierField, form, dirtyFields);
             setErrorObject(errObjs);

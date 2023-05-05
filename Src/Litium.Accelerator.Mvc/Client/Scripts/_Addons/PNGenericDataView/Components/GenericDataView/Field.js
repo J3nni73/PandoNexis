@@ -20,6 +20,7 @@ export const GenericDataViewField = React.forwardRef(
         }
 
         const onEnterKeyPress = function (event) {
+            window.currGenDW_lastClickedFieldId = fieldId;
             if ((event.keyCode === 13 || event.keyCode === 9) && event.target.nodeName === 'INPUT') {
                 var parent = event.target.closest('.row');
                 var currentElementName = event.target.name;
@@ -71,9 +72,9 @@ export const GenericDataViewField = React.forwardRef(
                     setErrorObject={setErrorObject}
                     title={name}
                     onButtonClick={onButtonClick}
-                    
+                    onKeyDown={(event) => onEnterKeyPress(event)}
+                    onClick={(event) => onEnterKeyPress(event)}
                     {...ref}
-                    
                 />
             );
         }
@@ -178,6 +179,8 @@ export const GenericDataViewField = React.forwardRef(
                                 onKeyDown={(event) => onEnterKeyPress(event)}
                                 type="text"
                                 required={isRequired}
+                                autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedFieldId === fieldId}
+                                onClick={(event) => onEnterKeyPress(event)}
                                 {...common}
                             />
                             {suffix}
@@ -191,6 +194,8 @@ export const GenericDataViewField = React.forwardRef(
                                 onKeyDown={(event) => onEnterKeyPress(event)}
                                 type="number"
                                 required={isRequired}
+                                onClick={(event) => onEnterKeyPress(event)}
+                                autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedFieldId === fieldId }
                                 {...common}
                             />
                             {suffix}
