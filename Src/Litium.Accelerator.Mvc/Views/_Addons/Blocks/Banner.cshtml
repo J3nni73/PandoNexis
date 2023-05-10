@@ -63,10 +63,17 @@
                         @Html.ImageFor(x => item.Image)
                     </div>
                 }
-                @if (item.MobileImage != null)
+                @if (item.MobileImage != null || item.Image != null)
                 {
                     <div class="banner-block__image-wrapper-mobile">
-                        @Html.ImageFor(x => item.MobileImage)
+                        @if (item.MobileImage != null)
+                        {
+                            @Html.ImageFor(x => item.MobileImage)
+                        }
+                        else
+                        {
+                            @Html.ImageFor(x => item.Image)
+                        }
                     </div>
                 }
                 <div class="banner-block__item">
