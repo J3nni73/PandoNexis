@@ -4,19 +4,19 @@
 <div class="column-block">
     <div class="row">
         <div class="small-12 columns">
-            <p class="column-block__subtitle">
+            <h3 class="column-block__subtitle">
                 @Model.BlockSubTitle
-            </p>
-            <h1 class="column-block__title">
+            </h3>
+            <h2 class="column-block__title">
                 @Model.BlockTitle
-            </h1>
+            </h2>
             @if (!string.IsNullOrEmpty(@Model.BlockText) | !string.IsNullOrEmpty(@Model.BlockText2))
             {
                 <div class="column-block__text-wrapper">
-                    <div class="column-block__text">
+                    <div class="small-12 medium-6 columns column-block__text">
                         @Html.Raw(Model.BlockText)
                     </div>
-                    <div class="column-block__text">
+                    <div class="small-12 medium-6 columns column-block__text">
                         @Html.Raw(Model.BlockText2)
                     </div>
                 </div>
@@ -50,6 +50,8 @@
             }
         </div>
     </div>
+    @if (!string.IsNullOrEmpty(Model.Summary)||!string.IsNullOrEmpty(Model.Button.Href))
+    {
     <div class="row column-block__summary">
             @Html.Raw(Model.Summary)
         
@@ -61,6 +63,7 @@
             </div>
         }
     </div>
+    }
 </div>
 
 
