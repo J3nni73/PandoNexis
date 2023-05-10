@@ -1,0 +1,99 @@
+@using PandoNexis.AddOns.Extensions.Block.BlockBanner
+@model BlockBannerViewModel
+@{
+    var hasBanner = Model.Items != null && Model.Items.Any();
+    var bannerPerRow = hasBanner ? Math.Min(Model.Items.Count, 4) : 1;
+    var largeColumn = 12 / bannerPerRow;
+
+    Func<int, ResponsiveImageDefinition> BannerSelector = i =>
+    {
+        var sizeDef = i switch
+        {
+            4 => new SizeDefinition[]
+                {
+                    new ("(min-width: 1440px)", "306px"),
+                    new ("(min-width: 1040px)", "calc(40vw + 74px)"),
+                    new ("calc(98.61vw - 16px)"),
+                },
+            3 => new SizeDefinition[]
+                {
+                    new ("(min-width: 1440px)", "418px"),
+                    new ("(min-width: 1040px)", "calc(26.58vw + 41px)"),
+                    new ("calc(98.61vw - 16px)"),
+                },
+            2 => new SizeDefinition[]
+                {
+                    new ("(min-width: 1440px)", "642px"),
+                    new ("(min-width: 1040px)", "calc(40vw + 74px)"),
+                    new ("calc(98.61vw - 16px)"),
+                },
+            _ => new SizeDefinition[]
+                {
+                    new ("(min-width: 1420px)", "1314px"),
+                    new ("94vw")
+                }
+        };
+
+        return new()
+                {
+                    SrcSets = new SrcSetDefinition[]
+            {
+                new (280),
+                new (720),
+                new (1040),
+                new (1284),
+                new (1670),
+                new (1830),
+                new (1980),
+            },
+                    Sizes = sizeDef,
+                };
+    };
+}
+<div class="row ">
+    @if (Model.Items.Any())
+    {
+        @foreach (var item in Model.Items)
+        {
+            <div class="columns small-12 large-@largeColumn">
+
+                @if (item.Image != null)
+                {
+                    <div class="banner-block__image-wrapper">
+                        @Html.ImageFor(x => item.Image)
+                    </div>
+                }
+                @if (item.MobileImage != null)
+                {
+                    <div class="banner-block__image-wrapper-mobile">
+                        @Html.ImageFor(x => item.MobileImage)
+                    </div>
+                }
+                <div class="banner-block__item">
+                    @if (!string.IsNullOrEmpty(item.BlockTitle))
+                    {
+                        <p class="banner-block__item__title">
+                            @item.BlockTitle
+                        </p>
+                    }
+                    @if (!string.IsNullOrEmpty(item.BlockTitle))
+                    {
+                        <div class="banner-block__item__text">
+                            @Html.Raw(item.BlockText)
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Button.Href))
+                    {
+                        <div class="button banner-block__item__button">
+                            <a href="@item.Button.Href" target="@item.Button.Target" class="@item.Button.Class">@item.Button.LinkText</a>
+                            <p class="banner-block__summary__subtext">@item.Button.ButtonSubText</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    }
+
+</div>
+
+

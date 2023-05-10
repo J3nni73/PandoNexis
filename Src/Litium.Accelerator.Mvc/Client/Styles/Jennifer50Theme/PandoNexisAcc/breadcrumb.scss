@@ -30,7 +30,6 @@ $breadcrumb-use-sticky-header: $solution-use-sticky-header;
     }
 
     &__link {
-        text-transform: capitalize;
         display: inline-block;
         color: rgba($solution-breadcrumb-font-color,.8);
 

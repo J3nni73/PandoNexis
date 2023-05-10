@@ -30,13 +30,11 @@
         //BlockItems
         public const string InspirationalBlockItem = "InspirationalBlockItem";
         public const string ColumnBlockItem = "ColumnBlockItem";
-
         public const string InfoTileBlockItem = "InfoTileBlockItem";
-
         public const string ImageStatsBlockItem = "ImageStatsBlockItem";
-
         public const string HeroBlockItem = "HeroBlockItem";
         public const string UspBlockItem = "UspBlockItem";
+        public const string BannerBlockItems = "BannerBlockItems";
 
 
         //BlockLinks

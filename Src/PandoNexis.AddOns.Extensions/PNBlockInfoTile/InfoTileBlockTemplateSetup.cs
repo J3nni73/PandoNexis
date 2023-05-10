@@ -106,11 +106,7 @@ internal class InfoTileBlockTemplateSetup : FieldTemplateHelper
                         new FieldTemplateFieldGroup()
                         {
                             Id=BlockFieldGroupNameConstants.Items,
-                            Collapsed = false,
-                            Fields =
-                            {
-                                BlockFieldNameConstants.InfoTileBlockItem,
-                            }
+                            Collapsed = false
                         }
                     }
         };

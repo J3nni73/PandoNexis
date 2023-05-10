@@ -1,27 +1,27 @@
 $column-text-color: $solution-page-font-color;
 
 .column-block {
-    padding: 2rem 0;
+    padding: 2rem 1rem;
 
     &__subtitle {
         /*font-weight: $font-weight-extra-bold;*/
         /*font-size: $fontsize-sub-text;*/
         color: $column-text-color;
-        text-transform: uppercase;
         margin-bottom: rem(8px);
     }
 
     &__title {
         /*font-weight: $font-weight-normal;*/
-        font-size: $fontsize-h2;
-        color: $column-text-color;
+        font-size: $fontsize-h1;
+        color: $solution-color-text-highlight;
         padding-bottom: 1rem;
     }
 
     &__text-wrapper {
         display: flex;
         padding-bottom: rem(44px);
-        gap: 1rem;        
+        gap: 1rem;
+
         @media (max-width: $large-mobile-width) {
             display: grid;
             gap: 0;
@@ -36,7 +36,7 @@ $column-text-color: $solution-page-font-color;
     }
 
     &__items {
-        padding-bottom: rem(70px);
+        padding-bottom: rem(20px);
     }
 
     &__item-row {
@@ -48,10 +48,7 @@ $column-text-color: $solution-page-font-color;
         }
 
         &__title {
-            /*font-weight: $font-weight-extra-bold;*/
-            /*font-size: $fontsize-sub-text;*/
-            color: $column-text-color;
-            text-transform: uppercase;
+            color: $solution-color-text-highlight;
             word-break: break-word;
             padding-right: 1rem;
             margin: 0;
@@ -61,20 +58,30 @@ $column-text-color: $solution-page-font-color;
         &__text {
             /*font-size: $fontsize-sub-text;*/
             /*font-weight: $font-weight-bold;*/
+            li {
+                list-style-type: disc;
+                margin-left: 1.2rem;
+            }
         }
 
         &__image-wrapper {
-            width: rem(69px);
-            height: rem(69px);
+            display: flex;
+            justify-content: center;
+            /*          width: rem(69px);
+            height: rem(69px);*/
         }
     }
 
     &__summary {
-        background-color: $color-primary;
         padding: rem(40px) 0;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        background-color: $solution-background-primary;
+        color: $solution-color-text-highlight;
+
 
         &__text {
-            color: $color-white;
             line-height: 1.7;
 
             li {
@@ -88,9 +95,13 @@ $column-text-color: $solution-page-font-color;
                 font-weight: $font-weight-bold;*/
             }
 
-            h1,
-            h2,
+            h1, h2 {
+                color: $solution-color-text-highlight;
+                /*font-weight: $font-weight-normal;*/
+            }
+
             h3 {
+                color: $solution-color-text-highlight;
                 /*font-weight: $font-weight-normal;*/
             }
         }
@@ -109,6 +120,7 @@ $column-text-color: $solution-page-font-color;
             display: flex;
             justify-content: center;
             align-items: flex-end;
+            margin: 2rem auto !important;
 
             .primaryCTA {
                 min-width: rem(212px);

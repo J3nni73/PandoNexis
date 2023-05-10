@@ -27,7 +27,7 @@ internal class UspBlockTemplateSetup : FieldTemplateHelper
 
             GetBlockField(BlockTemplateNameConstants.UspBlock, BlockFieldGroupNameConstants.General, BlockFieldNameConstants.Background),
 
-            GetBlockField(BlockTemplateNameConstants.UspBlock, BlockFieldGroupNameConstants.General, BlockFieldNameConstants.UspBlockItem),
+            GetBlockField(BlockTemplateNameConstants.UspBlock, BlockFieldGroupNameConstants.Items, BlockFieldNameConstants.UspBlockItem),
             
 
         };
@@ -50,38 +50,18 @@ internal class UspBlockTemplateSetup : FieldTemplateHelper
                         {
                             Id = BlockFieldGroupNameConstants.General,
                             Collapsed = false,
-                            Fields =
-                            {
-                                SystemFieldDefinitionConstants.Name,
-                                BlockFieldNameConstants.BlockTitle,
-                                BlockFieldNameConstants.BlockSubTitle,
-                                BlockFieldNameConstants.BlockText,
-                                BlockFieldNameConstants.Background,
-                            }
+                            
                         },
                         new FieldTemplateFieldGroup()
                         {
                             Id=BlockFieldGroupNameConstants.CTA,
                             Collapsed = false,
-                            Fields =
-                            {
-                                 BlockFieldNameConstants.ExtendedLinkText,
-                                 BlockFieldNameConstants.ExtendedLinkToPage,
-                                 BlockFieldNameConstants.ExtendedLinkToCategory,
-                                 BlockFieldNameConstants.ExtendedLinkToProduct,
-                                 BlockFieldNameConstants.ExtendedLinkToFile,
-                                 BlockFieldNameConstants.ExtendedLinkToExternalUrl,
-                                 BlockFieldNameConstants.ExtendedClass,
-                            }
+                           
                         },
                         new FieldTemplateFieldGroup()
                         {
                             Id=BlockFieldGroupNameConstants.Items,
                             Collapsed = false,
-                            Fields =
-                            {
-                                BlockFieldNameConstants.UspBlockItem,
-                            }
                         }
                     }
               

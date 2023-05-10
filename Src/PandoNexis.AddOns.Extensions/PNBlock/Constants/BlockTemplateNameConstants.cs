@@ -8,6 +8,7 @@
         public const string ImageStatsBlock = "ImageStatsBlock";
         public const string HeroBlock = "HeroBlock";
         public const string UspBlock = "UspBlock";
+        public const string BannerBlock = "BannerBlock";
 
     }
     public static class BlockFieldGroupNameConstants

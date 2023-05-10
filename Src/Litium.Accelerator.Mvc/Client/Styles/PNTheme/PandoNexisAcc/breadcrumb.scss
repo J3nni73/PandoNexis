@@ -15,7 +15,6 @@
 
     &__link {
         @include transition;
-        text-transform: capitalize;
         display: inline-block;
         color: rgba($solution-link-color, .7);
 

@@ -38,31 +38,28 @@
                                 <p class="column-block__item-row__title">
                                     @item.BlockTitle
                                 </p>
+
                             </div>
                             <div class="column-block__item-row__text">
                                 @Html.Raw(item.BlockText)
                             </div>
+
                         </div>
                     }
                 </div>
             }
         </div>
     </div>
-    <div class="column-block__summary">
-        <div class="row">
-            <div class="small-12 medium-8 columns column-block__summary__text">
-                <div>@Html.Raw(Model.Summary)</div>
-            </div>
-            <div class="small-12 medium-4 columns column-block__summary__button-subtext-wrapper">
-                @if (Model.Button != null && !string.IsNullOrEmpty(Model.Button.Href))
-                {
-                    <div class="button column-block__summary__button">
-                        <a href="@Model.Button.Href" target="@Model.Button.Target" class="@Model.Button.Class">@Model.Button.LinkText</a>
-                    </div>
-                }
+    <div class="row column-block__summary">
+            @Html.Raw(Model.Summary)
+        
+        @if (Model.Button != null && !string.IsNullOrEmpty(Model.Button.Href))
+        {
+            <div class="button column-block__summary__button">
+                <a href="@Model.Button.Href" target="@Model.Button.Target" class="@Model.Button.Class">@Model.Button.LinkText</a>
                 <p class="column-block__summary__subtext">@Model.Button.ButtonSubText</p>
             </div>
-        </div>
+        }
     </div>
 </div>
 

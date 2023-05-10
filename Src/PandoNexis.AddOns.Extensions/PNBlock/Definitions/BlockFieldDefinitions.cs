@@ -231,6 +231,32 @@ namespace PandoNexis.AddOns.Extensions.PNBlock.Definitions
                          }
                      }
                 },
+                new FieldDefinition<BlockArea>(BlockFieldNameConstants.BannerBlockItems, SystemFieldTypeConstants.MultiField)
+                {
+                    MultiCulture = false,
+                     Option = new MultiFieldOption
+                     {
+                         IsArray = true,
+                         Fields  = new List<string>()
+                         {
+                             BlockFieldNameConstants.BlockTitle,
+                             BlockFieldNameConstants.BlockText,
+                             BlockFieldNameConstants.BlockImage,
+                             BlockFieldNameConstants.BlockMobileImage,
+                             BlockFieldNameConstants.ExtendedLinkText,
+                             BlockFieldNameConstants.ExtendedLinkToPage,
+                             BlockFieldNameConstants.ExtendedLinkToCategory,
+                             BlockFieldNameConstants.ExtendedLinkToProduct,
+                             BlockFieldNameConstants.ExtendedLinkToProductList,
+                             BlockFieldNameConstants.ExtendedLinkToFile,
+                             BlockFieldNameConstants.ExtendedLinkToYouTube,
+                             BlockFieldNameConstants.ExtendedLinkToExternalUrl,
+                             BlockFieldNameConstants.ExtendedClass,
+
+
+                         }
+                     }
+                },
             };
             return fields;
         }
