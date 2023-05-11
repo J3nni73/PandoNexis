@@ -18,9 +18,7 @@ $column-text-color: $solution-page-font-color;
     }
 
     &__text-wrapper {
-        display: flex;
         padding-bottom: rem(44px);
-        gap: 1rem;
 
         @media (max-width: $large-mobile-width) {
             display: grid;
@@ -30,9 +28,12 @@ $column-text-color: $solution-page-font-color;
     }
 
     &__text {
-        /* font-weight: $font-weight-bold;*/
         font-size: $fontsize-normal;
         color: $column-text-color;
+        padding: 0;
+        padding: rem(24px);
+        background: rgba(0,0,0,.4);
+
     }
 
     &__items {
@@ -40,7 +41,8 @@ $column-text-color: $solution-page-font-color;
     }
 
     &__item-row {
-
+        background: rgba(0,0,0,.3);
+        padding: 20px;
 
         &__header-wrapper {
             padding-bottom: rem(24px);

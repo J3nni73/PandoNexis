@@ -4,6 +4,7 @@
 <div class="column-block">
     <div class="row">
         <div class="small-12 columns">
+
             <h3 class="column-block__subtitle">
                 @Model.BlockSubTitle
             </h3>
@@ -13,57 +14,75 @@
             @if (!string.IsNullOrEmpty(@Model.BlockText) | !string.IsNullOrEmpty(@Model.BlockText2))
             {
                 <div class="column-block__text-wrapper">
-                    <div class="small-12 medium-6 columns column-block__text">
-                        @Html.Raw(Model.BlockText)
-                    </div>
-                    <div class="small-12 medium-6 columns column-block__text">
-                        @Html.Raw(Model.BlockText2)
+                    <div class="row">
+                        <div class="small-12 medium-6 columns">
+                            <div class="column-block__text">@Html.Raw(Model.BlockText)</div>
+                        </div>
+                        <div class="small-12 medium-6 columns">
+                            <div class="column-block__text">
+                                @Html.Raw(Model.BlockText2)
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
 
             @if (Model.Items.Any())
             {
-                <div class="row column-block__items">
-                    @foreach (var item in Model.Items)
-                    {
-                        <div class="small-12 medium-6 large-3 columns column-block__item-row">
-                            <div class="column-block__item-row__header-wrapper">
-                                @if (item.Image != null)
+                <div class="row">
+                    <div class="small-12 columns">
+                        <div class="column-block__item-row">
+                            <div class="row">
+                                @foreach (var item in Model.Items)
                                 {
-                                    <div class="column-block__item-row__image-wrapper">
-                                        @Html.ImageFor(x => item.Image)
+                                    <div class="small-12 medium-6 large-3 columns">
+                                        <div>
+                                            <div class="column-block__item-row__header-wrapper">
+                                                @if (item.Image != null)
+                                                {
+                                                    <div class="column-block__item-row__image-wrapper">
+                                                        @Html.ImageFor(x => item.Image)
+                                                    </div>
+                                                }
+                                                <p class="column-block__item-row__title">
+                                                    @item.BlockTitle
+                                                </p>
+
+                                            </div>
+                                            <div class="column-block__item-row__text">
+                                                @Html.Raw(item.BlockText)
+                                            </div>
+                                        </div>
                                     </div>
                                 }
-                                <p class="column-block__item-row__title">
-                                    @item.BlockTitle
-                                </p>
-
                             </div>
-                            <div class="column-block__item-row__text">
-                                @Html.Raw(item.BlockText)
-                            </div>
-
                         </div>
-                    }
+                    </div>
                 </div>
             }
         </div>
     </div>
-    @if (!string.IsNullOrEmpty(Model.Summary)||!string.IsNullOrEmpty(Model.Button.Href))
-    {
-    <div class="row column-block__summary">
-            @Html.Raw(Model.Summary)
-        
-        @if (Model.Button != null && !string.IsNullOrEmpty(Model.Button.Href))
-        {
-            <div class="button column-block__summary__button">
-                <a href="@Model.Button.Href" target="@Model.Button.Target" class="@Model.Button.Class">@Model.Button.LinkText</a>
-                <p class="column-block__summary__subtext">@Model.Button.ButtonSubText</p>
-            </div>
-        }
-    </div>
-    }
 </div>
+@if (!string.IsNullOrEmpty(Model.Summary) || !string.IsNullOrEmpty(Model.Button.Href))
+{
+    <div class="row">
+        <div class="small-12 columns">
+            <div class=" column-block__summary">
+                <div>
+                    @Html.Raw(Model.Summary)
+
+                    @if (Model.Button != null && !string.IsNullOrEmpty(Model.Button.Href))
+                    {
+                        <div class="button column-block__summary__button">
+                            <a href="@Model.Button.Href" target="@Model.Button.Target" class="@Model.Button.Class">@Model.Button.LinkText</a>
+                            <p class="column-block__summary__subtext">@Model.Button.ButtonSubText</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    </div>
 
 
