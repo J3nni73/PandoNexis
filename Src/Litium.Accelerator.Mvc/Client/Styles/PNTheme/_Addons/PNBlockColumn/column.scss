@@ -18,7 +18,7 @@ $column-text-color: $solution-page-font-color;
     }
 
     &__text-wrapper {
-        padding-bottom: rem(44px);
+        padding-bottom: rem(24px);
 
         @media (max-width: $large-mobile-width) {
             display: grid;
@@ -33,7 +33,12 @@ $column-text-color: $solution-page-font-color;
         padding: 0;
         padding: rem(24px);
         background: rgba(0,0,0,.4);
+        height: 100%;
 
+        li {
+            list-style-type: disc;
+            margin-left: 1.2rem;
+        }
     }
 
     &__items {
@@ -75,7 +80,8 @@ $column-text-color: $solution-page-font-color;
     }
 
     &__summary {
-        padding: rem(40px) 0 0 0;
+        margin-top: 1.5rem;
+        padding: rem(24px) 0 rem(8px) 0;
         display: flex;
         justify-content: center;
         flex-direction: column;
