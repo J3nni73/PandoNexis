@@ -3,6 +3,7 @@ using Litium.Websites;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 using PageTemplateNameConstants = PandoNexis.AddOns.Extensions.PNGenericDataView.Constants.PageTemplateNameConstants;
 using PageFieldNameConstants = PandoNexis.AddOns.Extensions.PNGenericDataView.Constants.DataViewFieldNameConstants;
+using Litium.Accelerator.Constants;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
 {
@@ -54,6 +55,27 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
                             Collapsed = false,
                         }
                     },
+                Containers = new List<BlockContainerDefinition>
+                    {
+                        new BlockContainerDefinition()
+                        {
+                            Id = BlockContainerNameConstant.Header,
+                            Name =
+                            {
+                                ["sv-SE"] = "Huvud",
+                                ["en-US"] = "Header",
+                            }
+                        },
+                         new BlockContainerDefinition()
+                        {
+                            Id = BlockContainerNameConstant.Main,
+                            Name =
+                            {
+                                ["sv-SE"] = "Fot",
+                                ["en-US"] = "Footer",
+                            }
+                        }
+                },
             };
             return template;
         }
