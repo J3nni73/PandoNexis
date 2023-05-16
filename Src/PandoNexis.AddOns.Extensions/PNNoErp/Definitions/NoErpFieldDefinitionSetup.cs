@@ -24,7 +24,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Definitions
                     CanBeGridFilter = true,
                     MultiCulture = false,
                 },
-                new FieldDefinition<WebsiteArea>(NoErpOrderAdminConstants.ButtonName, SystemFieldTypeConstants.TextOption)
+                new FieldDefinition<WebsiteArea>(NoErpOrderAdminConstants.NoErpButtonNames, SystemFieldTypeConstants.TextOption)
                 {
                       Option = new TextOption 
                       {
@@ -32,11 +32,8 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Definitions
                         Items = new List<TextOption.Item>()
                       }
                 }, 
-                new FieldDefinition<WebsiteArea>(NoErpOrderAdminConstants.ButtonPagePointer, SystemFieldTypeConstants.Pointer)
-                {
-                    Option = new PointerOption { EntityType = PointerTypeConstants.WebsitesPage }
-                },
-                new FieldDefinition<WebsiteArea>(NoErpOrderAdminConstants.ButtonLinks, SystemFieldTypeConstants.MultiField)
+                
+                new FieldDefinition<WebsiteArea>(NoErpOrderAdminConstants.NoErpButtonLinks, SystemFieldTypeConstants.MultiField)
                 {
                     MultiCulture = false,
                      Option = new MultiFieldOption

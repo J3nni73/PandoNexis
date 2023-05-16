@@ -9,9 +9,8 @@
         public static string Authorization = "Authorization";
         public static string BaseUrl = "BaseUrl";
 
-        public static string ButtonName = "ButtonName";
-        public static string ButtonPagePointer = "ButtonPagePointer";
-        public static string ButtonLinks = "ButtonLinks";
+        public static string NoErpButtonNames = "NoErpButtonNames";
+        public static string NoErpButtonLinks = "NoErpButtonLinks";
 
     }
    

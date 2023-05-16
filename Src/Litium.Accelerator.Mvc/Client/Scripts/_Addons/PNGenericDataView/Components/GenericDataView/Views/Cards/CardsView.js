@@ -42,7 +42,7 @@ export const CardsView = ({
     const sortColumn = (fieldName, index) => {
         requestSort('fieldValue', index, fieldName);
     };
-
+    const [mainSettings, setMainSettings] = useState(settings);
     if (dataContainers && fieldsToShow) {
 
         return (
@@ -57,6 +57,7 @@ export const CardsView = ({
                                 key={`${uuidv4()}${index}`}
                                 {...dataContainer}
                                 {...settings}
+                                mainSettings={mainSettings}
                                 onDataContainerChange={onDataContainerChange}
                                 dataContainerIndex={index}
                                 fieldsToShow={fieldsToShow}

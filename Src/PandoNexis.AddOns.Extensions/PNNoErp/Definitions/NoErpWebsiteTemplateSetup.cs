@@ -10,7 +10,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Definitions
         {
             var templateChanges = new List<FieldTemplateChanges>
             {
-                GetWebsiteField("AcceleratorWebsite", NoErpOrderAdminConstants.NoErp, NoErpOrderAdminConstants.ButtonLinks),
+                GetWebsiteField("AcceleratorWebsite", NoErpOrderAdminConstants.NoErp, NoErpOrderAdminConstants.NoErpButtonLinks),
 
             };
 

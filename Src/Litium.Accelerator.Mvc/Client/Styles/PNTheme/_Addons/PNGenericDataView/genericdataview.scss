@@ -403,6 +403,7 @@ $dataview-general-font-size: rem($fontsize-large);
         width: 20px;
         height: 20px;
         transition: width 0.5s;
+        display:none;
 
         &__icon {
             &-close, &-settings {

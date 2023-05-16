@@ -1,6 +1,6 @@
 /****   Generic Data Container ( Former Row )   ****/
 
-import { patch } from '../../../Services/http';
+import { patch, post } from '../../../Services/http';
 import { catchError } from '../../../Actions/Error.action';
 import { toggleGenericLoader } from '../../../_PandoNexis/Actions/GenericLoader.action';
 import {
@@ -20,17 +20,16 @@ export const checkFormField = (obj) => {
     //obj.field
     //alert(JSON.stringify(fields));
     const validationRules = obj?.field?.settings?.validationRules;
-    const fieldID = obj?.fieldID;
+    const fieldId = obj?.fieldId;
     const fieldValue = obj?.fieldValue;
     let errorObject = null;
-    if (obj && obj.fieldID && validationRules) {
-
+    if (obj && obj.fieldId && validationRules) {
         for (let i = 0; i < validationRules.length; i++) {
             const obj = validationRules[i];
             if (obj.rule === 'IsRequired') {
                 if (fieldValue.trim().length < 1) {
                     errorObject = {
-                        ...obj, fieldID
+                        ...obj, fieldId
                     };
                     break;
                 }
@@ -40,7 +39,7 @@ export const checkFormField = (obj) => {
                 const result = regex.test(fieldValue);
                 if (!result) {
                     errorObject = {
-                        ...obj, fieldID
+                        ...obj, fieldId
                     };
                     break;
                 }
@@ -55,8 +54,35 @@ const getFocused = () => {
     return document.activeElement;
 }
 
+export const sendContainerState = (entitySystemId, containerState) => (dispatch, getState) => {
+   
+    //var field = fields.find(x => x.fieldId === data.fieldId);
+    //if (field && field.settings && field.settings.validationRules) {
+
+    //    isFieldValid(data.fieldValue, field.settings.validationRules);
+    //    //alert(JSON.stringify(field.settings.validationRules));
+    //    return;
+    //}   
+
+    //dispatch({
+    //    type: isInModal ? GENERIC_MODAL_DATA_CONTAINER_UPDATE : GENERIC_DATA_CONTAINER_UPDATE,
+    //    payload: { data, fields },
+    //});
+    // console.log('Update Row --', type, data, fields);
+    const data = {
+        entitySystemId,
+        containerState
+    };
+    return post(rootRoute + "changeContainerState", data)
+        .then((response) => response.json())
+        //.then((response) => dispatch(checkDataContainerResponse(response, fields, isInModal, entitySystemId)))
+        .catch((ex) =>
+            dispatch(catchError(ex, (error) => updateError(error, entitySystemId)))
+        );
+};
+
 export const update = (pageSystemId, data, fields, isInModal = false, entitySystemId = '') => (dispatch, getState) => {
-    //var field = fields.find(x => x.fieldID === data.fieldID);
+    //var field = fields.find(x => x.fieldId === data.fieldId);
     //if (field && field.settings && field.settings.validationRules) {
 
     //    isFieldValid(data.fieldValue, field.settings.validationRules);
@@ -88,8 +114,6 @@ export const checkDataContainerResponse = (response, fields, isInModal = false, 
             dispatch(receiveGenericDataViewTabs(response.dataViewTabs));
         }
     }
-
-
     if (!response.cart && !response.dataContainer) {
         return dispatch(receive(response, fields, isInModal, entitySystemId));
     } else {

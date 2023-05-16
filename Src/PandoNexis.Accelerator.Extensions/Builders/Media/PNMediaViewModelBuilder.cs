@@ -1,7 +1,7 @@
 ﻿
 using Litium.Media;
 using Litium.Runtime.AutoMapper;
-using PandoNexis.Accelerator.Extensions.ViewModel.Media;
+using PandoNexis.Accelerator.Extensions.ViewModels.Media;
 using Litium.Web.Administration.WebApi.Media.ViewModels;
 using JetBrains.Annotations;
 using Litium.Runtime.DependencyInjection;

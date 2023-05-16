@@ -17,10 +17,10 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Definitions
         {
             var changes = new List<FieldOptionChanges>()
             {
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.DataArea, NoErpOrderAdminConstants.NoErp),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,PageFieldNameConstants.AreaSource, NoErpOrderAdminConstants.OrderView),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,PageFieldNameConstants.AreaSource, NoErpOrderAdminConstants.OrderRowView),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,NoErpOrderAdminConstants.ButtonName, NoErpButtonConstants.ViewOrder),
+                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.DataArea, NoErpOrderAdminConstants.NoErp),
+                GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.AreaSource, NoErpOrderAdminConstants.OrderView),
+                GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.AreaSource, NoErpOrderAdminConstants.OrderRowView),
+                GetFieldOption(FieldHelperConstants.WebsiteArea,NoErpOrderAdminConstants.NoErpButtonNames, NoErpButtonConstants.ViewOrder),
             };
         
             UpdateFieldOptions(changes);
@@ -31,8 +31,13 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Definitions
         {
             var changes = new List<FieldMultiFieldChanges>()
             {
-                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoErpOrderAdminConstants.ButtonLinks, NoErpOrderAdminConstants.ButtonName),
-                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoErpOrderAdminConstants.ButtonLinks, NoErpOrderAdminConstants.ButtonPagePointer)
+                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoErpOrderAdminConstants.NoErpButtonLinks, NoErpOrderAdminConstants.NoErpButtonNames),
+                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoErpOrderAdminConstants.NoErpButtonLinks, DataViewFieldNameConstants.ButtonPagePointer),
+                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoErpOrderAdminConstants.NoErpButtonLinks, DataViewFieldNameConstants.UseConfirmation),
+                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoErpOrderAdminConstants.NoErpButtonLinks, DataViewFieldNameConstants.ConfirmationText),
+                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoErpOrderAdminConstants.NoErpButtonLinks, DataViewFieldNameConstants.ButtonOpenInModal),
+                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoErpOrderAdminConstants.NoErpButtonLinks, DataViewFieldNameConstants.EndPointMethod),
+                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoErpOrderAdminConstants.NoErpButtonLinks, DataViewFieldNameConstants.FieldTooltipMessage),
             };
             
             UpdateMultiFieldField(changes);

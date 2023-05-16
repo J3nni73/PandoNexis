@@ -113,31 +113,31 @@ export const GenericDataView = ({
     };
 
     useEffect(() => {
-        const _displayTypes = settings?.displayTypes;
-        if (!_displayTypes) {
-            return;
+        if (settings) {
+            const _displayTypes = settings?.displayTypes; //?.trim().split(',');
+            if (!_displayTypes) {
+                return;
+            }
+            // Split to Array and trim strings
+
+            //_displayTypes.trim();
+            //if (_displayTypes.length < 1) { }
+            //_displayTypes = _displayTypes.replace(/ /g, '').toLowerCase();
+            //let displayTypesList = _displayTypes?.split(",") || ["table"];
+            //if (!_displayTypes || !displayTypesList || displayTypesList.length < 1) {
+            //    displayTypesList = ["table"];
+            //}
+
+            setViewsList(_displayTypes);
+            setCurrentView(_displayTypes[0]);
+            setColumnsInsideContainerSmall(settings?.columnsInsideContainerSmall || 1);
+            setColumnsInsideContainerMedium(settings?.columnsInsideContainerMedium || 2);
+            setColumnsInsideContainerLarge(settings?.columnsInsideContainerLarge || 3);
+
+            setColumnsWithContainersSmall(settings?.columnsWithContainersSmall || 1);
+            setColumnsWithContainersMedium(settings?.columnsWithContainersMedium || 2);
+            setColumnsWithContainersLarge(settings?.columnsWithContainersLarge || 3);
         }
-        // Split to Array and trim strings
-
-        //_displayTypes.trim();
-        //if (_displayTypes.length < 1) { }
-        //_displayTypes = _displayTypes.replace(/ /g, '').toLowerCase();
-        //let displayTypesList = _displayTypes?.split(",") || ["table"];
-        //if (!_displayTypes || !displayTypesList || displayTypesList.length < 1) {
-        //    displayTypesList = ["table"];
-        //}
-        setViewsList(_displayTypes);
-        setCurrentView(_displayTypes[0]);
-        setColumnsInsideContainerSmall(settings?.columnsInsideContainerSmall || 1);
-        setColumnsInsideContainerMedium(settings?.columnsInsideContainerMedium || 2);
-        setColumnsInsideContainerLarge(settings?.columnsInsideContainerLarge || 3);
-
-        setColumnsWithContainersSmall(settings?.columnsWithContainersSmall || 1);
-        setColumnsWithContainersMedium(settings?.columnsWithContainersMedium || 2);
-        setColumnsWithContainersLarge(settings?.columnsWithContainersLarge || 3);
-
-
-
     }, [settings]);
 
 
@@ -162,6 +162,7 @@ export const GenericDataView = ({
         <Fragment>
             {viewsList && viewsList.length > 1 &&
                 <div className="generic-data-view__views">
+                    {console.log("viewsList", viewsList) }
                     <ul className="generic-data-view__view-selector">
                         {viewsList.map((viewItem, index) => (
                             <li key={`view${index}}`} onClick={() => toggleView(viewItem)}> <ViewIcon name={viewItem} /></li>

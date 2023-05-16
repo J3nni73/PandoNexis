@@ -2,7 +2,7 @@
 using Litium.Accelerator.ViewModels.Product;
 using Litium.Runtime.AutoMapper;
 
-namespace PandoNexis.Accelerator.Extensions.ViewModel.Product
+namespace PandoNexis.Accelerator.Extensions.ViewModels.Product
 {
     public class PNProductItemViewModel : ProductItemViewModel, IAutoMapperConfiguration
     {

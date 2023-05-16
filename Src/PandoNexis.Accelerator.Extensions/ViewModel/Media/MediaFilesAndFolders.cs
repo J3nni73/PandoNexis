@@ -1,4 +1,4 @@
-﻿namespace PandoNexis.Accelerator.Extensions.ViewModel.Media
+﻿namespace PandoNexis.Accelerator.Extensions.ViewModels.Media
 {
     public class MediaFilesAndFolders
     {   

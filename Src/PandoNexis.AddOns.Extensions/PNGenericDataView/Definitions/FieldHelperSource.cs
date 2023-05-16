@@ -5,7 +5,6 @@ using Litium.Security;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNNoErp.Constants;
-using static PandoNexis.AddOns.Extensions.PNGenericDataView.Constants.PageFieldNameConstants;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
 {
@@ -18,11 +17,11 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
         public override void HandleFieldOptions()
         {
             var changes = new List<FieldOptionChanges>(){
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.DataArea, ProcessorConstants.ProductArea),
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.DataArea, ProcessorConstants.CustomerArea),
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.AlignContainers, PageFieldOptionValues.Left),
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.AlignContainers, PageFieldOptionValues.Center),
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.AlignContainers, PageFieldOptionValues.Right),
+                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.DataArea, ProcessorConstants.ProductArea),
+                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.DataArea, ProcessorConstants.CustomerArea),
+                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.AlignContainers, PageFieldOptionValues.Left),
+                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.AlignContainers, PageFieldOptionValues.Center),
+                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.AlignContainers, PageFieldOptionValues.Right),
                 };
 
             UpdateFieldOptions(changes);
@@ -31,7 +30,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
         }
         public override void HandleMultiFieldFields()
         {
-            throw new NotImplementedException();
         }
     }
 }

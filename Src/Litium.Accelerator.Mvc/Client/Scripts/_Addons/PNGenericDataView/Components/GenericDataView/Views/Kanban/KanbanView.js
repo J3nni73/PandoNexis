@@ -54,7 +54,7 @@ export const KanbanView = ({
                     sortConfig={sortConfig}
                     handleSetfieldsToShow={handleSetfieldsToShow}
                     fieldsToShow={fieldsToShow}
-                    statusList={settings.availableStatusList}
+                    statusList={settings.genericDataContainerStateList}
                 />
                 <tbody>
                     {currentPosts &&

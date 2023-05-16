@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import DynamicComponent from './Components/DynamicComponent';
+import 'react-tooltip/dist/react-tooltip.css';
 
 //PandoNexis: BEGIN IMPORT
 import PNGenericDataViewContainer from './_Addons/PNGenericDataView/Components/PNGenericDataView.container';

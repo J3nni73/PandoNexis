@@ -5,7 +5,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "OrderNumber",
+          "fieldId": "OrderNumber",
           "fieldName": "Order number",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -45,7 +45,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "OrderDate",
+          "fieldId": "OrderDate",
           "fieldName": "Order date",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -85,7 +85,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "OrderRowsCount",
+          "fieldId": "OrderRowsCount",
           "fieldName": "Amount of rows",
           "fieldSuffix": null,
           "fieldType": "html",
@@ -125,7 +125,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "ViewOrder",
+          "fieldId": "ViewOrder",
           "fieldName": "View order",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -165,7 +165,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "OrderTotal",
+          "fieldId": "OrderTotal",
           "fieldName": "Order ordertotal",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -205,7 +205,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "CustomerInfo",
+          "fieldId": "CustomerInfo",
           "fieldName": "Customer information",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -245,7 +245,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "OrderState",
+          "fieldId": "OrderState",
           "fieldName": "Order state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -285,7 +285,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "ShipmentState",
+          "fieldId": "ShipmentState",
           "fieldName": "Shipment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -325,7 +325,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "PaymentState",
+          "fieldId": "PaymentState",
           "fieldName": "Payment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -365,7 +365,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "NotifyOrderExported",
+          "fieldId": "NotifyOrderExported",
           "fieldName": "Order received",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -405,7 +405,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "CreateShipment",
+          "fieldId": "CreateShipment",
           "fieldName": "Create shipment",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -445,7 +445,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "NotifyShipmentDelivered",
+          "fieldId": "NotifyShipmentDelivered",
           "fieldName": "Deliver",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -485,7 +485,7 @@
         {
           "dataSource": null,
           "entitySystemId": "565b0d1b-a22a-44e7-a0b7-49d8ae974c24",
-          "fieldID": "FinalizeOrder",
+          "fieldId": "FinalizeOrder",
           "fieldName": "Cancel",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -530,7 +530,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "OrderNumber",
+          "fieldId": "OrderNumber",
           "fieldName": "Order number",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -570,7 +570,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "OrderDate",
+          "fieldId": "OrderDate",
           "fieldName": "Order date",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -610,7 +610,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "OrderRowsCount",
+          "fieldId": "OrderRowsCount",
           "fieldName": "Amount of rows",
           "fieldSuffix": null,
           "fieldType": "html",
@@ -650,7 +650,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "ViewOrder",
+          "fieldId": "ViewOrder",
           "fieldName": "View order",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -690,7 +690,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "OrderTotal",
+          "fieldId": "OrderTotal",
           "fieldName": "Order ordertotal",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -730,7 +730,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "CustomerInfo",
+          "fieldId": "CustomerInfo",
           "fieldName": "Customer information",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -770,7 +770,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "OrderState",
+          "fieldId": "OrderState",
           "fieldName": "Order state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -810,7 +810,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "ShipmentState",
+          "fieldId": "ShipmentState",
           "fieldName": "Shipment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -850,7 +850,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "PaymentState",
+          "fieldId": "PaymentState",
           "fieldName": "Payment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -890,7 +890,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "NotifyOrderExported",
+          "fieldId": "NotifyOrderExported",
           "fieldName": "Order received",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -930,7 +930,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "CreateShipment",
+          "fieldId": "CreateShipment",
           "fieldName": "Create shipment",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -970,7 +970,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "NotifyShipmentDelivered",
+          "fieldId": "NotifyShipmentDelivered",
           "fieldName": "Deliver",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -1010,7 +1010,7 @@
         {
           "dataSource": null,
           "entitySystemId": "6c8b62ba-a9f1-4124-8e99-4cc712d2b6e3",
-          "fieldID": "FinalizeOrder",
+          "fieldId": "FinalizeOrder",
           "fieldName": "Cancel",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -1055,7 +1055,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "OrderNumber",
+          "fieldId": "OrderNumber",
           "fieldName": "Order number",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1095,7 +1095,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "OrderDate",
+          "fieldId": "OrderDate",
           "fieldName": "Order date",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1135,7 +1135,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "OrderRowsCount",
+          "fieldId": "OrderRowsCount",
           "fieldName": "Amount of rows",
           "fieldSuffix": null,
           "fieldType": "html",
@@ -1175,7 +1175,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "ViewOrder",
+          "fieldId": "ViewOrder",
           "fieldName": "View order",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -1215,7 +1215,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "OrderTotal",
+          "fieldId": "OrderTotal",
           "fieldName": "Order ordertotal",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1255,7 +1255,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "CustomerInfo",
+          "fieldId": "CustomerInfo",
           "fieldName": "Customer information",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1295,7 +1295,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "OrderState",
+          "fieldId": "OrderState",
           "fieldName": "Order state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1335,7 +1335,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "ShipmentState",
+          "fieldId": "ShipmentState",
           "fieldName": "Shipment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1375,7 +1375,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "PaymentState",
+          "fieldId": "PaymentState",
           "fieldName": "Payment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1415,7 +1415,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "NotifyOrderExported",
+          "fieldId": "NotifyOrderExported",
           "fieldName": "Order received",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -1455,7 +1455,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "CreateShipment",
+          "fieldId": "CreateShipment",
           "fieldName": "Create shipment",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -1495,7 +1495,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "NotifyShipmentDelivered",
+          "fieldId": "NotifyShipmentDelivered",
           "fieldName": "Deliver",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -1535,7 +1535,7 @@
         {
           "dataSource": null,
           "entitySystemId": "804c9107-8a8e-4d6c-b712-2dcd43dba8e6",
-          "fieldID": "FinalizeOrder",
+          "fieldId": "FinalizeOrder",
           "fieldName": "Cancel",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -1580,7 +1580,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "OrderNumber",
+          "fieldId": "OrderNumber",
           "fieldName": "Order number",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1620,7 +1620,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "OrderDate",
+          "fieldId": "OrderDate",
           "fieldName": "Order date",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1660,7 +1660,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "OrderRowsCount",
+          "fieldId": "OrderRowsCount",
           "fieldName": "Amount of rows",
           "fieldSuffix": null,
           "fieldType": "html",
@@ -1700,7 +1700,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "ViewOrder",
+          "fieldId": "ViewOrder",
           "fieldName": "View order",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -1740,7 +1740,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "OrderTotal",
+          "fieldId": "OrderTotal",
           "fieldName": "Order ordertotal",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1780,7 +1780,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "CustomerInfo",
+          "fieldId": "CustomerInfo",
           "fieldName": "Customer information",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1820,7 +1820,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "OrderState",
+          "fieldId": "OrderState",
           "fieldName": "Order state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1860,7 +1860,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "ShipmentState",
+          "fieldId": "ShipmentState",
           "fieldName": "Shipment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1900,7 +1900,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "PaymentState",
+          "fieldId": "PaymentState",
           "fieldName": "Payment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -1940,7 +1940,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "NotifyOrderExported",
+          "fieldId": "NotifyOrderExported",
           "fieldName": "Order received",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -1980,7 +1980,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "CreateShipment",
+          "fieldId": "CreateShipment",
           "fieldName": "Create shipment",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -2020,7 +2020,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "NotifyShipmentDelivered",
+          "fieldId": "NotifyShipmentDelivered",
           "fieldName": "Deliver",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -2060,7 +2060,7 @@
         {
           "dataSource": null,
           "entitySystemId": "2acba303-1a73-410c-b60c-a7a3db0fd397",
-          "fieldID": "FinalizeOrder",
+          "fieldId": "FinalizeOrder",
           "fieldName": "Cancel",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -2105,7 +2105,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "OrderNumber",
+          "fieldId": "OrderNumber",
           "fieldName": "Order number",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2145,7 +2145,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "OrderDate",
+          "fieldId": "OrderDate",
           "fieldName": "Order date",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2185,7 +2185,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "OrderRowsCount",
+          "fieldId": "OrderRowsCount",
           "fieldName": "Amount of rows",
           "fieldSuffix": null,
           "fieldType": "html",
@@ -2225,7 +2225,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "ViewOrder",
+          "fieldId": "ViewOrder",
           "fieldName": "View order",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -2265,7 +2265,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "OrderTotal",
+          "fieldId": "OrderTotal",
           "fieldName": "Order ordertotal",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2305,7 +2305,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "CustomerInfo",
+          "fieldId": "CustomerInfo",
           "fieldName": "Customer information",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2345,7 +2345,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "OrderState",
+          "fieldId": "OrderState",
           "fieldName": "Order state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2385,7 +2385,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "ShipmentState",
+          "fieldId": "ShipmentState",
           "fieldName": "Shipment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2425,7 +2425,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "PaymentState",
+          "fieldId": "PaymentState",
           "fieldName": "Payment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2465,7 +2465,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "NotifyOrderExported",
+          "fieldId": "NotifyOrderExported",
           "fieldName": "Order received",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -2505,7 +2505,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "CreateShipment",
+          "fieldId": "CreateShipment",
           "fieldName": "Create shipment",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -2545,7 +2545,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "NotifyShipmentDelivered",
+          "fieldId": "NotifyShipmentDelivered",
           "fieldName": "Deliver",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -2585,7 +2585,7 @@
         {
           "dataSource": null,
           "entitySystemId": "cc49080e-d8cf-4cd5-baab-7bf19e6c5370",
-          "fieldID": "FinalizeOrder",
+          "fieldId": "FinalizeOrder",
           "fieldName": "Cancel",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -2630,7 +2630,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "OrderNumber",
+          "fieldId": "OrderNumber",
           "fieldName": "Order number",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2670,7 +2670,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "OrderDate",
+          "fieldId": "OrderDate",
           "fieldName": "Order date",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2710,7 +2710,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "OrderRowsCount",
+          "fieldId": "OrderRowsCount",
           "fieldName": "Amount of rows",
           "fieldSuffix": null,
           "fieldType": "html",
@@ -2750,7 +2750,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "ViewOrder",
+          "fieldId": "ViewOrder",
           "fieldName": "View order",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -2790,7 +2790,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "OrderTotal",
+          "fieldId": "OrderTotal",
           "fieldName": "Order ordertotal",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2830,7 +2830,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "CustomerInfo",
+          "fieldId": "CustomerInfo",
           "fieldName": "Customer information",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2870,7 +2870,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "OrderState",
+          "fieldId": "OrderState",
           "fieldName": "Order state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2910,7 +2910,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "ShipmentState",
+          "fieldId": "ShipmentState",
           "fieldName": "Shipment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2950,7 +2950,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "PaymentState",
+          "fieldId": "PaymentState",
           "fieldName": "Payment state",
           "fieldSuffix": null,
           "fieldType": "string",
@@ -2990,7 +2990,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "NotifyOrderExported",
+          "fieldId": "NotifyOrderExported",
           "fieldName": "Order received",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -3030,7 +3030,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "CreateShipment",
+          "fieldId": "CreateShipment",
           "fieldName": "Create shipment",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -3070,7 +3070,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "NotifyShipmentDelivered",
+          "fieldId": "NotifyShipmentDelivered",
           "fieldName": "Deliver",
           "fieldSuffix": null,
           "fieldType": "button",
@@ -3110,7 +3110,7 @@
         {
           "dataSource": null,
           "entitySystemId": "b1463fe2-3b4c-49e5-ad48-30d007f0408d",
-          "fieldID": "FinalizeOrder",
+          "fieldId": "FinalizeOrder",
           "fieldName": "Cancel",
           "fieldSuffix": null,
           "fieldType": "button",

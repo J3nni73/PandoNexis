@@ -2,7 +2,7 @@
 {
     public class GenericDataField
     { 
-        public string FieldID { get; set; } //FieldefinitionID
+        public string FieldId { get; set; } //FieldefinitionID
         public string FieldName { get; set; } //FieldTitle
         public string EntitySystemId { get; set; }
         public string FieldValue { get; set; }

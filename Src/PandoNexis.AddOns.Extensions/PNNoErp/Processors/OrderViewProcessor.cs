@@ -1,6 +1,7 @@
 ﻿using Litium.Accelerator.Routing;
 using Litium.Accelerator.Utilities;
 using Litium.Runtime.DependencyInjection;
+using Newtonsoft.Json;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Services;
 using PandoNexis.AddOns.Extensions.PNNoErp.Constants;
@@ -38,7 +39,6 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
             var view = new GenericDataView();
             if (_personStorage?.CurrentSelectedOrganization == null) return view;
 
-
             var orders = _noErpOrderService.GetOrders();
 
             if (orders == null) { return view; }
@@ -50,7 +50,6 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
                 view.DataContainers.Add(container);
             }
 
-
             return view;
         }
 
@@ -60,7 +59,6 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
             var website = _requestModelAccessor.RequestModel.WebsiteModel.Website;
 
             var container = new GenericDataContainer();
-            var field = new GenericDataField();
 
             container.Fields.Add(order.OrderIdAsGenericField(website));
             container.Fields.Add(order.OrderDateAsGenericField(website));
@@ -96,15 +94,16 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
             throw new NotImplementedException();
         }
 
-        public async override Task<GenericDataContainer> ButtonClick( GenericDataField fieldData)
+        public async override Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data)
         {
+            var fieldData = JsonConvert.DeserializeObject<GenericDataField>(data);
 
             if (Guid.TryParse(fieldData.EntitySystemId, out Guid orderSystemId))
             {
                 var container = new GenericDataContainer();
                 Order order = null;
 
-                switch (fieldData.FieldID)
+                switch (buttonId)
                 {
                     case NoErpButtonConstants.NotifyOrderExported:
                         order = _noErpOrderService.NotifyOrderExported(orderSystemId);

@@ -33,6 +33,8 @@ export const TableView = ({
     rowIndex,
 }) => {
     const { items, requestSort, sortConfig } = useSortableData(dataContainers);
+    const [mainSettings, setMainSettings] = useState(settings);
+
     const sortColumn = (fieldName, index) => {
         requestSort('fieldValue', index, fieldName);
     };
@@ -58,6 +60,7 @@ export const TableView = ({
                                 key={`${uuidv4()}${index}`}
                                 {...dataContainer}
                                 {...settings}
+                                mainSettings={mainSettings}
                                 onDataContainerChange={onDataContainerChange}
                                 dataContainerIndex={index}
                                 fieldsToShow={fieldsToShow}

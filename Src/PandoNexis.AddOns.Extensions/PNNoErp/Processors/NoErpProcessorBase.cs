@@ -27,7 +27,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
             }
         }
 
-        public abstract Task<GenericDataContainer> ButtonClick(GenericDataField fieldData);
+        public abstract Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data);
 
         public abstract Task<object> GetDataForm(string data);
 

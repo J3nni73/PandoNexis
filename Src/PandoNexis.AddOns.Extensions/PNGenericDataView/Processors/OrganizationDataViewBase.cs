@@ -12,15 +12,15 @@ using System.Globalization;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
 {
-    [Service(ServiceType = typeof(CustomerDataViewBase), Lifetime = DependencyLifetime.Transient, NamedService = true)]
-    public abstract class CustomerDataViewBase : IGenericDataViewProcessor
+    [Service(ServiceType = typeof(OrganizationDataViewBase), Lifetime = DependencyLifetime.Transient, NamedService = true)]
+    public abstract class OrganizationDataViewBase : IGenericDataViewProcessor
     {
         private readonly FieldTemplateService _fieldTemplateService;
         private readonly FieldDefinitionService _fieldDefinitionService;
         private readonly GenericDataViewService _genericDataViewService;
         private readonly RequestModelAccessor _requestModelAccessor;
 
-        protected CustomerDataViewBase(FieldDefinitionService fieldDefinitionService,
+        protected OrganizationDataViewBase(FieldDefinitionService fieldDefinitionService,
                                         FieldTemplateService fieldTemplateService,
                                         GenericDataViewService genericDataViewService,
                                         RequestModelAccessor requestModelAccessor)
@@ -31,7 +31,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
             _requestModelAccessor = requestModelAccessor;
         }
 
-        public virtual Task<GenericDataContainer> ButtonClick(GenericDataField fieldData)
+        public virtual Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data)
         {
             throw new NotImplementedException();
         }
@@ -83,7 +83,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
                 var fieldDefinition = _fieldDefinitionService.Get<CustomerArea>(field);
                 var dataField = new GenericDataField
                 {
-                    FieldID = fieldDefinition.Id,
+                    FieldId = fieldDefinition.Id,
                     FieldName = fieldDefinition.GetEntityName(CultureInfo.CurrentCulture),
                     FieldType = _genericDataViewService.GetDataViewFieldType(fieldDefinition.FieldType),
                     EntitySystemId = Guid.Empty.ToString(),

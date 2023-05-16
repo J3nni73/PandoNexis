@@ -31,7 +31,6 @@ const PNGenericDataViewContainer = ({
     }
 
     const onDataContainerChange = (data, item, isInModal = false, entitySystemId = '') => {
-        
         var currentEnvPageSystemId = isInModal ? modalPageSystemId || pageSystemId : pageSystemId;
         const selectedValueObject = {
             ...item,

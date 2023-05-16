@@ -63,7 +63,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
 
             field.FieldName = "ArticleNumber";
             field.EntitySystemId = orderRow.ArticleNumber;
-            field.FieldID = "articlenumber";
+            field.FieldId = "articlenumber";
             field.FieldType = "string";
             field.FieldValue = orderRow.ArticleNumber;
             container.Fields.Add(field);
@@ -71,7 +71,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
             field = new GenericDataField();
             field.FieldName = "Description";
             field.EntitySystemId = orderRow.ArticleNumber;
-            field.FieldID = "description";
+            field.FieldId = "description";
             field.FieldType = "string";
             field.FieldValue = orderRow.Descriptions;
             container.Fields.Add(field);
@@ -80,7 +80,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
             field = new GenericDataField();
             field.FieldName = "Quantity";
             field.EntitySystemId = orderRow.Id;
-            field.FieldID = "orderqantity";
+            field.FieldId = "orderqantity";
             field.FieldType = "string";
             field.FieldValue = orderRow.Quantity.ToString();
             container.Fields.Add(field);
@@ -104,14 +104,14 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
             throw new NotImplementedException();
         }
 
-        public async override Task<GenericDataContainer> ButtonClick(GenericDataField fieldData)
+        public async override Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data)
         {
             var container = new GenericDataContainer();
 
             //Order order = null;
 
 
-            //switch (fieldData.FieldID)
+            //switch (fieldData.FieldId)
             //{
             //    case NoErpOrderStateConstants.NotifiyOrderExported:
             //        order = await _noErpOrderService.NotifyOrderExported(Guid.Parse(fieldData.EntitySystemId));

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { GenericDataViewField } from '../../Field';
 import { any } from 'array-flat-polyfill';
 import { FieldErrorMsg, getFieldData } from '../viewFunctions';
-import { checkFormField } from '../../../../Actions/GenericDataContainer.action';
+import { checkFormField, sendContainerState } from '../../../../Actions/GenericDataContainer.action';
 import { buttonClick } from '../../../../Actions/GenericDataContainerField.action';
 import { loadModal } from '../../../../Actions/GenericDataView.action';
 //import { DndContext } from '@dnd-kit/core';
@@ -43,15 +43,16 @@ export const DataContainer = React.memo(
 
     }) => {
         const { register, handleSubmit, setFocus, reset, formState: { dirtyFields, isSubmitted }, } = useForm();
-        const [cardFields, setCardFields] = useState([]);
-        const [currentStatus, setCurrentStatus] = useState(settings?.currentStatus);
-        const [nextAvailableStatus, setNewAvailableStatus] = useState(settings?.possibleNextStatusList);
+        const [cardFields, setCardFields] = useState([]);              
+        const [containerState, setContainerState] = useState(settings?.containerState);
+        const [nextAvailableStatus, setNewAvailableStatus] = useState(settings?.possibleContainerStateTransitions);
         const [cardIngressField, setCardIngressField] = useState(null);
         const [errorObject, setErrorObject] = useState(null);
         const dispatch = useDispatch();
         const dragItem = useRef();
+        const rowItem = useRef();
         const dragOverItem = useRef();
-        let tempStatus = null;
+        let tempState = null;
         let initialOffset = null;
         let currentOffset = null;
 
@@ -68,9 +69,9 @@ export const DataContainer = React.memo(
                 const FullData = Object.keys(theFormFields).reduce((payload, key) => {
                     //console.log("key", form[key]);
                     var errObj = checkFormField({
-                        fieldID: key,
+                        fieldId: key,
                         fieldValue: form[key],
-                        field: fields.find(x => x.fieldID === key)
+                        field: fields.find(x => x.fieldId === key)
                     });
 
                     if (errObj) {
@@ -130,19 +131,21 @@ export const DataContainer = React.memo(
             dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject));
         };
 
-        const onBlur = (form) => {           
+        const onBlur = (form) => {
             const identifierField = { EntitySystemId: fields[0].entitySystemId };
             const errObjs = isContainerValid(identifierField, form, dirtyFields);
             setErrorObject(errObjs);
+            if (!errObjs) {
+                dispatch(isContainerValid());
+            }
         };
 
-        useEffect(() => {
-            
+        useEffect(() => {           
             if (ingressField) {
-                const cardIngress = fields.filter(x => x.fieldID == ingressField);
+                const cardIngress = fields.filter(x => x.fieldId == ingressField);
                 if (cardIngress.length > 0) {
                     setCardIngressField(cardIngress[0]);
-                    setCardFields(fields.filter(x => x.fieldID != ingressField));
+                    setCardFields(fields.filter(x => x.fieldId != ingressField));
                     return;
                 }
             }
@@ -157,7 +160,7 @@ export const DataContainer = React.memo(
                     fields.reduce(
                         (state, field) => ({
                             ...state,
-                            [field.fieldID]: field.fieldValue,
+                            [field.fieldId]: field.fieldValue,
                         }),
                         {}
                     )
@@ -172,7 +175,7 @@ export const DataContainer = React.memo(
         //            fields.reduce(
         //                (state, field) => ({
         //                    ...state,
-        //                    [field.fieldID]: field.fieldValue,
+        //                    [field.fieldId]: field.fieldValue,
         //                }),
         //                {},
         //            ),
@@ -182,45 +185,86 @@ export const DataContainer = React.memo(
         //}, [error]);
 
         const dragStart = (e, status) => {
-            e.dataTransfer.setData("text", 'Dragme');
+            e.dataTransfer.setData("text/plain", 'Dragme');
             e.dataTransfer.effectAllowed = "copyMove";
             e.target.style.cursor = "move";
+            window.currentDragIndx = dragItem.current.dataset.dragIndex;
         };
 
         const dragEnter = (e, status) => {
-            e.dataTransfer.effectAllowed = "copy";
+            e.preventDefault();
+
+            const isAvailable = nextAvailableStatus.indexOf(status.id) !== -1;
+            
+        };
+        const dragLeave = (e, status) => {
+            e.preventDefault();
+            const element = e.target;
+            element.classList.remove('drag-over');
+            element.classList.remove('drag-forbidden');
+            e.dataTransfer.effectAllowed = "move";
         };
         const dragOver = (e, status, leaving = false) => {
             e.preventDefault();
             e.UseDefaultCursors = true;
             const isAvailable = nextAvailableStatus.indexOf(status.id) !== -1;
-            if (status.id !== currentStatus && isAvailable) {
+            if (status.id !== containerState && isAvailable) {
                 const element = e.target;
+                const containerHolderEl = element.closest('.kb-container-holder');
+                const containerRef = containerHolderEl?.dataset.containerRef;
+                const isWithinContainer = containerRef ? containerRef === window.currentDragIndx : false;
 
-                if (element) {                    
+                if (status.id !== containerState && isAvailable && isWithinContainer) {
+                    e.target.classList.add('drag-over');
+                    e.dataTransfer.effectAllowed = "copy";
+                }
+                else {
+                    if (!isWithinContainer) {
+                        // Try to mark 
+                    }
+                    e.target.classList.add('drag-forbidden');
+                    e.dataTransfer.effectAllowed = "none";
+                }
+                e.dataTransfer.dropEffect = "copy";
+                if (element) {
                     if (leaving) {
-                        element.classList.remove("drag-over");
+                        //element.classList.remove("drag-over");
                     }
                     else {
-                        element.classList.add("drag-over");
-                        tempStatus = status.id;
+                        // element.classList.add("drag-over");
+                        tempState = status.id;
                         e.UseDefaultCursors = false;
                     }
                 }
             }
             else {
-                e.dataTransfer.dropEffect = "copy";
+                e.dataTransfer.dropEffect = "none";
             }
         };
-        
-        const dropIt = (e, status) => {
-            console.log(tempStatus);
-            console.log(currentStatus);
 
-            if (tempStatus && tempStatus !== currentStatus) {
-                setCurrentStatus(tempStatus);
-                tempStatus = null;
-                e.target.style.cursor = 'default'; // Reset cursor
+        const dropIt = (e, status) => {
+            //console.log(tempState);
+            //console.log(containerState);
+            const element = e.target;
+            const containerHolder = element.parentNode.parentNode;
+            //alert(element.parentNode.outerHTML);
+            const kanbanColumns = containerHolder.querySelectorAll('.kanban');
+            if (kanbanColumns) {
+                Array.from(kanbanColumns).forEach(
+                    (kanban) => {
+                        if (kanban) {
+                            kanban.classList.remove('drag-over');
+                            kanban.classList.remove('drag-forbidden');
+                        }
+                    }
+                );
+            }
+            if (tempState && tempState !== containerState) {
+                const entitySystemId = fields[0]?.entitySystemId;
+                dispatch(sendContainerState(entitySystemId, tempState));
+                setContainerState(tempState);
+                tempState = null;
+                element.style.cursor = 'default'; // Reset cursor
                 return true;
             }
 
@@ -238,34 +282,35 @@ export const DataContainer = React.memo(
             return null;
         }
         return (
-            <tr>
+            <tr className="kb-container-holder" data-container-ref={`ref-${dataContainerIndex}`}>
                 {error && (
                     <div colSpan={fields.length} className="generic-data-view__error">
                         {error.message || error.toString() || 'There was an error.'}
                     </div>
                 )}
 
-                {mainSettings?.availableStatusList?.length > 0 && mainSettings.availableStatusList.map((status, index) => (
+                {mainSettings?.genericDataContainerStateList?.length > 0 && mainSettings.genericDataContainerStateList.map((status, index) => (
                     <td
-                        
-                        onDragEnter={(event) => dragOver(event, status)}
-                        onDragLeave={(event) => dragOver(event, status, true)}
-                        
+                        onDragEnter={(event) => dragEnter(event, status)}
+                        onDragOver={(event) => dragOver(event, status)}
+                        onDragLeave={(event) => dragLeave(event, status)}
+
                         key={`header-${index}`}
                         style={{ backgroundColor: status.backgroundColor || null }}
                         onClick={() => sortColumn(status.name, index)}
                         className={`${sortConfig && sortConfig?.name === status.name ? sortConfig.direction || '' : ''
-                            } ${fieldsToShow.includes(index) ? '' : 'fieldToHide'} kanban`} 
+                            } ${fieldsToShow.includes(index) ? '' : 'fieldToHide'} kanban`}
                     >
-                        
-                        {currentStatus === status.id ? (
+
+                        {containerState === status.id ? (
                             <div className="card"
                                 ref={dragItem}
                                 onDragEnd={(event) => dropIt(event, status)}
                                 onDrop={(event) => dropIt(event, status)}
-                                onDragStart={ (event) => dragStart(event)}
-                                onDragEnter={(event) => dragEnter(event)}
+                                onDragStart={(event) => dragStart(event)}
                                 key={`draggable-${index}`}
+                                data-drag-index={`ref-${dataContainerIndex}`}
+
                                 draggable
                             >
                                 {onlyShowTaskName ? (
@@ -276,14 +321,14 @@ export const DataContainer = React.memo(
                                     (
                                         <Fragment>
                                             {cardIngressField &&
-                                                <div {...register(cardIngressField.fieldID)}>
+                                                <div {...register(cardIngressField.fieldId)}>
                                                     <GenericDataViewField
                                                         isEditable={cardIngressField.settings && cardIngressField.settings.editable}
                                                         type={cardIngressField.fieldType}
                                                         suffix={cardIngressField.fieldSuffix}
                                                         defaultValue={cleanData(cardIngressField.fieldValue, cardIngressField.fieldType) || ''}
                                                         title={cardIngressField.fieldName}
-                                                        name={cardIngressField.fieldID}
+                                                        name={cardIngressField.fieldId}
                                                         setErrorObject={setErrorObject}
                                                         onBlur={
                                                             cardIngressField.fieldType !== 'autocomplete' && cardIngressField.fieldType !== 'dropdown' && cardIngressField.fieldType !== 'productimageupload'
@@ -296,7 +341,7 @@ export const DataContainer = React.memo(
                                                         aria-labelledby={cardIngressField.fieldName}
                                                         entitySystemId={cardIngressField.entitySystemId}
                                                         dataContainerIndex={dataContainerIndex}
-                                                        fieldId={cardIngressField.fieldID}
+                                                        fieldId={cardIngressField.fieldId}
                                                         fieldSettings={cardIngressField.settings}
                                                         ref={register}
                                                         dropDownOptions={
@@ -309,7 +354,7 @@ export const DataContainer = React.memo(
                                                 {cardFields.map(
                                                     (
                                                         {
-                                                            fieldID,
+                                                            fieldId,
                                                             fieldType,
                                                             fieldName,
                                                             fieldValue,
@@ -322,7 +367,7 @@ export const DataContainer = React.memo(
                                                     ) => (
                                                         <div
                                                             key={`field-${fieldIndex}-${fieldName}`}
-                                                            {...register(fieldID)}
+                                                            {...register(fieldId)}
                                                             style={
                                                                 isLoading
                                                                     ? {
@@ -353,7 +398,7 @@ export const DataContainer = React.memo(
                                                                 suffix={fieldSuffix}
                                                                 defaultValue={cleanData(fieldValue, fieldType) || ''}
                                                                 title={fieldName}
-                                                                name={fieldID}
+                                                                name={fieldId}
                                                                 setErrorObject={setErrorObject}
                                                                 onBlur={
                                                                     fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload'
@@ -365,15 +410,16 @@ export const DataContainer = React.memo(
                                                                 }
                                                                 aria-labelledby={fieldName}
                                                                 entitySystemId={entitySystemId}
+                                                                nextEntitySystemId={fieldIndex !== cardFields.length - 1 ? [fieldIndex + 1].entitySystemId : '-1'}
                                                                 dataContainerIndex={dataContainerIndex}
-                                                                fieldId={fieldID}
+                                                                fieldId={fieldId}
                                                                 fieldSettings={settings}
                                                                 ref={register}
                                                                 dropDownOptions={
                                                                     fieldType === 'dropdown' || fieldType === 'productimageupload' ? dropDownOptions : null
                                                                 }
                                                             />
-                                                            {errorObject && <FieldErrorMsg fieldID={fieldID} errObjs={errorObject} />}
+                                                            {errorObject && <FieldErrorMsg fieldId={fieldId} errObjs={errorObject} />}
                                                             {settings.errorFieldMessage && (
                                                                 <span
                                                                     className="generic-data-view__error-field-message"
@@ -389,12 +435,10 @@ export const DataContainer = React.memo(
                                         </Fragment>
                                     )
                                 }
-
-                                </div>
+                            </div>
                         ) : (
-                                <div className="fill">&nbsp;</div>
+                            null
                         )}
-
                     </td>
                 ))}
             </tr>

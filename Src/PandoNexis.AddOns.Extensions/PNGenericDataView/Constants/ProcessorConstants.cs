@@ -2,8 +2,10 @@
 {
     public static class ProcessorConstants
     {
-        public static string ProductArea = "ProductArea";
         public static string CustomerArea = "CustomerArea";
+        public static string ProductArea = "ProductArea";
+        public static string PersonArea = "PersonArea";
+        public static string OrganizationArea = "OrganizationArea";
 
         public static string ProductData = "ProductData";
 

@@ -9,8 +9,8 @@ import {
     GENERIC_DATA_VIEW_SHOW_MODAL, GENERIC_MODAL_DATA_UPDATE_FIELDS, GENERIC_MODAL_DATA_VIEW_ALL_ROWS, GENERIC_MODAL_DATA_VIEW_RECEIVE, GENERIC_MODAL_DATA_VIEW_INIT,
     GENERIC_DATA_VIEW_SET_CURRENT_PAGE_ID
 } from '../constants';
-import mockdata from '../mockdata_jennifer.json';
-import mockdata2 from '../mockdataKanban.json';
+import mockdata from '../mockdata.json';// _jennifer.json';
+import mockdata2 from '../mockdataKanban.json';// '../mockdataForm.json';
 const rootRoute = '/api/genericdataview/';
 const genericLoaderType = "spinner"; // spinner or ripple
 
@@ -96,8 +96,8 @@ export const load = (pageId, settings, isInModal=false, entitySystemId='') => (d
     }
     
     ////ASPEN MOCKUP
-    //if (mockdata) {
-    //    const response = isInModal ? mockdata2 : mockdata;
+    //if (mockdata2) {
+    //    const response = mockdata2; // isInModal ? mockdata2 : mockdata;
 
     //    dispatch(checkResponse(response, isInModal));
     //    dispatch(checkPaging(response, pagenationActive));
@@ -325,7 +325,6 @@ export const receive = (data, isInModal = false) => {
             payload: data,
         };
     }
-
     return {
         type: isInModal ? GENERIC_MODAL_DATA_VIEW_RECEIVE : GENERIC_DATA_VIEW_RECEIVE,
         payload: data,
@@ -334,7 +333,6 @@ export const receive = (data, isInModal = false) => {
 
 // Används denna??
 export const updateFieldsInData = (dataContainers, isInModal = false) => {
-
     return {
         type: isInModal ? GENERIC_MODAL_DATA_UPDATE_FIELDS : GENERIC_DATA_UPDATE_FIELDS,
         payload: {

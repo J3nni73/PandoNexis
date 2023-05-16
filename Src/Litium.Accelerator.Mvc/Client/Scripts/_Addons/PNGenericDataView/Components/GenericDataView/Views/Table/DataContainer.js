@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import PropTypes, { object } from 'prop-types';
 import classNames from 'classnames';
@@ -9,6 +9,9 @@ import { FieldErrorMsg, getFieldData } from '../viewFunctions';
 import { checkFormField } from '../../../../Actions/GenericDataContainer.action';
 import { buttonClick } from '../../../../Actions/GenericDataContainerField.action';
 import { loadModal } from '../../../../Actions/GenericDataView.action';
+
+import { translate } from '../../../../../../Services/translation';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 /**
  *
  * @param {Array} fields - List of columns to display in the data container.
@@ -25,8 +28,11 @@ export const DataContainer = React.memo(
         identifierFieldId,
         dataContainerIndex,
         fieldsToShow,
+        settings,
+        mainSettings
     }) => {
         const { register, handleSubmit, setFocus, reset, formState: { dirtyFields, isSubmitted }, } = useForm();
+        const [containerSettings, setContainerSettings] = useState(settings);
         const [errorObject, setErrorObject] = useState(null);
         const dispatch = useDispatch();
         const isContainerValid = (identifierField, form, theFormFields) => {
@@ -41,9 +47,9 @@ export const DataContainer = React.memo(
                 const FullData = Object.keys(theFormFields).reduce((payload, key) => {
                     //console.log("key", form[key]);
                     var errObj = checkFormField({
-                        fieldID: key,
+                        fieldId: key,
                         fieldValue: form[key],
-                        field: fields.find(x => x.fieldID === key)
+                        field: fields.find(x => x.fieldId === key)
                     });
 
                     if (errObj) {
@@ -63,9 +69,29 @@ export const DataContainer = React.memo(
 
                 return errorObjects;
             }
+        };
+
+        const onCheckboxChange = (form, fieldId, entitySystemId, dataContainerIndex, settings) => {
+            const isTrue = currGenDW_isTrue;
+            form[fieldId] = isTrue;
+            const identifierField = { entitySystemId };
+            if (!dirtyFields[fieldId]) {
+                dirtyFields[fieldId] = true;
+            }
+            const errObjs = isContainerValid(identifierField, form);
+            setErrorObject(errObjs);
+            if (errObjs?.length) {
+                return true;
+            }
+            isContainerValid(identifierField, form, dirtyFields);
         }
 
-        const onButtonClick = (form) => {
+        const validateForm = (form) => {
+            const errObjs = isContainerValid(identifierField, form);
+            setErrorObject(errObjs);
+        };
+
+        const onButtonClick = (form, buttonData = null) => {
             const useConfirmation = currGenDW_useConfirmation;
             const fieldSettings = currGenDW_fieldSettings;
             const confirmationText = currGenDW_confirmationText;
@@ -75,7 +101,7 @@ export const DataContainer = React.memo(
             const identifierField = { entitySystemId };
             const errObjs = isContainerValid(identifierField, form);
             setErrorObject(errObjs);
-            if (!errObjs) {
+            if (errObjs?.length) {
                 return true;
             }
 
@@ -99,11 +125,13 @@ export const DataContainer = React.memo(
                 name: '',
                 entitySystemId,
                 dataContainerIndex,
+                form: containerSettings?.postContainer ? form : null
             };
-            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject));
+            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings));
         };
 
-        const onBlur = (form) => {                      
+        const onBlur = (form) => {
+
             const identifierField = { EntitySystemId: fields[0].entitySystemId };
             const errObjs = isContainerValid(identifierField, form, dirtyFields);
             setErrorObject(errObjs);
@@ -116,7 +144,7 @@ export const DataContainer = React.memo(
                     fields.reduce(
                         (state, field) => ({
                             ...state,
-                            [field.fieldID]: field.fieldValue,
+                            [field.fieldId]: field.fieldValue,
                         }),
                         {}
                     )
@@ -131,7 +159,7 @@ export const DataContainer = React.memo(
         //            fields.reduce(
         //                (state, field) => ({
         //                    ...state,
-        //                    [field.fieldID]: field.fieldValue,
+        //                    [field.fieldId]: field.fieldValue,
         //                }),
         //                {},
         //            ),
@@ -155,7 +183,7 @@ export const DataContainer = React.memo(
                 {error && (
                     <tr>
                         <td colSpan={fields.length} className="generic-data-view__error">
-                            {error.message || error.toString() || 'There was an error.'}
+                            {error.status + ' ' || ''}{error.title || error.toString() || 'There was an error.'}
                         </td>
                     </tr>
                 )}
@@ -163,20 +191,21 @@ export const DataContainer = React.memo(
                     {fields.map(
                         (
                             {
-                                fieldID,
+                                fieldId,
                                 fieldType,
                                 fieldName,
                                 fieldValue,
                                 fieldSuffix,
                                 settings,
                                 entitySystemId,
-                                dropDownOptions,
+                                dropDownOptions
                             },
                             fieldIndex
                         ) => (
                             <td
                                 key={`field-${fieldIndex}-${fieldName}`}
-                                {...register(fieldID)}
+                                id={`${entitySystemId}${fieldId}${dataContainerIndex}`}
+                                {...register(fieldId)}
                                 style={
                                     isLoading
                                         ? {
@@ -204,32 +233,39 @@ export const DataContainer = React.memo(
                                     suffix={fieldSuffix}
                                     defaultValue={cleanData(fieldValue, fieldType) || ''}
                                     title={fieldName}
-                                    name={fieldID}
+                                    name={fieldId}
                                     setErrorObject={setErrorObject}
                                     onButtonClick={
-                                        fieldType === 'button'
+                                        fieldType === 'button' || settings.genericButtons?.length > 0
                                             ? handleSubmit(onButtonClick)
                                             : null
                                     }
+
+                                    onCheckboxChange={fieldType === 'checkbox' || fieldType === 'radiobutton' ? handleSubmit((e) => onCheckboxChange(e, fieldId, entitySystemId, dataContainerIndex, settings))
+                                        : null}
+
                                     onBlur={
-                                        fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload'
-                                            ? handleSubmit(onBlur)
-                                            : null
+                                        containerSettings.postContainer ? handleSubmit(validateForm) :
+                                            !containerSettings.postContainer && (fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload' && fieldType !== 'radiobutton' && fieldType !== 'checkbox')
+                                                ? handleSubmit(onBlur)
+                                                : null
                                     }
                                     onChange={
                                         fieldType === 'dropdown' || fieldType === 'productimageupload' ? handleSubmit(onBlur) : null
                                     }
                                     aria-labelledby={fieldName}
                                     entitySystemId={entitySystemId}
+                                    nextEntitySystemId={fieldIndex !== fields.length - 1 ? [fieldIndex + 1].entitySystemId : '-1' }
                                     dataContainerIndex={dataContainerIndex}
-                                    fieldId={fieldID}
+                                    fieldId={fieldId}
                                     fieldSettings={settings}
+                                    genericButtons={settings.genericButtons}
                                     ref={register}
                                     dropDownOptions={
                                         fieldType === 'dropdown' || fieldType === 'productimageupload' ? dropDownOptions : null
                                     }
                                 />
-                                {errorObject && <FieldErrorMsg fieldID={fieldID} errObjs={errorObject} />}
+                                {errorObject && <FieldErrorMsg fieldId={fieldId} errObjs={errorObject} />}
                                 {settings.errorFieldMessage && (
                                     <span
                                         className="generic-data-view__error-field-message"
@@ -238,10 +274,35 @@ export const DataContainer = React.memo(
                                         }}
                                     ></span>
                                 )}
+                                {settings.fieldTooltipMessage && settings.fieldTooltipMessage.length > 0 &&
+                                    <ReactTooltip className="generic-data-view__tooltip" float={true} delayShow="800" delayHide="300" anchorId={`${entitySystemId}${fieldId}${dataContainerIndex}`} variant={settings.fieldTooltipType || "dark"} positionStrategy="fixed" offset="32" place="left">
+                                        {settings.fieldTooltipMessage}
+                                    </ReactTooltip>
+                                }
                             </td>
                         )
                     )}
+                    {fields && containerSettings && containerSettings.postContainer &&
+                        <td className="row">
+                            <div className="small-12 columns text--right">
+                                <GenericDataViewField
+                                    type={"button"}
+                                    title={containerSettings?.postContainerButtonText || translate('addons.genericdataview.buttons.generalpost')}
+                                    name={"Post"}
+                                    setErrorObject={setErrorObject}
+                                    onButtonClick={handleSubmit(onButtonClick)}
+                                    aria-labelledby={settings?.postContainerButtonText || translate('addons.genericdataview.buttons.generalpost')}
+                                    entitySystemId={fields[0].entitySystemId}
+                                    dataContainerIndex={dataContainerIndex}
+                                    fieldId={"Post"}
+                                    fieldSettings={{ buttonText: containerSettings?.postContainerButtonText || translate('addons.genericdataview.buttons.generalpost'), }}
+                                    ref={useRef()}
+                                />
+                            </div>
+                        </td>
+                    }
                 </tr>
+
             </>
         );
     }

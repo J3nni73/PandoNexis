@@ -12,7 +12,7 @@ using Litium.Sales;
 using Litium.Web.Models.Products;
 using PandoNexis.Accelerator.Extensions.Extensions;
 using PandoNexis.Accelerator.Extensions.ModelServices;
-using PandoNexis.Accelerator.Extensions.ViewModel.Product;
+using PandoNexis.Accelerator.Extensions.ViewModels.Product;
 
 namespace PandoNexis.Accelerator.Extensions.Builders.Product
 {

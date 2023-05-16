@@ -1,5 +1,5 @@
 ﻿using Litium.Runtime.DependencyInjection;
-using PandoNexis.Accelerator.Extensions.ViewModel.Product;
+using PandoNexis.Accelerator.Extensions.ViewModels.Product;
 
 namespace PandoNexis.Accelerator.Extensions.ModelServices
 {

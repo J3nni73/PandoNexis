@@ -36,11 +36,11 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Definitions
 
                GetPersonField(RegisterMeConstants.RegisterMePerson, ProcessorConstants.RequiredFields, SystemFieldDefinitionConstants.Email),
 
-               GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate, "General", RegisterMeConstants.AddedByRegisterMeForm),
-               GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate, "General", RegisterMeConstants.DateAdded),
-               GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate, ProcessorConstants.EditableFields, RegisterMeConstants.Allergies),
-               GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate, ProcessorConstants.EditableFields, RegisterMeConstants.PersonInfo),
-               GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate, ProcessorConstants.EditableFields, RegisterMeConstants.UserName),
+               GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate, RegisterMeConstants.RegisterMePerson, RegisterMeConstants.AddedByRegisterMeForm),
+               GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate, RegisterMeConstants.RegisterMePerson, RegisterMeConstants.DateAdded),
+               GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate, RegisterMeConstants.RegisterMePerson, RegisterMeConstants.Allergies),
+               GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate, RegisterMeConstants.RegisterMePerson, RegisterMeConstants.PersonInfo),
+               GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate, RegisterMeConstants.RegisterMePerson, RegisterMeConstants.UserName),
 
             };
 

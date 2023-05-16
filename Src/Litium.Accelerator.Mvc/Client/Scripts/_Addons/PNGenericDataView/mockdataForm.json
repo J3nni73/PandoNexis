@@ -1,0 +1,180 @@
+{
+  "dataContainers": [
+    {
+      "fields": [
+        {
+          "fieldId": "_firstName",
+          "fieldName": "Förnamn",
+          "entitySystemId": "16094294-1ba0-4b2f-b070-a8bf9ce3c46b",
+          "fieldValue": null,
+          "fieldType": "string",
+          "fieldSuffix": null,
+          "dataSource": null,
+          "options": {},
+          "settings": {
+            "editable": true,
+            "isVisible": true,
+            "backgroundColor": "",
+            "showForMobile": true,
+            "showForTablet": true,
+            "showForDesktop": true,
+            "validationRules": [],
+            "isFilterField": false,
+            "isSortField": false,
+            "endPointMethod": "",
+            "autocompleteEndPointMethod": "",
+            "placeholderText": "",
+            "buttonText": "",
+            "iconClass": "",
+            "emptyResultText": "",
+            "minimumCharsRequired": 9999,
+            "hideButton": false,
+            "useConfirmation": false,
+            "confirmationText": "",
+            "errorFieldMessage": "",
+            "buttonOpenInModal": false,
+            "modalPageSystemId": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        {
+          "fieldId": "_lastName",
+          "fieldName": "Efternamn",
+          "entitySystemId": "16094294-1ba0-4b2f-b070-a8bf9ce3c46b",
+          "fieldValue": null,
+          "fieldType": "string",
+          "fieldSuffix": null,
+          "dataSource": null,
+          "options": {},
+          "settings": {
+            "editable": true,
+            "isVisible": true,
+            "backgroundColor": "",
+            "showForMobile": true,
+            "showForTablet": true,
+            "showForDesktop": true,
+            "validationRules": [],
+            "isFilterField": false,
+            "isSortField": false,
+            "endPointMethod": "",
+            "autocompleteEndPointMethod": "",
+            "placeholderText": "",
+            "buttonText": "",
+            "iconClass": "",
+            "emptyResultText": "",
+            "minimumCharsRequired": 9999,
+            "hideButton": false,
+            "useConfirmation": false,
+            "confirmationText": "",
+            "errorFieldMessage": "",
+            "buttonOpenInModal": false,
+            "modalPageSystemId": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        {
+          "fieldId": "_email",
+          "fieldName": "E-post",
+          "entitySystemId": "16094294-1ba0-4b2f-b070-a8bf9ce3c46b",
+          "fieldValue": null,
+          "fieldType": "string",
+          "fieldSuffix": null,
+          "dataSource": null,
+          "options": {},
+          "settings": {
+            "editable": true,
+            "isVisible": true,
+            "backgroundColor": "",
+            "showForMobile": true,
+            "showForTablet": true,
+            "showForDesktop": true,
+            "validationRules": [
+              {
+                "rule": "IsRequired",
+                "errorMessage": "Detta fält är obligatoriskt"
+              },
+              {
+                "rule": "([a-zA-Z0-9_.+-])@[a-zA-Z0-9_.+-]+\\.[a-zA-Z0-9_.+-]",
+                "errorMessage": "Vänligen ange en giltig email"
+              }
+            ],
+            "isFilterField": false,
+            "isSortField": false,
+            "endPointMethod": "",
+            "autocompleteEndPointMethod": "",
+            "placeholderText": "",
+            "buttonText": "",
+            "iconClass": "",
+            "emptyResultText": "",
+            "minimumCharsRequired": 9999,
+            "hideButton": false,
+            "useConfirmation": false,
+            "confirmationText": "",
+            "errorFieldMessage": "",
+            "buttonOpenInModal": false,
+            "modalPageSystemId": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        {
+          "fieldId": "SavePerson",
+          "fieldName": "Spara person",
+          "entitySystemId": "16094294-1ba0-4b2f-b070-a8bf9ce3c46b",
+          "fieldValue": null,
+          "fieldType": "button",
+          "fieldSuffix": null,
+          "dataSource": null,
+          "options": {},
+          "settings": {
+            "editable": false,
+            "isVisible": true,
+            "backgroundColor": "",
+            "showForMobile": true,
+            "showForTablet": true,
+            "showForDesktop": true,
+            "validationRules": null,
+            "isFilterField": false,
+            "isSortField": false,
+            "endPointMethod": "",
+            "autocompleteEndPointMethod": "",
+            "placeholderText": "",
+            "buttonText": "Spara person",
+            "iconClass": "",
+            "emptyResultText": "",
+            "minimumCharsRequired": 9999,
+            "hideButton": false,
+            "useConfirmation": false,
+            "confirmationText": "",
+            "errorFieldMessage": "",
+            "buttonOpenInModal": false,
+            "modalPageSystemId": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      ],
+      "messages": "",
+      "settings": {
+        "postContainer": true,
+        "postContainerButtonText": "POSTA MIIIIG",
+        "containerState": null,
+        "possibleContainerStateTransitions": null
+      }
+    }
+  ],
+  "settings": {
+    "filter": [],
+    "sortOptions": [],
+    "genericDataContainerStateList": null,
+    "pageSize": 50,
+    "totalHits": 0,
+    "editableFieldIds": null,
+    "identifierFieldId": null,
+    "preventInitialLoad": false,
+    "displayTypes": [
+      "cards", "table"
+    ],
+    "columnsInsideContainerSmall": 1,
+    "columnsInsideContainerMedium": 2,
+    "columnsInsideContainerLarge": 3,
+    "columnsWithContainersSmall": 1,
+    "columnsWithContainersMedium": 2,
+    "columnsWithContainersLarge": 3,
+    "alignContainers": "center"
+  }
+}

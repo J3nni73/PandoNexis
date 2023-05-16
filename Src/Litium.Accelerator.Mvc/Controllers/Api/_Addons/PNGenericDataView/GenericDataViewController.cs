@@ -272,13 +272,13 @@ namespace Litium.Accelerator.Mvc.Controllers.Api._Addons.PNGenericDataView
         [HttpPut]
         [Route("buttonClick")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ButtonClick(object fieldData)
+        public async Task<IActionResult> ButtonClick(object data)
         {
-            var field = JsonConvert.DeserializeObject<GenericDataField>(fieldData.ToString());
+            var field = JsonConvert.DeserializeObject<GenericDataField>(data.ToString());
 
             if (Guid.TryParse(field.DataSource, out Guid pageSystemId))
             {
-                var datacontainer = (await GetProcessor(pageSystemId)).ButtonClick(field)?.Result;
+                var datacontainer = (await GetProcessor(pageSystemId)).ButtonClick(pageSystemId, field.FieldId, data.ToString())?.Result;
                 if (datacontainer != null)
                     return Ok(datacontainer);
             }
@@ -298,7 +298,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api._Addons.PNGenericDataView
         public async Task<IGenericDataViewProcessor> GetProcessor(Guid pageSystemId)
         {
             var page = _pageService.Get(pageSystemId);
-            var source = page.Fields.GetValue<string>(PageFieldNameConstants.AreaSource);
+            var source = page.Fields.GetValue<string>(DataViewFieldNameConstants.AreaSource);
             return await GetProcessor(source);
 
 

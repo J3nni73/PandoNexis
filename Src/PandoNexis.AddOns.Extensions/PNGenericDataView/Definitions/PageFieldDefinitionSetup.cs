@@ -2,7 +2,6 @@
 using Litium.FieldFramework.FieldTypes;
 using Litium.Websites;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
-using PageFieldNameConstants = PandoNexis.AddOns.Extensions.PNGenericDataView.Constants.PageFieldNameConstants;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
 {
@@ -21,7 +20,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
         {
             var fields = new List<FieldDefinition>
             {
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.DataArea, SystemFieldTypeConstants.TextOption)
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.DataArea, SystemFieldTypeConstants.TextOption)
                 {
                     Option = new TextOption { 
                         MultiSelect = false, 
@@ -40,7 +39,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
                         }
                     }
                 },
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.AreaSource, SystemFieldTypeConstants.TextOption)
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.AreaSource, SystemFieldTypeConstants.TextOption)
                 {
                     Option = new TextOption 
                     { 
@@ -56,7 +55,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
                     }
                 },
                 
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.DisplayTypes, SystemFieldTypeConstants.TextOption)
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.DisplayTypes, SystemFieldTypeConstants.TextOption)
                 {
                     Option = new TextOption
                     {
@@ -77,17 +76,17 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
                         }
                     }
                 },
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.ReactClass, SystemFieldTypeConstants.Text),
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.HasMegaMenu, SystemFieldTypeConstants.Boolean),
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.EnableDropZone, SystemFieldTypeConstants.Boolean),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ReactClass, SystemFieldTypeConstants.Text),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.HasMegaMenu, SystemFieldTypeConstants.Boolean),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.EnableDropZone, SystemFieldTypeConstants.Boolean),
 
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.ColumnsInsideContainerSmall, SystemFieldTypeConstants.Int),
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.ColumnsInsideContainerMedium, SystemFieldTypeConstants.Int),
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.ColumnsInsideContainerLarge, SystemFieldTypeConstants.Int),
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.ColumnsWithContainersSmall, SystemFieldTypeConstants.Int),
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.ColumnsWithContainersMedium, SystemFieldTypeConstants.Int),
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.ColumnsWithContainersLarge, SystemFieldTypeConstants.Int),
-                new FieldDefinition<WebsiteArea>(PageFieldNameConstants.AlignContainers, SystemFieldTypeConstants.TextOption)
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ColumnsInsideContainerSmall, SystemFieldTypeConstants.Int),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ColumnsInsideContainerMedium, SystemFieldTypeConstants.Int),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ColumnsInsideContainerLarge, SystemFieldTypeConstants.Int),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ColumnsWithContainersSmall, SystemFieldTypeConstants.Int),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ColumnsWithContainersMedium, SystemFieldTypeConstants.Int),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ColumnsWithContainersLarge, SystemFieldTypeConstants.Int),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.AlignContainers, SystemFieldTypeConstants.TextOption)
                 {
                     Option = new TextOption {
                         MultiSelect = false,
@@ -97,6 +96,37 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
                         }
                     }
                 },
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ButtonPagePointer, SystemFieldTypeConstants.Pointer)
+                {
+                    Option = new PointerOption { EntityType = PointerTypeConstants.WebsitesPage }
+                },
+
+                //sätts per addon
+                //new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ButtonText, SystemFieldTypeConstants.Text)
+                //{
+                //    MultiCulture = true,
+                //},
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.UseConfirmation, SystemFieldTypeConstants.Boolean),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ConfirmationText, SystemFieldTypeConstants.Text)
+                {
+                    MultiCulture = true,
+                },                  
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.ButtonOpenInModal, SystemFieldTypeConstants.Boolean),
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.EndPointMethod, SystemFieldTypeConstants.TextOption)
+                {
+                    Option = new TextOption {
+                        MultiSelect = false,
+                        Items = new List<TextOption.Item>
+                        {
+
+                        }
+                    }
+                },
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.FieldTooltipMessage, SystemFieldTypeConstants.Text)
+                {
+                    MultiCulture = true,
+                }, 
+                new FieldDefinition<WebsiteArea>(DataViewFieldNameConstants.HideButton, SystemFieldTypeConstants.Boolean),
             };
             return fields;
         }

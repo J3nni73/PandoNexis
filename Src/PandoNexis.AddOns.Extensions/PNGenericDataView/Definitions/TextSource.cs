@@ -34,7 +34,10 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
                 "genericdataview.field.dropdown.chooseoptiontext".AsWebsiteTextDefinition("Choose", "Välj", clientAvailable: true, serverAvailable: false),
                 "genericdataview.notloggedon.title".AsWebsiteTextDefinition("Not logged on", "Inte inloggad", clientAvailable: true, serverAvailable: false),
                 "genericdataview.notloggedon.description".AsWebsiteTextDefinition("You must be logged", "Inloggning krävs", clientAvailable: true, serverAvailable: false),
-                
+                 
+                // General post button
+                "genericdataview.buttons.generalpost".AsWebsiteTextDefinition("Post fields", "Posta fält", clientAvailable: true, serverAvailable: false),
+               
                 // Generic grid view - FORM
                 "genericdataview.form.button.open.quickbuy".AsWebsiteTextDefinition("Quick buy settings", "Inställningar för Quick buy", clientAvailable: true, serverAvailable: false),
                 "genericdataview.validationrulemessage.isrequired".AsWebsiteTextDefinition("This field is requiered", "Detta fält är obligatoriskt", clientAvailable: true, serverAvailable: true),

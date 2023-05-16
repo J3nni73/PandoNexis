@@ -14,6 +14,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
         Task<object> HandleFormData(string data);
         Task<object> GetGridViewForExport(string data);
         GenericDataContainer GetFields(string templateId);
-        Task<GenericDataContainer> ButtonClick(GenericDataField fieldData);
+        Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data);
     }
 }

@@ -17,9 +17,9 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Definitions
         {
             var changes = new List<FieldOptionChanges>()
             {
-                GetFieldOption(FieldHelperConstants.WebsiteArea, PageFieldNameConstants.DataArea, ProcessorConstants.CustomerArea),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,PageFieldNameConstants.AreaSource, RegisterMeConstants.RegisterMePerson),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,PageFieldNameConstants.AreaSource, RegisterMeConstants.RegisterMeOrganization),
+                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.DataArea, ProcessorConstants.CustomerArea),
+                GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.AreaSource, RegisterMeConstants.RegisterMePerson),
+                GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.AreaSource, RegisterMeConstants.RegisterMeOrganization),
             };
 
             UpdateFieldOptions(changes);

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 //import AutocompleteField from './SpecialFields/Autocomplete';
 import ButtonField from './SpecialFields/ButtonField';
@@ -9,48 +9,71 @@ import DropdownField from './SpecialFields/DropdownField';
 
 export const GenericDataViewField = React.forwardRef(
     (
-        { type, fieldId, isEditable = false, fieldSettings, entitySystemId, dataContainerIndex, suffix, title, dropDownOptions, setErrorObject, onButtonClick,
+        { type, fieldId, isEditable = false, fieldSettings, entitySystemId, nextEntitySystemId='-1', dataContainerIndex, suffix, title, dropDownOptions, setErrorObject, onButtonClick, genericButtons, onCheckboxChange, 
             ...props
         },
         ref
     ) => {
         let isRequired = false;
+        const [isChecked, setIsChecked] = useState(props.defaultValue !== "false" ? true : false);
+
         if (fieldSettings && fieldSettings.validationRules) {
             isRequired = fieldSettings.validationRules.find(x => x.rule === 'IsRequired') ? true : false;
         }
 
-        const onEnterKeyPress = function (event) {
-            window.currGenDW_lastClickedFieldId = fieldId;
-            if ((event.keyCode === 13 || event.keyCode === 9) && event.target.nodeName === 'INPUT') {
-                var parent = event.target.closest('.row');
-                var currentElementName = event.target.name;
-                var matchingInput = nextUntil(
-                    parent,
-                    'input[name=' + currentElementName + ']'
-                );
-                if (matchingInput) {
-                    matchingInput.focus();
+        const handleChecked = (e) => {
+            window.currGenDW_isTrue = !isChecked;
+            onCheckboxChange(e);
+            setIsChecked(!isChecked);
+        };
+
+        const onEnterKeyPress = function (event, isClick) {
+            
+            const currentElementName = fieldId;
+            //if (isClick) {
+                window.currGenDW_lastClickedFieldId = currentElementName;
+                window.currGenDW_lastClickedEntitySystemId = entitySystemId;
+            //}
+            if ((event.keyCode === 13 || event.keyCode === 9)) { //&& event.target.nodeName === 'INPUT') {
+                
+                let parent = event.target.closest('tr');
+                if (!parent) {
+                    parent = event.target.closest('.row');
                 }
+                
+                focusNextElement(parent, entitySystemId );
             }
         };
-        const nextUntil = function (elem, selector) {
 
-            if (!Element.prototype.matches) {
-                Element.prototype.matches =
-                    Element.prototype.msMatchesSelector ||
-                    Element.prototype.webkitMatchesSelector;
-            }
-            elem = elem.nextElementSibling;
-            
-            while (elem) {
-                if (
-                    elem.querySelector(selector) &&
-                    elem.querySelector(selector).type != 'hidden'
-                ) {
-                    return elem.querySelector(selector);
+        const checkElements = (siblingFields, entSysId) => {
+            let foundEl = false;
+            for (let i = 0; i < siblingFields.length; i++) {
+                //  siblingFields.Each(theEl => {
+                const theEl = siblingFields[i];
+                if (foundEl) {
+                    window.currGenDW_lastClickedFieldId = theEl.name;
+                    window.currGenDW_lastClickedEntitySystemId = entSysId;
+                    return;
                 }
 
-                elem = elem.nextElementSibling;
+                if (theEl.name === fieldId) {
+                    foundEl = true;
+                }
+            }
+
+            return foundEl;
+        };
+
+        const focusNextElement = function (parentEl) {
+            // capture all elements containing data-gdv-field
+            const siblingFields = parentEl.querySelectorAll('[data-gdv-field]');
+           
+            // If not found then take next row
+            if (!checkElements(siblingFields, entitySystemId)) {
+                const nextSibling = parentEl.nextSibling;
+                if (nextSibling) {
+                    checkElements(nextSibling, nextEntitySystemId);
+                }
             }
         };
         const common = {
@@ -59,9 +82,43 @@ export const GenericDataViewField = React.forwardRef(
             ...props,
         };
 
+        //useEffect(() => {
+        //    if (common.ref?.current) {
+        //        onCheckboxChange(common.ref.current);
+        //        aler(3);
+        //    }
+            
+        //}, [isChecked]);
+        // First Special Fields (independent of isEditable)
+        if (genericButtons?.length > 0) {
+            return (
+                <div className="generic-data-view__btn-group"
+                    {...ref}>
+                    {genericButtons.map((button, index) => (
+                        <ButtonField
+                            key={`button-group${index}-${dataContainerIndex}`}
+                            fieldId={fieldId}
+                            entitySystemId={entitySystemId}
+                            dataContainerIndex={dataContainerIndex}
+                            fieldSettings={button}
+                            defaultValue={props.fieldName || ''}
+                            setErrorObject={setErrorObject}
+                            title={button.buttonText}
+                            onButtonClick={(event, buttonData) => onButtonClick(event, buttonData)}
+                            onKeyDown={(event) => onEnterKeyPress(event)}
+                            onClick={(event) => onEnterKeyPress(event)}
+                            autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
+
+                        />
+                    ))}
+                   
+                </div>
+            );
+        }
+
         // First Special Fields (independent of isEditable)
         if (type === 'button') {
-            
+
             return (
                 <ButtonField
                     fieldId={fieldId}
@@ -74,6 +131,8 @@ export const GenericDataViewField = React.forwardRef(
                     onButtonClick={onButtonClick}
                     onKeyDown={(event) => onEnterKeyPress(event)}
                     onClick={(event) => onEnterKeyPress(event)}
+                    autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
+
                     {...ref}
                 />
             );
@@ -162,13 +221,60 @@ export const GenericDataViewField = React.forwardRef(
         //            defaultValue={props.defaultValue || ''}
         //        />
         //    );
-        else if(type === 'html') {
+        else if (type === 'datetime') {
+            return (
+                <div
+                    data-gdv-field
+                    autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
+                    {...common}>
+                    {props.defaultValue}
+                </div>
+            );
+        }
+        else if (type === 'textarea') {
+            return (
+                <textarea 
+                    defaultValue={props.defaultValue}
+                    data-gdv-field
+                    {...common}
+                    autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
+                />
+            );
+        }
+        else if (type === 'radiobutton') {
+            return (
+                <label className="generic-data-view__radiobutton-wrapper">
+                    <input
+                        data-gdv-field
+                        required={isRequired}
+                        className="generic-data-view__radiobutton"
+                        autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
+                        onMouseDown={(event) => onEnterKeyPress(event, true)}
+                        type="radiobutton" {...ref} /><span>{title}</span></label>
+            );
+        }
+        else if (type === 'checkbox') {
+            return (
+                <label className="generic-data-view__checkbox-wrapper">
+                    <input
+                        data-gdv-field
+                        required={isRequired}
+                        className="generic-data-view__checkbox"
+                        onChange={(e) => handleChecked(e)}
+                        onMouseDown={(event) => onEnterKeyPress(event, true)}
+                        checked={isChecked}
+                        type="checkbox"
+                        autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
+                        key={`test${fieldId}${entitySystemId}${isChecked}`} {...ref}
+                    /><span>{title}</span></label>
+            );
+        }
+        else if (type === 'html') {
             return (
                 <div dangerouslySetInnerHTML={{ __html: props.defaultValue }}></div>
             );
         }
-        else
-        {
+        else {
             // Fields depending on status of isEditable
             /*console.log("Type = ", type);*/
             switch (isEditable ? type : 'default') {
@@ -176,11 +282,13 @@ export const GenericDataViewField = React.forwardRef(
                     return (
                         <Fragment>
                             <input
+                                data-gdv-field
                                 onKeyDown={(event) => onEnterKeyPress(event)}
                                 type="text"
                                 required={isRequired}
-                                autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedFieldId === fieldId}
+                                autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
                                 onClick={(event) => onEnterKeyPress(event)}
+                                onMouseDown={(event) => onEnterKeyPress(event, true)}
                                 {...common}
                             />
                             {suffix}
@@ -191,11 +299,13 @@ export const GenericDataViewField = React.forwardRef(
                     return (
                         <Fragment>
                             <input
+                                data-gdv-field
                                 onKeyDown={(event) => onEnterKeyPress(event)}
                                 type="number"
                                 required={isRequired}
                                 onClick={(event) => onEnterKeyPress(event)}
-                                autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedFieldId === fieldId }
+                                onMouseDown={(event) => onEnterKeyPress(event, true)}
+                                autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
                                 {...common}
                             />
                             {suffix}
@@ -204,13 +314,15 @@ export const GenericDataViewField = React.forwardRef(
                 default:
                     return (
                         <>
-                            <input type="hidden" {...common} required={isRequired}  />
+                            <input type="hidden" {...common} required={isRequired} />
                             <span className="generic-data-view__simple-text" title={props.defaultValue}>{props.defaultValue}
                                 {suffix}</span>
                         </>
                     );
             }
         }
+
+
     }
 );
 

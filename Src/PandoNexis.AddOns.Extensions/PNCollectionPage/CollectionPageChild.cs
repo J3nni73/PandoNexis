@@ -5,7 +5,7 @@ using Litium.Web.Models;
 using Litium.Web.Models.Websites;
 using Litium.Accelerator.Extensions;
 using PandoNexis.Accelerator.Extensions.ViewModels;
-using PandoNexis.Accelerator.Extensions.ViewModel.Media;
+using PandoNexis.Accelerator.Extensions.ViewModels.Media;
 using System.Drawing;
 
 namespace PandoNexis.AddOns.Extensions.PNCollectionPage

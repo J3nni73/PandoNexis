@@ -50,7 +50,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
                 var fieldDefinition = _fieldDefinitionService.Get<ProductArea>(field);
                 var dataField = new GenericDataField
                 {
-                    FieldID = fieldDefinition.Id,
+                    FieldId = fieldDefinition.Id,
                     FieldName = fieldDefinition.GetEntityName(CultureInfo.CurrentCulture),
                     FieldType = _genericDataViewService.GetDataViewFieldType( fieldDefinition.FieldType),
                 };
@@ -71,7 +71,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
 
             foreach (var field in result.Fields)
             {
-                if (variant.Fields.TryGetValue(field.FieldID, CultureInfo.CurrentCulture, out var value))
+                if (variant.Fields.TryGetValue(field.FieldId, CultureInfo.CurrentCulture, out var value))
                     field.FieldValue = value?.ToString()??string.Empty;
                 field.EntitySystemId = variant.SystemId.ToString();
             }
@@ -79,7 +79,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
             return result;
         }
 
-        public Task<GenericDataContainer> ButtonClick(GenericDataField fieldData)
+        public Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data)
         {
             throw new NotImplementedException();
         }

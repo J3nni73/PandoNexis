@@ -1,6 +1,6 @@
 ﻿namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Constants
 {
-    public static class PageFieldNameConstants
+    public static class DataViewFieldNameConstants
     {
         //GenericGridView
         public const string DataArea = "DataArea"; 
@@ -15,17 +15,26 @@
         public const string ColumnsWithContainersMedium = "ColumnsWithContainersMedium";
         public const string ColumnsWithContainersLarge = "ColumnsWithContainersLarge";
 
-        // ReactPage
-        public const string ReactClass = "ReactClass";
-        public const string HasMegaMenu = "HasMegaMenu";
-
         public const string AlignContainers = "AlignContainers";
 
-        public static class PageFieldOptionValues
-        {
-            public const string Left = "left";
-            public const string Center = "center";
-            public const string Right = "right";
-        }
+        // ReactPage
+        public const string ReactClass = "ReactClass";
+        public const string HasMegaMenu = "HasMegaMenu"; 
+        
+        //Button constants
+        public static string ButtonPagePointer = "ButtonPagePointer";
+        public static string ButtonText = "ButtonText";
+        public static string UseConfirmation = "UseConfirmation";
+        public static string ConfirmationText = "ConfirmationText";
+        public static string ButtonOpenInModal = "ButtonOpenInModal";
+        public static string EndPointMethod = "EndPointMethod";
+        public static string FieldTooltipMessage = "FieldTooltipMessage";
+        public static string HideButton = "HideButton";
+    }
+    public static class PageFieldOptionValues
+    {
+        public const string Left = "left";
+        public const string Center = "center";
+        public const string Right = "right";
     }
 }
