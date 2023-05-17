@@ -236,6 +236,7 @@ export const GenericDataViewField = React.forwardRef(
                 <textarea 
                     defaultValue={props.defaultValue}
                     data-gdv-field
+                    name={fieldId}
                     {...common}
                     autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
                 />
@@ -250,6 +251,7 @@ export const GenericDataViewField = React.forwardRef(
                         className="generic-data-view__radiobutton"
                         autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
                         onMouseDown={(event) => onEnterKeyPress(event, true)}
+                        name={fieldId}
                         type="radiobutton" {...ref} /><span>{fieldSettings?.placeholderText || title}</span></label>
             );
         }
@@ -264,6 +266,7 @@ export const GenericDataViewField = React.forwardRef(
                         onMouseDown={(event) => onEnterKeyPress(event, true)}
                         checked={isChecked}
                         type="checkbox"
+                        name={fieldId}
                         autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
                         key={`test${fieldId}${entitySystemId}${isChecked}`} {...ref}
                     /><span>{fieldSettings?.placeholderText || title}</span></label>
