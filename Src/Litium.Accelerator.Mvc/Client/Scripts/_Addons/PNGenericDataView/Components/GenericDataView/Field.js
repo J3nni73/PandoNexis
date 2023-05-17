@@ -250,7 +250,7 @@ export const GenericDataViewField = React.forwardRef(
                         className="generic-data-view__radiobutton"
                         autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
                         onMouseDown={(event) => onEnterKeyPress(event, true)}
-                        type="radiobutton" {...ref} /><span>{title}</span></label>
+                        type="radiobutton" {...ref} /><span>{fieldSettings?.placeholderText || title}</span></label>
             );
         }
         else if (type === 'checkbox') {
@@ -266,7 +266,7 @@ export const GenericDataViewField = React.forwardRef(
                         type="checkbox"
                         autoFocus={window.currGenDW_lastClickedFieldId && window.currGenDW_lastClickedEntitySystemId && window.currGenDW_lastClickedEntitySystemId === entitySystemId && window.currGenDW_lastClickedFieldId === fieldId}
                         key={`test${fieldId}${entitySystemId}${isChecked}`} {...ref}
-                    /><span>{title}</span></label>
+                    /><span>{fieldSettings?.placeholderText || title}</span></label>
             );
         }
         else if (type === 'html') {
