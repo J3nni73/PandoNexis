@@ -26,6 +26,7 @@ export const checkFormField = (obj) => {
     if (obj && obj.fieldId && validationRules) {
         for (let i = 0; i < validationRules.length; i++) {
             const obj = validationRules[i];
+            
             if (obj.rule === 'IsRequired') {
                 if ((typeof fieldValue == 'string' && fieldValue.trim().length < 1) || (typeof fieldValue == 'boolean' && fieldValue==false)) {
                     errorObject = {

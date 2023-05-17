@@ -41,7 +41,7 @@ export const DataContainer = React.memo(
     }) => {
         const { register, handleSubmit, setFocus, watch, reset, getValues, formState: { dirtyFields, isSubmitted, errors }, } = useForm();
         const [cardFields, setCardFields] = useState([]);
-       
+        const containerRef = useRef();
         const [isFormValid, setIsFormValid] = useState(false);
         const [containerSettings, setContainerSettings] = useState(settings);
         const [cardIngressField, setCardIngressField] = useState(null);
@@ -64,6 +64,7 @@ export const DataContainer = React.memo(
                         fieldValue: form[key],
                         field: fields.find(x => x.fieldId === key)
                     });
+                    
                     if (errObj) {
                         errorObjects.push(errObj);
                         return null;
@@ -78,12 +79,13 @@ export const DataContainer = React.memo(
                         return null;
                     }
                 }, identifierField);
-
                 return errorObjects;
             }
         }; 
         const onCheckboxChange = (form, fieldId, entitySystemId, dataContainerIndex, settings) => {
+            
             const isTrue = currGenDW_isTrue;
+            //checkContainerCheckboxes(form);
             form[fieldId] = isTrue;
             const identifierField = { entitySystemId };
             if (!dirtyFields[fieldId]) {
@@ -102,6 +104,18 @@ export const DataContainer = React.memo(
             const errObjs = isContainerValid(identifierField, form);
             setErrorObject(errObjs);
         };
+
+        //const checkContainerCheckboxes = (form) => {
+        //    const containerEl = containerRef?.current;
+        //    if (containerEl) {
+        //        const checkboxes = containerEl.querySelectorAll("input[type=checkbox]");
+        //        for (let i = 0; i < checkboxes.length; i++) {
+        //            const theEl = checkboxes[i];
+        //            const name = theEl.name;
+        //            form[name] = theEl.checked;
+        //        }
+        //    }
+        //};
 
         const onButtonClick = (form) => {
             const useConfirmation = currGenDW_useConfirmation;
@@ -246,7 +260,7 @@ export const DataContainer = React.memo(
                             />
                         </div>
                     }
-                    <div className={`row small-up-${columnsInsideContainerSmall} medium-up-${columnsInsideContainerMedium} large-up-${columnsInsideContainerLarge}`}>
+                    <div className={`row small-up-${columnsInsideContainerSmall} medium-up-${columnsInsideContainerMedium} large-up-${columnsInsideContainerLarge}`} ref={containerRef} >
                         {cardFields.map(
                             (
                                 {
