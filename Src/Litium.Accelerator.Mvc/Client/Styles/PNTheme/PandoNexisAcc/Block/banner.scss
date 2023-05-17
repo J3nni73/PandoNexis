@@ -53,6 +53,7 @@
 
         @include mobile {
             font-size: rem(40px);
+                padding:1rem;
             .multiple-banner.large-3 &, .multiple-banner.large-4 & {
                 font-size: rem(40px);
             }
@@ -97,5 +98,10 @@
     .multiple-banner.large-3 {
         flex: 0 0 50%;
         max-width: 50%;
+    }
+}
+@include mobile {
+    .multiple-banner{
+        padding:0 1rem;
     }
 }
