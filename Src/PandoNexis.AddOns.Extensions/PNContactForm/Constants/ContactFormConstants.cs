@@ -6,7 +6,6 @@
         public const string ContactFormMessage = "ContactFormMessage";
         public const string ContactFormCompany = "ContactFormCompany";
         public const string AddedByContactForm= "AddedByContactForm";
-
-
+        public const string ContactAccept = "ContactAccept";
     }   
 }

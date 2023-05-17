@@ -24,14 +24,17 @@ namespace PandoNexis.AddOns.Extensions.PNContactForm.Definitions
                GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.AvailableFields, SystemFieldDefinitionConstants.Email),
                GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.AvailableFields, ContactFormConstants.ContactFormCompany),
                GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.AvailableFields, ContactFormConstants.ContactFormMessage),
+               GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.AvailableFields, ContactFormConstants.ContactAccept),
 
                GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.EditableFields, SystemFieldDefinitionConstants.FirstName),
                GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.EditableFields, SystemFieldDefinitionConstants.LastName),
                GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.EditableFields, SystemFieldDefinitionConstants.Email),
                GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.EditableFields, ContactFormConstants.ContactFormCompany),
                GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.EditableFields, ContactFormConstants.ContactFormMessage),
+               GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.EditableFields, ContactFormConstants.ContactAccept),
 
                GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.RequiredFields, SystemFieldDefinitionConstants.Email),
+               GetPersonField(ContactFormConstants.ContactForm, ProcessorConstants.RequiredFields, ContactFormConstants.ContactAccept),
 
                GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate,ContactFormConstants.ContactForm, ContactFormConstants.AddedByContactForm),
                GetPersonField(CustomerTemplateIdConstants.B2BPersonTemplate,ContactFormConstants.ContactForm, ContactFormConstants.ContactFormMessage),
@@ -75,7 +78,7 @@ namespace PandoNexis.AddOns.Extensions.PNContactForm.Definitions
                         },
                         new FieldTemplateFieldGroup
                         {
-                            Id = ProcessorConstants.DefaultFields,
+                            Id = ProcessorConstants.RequiredFields,
                             Collapsed = false,
                             Localizations =
                             {

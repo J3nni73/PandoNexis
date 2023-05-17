@@ -28,7 +28,8 @@ namespace PandoNexis.AddOns.Extensions.PNContactForm.Definitions
                 {
                     CanBeGridColumn = true,
                     CanBeGridFilter = true,
-                }
+                },
+                new FieldDefinition<CustomerArea>(ContactFormConstants.ContactAccept, SystemFieldTypeConstants.Boolean)
             };
             return fields;
         }
