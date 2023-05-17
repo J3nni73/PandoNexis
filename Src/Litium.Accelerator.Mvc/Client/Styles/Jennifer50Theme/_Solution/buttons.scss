@@ -23,7 +23,7 @@ $button-general-margin: 12px 0;
     min-height: rem($button-general-height);
     font-size: rem(14px);
     font-weight: 600;
-    background-color: $button-general-primary-color;
+    background-color: #cb5012;
     @include border-radius(rem(20px));
     @include box-shadow(0, 0, 0, 0, rgba($button-general-shadow-color, 0));
     justify-self: $button-general-jusify;
@@ -36,6 +36,7 @@ $button-general-margin: 12px 0;
     &--left {
         margin-left: 0;
     }
+
     max-width: 200px;
 
     &--right {
@@ -52,12 +53,12 @@ $button-general-margin: 12px 0;
     }
 
     &, &.disabled {
-        background-color: $button-general-primary-color;
+        background-color: linear-gradient(90deg,#ec6724,#cb5012);
     }
 
     &:hover {
         @include box-shadow(0, 0, 6px, 0, rgba($button-general-shadow-color, .2));
-        background-color: rgba($button-general-primary-color, .8);
+        background-color: #ec6724;
         //color: $color-full-black;
     }
 
