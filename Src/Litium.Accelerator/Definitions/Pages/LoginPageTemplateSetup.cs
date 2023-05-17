@@ -45,8 +45,30 @@ namespace Litium.Accelerator.Definitions.Pages
                                  LoginPageFieldNameConstants.ForgottenPasswordLink,
                             }
                         }
-                    }
+                    },
+                     Containers = new List<BlockContainerDefinition>
+                    {
+                        new BlockContainerDefinition()
+                        {
+                            Id = BlockContainerNameConstant.Header,
+                            Name =
+                            {
+                                ["sv-SE"] = "Huvud",
+                                ["en-US"] = "Header",
+                            }
+                        },
+                         new BlockContainerDefinition()
+                        {
+                            Id = BlockContainerNameConstant.Main,
+                            Name =
+                            {
+                                ["sv-SE"] = "Fot",
+                                ["en-US"] = "Footer",
+                            }
+                        }
+                    },
                 },
+
             };
             return templates;
         }

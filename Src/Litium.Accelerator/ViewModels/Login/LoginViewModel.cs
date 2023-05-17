@@ -11,6 +11,7 @@ using Litium.Accelerator.Builders;
 using Litium.Accelerator.Extensions;
 using Litium.Accelerator.ViewModels.MyPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Litium.Web.Models.Blocks;
 
 namespace Litium.Accelerator.ViewModels.Login
 {
@@ -28,6 +29,8 @@ namespace Litium.Accelerator.ViewModels.Login
         public Guid SelectedOrganization { get; set; }
         public string RedirectUrl { get; set; }
         public string ErrorMessage { get; set; }
+
+        public Dictionary<string, List<BlockModel>> Blocks { get; set; }
 
         [UsedImplicitly]
         void IAutoMapperConfiguration.Configure(IMapperConfigurationExpression cfg)

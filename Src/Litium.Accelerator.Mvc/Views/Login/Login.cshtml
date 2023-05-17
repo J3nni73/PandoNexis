@@ -1,11 +1,15 @@
-﻿@using Litium.Web.Mvc;
+﻿@using Litium.Accelerator.Constants;
+@using Litium.Web.Mvc;
 @using Litium.Web;
 @model Litium.Accelerator.ViewModels.Login.LoginViewModel
 
 <div class="full-height">
+    @await Component.BlockContainerAsync(Model.Blocks, BlockContainerNameConstant.Header)
     <div class="form__container">
         @if (!User.Identity.IsAuthenticated || Model.InsufficientPermissions)
         {
+
+         
             <h1>@Model.Title</h1>
             if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
             {
@@ -43,5 +47,7 @@
                 @Html.ActionLink("login.logout".AsWebsiteText(), "Logout", "Login", null, new { @class = "button submit small" })
             </fieldset>
         }
+
     </div>
+    @await Component.BlockContainerAsync(Model.Blocks, BlockContainerNameConstant.Main)
 </div>
