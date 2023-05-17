@@ -29,6 +29,7 @@ namespace PandoNexis.AddOns.Extensions.PNContactForm.Definitions
                 "contactform.responsetexts.title".AsWebsiteTextDefinition("Thank you, ", "Tack", clientAvailable: true, serverAvailable: true),
                 "contactform.responsetexts.text".AsWebsiteTextDefinition("Thank you for your interest, we will contact you as soon as possible.", "Tack för visat intresse, vi kommer kontakta dig snarast", clientAvailable: true, serverAvailable: true),
                 "contactform.postbutton.text".AsWebsiteTextDefinition("Contact me", "Kontakta mig", clientAvailable: true, serverAvailable: true),
+                "genericdataview.placeholdertext.contactaccept".AsWebsiteTextDefinition("I approve that Pando Nexis contacts me.", "Jag godkänner att Pando Nexis kontaktar mig.", clientAvailable:false, serverAvailable:true)
             };
         }
     }

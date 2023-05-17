@@ -78,10 +78,7 @@ namespace PandoNexis.AddOns.Extensions.PNContactForm.Processors
             var result = JsonConvert.DeserializeObject<GenericDataContainer>(JsonConvert.SerializeObject(templateContainer));
             result.Settings.PostContainer = true;
             result.Settings.PostContainerButtonText = "addons.contactform.postbutton.text".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
-            if (result.Fields.FirstOrDefault(i=>i.FieldId==ContactFormConstants.ContactAccept)!=null)
-            {
-                result.Fields.FirstOrDefault(i => i.FieldId == ContactFormConstants.ContactAccept).FieldValue = "testar";
-            }
+            
             
             return result;
 

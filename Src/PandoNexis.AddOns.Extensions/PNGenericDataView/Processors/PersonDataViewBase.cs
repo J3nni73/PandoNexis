@@ -5,9 +5,11 @@ using Litium.Runtime.DependencyInjection;
 using Litium.Web;
 using Litium.Web.Administration.FieldFramework;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
+using PandoNexis.Accelerator.Extensions.Extensions;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Services;
+using PandoNexis.AddOns.Extensions.PNRegisterMe.Constants;
 using System.Globalization;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
@@ -89,6 +91,11 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
                     EntitySystemId = Guid.Empty.ToString(),
                     
                 };
+                if (fieldDefinition.FieldType==SystemFieldTypeConstants.Boolean)
+                {
+
+                    dataField.Settings.PlaceholderText = $"addons.genericdataview.placeholdertext.{fieldDefinition.Id.ToLower()}".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
+                }
                 
                 dataField.Settings.Editable = editableFields?.Contains(field)??false;
                 //dataField.Settings.IsRequired = requiredFields?.Contains(field)??false;
