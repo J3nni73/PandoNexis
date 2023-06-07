@@ -49,7 +49,7 @@
         @if (Model.Products.Any())
         {
             <div class="product-list">
-                <ul class="row product-list small-up-2 medium-up-3 large-up-4">
+                <ul class="row product-list small-up-2 medium-up-3 large-up-3">
                     @foreach (var product in Model.Products)
                     {
                         <li class="product-list__item column">@Html.DisplayFor(x => product, new { maxWidth = 371 })</li>

@@ -221,7 +221,7 @@
             margin-bottom: 0;
             @include border-radius(16px);
             background-color: $solution-background-primary;
-            color: $color-text-primary;
+            color: rgb(55,55,155); // $color-text-primary;
         }
     }
 

@@ -55,8 +55,7 @@
         flex-flow: column wrap;
         flex: 1 1 auto;
         width: 100%;
-        background: $solution-background-primary;
-
+        background: rgba(155, 255, 255, 0.3);   //$solution-background-primary;
         @include transition;
         @include border-radius(2px, 2px, 0, 0);
 
