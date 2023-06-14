@@ -65,9 +65,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
         
         public GenericDataContainer BuildContainer(GenericDataContainer templateContainer, Variant variant)
         {
-            var test = JsonConvert.SerializeObject(templateContainer);
-            var test2 = JsonConvert.DeserializeObject<GenericDataContainer>(test);
-            var result = test2;
+            var result = JsonConvert.DeserializeObject<GenericDataContainer>(JsonConvert.SerializeObject(templateContainer));
 
             foreach (var field in result.Fields)
             {

@@ -177,11 +177,13 @@ export const GenericDataView = ({
       </button> */}
 
                 <GenericDataViewSettings onChange={onSettingsChange} {...settings} />
-                <GenericDataViewFieldSettings  {...items[0]}
-                    handleSetfieldsToShow={handleSetfieldsToShow}
-                    fieldsToShow={fieldsToShow}
+                {settings.changeVisibleFields && 
+                    <GenericDataViewFieldSettings  {...items[0]}
+                        handleSetfieldsToShow={handleSetfieldsToShow}
+                        fieldsToShow={fieldsToShow}
 
-                />
+                    />
+                }
                 {isLoading && !hasDataContainers && (
                     <Fragment>
                         <p className="generic-data-view--loading">

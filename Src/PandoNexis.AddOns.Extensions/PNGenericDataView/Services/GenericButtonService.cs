@@ -26,6 +26,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
                 {
                     if (field.Fields.GetValue<string>(buttonNameFieldDefinition) == buttonName)
                     {
+                        button.FieldId = buttonName;
                         button.EntitySystemId = entitySystemId;
                         button.ButtonText = field.Fields.GetValue<string>(buttonNameFieldDefinition);
                         button.UseConfirmation = field.Fields.GetValue<bool>(DataViewFieldNameConstants.UseConfirmation);
@@ -34,6 +35,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
                         button.PageSystemId = field.Fields.GetValue<Guid>(DataViewFieldNameConstants.ButtonPagePointer);
                         button.EndPointMethod = field.Fields.GetValue<string>(DataViewFieldNameConstants.EndPointMethod);
                         button.FieldTooltipMessage = field.Fields.GetValue<string>(DataViewFieldNameConstants.FieldTooltipMessage);
+                        button.ClassName = "generic-data-view__btn-green";
                     }
                 }
             }

@@ -9,8 +9,8 @@ import {
     GENERIC_DATA_VIEW_SHOW_MODAL, GENERIC_MODAL_DATA_UPDATE_FIELDS, GENERIC_MODAL_DATA_VIEW_ALL_ROWS, GENERIC_MODAL_DATA_VIEW_RECEIVE, GENERIC_MODAL_DATA_VIEW_INIT,
     GENERIC_DATA_VIEW_SET_CURRENT_PAGE_ID
 } from '../constants';
-import mockdata from '../mockdata.json';// _jennifer.json';
-import mockdata2 from '../mockdataKanban.json';// '../mockdataForm.json';
+//import mockdata from '../mockdata.json';// _jennifer.json';
+//import mockdata2 from '../mockdataKanban.json';// '../mockdataForm.json';
 const rootRoute = '/api/genericdataview/';
 const genericLoaderType = "spinner"; // spinner or ripple
 
@@ -96,8 +96,8 @@ export const load = (pageId, settings, isInModal=false, entitySystemId='') => (d
     }
     
     ////ASPEN MOCKUP
-    //if (mockdata2) {
-    //    const response = mockdata2; // isInModal ? mockdata2 : mockdata;
+    //if (mockdata) {
+    //    const response = mockdata; // isInModal ? mockdata2 : mockdata;
 
     //    dispatch(checkResponse(response, isInModal));
     //    dispatch(checkPaging(response, pagenationActive));

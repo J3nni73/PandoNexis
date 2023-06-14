@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import { translate } from '../../../../../Services/translation';

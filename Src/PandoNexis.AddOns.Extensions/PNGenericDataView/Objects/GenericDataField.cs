@@ -9,7 +9,7 @@
         public string FieldType { get; set; }
         public string FieldSuffix { get; set; }
         public string DataSource { get; set; }
-        public Dictionary<string, string> Options { get; set; } = new Dictionary<string, string>();
+        public List<GenericOption> Options{ get; set; } = new List<GenericOption>();
         public GenericDataFieldSettings Settings { get; set; } = new GenericDataFieldSettings();
     }
 }

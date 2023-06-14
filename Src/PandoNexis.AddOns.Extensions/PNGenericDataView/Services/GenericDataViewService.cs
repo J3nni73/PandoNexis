@@ -1,4 +1,5 @@
-﻿using Litium.FieldFramework;
+﻿using Litium.Accelerator.Routing;
+using Litium.FieldFramework;
 using Litium.Runtime.DependencyInjection;
 using Litium.Web;
 using Litium.Websites;
@@ -12,10 +13,13 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
     public class GenericDataViewService
     {
         private readonly PageService _pageService;
+        private readonly RequestModelAccessor _requestModelAccessor;
 
-        public GenericDataViewService(PageService pageService)
+        public GenericDataViewService(PageService pageService, 
+                                      RequestModelAccessor requestModelAccessor)
         {
             _pageService = pageService;
+            _requestModelAccessor = requestModelAccessor;
         }
 
         public GenericDataViewSettings GetDataViewSettings(Guid pageSystemId)
@@ -59,7 +63,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
             //genericButtons.Add(genericButton);
             //genericButtons.Add(genericButton2);
             settings.DataViewButtons = genericButtons;
-            
+
             return settings;
         }
         public string GetDataViewFieldType(string dataType)
@@ -77,6 +81,28 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
             }
 
             return "string";
+        }
+        public List<ValidationRule> GetValidationRules(string fieldDefinitionId, List<string> requiredFields)
+        {
+            var result = new List<ValidationRule>();
+            if (requiredFields?.Contains(fieldDefinitionId) ?? false)
+            {
+                result.Add(new ValidationRule()
+                {
+                    Rule = ValidationRuleConstants.IsRequired,
+                    ErrorMessage = "addons.genericdataview.validationrulemessage.isrequired".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website)
+                });
+            }
+            if (fieldDefinitionId == SystemFieldDefinitionConstants.Email)
+            {
+                result.Add(new ValidationRule()
+                {
+                    Rule = ValidationRuleConstants.Email,
+                    ErrorMessage = "addons.genericdataview.validationrulemessage.email".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website)
+                });
+            }
+
+            return result;
         }
     }
 

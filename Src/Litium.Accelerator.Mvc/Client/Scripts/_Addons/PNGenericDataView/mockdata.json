@@ -93,14 +93,6 @@
             "showForTablet": true,
             "showForDesktop": true,
             "validationRules": [
-              {
-                "rule": "IsRequired",
-                "errorMessage": "Detta fält är obligatoriskt"
-              },
-              {
-                "rule": "([a-zA-Z0-9_.+-])@[a-zA-Z0-9_.+-]+\\.[a-zA-Z0-9_.+-]",
-                "errorMessage": "Vänligen ange en giltig email"
-              }
             ],
             "isFilterField": false,
             "isSortField": false,
@@ -192,7 +184,8 @@
                 "className": "",
                 "useConfirmation": false,
                 "confirmationText": "",
-                "buttonOpenInModal": false,
+                "buttonOpenInModal": true,
+                "modalPageSystemId": "017f24cc-0e3a-41c3-b40c-14ba31c75da3",
                 "pageSystemId": "00000000-0000-0000-0000-000000000000",
                 "endPointMethod": "test",
                 "fieldTooltipMessage": "testar knapp",
@@ -227,7 +220,7 @@
             "fieldTooltipMessage": "",
             "fieldTooltipType": "dark",
             "errorFieldMessage": "",
-            "buttonOpenInModal": false,
+            "buttonOpenInModal": true,
             "modalPageSystemId": "00000000-0000-0000-0000-000000000000"
           }
         }
@@ -285,7 +278,7 @@
         "className": "generic-data-view__btn-orange",
         "useConfirmation": false,
         "confirmationText": "",
-        "buttonOpenInModal": false,
+        "buttonOpenInModal": true,
         "pageSystemId": "00000000-0000-0000-0000-000000000000",
         "endPointMethod": "test2",
         "fieldTooltipMessage": "testar knapp2",

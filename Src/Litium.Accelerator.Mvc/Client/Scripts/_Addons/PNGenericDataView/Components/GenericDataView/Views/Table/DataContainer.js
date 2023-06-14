@@ -41,7 +41,12 @@ export const DataContainer = React.memo(
                 isFullFormCheck = true;
                 theFormFields = form;
             }
+            if (Object.keys(theFormFields).length < 1) {
+                const lastClickedFieldId = window.currGenDW_lastClickedFieldId;
+                const lastClickedFieldValue = window.currGenDW_lastClickedFieldId;
 
+                theFormFields[lastClickedFieldId] = true;
+            }
             if (Object.keys(theFormFields).length) {
                 let errorObjects = [];
                 const FullData = Object.keys(theFormFields).reduce((payload, key) => {
@@ -104,7 +109,7 @@ export const DataContainer = React.memo(
             if (errObjs?.length) {
                 return true;
             }
-
+            
             if (useConfirmation) {
                 if (!confirm(confirmationText)) {
                     return false;
@@ -112,9 +117,8 @@ export const DataContainer = React.memo(
             }
             if (fieldSettings?.buttonOpenInModal) {
                 const modalSettings = {
-                    modalPageSystemId: fieldSettings.modalPageSystemId,
+                    modalPageSystemId: fieldSettings.pageSystemId,
                     entitySystemId,
-
                 };
                 dispatch(loadModal(modalSettings));
                 return;
@@ -130,9 +134,11 @@ export const DataContainer = React.memo(
             dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings));
         };
 
-        const onBlur = (form) => {
-
-            const identifierField = { EntitySystemId: fields[0].entitySystemId };
+        const onBlur = (form, getWinValue = false) => {
+            if (getWinValue) {
+                form[window.currGenDW_lastClickedFieldId] = window.currGenDW_lastClickedFieldValue;
+            }
+            const identifierField = { EntitySystemId: fields[0].entitySystemId };;
             const errObjs = isContainerValid(identifierField, form, dirtyFields);
             setErrorObject(errObjs);
         };
@@ -198,7 +204,7 @@ export const DataContainer = React.memo(
                                 fieldSuffix,
                                 settings,
                                 entitySystemId,
-                                dropDownOptions
+                                options
                             },
                             fieldIndex
                         ) => (
@@ -245,13 +251,13 @@ export const DataContainer = React.memo(
                                         : null}
 
                                     onBlur={
-                                        containerSettings.postContainer ? handleSubmit(validateForm) :
-                                            !containerSettings.postContainer && (fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload' && fieldType !== 'radiobutton' && fieldType !== 'checkbox')
+                                        containerSettings?.postContainer ? handleSubmit(validateForm) :
+                                            !containerSettings?.postContainer && (fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload' && fieldType !== 'radiobutton' && fieldType !== 'checkbox' )
                                                 ? handleSubmit(onBlur)
                                                 : null
                                     }
                                     onChange={
-                                        fieldType === 'dropdown' || fieldType === 'productimageupload' ? handleSubmit(onBlur) : null
+                                        !containerSettings?.postContainer && (fieldType === 'dropdown' || fieldType === 'productimageupload' || fieldType === 'datetime') ? handleSubmit((e) => onBlur(e, true)) : null
                                     }
                                     aria-labelledby={fieldName}
                                     entitySystemId={entitySystemId}
@@ -262,7 +268,7 @@ export const DataContainer = React.memo(
                                     genericButtons={settings.genericButtons}
                                     ref={register}
                                     dropDownOptions={
-                                        fieldType === 'dropdown' || fieldType === 'productimageupload' ? dropDownOptions : null
+                                        fieldType === 'dropdown' || fieldType === 'productimageupload' ? options : null
                                     }
                                 />
                                 {errorObject && <FieldErrorMsg fieldId={fieldId} errObjs={errorObject} />}
@@ -282,7 +288,7 @@ export const DataContainer = React.memo(
                             </td>
                         )
                     )}
-                    {fields && containerSettings && containerSettings.postContainer &&
+                    {fields && containerSettings && containerSettings?.postContainer &&
                         <td className="row">
                             <div className="small-12 columns text--right">
                                 <GenericDataViewField

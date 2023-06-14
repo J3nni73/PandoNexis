@@ -4,12 +4,11 @@ using Litium.FieldFramework;
 using Litium.Runtime.DependencyInjection;
 using Litium.Web;
 using Litium.Web.Administration.FieldFramework;
+using Newtonsoft.Json;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
-using PandoNexis.Accelerator.Extensions.Extensions;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Services;
-using PandoNexis.AddOns.Extensions.PNRegisterMe.Constants;
 using System.Globalization;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
@@ -68,14 +67,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
                 editableFields = personFieldTemplate?.FieldGroups?.FirstOrDefault(i => i.Id == ProcessorConstants.EditableFields)?.Fields.ToList();
                 requiredFields = personFieldTemplate?.FieldGroups?.FirstOrDefault(i => i.Id == ProcessorConstants.RequiredFields)?.Fields.ToList();
             }
-            else if (fieldTemplate.GetType().Name == FieldTemplateHelperConstants.OrganizationFieldTemplate)
-            {
-                var personFieldTemplate = (PersonFieldTemplate)fieldTemplate;
-                availableFields = personFieldTemplate?.FieldGroups?.FirstOrDefault(i => i.Id == ProcessorConstants.AvailableFields)?.Fields.ToList();
-                if (availableFields == null) { return container; }
-                editableFields = personFieldTemplate?.FieldGroups?.FirstOrDefault(i => i.Id == ProcessorConstants.EditableFields)?.Fields.ToList();
-                requiredFields = personFieldTemplate?.FieldGroups?.FirstOrDefault(i => i.Id == ProcessorConstants.RequiredFields)?.Fields.ToList();
-            }
+          
 
             if (availableFields == null && availableFields.Any()) { return container; }
             
@@ -91,11 +83,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
                     EntitySystemId = Guid.Empty.ToString(),
                     
                 };
-                if (fieldDefinition.FieldType==SystemFieldTypeConstants.Boolean)
-                {
-
-                    dataField.Settings.PlaceholderText = $"addons.genericdataview.placeholdertext.{fieldDefinition.Id.ToLower()}".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
-                }
                 
                 dataField.Settings.Editable = editableFields?.Contains(field)??false;
                 //dataField.Settings.IsRequired = requiredFields?.Contains(field)??false;
@@ -104,6 +91,26 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
             }
 
             return container;
+        }
+        public virtual GenericDataContainer BuildContainer(GenericDataContainer templateContainer, Person person)
+        {
+            var result = JsonConvert.DeserializeObject<GenericDataContainer>(JsonConvert.SerializeObject(templateContainer));
+
+            foreach (var field in result.Fields)
+            {
+                if (person.Fields.TryGetValue(field.FieldId, CultureInfo.CurrentCulture, out var value))
+                {
+                    field.FieldValue = value?.ToString() ?? string.Empty;
+                }
+                else if (person.Fields.TryGetValue(field.FieldId, out var value2))
+                {
+                    field.FieldValue = value2?.ToString() ?? string.Empty;
+                }
+                field.EntitySystemId = person.SystemId.ToString();
+            }
+
+            return result;
+
         }
         public List<ValidationRule> GetValidationRules(string fieldDefinitionId, List<string> requiredFields)
         {

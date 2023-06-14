@@ -8,19 +8,19 @@ using System.Web;
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Constants
 {
     public static class DataFieldTypes
-    {
-    
+    {    
         public const string StringDGType = "string";
         public const string BooleanDGType = "checkbox";
         public const string MultirowDGType = "textarea";
         public const string DateTimeDGType = "datetime";
         public const string DecimalDGType = "decimal";
         public const string TextAreaDGType = "textarea";
+        public const string DropDownDGType = "dropdown";
+        public const string ButtonDGType = "button";    
     }
     public static class DataFieldFormats
     {
         public const string DateTimeFormat = "yyyy-MM-dd HH:mm";
         public const string TimeFormat = "0.##";
     }
-    
 }

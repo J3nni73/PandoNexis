@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Litium.Accelerator.Builders;
 using Litium.Runtime.AutoMapper;
-using Litium.Web.Models.Blocks;
 using Litium.Web.Models.Websites;
+using Litium.Web.Models.Blocks;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.ViewModels
 {

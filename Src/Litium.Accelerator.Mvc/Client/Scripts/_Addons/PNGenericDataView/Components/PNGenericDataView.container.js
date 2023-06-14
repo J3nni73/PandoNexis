@@ -97,6 +97,8 @@ const PNGenericDataViewContainer = ({
                             ? 'generic-data-view__container--has-tabs'
                             : 'generic-data-view__container'
                             }`}
+
+                        style={{ maxWidth: genericDataView?.settings?.maxWidth || 'none' }}
                     >
                         <GenericDataView
                             onSettingsChange={load}

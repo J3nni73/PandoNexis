@@ -36,7 +36,8 @@ export const CardsView = ({
     columnsInsideContainerMedium = 2,
     columnsInsideContainerLarge = 3,
     ingressField,
-    showTitles
+    showTitles,
+    dropDownOptions
 }) => {
     const { items, requestSort, sortConfig } = useSortableData(dataContainers);
     const sortColumn = (fieldName, index) => {
@@ -66,7 +67,7 @@ export const CardsView = ({
                                     columnsInsideContainerMedium,
                                     columnsInsideContainerLarge,
                                     showTitles,
-                                    ingressField }}
+                                    ingressField                             }}
                             />
                         ))}
                 </div>

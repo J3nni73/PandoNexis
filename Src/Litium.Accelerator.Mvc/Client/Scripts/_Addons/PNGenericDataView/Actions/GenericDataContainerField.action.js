@@ -1,6 +1,6 @@
 import { get, patch, post, put, remove } from '../../../Services/http';
 import { catchError } from '../../../Actions/Error.action';
-
+//import mockdata from '../mockdataKanban.json';// '../mockdataForm.json';
 import { toggleGenericLoader } from '../../../_PandoNexis/Actions/GenericLoader.action';
 import {
     receiveCart,
@@ -96,6 +96,14 @@ export const buttonClick = (fieldId, containerIndex, setValueObject, isInModal =
 
     setValueObject.dataSource = currentPageId;
     dispatch(toggleGenericLoader(true));
+
+
+    //if (mockdata) {
+    //    dispatch(updateDataContainer(mockdata, fields, buttonSettings));
+    //    //response = mockdata; // isInModal ? mockdata2 : mockdata;
+    //    return;
+    //}
+
     return put(rootRoute + 'buttonClick', setValueObject)
         .then((response) => response.json())
         .then((response) => dispatch(updateDataContainer(response, fields, buttonSettings)))
@@ -129,9 +137,10 @@ export const receiveOrganizationList = (data) => {
 
 export const updateDataContainer = (response, fields, buttonSettings = {}) => (dispatch, getState) => {
     dispatch(toggleGenericLoader(false));
-    
+   
     // If ony one data container is to be updated
     if (response) {
+        
         // First check if we want to download a file
         if (buttonSettings && buttonSettings.downloadMimeTypeString?.length > 0 && buttonSettings.downloadFileType?.length > 0) {
             const fileName = `${buttonSettings.downloadFileName || buttonSettings.fieldId}.${buttonSettings.downloadFileType}`;
@@ -148,7 +157,12 @@ export const updateDataContainer = (response, fields, buttonSettings = {}) => (d
             downloadLink.remove();
             return;
         }
-        return dispatch(checkDataContainerResponse(response, fields));
+        
+        if (response.fields) {
+            return dispatch(checkDataContainerResponse(response, fields));
+        }
+        return dispatch(checkResponse(response));
+        
     }
 
     // Update header data

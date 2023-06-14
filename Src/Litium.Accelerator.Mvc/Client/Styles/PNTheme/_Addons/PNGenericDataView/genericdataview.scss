@@ -13,10 +13,21 @@ $dataview-icon-active-color: rgba(122, 222, 222,.8);
 $dataview-link-color: rgba(0, 0, 0,.8);
 $dataview-link-color-hover: rgba(0, 0, 100,.8);
 $dataview-general-font-size: rem($fontsize-large);
-
-
+$dataview-error-bg: rgba(255, 0, 0,.2);
+$dataview-error-color: rgba(255,0,0,1);
+$dataview-error-field-color: rgba(255,0,0,1);
 
 .p__generic-data-view {
+    &.no-backdrop {
+        .generic-data-view__wrapper {
+            .card {
+                @include backdrop-filter(none);
+            }
+        }
+    }
+
+    overflow: hidden;
+
     .main-content {
         padding-bottom: 0;
     }
@@ -55,7 +66,7 @@ $dataview-general-font-size: rem($fontsize-large);
         background: $white;
         //@include box-shadow(0, 0, 4px, 2px, rgba($color-navy, .25));
         max-height: 35px;
-        //overflow: hidden;
+        overflow: hidden;
         cursor: pointer;
         @include transition(all, 1s);
         position: relative;
@@ -123,6 +134,11 @@ $dataview-general-font-size: rem($fontsize-large);
     font-family: $font-family-condensed;
     font-size: $dataview-general-font-size;
 
+    &__tooltip {
+        z-index: 999999 !important;
+        left: 0;
+    }
+
     &__checkbox {
         &-wrapper {
             span {
@@ -131,6 +147,55 @@ $dataview-general-font-size: rem($fontsize-large);
                 max-width: calc(100% - 24px);
                 float: right;
             }
+        }
+    }
+
+    &__btn {
+        &-group {
+            display: inline-block;
+
+            .generic-data-view__button-field-container {
+                display: inline-block;
+                margin: rem(8px);
+            }
+
+            &-button {
+                color: rgba(255,255,255,.98);
+                font-weight: 600;
+            }
+
+            button {
+                transition: all 0.1s ease-in-out;
+
+                &:hover {
+                    @include scale(104%, 104%);
+                    @include box-shadow(4px, 0, 10px, 0, rgba(0, 0, 0, 0.3));
+                }
+            }
+        }
+
+        &-orange {
+            @include button-gradient($color-orange);
+        }
+
+        &-green {
+            @include button-gradient($color-green);
+        }
+
+        &-cyan {
+            @include button-gradient($color-cyan);
+        }
+
+        &-magenta {
+            @include button-gradient($color-magenta);
+        }
+
+        &-purple {
+            @include button-gradient($bg-color-purple-base);
+        }
+
+        &-red {
+            @include button-gradient($custom-color-red);
         }
     }
 
@@ -270,8 +335,37 @@ $dataview-general-font-size: rem($fontsize-large);
         z-index: 3000;
     }
 
+    &__datepicker {
+        &-input {
+            height: rem(32px) !important;
+            @include border-radius(rem(4px));
+        }
+
+        .rmdp-container {
+            background: none;
+            border: none;
+            padding: 0 !important;
+            box-shadow: none !important;
+            position: relative;
+
+            input {
+                height: 2rem;
+            }
+
+            > div > div *, .ep-arrow:after {
+                opacity: 0;
+                @include animation(.1s,.3s, fade-in, ease-in-out);
+            }
+        }
+
+        .rmdp-container input, .rmdp-container {
+            @extend .generic-data-view__input;
+        }
+    }
+
     &__wrapper {
         max-height: calc(100vh - 240px);
+        padding-bottom: 64px;
         overflow: hidden;
         overflow-y: scroll;
         @include scroll-styling(8px);
@@ -414,7 +508,6 @@ $dataview-general-font-size: rem($fontsize-large);
         width: 20px;
         height: 20px;
         transition: width 0.5s;
-        display:none;
 
         &__icon {
             &-close, &-settings {
@@ -598,7 +691,21 @@ $dataview-general-font-size: rem($fontsize-large);
     &__cards {
         background: none;
         @include box-shadow(0,0,0,0,transparent);
-        padding: rem(0 44px);
+        padding: rem(24px 44px);
+        position: relative;
+
+        &:before {
+            content: '';
+            background-color: rgba(255,255,255,.4);
+            height: 1px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 120px);
+            
+            //border-top: 1px solid rgba(255,255,255,.9);
+        }
 
         .card {
             background: rgba(255, 255, 255, .8);
@@ -721,7 +828,24 @@ $dataview-general-font-size: rem($fontsize-large);
                 background: transparent;
             }
 
+            tr, td {
+                position: relative;
+                vertical-align: middle;
 
+                &:hover {
+                    z-index: 99999;
+                }
+            }
+
+            td {
+                vertical-align: middle;
+
+                label {
+                    display: flex;
+                    margin: auto;
+                    height: auto;
+                }
+            }
 
             td,
             td input {
@@ -750,6 +874,7 @@ $dataview-general-font-size: rem($fontsize-large);
 
             td {
                 position: relative;
+                border: 2px solid transparent;
 
                 .card {
                     margin: rem(6px);
@@ -761,6 +886,7 @@ $dataview-general-font-size: rem($fontsize-large);
                     @include box-shadow(4px, 0, 12px, 0px, rgba(0,0,0,.5));
                     cursor: ew-resize;
                     max-width: rem(255px);
+                    @include border-radius(rem(6px));
 
                     a {
                         &, &:active, &:visited {
@@ -778,17 +904,32 @@ $dataview-general-font-size: rem($fontsize-large);
 
                 &.drag-over {
                     background: rgba(200,200,255,.1);
-
-                    &, &:hover {
+                    border: 2px dashed rgba(255, 10,10,.8);
+                    /*&, &:hover {
                         cursor: grabbing !important;
+                    }*/
                     }
                 }
             }
         }
-    }
 
     &__error {
-        background: lighten($color: $color-error, $amount: 35);
+        background: $dataview-error-bg;
+        color: $dataview-error-color;
+        text-indent: rem(16px);
+
+        &-field {
+            color: $dataview-error-field-color;
+            font-style: italic;
+            font-size: smaller;
+            font-weight: 400;
+            letter-spacing: .04rem;
+    }
+
+        &:not(.columns) {
+            padding: rem(6px);
+            text-shadow: 0px 0px rem(6px) invert($dataview-error-color);
+        }
     }
 
     &__no-result {
@@ -951,7 +1092,25 @@ $dataview-general-font-size: rem($fontsize-large);
         font-size: rem(12px);
         border: none;
         @include box-shadow(1px, 1px, 3px, 0px, rgba(darken($bg-color-odd-row, 20%), 0.34), inset);
+
+        &[type="checkbox"], &[type="radiobutton"] {
+            @include box-shadow(0, 0, 0, 0, transparent, inset);
+            height: auto;
+            padding: 0;
+            display: inline-block;
+            margin-right: rem(4px);
+        }
     }
+
+    &__checkbox, &__radiobutton {
+        > span {
+            display: inline-block;
+        }
+
+        &-wrapper {
+        }
+    }
+
 
     select.generic-data-view__input {
         padding: rem(6px 20px 6px 6px);
@@ -960,7 +1119,6 @@ $dataview-general-font-size: rem($fontsize-large);
 
     &__button {
         @extend .button;
-        width: 100%;
         margin: 0;
 
         &-export {
@@ -973,6 +1131,7 @@ $dataview-general-font-size: rem($fontsize-large);
 
             &:hover {
                 opacity: .6;
+                width: auto;
             }
 
             @include mobile {
@@ -1115,8 +1274,7 @@ $dataview-general-font-size: rem($fontsize-large);
             &.button-orange {
                 @include button-gradient($color-orange);
             }
-
-            width: 100% !important;
+            //width: 100% !important;
         }
 
         &-top-buttons {

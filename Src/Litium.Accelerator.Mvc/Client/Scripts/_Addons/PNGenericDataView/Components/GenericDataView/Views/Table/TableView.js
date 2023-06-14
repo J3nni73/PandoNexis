@@ -29,6 +29,7 @@ export const TableView = ({
     onDataContainerChange,
     fieldsToShow,
     currentPosts,
+    dropDownOptions,
     error,
     rowIndex,
 }) => {
@@ -64,6 +65,7 @@ export const TableView = ({
                                 onDataContainerChange={onDataContainerChange}
                                 dataContainerIndex={index}
                                 fieldsToShow={fieldsToShow}
+                                dropDownOptions={dataContainer.options}
                             />
                         ))}
                 </tbody>

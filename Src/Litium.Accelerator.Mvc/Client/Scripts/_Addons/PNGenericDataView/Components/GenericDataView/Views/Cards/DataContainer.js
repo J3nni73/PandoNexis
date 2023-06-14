@@ -41,7 +41,7 @@ export const DataContainer = React.memo(
     }) => {
         const { register, handleSubmit, setFocus, watch, reset, getValues, formState: { dirtyFields, isSubmitted, errors }, } = useForm();
         const [cardFields, setCardFields] = useState([]);
-        const containerRef = useRef();
+       
         const [isFormValid, setIsFormValid] = useState(false);
         const [containerSettings, setContainerSettings] = useState(settings);
         const [cardIngressField, setCardIngressField] = useState(null);
@@ -49,10 +49,19 @@ export const DataContainer = React.memo(
         const dispatch = useDispatch();
 
         const isContainerValid = (identifierField, form, theFormFields) => {
+            
             let isFullFormCheck = false;
+            
             if (theFormFields === undefined) {
                 isFullFormCheck = true;
                 theFormFields = form;
+            }
+            
+            if (Object.keys(theFormFields).length < 1) {
+                const lastClickedFieldId = window.currGenDW_lastClickedFieldId;
+                const lastClickedFieldValue = window.currGenDW_lastClickedFieldId;
+                
+                theFormFields[lastClickedFieldId] = true;
             }
             
             if (Object.keys(theFormFields).length) {
@@ -64,7 +73,6 @@ export const DataContainer = React.memo(
                         fieldValue: form[key],
                         field: fields.find(x => x.fieldId === key)
                     });
-                    
                     if (errObj) {
                         errorObjects.push(errObj);
                         return null;
@@ -79,13 +87,12 @@ export const DataContainer = React.memo(
                         return null;
                     }
                 }, identifierField);
+                
                 return errorObjects;
             }
         }; 
         const onCheckboxChange = (form, fieldId, entitySystemId, dataContainerIndex, settings) => {
-            
             const isTrue = currGenDW_isTrue;
-            //checkContainerCheckboxes(form);
             form[fieldId] = isTrue;
             const identifierField = { entitySystemId };
             if (!dirtyFields[fieldId]) {
@@ -105,31 +112,20 @@ export const DataContainer = React.memo(
             setErrorObject(errObjs);
         };
 
-        //const checkContainerCheckboxes = (form) => {
-        //    const containerEl = containerRef?.current;
-        //    if (containerEl) {
-        //        const checkboxes = containerEl.querySelectorAll("input[type=checkbox]");
-        //        for (let i = 0; i < checkboxes.length; i++) {
-        //            const theEl = checkboxes[i];
-        //            const name = theEl.name;
-        //            form[name] = theEl.checked;
-        //        }
-        //    }
-        //};
-
-        const onButtonClick = (form) => {
+        const onButtonClick = (form, buttonData = null) => {
             const useConfirmation = currGenDW_useConfirmation;
             const fieldSettings = currGenDW_fieldSettings;
             const confirmationText = currGenDW_confirmationText;
             const fieldId = currGenDW_fieldId;
-            const entitySystemId = fieldSettings.entitySystemId || fields[0].entitySystemId;
+
+            const entitySystemId = fields[0].entitySystemId;
             const identifierField = { entitySystemId };
             const errObjs = isContainerValid(identifierField, form);
             setErrorObject(errObjs);
             if (errObjs?.length) {
                 return true;
             }
-            
+
             if (useConfirmation) {
                 if (!confirm(confirmationText)) {
                     return false;
@@ -137,7 +133,7 @@ export const DataContainer = React.memo(
             }
             if (fieldSettings?.buttonOpenInModal) {
                 const modalSettings = {
-                    modalPageSystemId: fieldSettings.modalPageSystemId,
+                    modalPageSystemId: fieldSettings.pageSystemId,
                     entitySystemId,
                 };
                 dispatch(loadModal(modalSettings));
@@ -146,7 +142,7 @@ export const DataContainer = React.memo(
 
             const selectedValueObject = {
                 value: '',
-                name: fieldId,
+                name: '',
                 entitySystemId,
                 dataContainerIndex,
                 form: containerSettings?.postContainer ? form : null
@@ -154,8 +150,11 @@ export const DataContainer = React.memo(
             dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings));
         };
 
-        const onBlur = (form) => {
-            const identifierField = { EntitySystemId: fields[0].entitySystemId };
+        const onBlur = (form, getWinValue=false) => {
+            if (getWinValue) {
+                form[window.currGenDW_lastClickedFieldId] = window.currGenDW_lastClickedFieldValue;
+            }
+            const identifierField = { EntitySystemId: fields[0].entitySystemId };;
             const errObjs = isContainerValid(identifierField, form, dirtyFields);
             setErrorObject(errObjs);
         };
@@ -243,11 +242,11 @@ export const DataContainer = React.memo(
                                         : null
                                 }
                                 onBlur={
-                                    cardIngressField.fieldType !== 'autocomplete' && cardIngressField.fieldType !== 'dropdown' && cardIngressField.fieldType !== 'productimageupload'
+                                    cardIngressField.fieldType !== 'autocomplete' && cardIngressField.fieldType !== 'dropdown' && cardIngressField.fieldType !== 'productimageupload' && cardIngressField.fieldType !== 'dropdown'
                                         ? handleSubmit(onBlur)
                                         : null
                                 }
-
+                              
                                 aria-labelledby={cardIngressField.fieldName}
                                 entitySystemId={cardIngressField.entitySystemId}
                                 dataContainerIndex={dataContainerIndex}
@@ -255,12 +254,12 @@ export const DataContainer = React.memo(
                                 fieldSettings={cardIngressField.settings}
                                 ref={register}
                                 dropDownOptions={
-                                    cardIngressField.fieldType === 'dropdown' || cardIngressField.fieldType === 'productimageupload' ? cardIngressField.dropDownOptions : null
+                                    cardIngressField.fieldType === 'dropdown' || cardIngressField.fieldType === 'productimageupload' ? cardIngressField.options : null
                                 }
                             />
                         </div>
                     }
-                    <div className={`row small-up-${columnsInsideContainerSmall} medium-up-${columnsInsideContainerMedium} large-up-${columnsInsideContainerLarge}`} ref={containerRef} >
+                    <div className={`row small-up-${columnsInsideContainerSmall} medium-up-${columnsInsideContainerMedium} large-up-${columnsInsideContainerLarge}`}>
                         {cardFields.map(
                             (
                                 {
@@ -271,7 +270,7 @@ export const DataContainer = React.memo(
                                     fieldSuffix,
                                     settings,
                                     entitySystemId,
-                                    dropDownOptions,
+                                    options,
                                 },
                                 fieldIndex
                             ) => (
@@ -320,14 +319,14 @@ export const DataContainer = React.memo(
                                                 : null
                                         }
                                         onBlur={
-                                            containerSettings.postContainer ? handleSubmit(validateForm) :
-                                                !containerSettings.postContainer && (fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload' && fieldType !== 'checkbox' && fieldType !== 'radiobutton')
+                                            containerSettings?.postContainer ? handleSubmit(validateForm) :
+                                                !containerSettings?.postContainer && (fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload' && fieldType !== 'checkbox' && fieldType !== 'radiobutton')
                                                 ? handleSubmit(onBlur)
                                                 : null
                                         }
                                         
                                         onChange={
-                                            !containerSettings.postContainer && (fieldType === 'dropdown' || fieldType === 'productimageupload' ) ? handleSubmit(onBlur) : null
+                                            !containerSettings?.postContainer && (fieldType === 'dropdown' || fieldType === 'productimageupload' || fieldType === 'datetime') ? handleSubmit((e) => onBlur(e, true)) : null
                                         }
                                         aria-labelledby={fieldName}
                                         entitySystemId={entitySystemId}
@@ -338,7 +337,7 @@ export const DataContainer = React.memo(
                                         ref={register}
                                         genericButtons={settings.genericButtons}
                                         dropDownOptions={
-                                            fieldType === 'dropdown' || fieldType === 'productimageupload' ? dropDownOptions : null
+                                            fieldType === 'dropdown' || fieldType === 'productimageupload' ? options : null
                                         }
                                     />
                                     {settings.fieldTooltipMessage && settings.fieldTooltipMessage.length>0 &&
@@ -359,7 +358,7 @@ export const DataContainer = React.memo(
                             )
                         )}
                     </div>
-                    {fields && containerSettings && containerSettings.postContainer &&
+                    {fields && containerSettings && containerSettings?.postContainer &&
                         <div className="row">
                             <div className="small-12 columns text--right">
                                 <GenericDataViewField

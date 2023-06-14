@@ -9,6 +9,7 @@ using CategoryService = Litium.Blocks.CategoryService;
 using Litium.Globalization;
 using Litium.Media;
 using Litium.Customers;
+using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 
 namespace Solution.Extensions.Definitions
 {
@@ -19,23 +20,32 @@ namespace Solution.Extensions.Definitions
         private readonly CategoryService _categoryService;
         private readonly DisplayTemplateService _displayTemplateService;
         private readonly IEnumerable<FieldTemplateHelper> _fieldTemplateHelper;
+        private readonly IEnumerable<FieldHelper> _fieldHelper;
 
 
         public TemplateSetup(FieldTemplateService fieldTemplateService,
             SecurityContextService securityContextService,
             CategoryService categoryService,
             DisplayTemplateService displayTemplateService,
-            IEnumerable<FieldTemplateHelper> fieldTemplateHelper)
+            IEnumerable<FieldTemplateHelper> fieldTemplateHelper,
+            IEnumerable<FieldHelper> fieldHelper)
         {
             _fieldTemplateService = fieldTemplateService;
             _securityContextService = securityContextService;
             _categoryService = categoryService;
             _displayTemplateService = displayTemplateService;
             _fieldTemplateHelper = fieldTemplateHelper;
+            _fieldHelper = fieldHelper;
         }
 
         public override IEnumerable<FieldTemplate> GetTemplates()
         {
+
+            foreach (var item in _fieldHelper)
+            {
+                item.HandleFieldOptions();
+                item.HandleMultiFieldFields();
+            }
             var fieldTemplates = new List<FieldTemplate>();
             var templateChanges = new List<FieldTemplateChanges>();
             var newTemplates = new List<FieldTemplate>();
@@ -94,6 +104,9 @@ namespace Solution.Extensions.Definitions
                             case FieldTemplateHelperConstants.PersonFieldTemplate:
                                 fieldTemplate = GetPersonFieldTemplate(template.Key, changes, newTemplates);
                                 break;
+                            case FieldTemplateHelperConstants.GroupFieldTemplate:
+                                fieldTemplate = GetGroupFieldTemplate(template.Key, changes, newTemplates);
+                                break;
                         }
                         if (fieldTemplate != null)
                             fieldTemplates.Add(fieldTemplate);
@@ -101,6 +114,53 @@ namespace Solution.Extensions.Definitions
                 }
             }
             return fieldTemplates;
+        }
+        private FieldTemplate? GetGroupFieldTemplate(string templateId, List<FieldTemplateChanges> changes, List<FieldTemplate> newTemplates)
+        {
+            var groups = changes.GroupBy(i => i.FieldGroupName);
+            var customerFieldTemplate = newTemplates.FirstOrDefault(i => i.Id == templateId) as GroupFieldTemplate;
+            if (customerFieldTemplate == null)
+                return null;
+
+            var newcustomerFieldTemplate = new GroupFieldTemplate(templateId);
+            newcustomerFieldTemplate.FieldGroups = new List<FieldTemplateFieldGroup>();
+            foreach (var group in customerFieldTemplate.FieldGroups)
+            {
+                var newGroup = new FieldTemplateFieldGroup()
+                {
+                    Id = group.Id,
+                    Collapsed = group.Collapsed,
+                };
+                foreach (var field in group.Fields)
+                {
+                    newGroup.Fields.Add(field);
+                }
+                newcustomerFieldTemplate.FieldGroups.Add(newGroup);
+            }
+
+            foreach (var change in changes)
+            {
+
+                if (newcustomerFieldTemplate.FieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) == null)
+                {
+                    newcustomerFieldTemplate.FieldGroups.Add(new FieldTemplateFieldGroup()
+                    {
+                        Id = change.FieldGroupName,
+                        Collapsed = false,
+                        Localizations =  {
+                                            ["sv-SE"] = { Name = change.FieldGroupName },
+                                            ["en-US"] = { Name = change.FieldGroupName }
+                                         },
+                    });
+                }
+
+                if (newcustomerFieldTemplate.FieldGroups?.FirstOrDefault(i => i.Id == change.FieldGroupName) != null)
+                {
+                    newcustomerFieldTemplate.FieldGroups.FirstOrDefault(i => i.Id == change.FieldGroupName)?.Fields.Add(change.Field);
+                }
+            }
+
+            return newcustomerFieldTemplate;
         }
         private FieldTemplate? GetPersonFieldTemplate(string templateId, List<FieldTemplateChanges> changes, List<FieldTemplate> newTemplates)
         {

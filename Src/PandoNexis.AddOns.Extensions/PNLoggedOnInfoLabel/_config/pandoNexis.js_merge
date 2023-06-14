@@ -1,0 +1,22 @@
+//PandoNexis: BEGIN COMPONENT  
+    // Logged on info
+    const loggedOnInfoLabels = document.querySelectorAll('.pn-info-label');
+    if (loggedOnInfoLabels) {
+        const LoggedOnInfoLabel = DynamicComponent({
+            loader: () => import('./_Addons/PNLoggedOnInfoLabel/Components/LoggedOnInfoLabelContainer'),
+        });
+
+        loggedOnInfoLabels.forEach((elem, index) => {
+            const { heading } = elem.dataset;
+            renderReact(
+                <Provider store={window.__pn.store}>
+                    <LoggedOnInfoLabel getData={index === 0} heading={heading || ''} />
+                </Provider>,
+                elem
+            );
+        });
+    }
+    // END Logged on info
+//PandoNexis: END COMPONENT  
+
+

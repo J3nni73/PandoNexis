@@ -1,40 +1,62 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { translate } from '../../../../../Services/translation';
-class DropdownField extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...props };
-  }
-  render() {
-    const { common, dropDownOptions, isEditable } = this.props;
-    return (
-      <div className="generic-grid-view__dropdown-container">
-        {dropDownOptions && dropDownOptions.length > 0 && isEditable && (
-          <select
-            className={`generic-grid-view__dropdown-list `}
-            value={this.state.selectValue}
-            readOnly={!isEditable}
-            {...common}
-          >
-            <option value="-1">
-              {translate(
-                'addons.genericgridview.field.dropdown.chooseoptiontext'
-              )}
-            </option>
-            {dropDownOptions &&
-              dropDownOptions.map((item, dropdownIndex, array) => (
-                <Fragment key={`dropdownListIndex-${dropdownIndex}`}>
-                  <option value={item.value} className="">
-                    {item.text}
-                  </option>
-                </Fragment>
-              ))}
-          </select>
-        )}
-      </div>
-    );
-  }
-}
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 
-export default connect()(DropdownField);
+export const DropdownField = ({
+    common, fieldSettings, dropDownOptions, isEditable, defaultValue, onFocus, fieldId, autoFocus,
+    ...props },
+    ref
+) => {
+    const [selectedValue, setSelectedValue] = useState(defaultValue);
+    //const values = Array.from(options).map(({ value }) => value);
+    //var selected = [...select.options]
+    //    .filter(option => option.selected)
+    //    .map(option => option.value);
+
+    const onChanging = (e) => {
+        window.currGenDW_lastClickedFieldId = fieldId;
+        window.currGenDW_lastClickedFieldValue = e.target.value;
+        props.onChange(e);
+    }
+
+    return (
+        <div className="generic-data-view__dropdown-container">
+            {dropDownOptions && dropDownOptions.length > 0 && (
+                <select
+                    className={`generic-data-view__dropdown-list `}
+                    readOnly={!isEditable}
+                    onFocus={onFocus}
+                    {...autoFocus}
+                    multiple={fieldSettings.multiple}
+                    {...common}
+                    onChange={(e) => onChanging(e)}
+                    
+                >
+                    <option value="-1">
+                        {translate(
+                            'addons.genericdataview.field.dropdown.chooseoptiontext'
+                        )}
+                    </option>
+                    {dropDownOptions &&
+                        dropDownOptions.map((item, dropdownIndex, array) => (
+                            <Fragment key={`dropdownListIndex-${dropdownIndex}`}>
+                                <option value={item.key} className="">
+                                    {item.value}
+                                </option>
+                            </Fragment>
+                        ))}
+                </select>
+            )}
+            {fieldSettings.fieldTooltipMessage && fieldSettings.fieldTooltipMessage.length > 0 &&
+                <ReactTooltip className="generic-data-view__tooltip" float={true} delayShow="800" delayHide="300" anchorId={`dropdown-${fieldSettings.entitySystemId || entitySystemId}${fieldSettings.fieldId || fieldId}${rndNo}${dataContainerIndex || 0}`} variant={fieldSettings.fieldTooltipType || "dark"} positionStrategy="fixed" offset="32" place="left">
+                    {fieldSettings.fieldTooltipMessage}
+                </ReactTooltip>
+            }
+        </div>
+    );
+};
+
+const mapStateToProps = ({ genericDataView }) => genericDataView;
+DropdownField.displayName = 'DropdownField';
+export default connect(mapStateToProps)(DropdownField);
