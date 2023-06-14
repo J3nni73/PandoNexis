@@ -30,7 +30,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
         private readonly DataService _dataService;
         private readonly GenericDataViewService _genericDataViewService;
         private readonly GenericButtonService _genericButtonService;
-        private readonly PersonGroupService _personGroupService;
+        private readonly NoCrmPersonGroupService _personGroupService;
         private readonly RequestModelAccessor _requestModelAccessor;
         public GroupsProcessor(FieldTemplateService fieldTemplateService,
                                FieldDefinitionService fieldDefinitionService,
@@ -39,7 +39,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
                                GroupService groupService,
                                DataService dataService,
                                PersonService personService,
-                               PersonGroupService personGroupService,
+                               NoCrmPersonGroupService personGroupService,
                                GenericButtonService genericButtonService) : base(fieldTemplateService, fieldDefinitionService, genericDataViewService, requestModelAccessor)
         {
             _groupService = groupService;
@@ -99,6 +99,8 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
                 viewGroupButton.FieldName = NoCrmProcessorConstants.ViewPersonListByGroup;
                 viewGroupButton.FieldType= DataFieldTypes.ButtonDGType;
                 viewGroupButton.Settings.GenericButtons.Add(_genericButtonService.GetButton(website, NoCrmProcessorConstants.NoCrmButtonLinks, NoCrmProcessorConstants.ViewPersonListByGroup, NoCrmProcessorConstants.NoCrmButtonNames, group.SystemId));
+
+
 
                 container.Fields.Add(viewGroupButton);
                 view.DataContainers.Add(container);

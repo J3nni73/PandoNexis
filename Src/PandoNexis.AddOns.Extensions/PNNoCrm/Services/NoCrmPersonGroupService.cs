@@ -12,14 +12,14 @@ using PandoNexis.AddOns.Extensions.PNRegisterMe.Constants;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
 {
-    [Service(ServiceType = typeof(PersonGroupService))]
-    public class PersonGroupService
+    [Service(ServiceType = typeof(NoCrmPersonGroupService))]
+    public class NoCrmPersonGroupService
     {
         private readonly DataService _dataService;
         private readonly PersonService _personService;
         private readonly GroupService _groupService;
 
-        public PersonGroupService(DataService dataService,
+        public NoCrmPersonGroupService(DataService dataService,
             PersonService personService,
             GroupService groupService)
         {

@@ -3,6 +3,8 @@ using Litium.Accelerator.Routing;
 using Litium.Customers;
 using Litium.FieldFramework;
 using Litium.Runtime.DependencyInjection;
+using Litium.Websites;
+using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Processors;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Services;
@@ -18,30 +20,46 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
     [Service(Name = "PersonListByGroup")]
     public class PersonListByGroupProcessor : PersonDataViewBase
     {
-        private readonly PersonGroupService _personGroupService;
+        private readonly NoCrmPersonGroupService _personGroupService;
+        private readonly GenericButtonService _genericButtonService;
+        private readonly RequestModelAccessor _requestModelAccessor;
         public PersonListByGroupProcessor(FieldDefinitionService fieldDefinitionService,
                                             FieldTemplateService fieldTemplateService,
                                             GenericDataViewService genericDataViewService,
                                             RequestModelAccessor requestModelAccessor,
-                                            PersonGroupService personGroupService) : base(fieldDefinitionService, fieldTemplateService, genericDataViewService, requestModelAccessor)
+                                            NoCrmPersonGroupService personGroupService,
+                                            GenericButtonService genericButtonService) : base(fieldDefinitionService, fieldTemplateService, genericDataViewService, requestModelAccessor)
         {
             _personGroupService = personGroupService;
+            _genericButtonService = genericButtonService;
+            _requestModelAccessor = requestModelAccessor;
         }
 
         public override async Task<GenericDataView> GetDataView(Guid pageSystemId, string data)
         {
             var view = new GenericDataView();
             view.Settings = GetDataViewSettings(pageSystemId);
-
+            var website = _requestModelAccessor.RequestModel.WebsiteModel.Website;
 
             var groupId = Guid.Parse(data.Replace("?entitySystemId=", ""));
             var persons = _personGroupService.GetPersonsInGroup(groupId);
             var templateFields = GetFields(NoCrmProcessorConstants.PersonListByGroup);
 
-            foreach ( var person in persons ) 
-            { 
-                view.DataContainers.Add(BuildContainer(templateFields, person));
+            foreach (var person in persons)
+            {
+                var container = BuildContainer(templateFields, person);
+                var viewButton = new GenericDataField();
+                viewButton.EntitySystemId = person.SystemId.ToString();
+                viewButton.FieldId = NoCrmProcessorConstants.ViewPersonListByGroup;
+                viewButton.FieldName = NoCrmProcessorConstants.ViewPersonListByGroup;
+                viewButton.FieldType = DataFieldTypes.ButtonDGType;
+                viewButton.Settings.GenericButtons.Add(_genericButtonService.GetButton(website, NoCrmProcessorConstants.NoCrmButtonLinks, NoCrmProcessorConstants.AddLogin, NoCrmProcessorConstants.NoCrmButtonNames, person.SystemId));
+                container.Fields.Add(viewButton);
+                view.DataContainers.Add(container);
             }
+
+
+
 
             return view;
 
@@ -54,6 +72,19 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
         public override Task<GenericDataContainer> UpdateField(GenericDataField fieldData)
         {
             throw new NotImplementedException();
+        }
+        public async override Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data)
+        {
+            switch (buttonId)
+            {
+                case NoCrmProcessorConstants.AddLogin:
+                    break;
+
+
+
+
+            }
+            return null;
         }
     }
 }

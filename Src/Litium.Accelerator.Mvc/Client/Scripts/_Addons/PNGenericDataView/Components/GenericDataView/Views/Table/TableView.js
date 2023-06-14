@@ -35,7 +35,7 @@ export const TableView = ({
 }) => {
     const { items, requestSort, sortConfig } = useSortableData(dataContainers);
     const [mainSettings, setMainSettings] = useState(settings);
-
+    
     const sortColumn = (fieldName, index) => {
         requestSort('fieldValue', index, fieldName);
     };
@@ -54,7 +54,7 @@ export const TableView = ({
                     handleSetfieldsToShow={handleSetfieldsToShow}
                     fieldsToShow={fieldsToShow}
                 />
-                <tbody>
+                <tbody className={`hepp${currentPosts.length}`}>
                     {currentPosts &&
                         currentPosts.map((dataContainer, index) => (
                             <DataContainer

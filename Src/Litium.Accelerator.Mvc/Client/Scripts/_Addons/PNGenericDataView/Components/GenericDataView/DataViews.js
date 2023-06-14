@@ -55,24 +55,22 @@ export const GenericDataView = ({
 
     const [hasInitialized, setHasInitialized] = useState(false);
     const [viewsList, setViewsList] = useState([]);
+    const { totalHits, pageSize } = settings;
+
+    const { items, requestSort, sortConfig } = useSortableData(dataContainers);
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(20);
+    const [postsPerPage, setPostsPerPage] = useState(pageSize);    
+    const [currentPosts, setCurrentPosts] = useState(items);
+  
     
-    const { items, requestSort, sortConfig } = useSortableData(dataContainers);
-
-    // Pagination
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = items.slice(indexOfFirstPost, indexOfLastPost);
-      
     const sortColumn = (fieldName, index) => {
         requestSort('fieldValue', index, fieldName);
     };
     const hasDataContainers = (items || []).length > 0;
-    const { totalHits, pageSize } = settings;
-    const pageCount = Math.ceil(totalHits / pageSize) || 1;
-    const { page = 1 } = getURLSearchParams();
+    
+    //const pageCount = Math.ceil(totalHits / pageSize) || 1;
+    //const { page = 1 } = getURLSearchParams();
 
     // ColumnsInsideContainer
     const handleSetfieldsToShow = (index) => {
@@ -83,7 +81,8 @@ export const GenericDataView = ({
 
         setfieldsToShow((prevState) => [...prevState, index]);
     };
-
+    
+    
     // Change page
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -141,6 +140,7 @@ export const GenericDataView = ({
     }, [settings]);
 
 
+
     useEffect(() => {
         if (items.length !== 0 && !hasInitialized) {
             const fields = items[0].fields;
@@ -150,6 +150,16 @@ export const GenericDataView = ({
             }
             setfieldsToShow(tempVisibleFields);
             setHasInitialized(true);
+
+            // REMOVE FOLLOWING ROW WHEN USING PAGENATION
+            setCurrentPosts(items);
+            //// WHEN USING PAGE SIZE
+            //if (pageSize) {
+            //    // Pagination
+            //    const indexOfLastPost = currentPage * pageSize;
+            //    const indexOfFirstPost = indexOfLastPost - pageSize;
+            //    setCurrentPosts(items.slice(indexOfFirstPost, indexOfLastPost));
+            //}
         }
     }, [items]);
 

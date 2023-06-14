@@ -19,9 +19,13 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Definitions
         {
             var changes = new List<FieldOptionChanges>()
             {
+                GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.DataArea, NoCrmProcessorConstants.NoCrm),
                 GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.Groups),
                 GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.PersonListByGroup),
                 GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.ViewPersonListByGroup),
+                GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.CreatePerson),
+                GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.AddLogin),
+
             };
 
             UpdateFieldOptions(changes);
