@@ -65,7 +65,12 @@
                 @{
                     var image = Model.Images.FirstOrDefault();
                 }
+                @if (Model.Name.ToLower().Contains("litium")){// ("dynamic")){
+                    <div class="product__image-wrapper pn-main-background" data-theme="cells"></div>
+                }
+                
                 @Html.ImageFor(x => image, maxSize: new Size(420, 600), htmlAttributes: new { itemprop = "image", @class = "product__image" }, renderSizeAttributes: true, responsiveDefinition: responsiveDefinition)
+                
             </a>
         }
         else

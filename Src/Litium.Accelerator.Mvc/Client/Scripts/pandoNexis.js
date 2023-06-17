@@ -198,18 +198,29 @@ export const bootstrapPNComponents = () => {
     // END OrganizationSelector
  
     // 3D Background
-    const threeDBg = document.getElementById("pnMainBackground");
-    if (threeDBg) {
+    const threeDBgs = document.querySelectorAll('.pn-main-background'); //getElementById("pnMainBackground");
+    if (threeDBgs) {
         const ThreeDBg = DynamicComponent({
             loader: () => import('./_Addons/PNThreeDeeBg/Background'),
         });
-        const { theme } = threeDBg.dataset;
-        renderReact(
-            <Provider store={window.__pn.store}>
-                <ThreeDBg theme={theme} />
-            </Provider>,
-            threeDBg
-        );
+
+        Array.from(threeDBgs).forEach(
+            (threeDBg) => {
+                const { theme } = threeDBg.dataset;
+                renderReact(
+                    <Provider store={window.__pn.store}>
+                        <ThreeDBg theme={theme} />
+                    </Provider>,
+                    threeDBg
+                );
+            });
+        
+        //renderReact(
+        //    <Provider store={window.__pn.store}>
+        //        <ThreeDBg theme={theme} />
+        //    </Provider>,
+        //    threeDBg
+        //);
     }
     // END 3D Background
 

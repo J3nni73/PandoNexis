@@ -82,7 +82,7 @@
                         </a>
                     </div>
                 }
-                @if (extendedModel.VisibleCheckout)
+                @if (extendedModel.VisibleCheckout && User.Identity.IsAuthenticated)
                 {
                     <div id="miniCart" class="cart cart--mini"></div>
                 }
