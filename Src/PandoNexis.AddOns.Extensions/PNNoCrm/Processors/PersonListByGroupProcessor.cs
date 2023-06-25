@@ -4,11 +4,13 @@ using Litium.Customers;
 using Litium.FieldFramework;
 using Litium.Runtime.DependencyInjection;
 using Litium.Websites;
+using Newtonsoft.Json;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Processors;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Services;
 using PandoNexis.AddOns.Extensions.PNNoCrm.Constants;
+using PandoNexis.AddOns.Extensions.PNNoCrm.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,16 +25,19 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
         private readonly NoCrmPersonGroupService _personGroupService;
         private readonly GenericButtonService _genericButtonService;
         private readonly RequestModelAccessor _requestModelAccessor;
+        private readonly NoCrmPersonService _noCrmPersonService;
         public PersonListByGroupProcessor(FieldDefinitionService fieldDefinitionService,
                                             FieldTemplateService fieldTemplateService,
                                             GenericDataViewService genericDataViewService,
                                             RequestModelAccessor requestModelAccessor,
                                             NoCrmPersonGroupService personGroupService,
-                                            GenericButtonService genericButtonService) : base(fieldDefinitionService, fieldTemplateService, genericDataViewService, requestModelAccessor)
+                                            GenericButtonService genericButtonService,
+                                            NoCrmPersonService noCrmPersonService) : base(fieldDefinitionService, fieldTemplateService, genericDataViewService, requestModelAccessor)
         {
             _personGroupService = personGroupService;
             _genericButtonService = genericButtonService;
             _requestModelAccessor = requestModelAccessor;
+            _noCrmPersonService = noCrmPersonService;
         }
 
         public override async Task<GenericDataView> GetDataView(Guid pageSystemId, string data)
@@ -75,9 +80,11 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
         }
         public async override Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data)
         {
+            var dataViewResponse = JsonConvert.DeserializeObject<GenericDataViewResponse>(data);
             switch (buttonId)
             {
                 case NoCrmProcessorConstants.AddLogin:
+                    _noCrmPersonService.CreateLogin(dataViewResponse.EntitySystemId);
                     break;
 
 

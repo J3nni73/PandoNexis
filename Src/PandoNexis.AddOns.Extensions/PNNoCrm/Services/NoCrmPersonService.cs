@@ -48,5 +48,17 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Services
                 return true;
             }
         }
+
+        public void CreateLogin(Guid systemId)
+        {
+
+        }
+        public void CreateLogin(string entitySystemId)
+        {
+            if (Guid.TryParse(entitySystemId, out Guid id))
+                CreateLogin(id);
+
+            
+        }
     }
 }

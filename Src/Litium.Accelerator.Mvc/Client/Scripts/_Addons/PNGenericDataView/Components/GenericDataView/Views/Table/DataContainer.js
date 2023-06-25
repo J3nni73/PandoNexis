@@ -114,8 +114,9 @@ export const DataContainer = React.memo(
                 if (!confirm(confirmationText)) {
                     return false;
                 }
-            }
+            } 
             if (fieldSettings?.buttonOpenInModal) {
+                
                 const modalSettings = {
                     modalPageSystemId: fieldSettings.pageSystemId,
                     entitySystemId,
@@ -127,11 +128,11 @@ export const DataContainer = React.memo(
             const selectedValueObject = {
                 value: '',
                 name: '',
-                entitySystemId,
+                entitySystemId: entitySystemId,
                 dataContainerIndex,
                 form: containerSettings?.postContainer ? form : null
             };
-            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings));
+            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings, fieldSettings.pageSystemId));
         };
 
         const onBlur = (form, getWinValue = false) => {

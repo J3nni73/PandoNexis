@@ -54,7 +54,7 @@ export const TableView = ({
                     handleSetfieldsToShow={handleSetfieldsToShow}
                     fieldsToShow={fieldsToShow}
                 />
-                <tbody className={`hepp${currentPosts.length}`}>
+                <tbody>
                     {currentPosts &&
                         currentPosts.map((dataContainer, index) => (
                             <DataContainer

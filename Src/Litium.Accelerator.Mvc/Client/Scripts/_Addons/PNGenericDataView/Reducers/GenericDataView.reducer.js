@@ -99,7 +99,6 @@ export const genericDataView = (state = DEFAULT_STATE, { type, payload }) => {
         case GENERIC_DATA_VIEW_LOAD:
             return { ...state, isLoading: true };
         case GENERIC_DATA_VIEW_RECEIVE:
-
             return {
                 ...state,
                 isLoading: false,

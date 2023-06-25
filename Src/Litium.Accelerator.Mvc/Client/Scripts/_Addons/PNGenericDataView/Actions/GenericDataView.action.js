@@ -9,7 +9,7 @@ import {
     GENERIC_DATA_VIEW_SHOW_MODAL, GENERIC_MODAL_DATA_UPDATE_FIELDS, GENERIC_MODAL_DATA_VIEW_ALL_ROWS, GENERIC_MODAL_DATA_VIEW_RECEIVE, GENERIC_MODAL_DATA_VIEW_INIT,
     GENERIC_DATA_VIEW_SET_CURRENT_PAGE_ID
 } from '../constants';
-//import mockdata from '../mockdata.json';// _jennifer.json';
+//import mockdata from '../mockdataForm.json';// _jennifer.json';
 //import mockdata2 from '../mockdataKanban.json';// '../mockdataForm.json';
 const rootRoute = '/api/genericdataview/';
 const genericLoaderType = "spinner"; // spinner or ripple
@@ -227,6 +227,7 @@ export const checkResponse = (response, isInModal = false) => (dispatch, getStat
     }
 
     dispatch(toggleLoader(false));
+    
     if (response.isNotLoggedOn) {
         //We use reversed condition due to object maybe not found
         return dispatch({
@@ -319,6 +320,7 @@ export const updateAllRows = (dataContainers, isInModal=false) => {
 };
 
 export const receive = (data, isInModal = false) => {
+    
     if (isInModal) {
         return {
             type: isInModal ? GENERIC_MODAL_DATA_VIEW_RECEIVE : GENERIC_DATA_VIEW_RECEIVE,

@@ -56,7 +56,7 @@ export const GenericDataView = ({
     const [hasInitialized, setHasInitialized] = useState(false);
     const [viewsList, setViewsList] = useState([]);
     const { totalHits, pageSize } = settings;
-
+   
     const { items, requestSort, sortConfig } = useSortableData(dataContainers);
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -142,7 +142,7 @@ export const GenericDataView = ({
 
 
     useEffect(() => {
-        if (items.length !== 0 && !hasInitialized) {
+        if (items.length !== 0) {
             const fields = items[0].fields;
             let tempVisibleFields = [];
             for (let i = 0; i < fields.length; i++) {
@@ -150,7 +150,7 @@ export const GenericDataView = ({
             }
             setfieldsToShow(tempVisibleFields);
             setHasInitialized(true);
-
+            
             // REMOVE FOLLOWING ROW WHEN USING PAGENATION
             setCurrentPosts(items);
             //// WHEN USING PAGE SIZE
@@ -161,7 +161,7 @@ export const GenericDataView = ({
             //    setCurrentPosts(items.slice(indexOfFirstPost, indexOfLastPost));
             //}
         }
-    }, [items]);
+    }, [items, dataContainers]);
 
 
     if (!currentView || !items || !settings || !viewsList || viewsList.length<1) {
