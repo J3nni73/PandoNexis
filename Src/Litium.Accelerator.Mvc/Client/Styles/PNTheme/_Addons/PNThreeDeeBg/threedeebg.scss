@@ -21,11 +21,24 @@ footer.footer {
     z-index: 2;
 }
 .pn-main-background {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    opacity: 0;
-    @include animation(1s, 3.4s, fade-in-background, ease-in-out);
+
+    &:not(.product__image-wrapper) {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        opacity: 0;
+        @include animation(1s, 3.4s, fade-in-background, ease-in-out);
+    }
+
+    &.product__image-wrapper {
+        width: 100%;
+        height: 215px;
+        overflow: hidden;
+        position: absolute;
+        opacity: 1;
+        
+    }
+    
     //@include animation(1s, 3.4s, fade-in-blurry-background, ease-in-out);
     padding: 0 !important;
     margin: 0 !important;

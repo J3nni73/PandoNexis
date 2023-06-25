@@ -16,7 +16,7 @@ namespace PandoNexis.Accelerator.Extensions.Framework.ViewModels
 
         //PandoNexis Visibility begin
         public bool VisibleLogin { get; set; } = true;
-        public bool VisibleCheckout { get; set; }
+        public bool VisibleCheckout { get; set; } = true;
         //PandoNexis Visibility end
 
         //PandoNexis HeaderBannerMessage begin
