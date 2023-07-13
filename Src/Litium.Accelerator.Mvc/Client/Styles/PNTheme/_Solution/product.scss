@@ -56,6 +56,7 @@
         flex: 1 1 auto;
         width: 100%;
         background: rgba(155, 255, 255, 0.3); //$solution-background-primary;
+        border: 1px solid transparent;
         @include transition;
         @include border-radius(2px, 2px, 8px, 8px);
 
