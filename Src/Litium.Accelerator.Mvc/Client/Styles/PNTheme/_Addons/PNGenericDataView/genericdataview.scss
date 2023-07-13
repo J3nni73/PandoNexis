@@ -987,11 +987,14 @@ $dataview-error-field-color: rgba(255,0,0,1);
     }
 
     &__modal {
-        padding: rem(124px 24px 0 24px);
+        padding: rem(80px 24px 0 24px);
 
         input[type='text'] {
             border: 1px solid rgba(0, 0, 0, 0.3);
             border-radius: rem(4px);
+        }
+        .generic-data-view__wrapper{
+            max-height: calc(100vh - 70px);
         }
 
        /* button {

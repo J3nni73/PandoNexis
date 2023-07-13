@@ -99,6 +99,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
 
         public async override Task<GenericDataView> GetDataView(Guid pageSystemId, string data)
         {
+            _currentPageSystemId = pageSystemId;
             var website = _requestModelAccessor.RequestModel.WebsiteModel.Website;
             var view = new GenericDataView();
             view.Settings = GetDataViewSettings(pageSystemId);
