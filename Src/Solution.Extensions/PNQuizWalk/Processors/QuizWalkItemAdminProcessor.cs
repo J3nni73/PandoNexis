@@ -80,6 +80,7 @@ namespace Solution.Extensions.PNQuizWalk.Processors
             var result = JsonConvert.DeserializeObject<GenericDataContainer>(JsonConvert.SerializeObject(templateContainer));
 
             result.Settings.PostContainer = true;
+            result.Settings.PostContainerPageSystemId = _currentPageSystemId;
 
             foreach (var field in result.Fields)
             {

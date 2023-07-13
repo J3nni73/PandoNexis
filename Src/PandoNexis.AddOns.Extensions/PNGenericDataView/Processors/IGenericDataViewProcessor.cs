@@ -7,6 +7,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
     
     public interface IGenericDataViewProcessor
     {
+         Guid _currentPageSystemId { get; set; }
         Task<GenericDataView> GetDataView(Guid pageSystemId, string data);
         GenericDataViewSettings GetDataViewSettings(Guid pageSystemId);
         Task<object> GetDataForm(string data);

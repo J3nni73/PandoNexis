@@ -77,6 +77,7 @@ namespace PandoNexis.AddOns.Extensions.PNContactForm.Processors
 
             var result = JsonConvert.DeserializeObject<GenericDataContainer>(JsonConvert.SerializeObject(templateContainer));
             result.Settings.PostContainer = true;
+            result.Settings.PostContainerPageSystemId = _currentPageSystemId;
             result.Settings.PostContainerButtonText = "addons.contactform.postbutton.text".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
             
             

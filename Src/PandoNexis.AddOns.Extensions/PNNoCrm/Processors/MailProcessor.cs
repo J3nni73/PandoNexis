@@ -117,6 +117,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
             container.Fields.Add(GetSubject(entitySystemId));
             container.Fields.Add(GetBody(entitySystemId));
             container.Settings.PostContainer= true;
+            container.Settings.PostContainerPageSystemId = _currentPageSystemId;
 
             return container;
         }

@@ -14,7 +14,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
         private readonly PersonStorage _personStorage;
         private readonly string _baseUrl;
         private readonly string _token;
-
+        public Guid _currentPageSystemId { get; set; }
         public NoErpProcessorBase(PersonStorage personStorage,
             GenericDataViewService genericDataViewService)
         {

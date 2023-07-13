@@ -16,7 +16,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
         private readonly GenericDataViewService _genericDataViewService;
         private readonly FieldTemplateService _fieldTemplateService;
         private readonly FieldDefinitionService _fieldDefinitionService;
-
+        public Guid _currentPageSystemId { get; set; }
         protected ProductDataViewBase(FieldTemplateService fieldTemplateService,
                                         FieldDefinitionService fieldDefinitionService,
                                         GenericDataViewService genericDataViewService)
