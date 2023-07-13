@@ -101,7 +101,7 @@ export const DataContainer = React.memo(
             const fieldSettings = currGenDW_fieldSettings;
             const confirmationText = currGenDW_confirmationText;
             const fieldId = currGenDW_fieldId;
-
+            
             const entitySystemId = fields[0].entitySystemId;
             const identifierField = { entitySystemId };
             const errObjs = isContainerValid(identifierField, form);
@@ -114,8 +114,10 @@ export const DataContainer = React.memo(
                 if (!confirm(confirmationText)) {
                     return false;
                 }
-            }
+            } 
+            
             if (fieldSettings?.buttonOpenInModal) {
+               
                 const modalSettings = {
                     modalPageSystemId: fieldSettings.pageSystemId,
                     entitySystemId,
@@ -127,11 +129,12 @@ export const DataContainer = React.memo(
             const selectedValueObject = {
                 value: '',
                 name: '',
-                entitySystemId,
+                entitySystemId: entitySystemId,
                 dataContainerIndex,
+                postContainerPageSystemId = containerSettings?.postContainerPageSystemId || null,
                 form: containerSettings?.postContainer ? form : null
             };
-            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings));
+            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings, fieldSettings.pageSystemId));
         };
 
         const onBlur = (form, getWinValue = false) => {
@@ -288,7 +291,7 @@ export const DataContainer = React.memo(
                             </td>
                         )
                     )}
-                    {fields && containerSettings && containerSettings?.postContainer &&
+                    {fields && containerSettings && containerSettings?.postContainer && containerSettings?.postContainerPageSystemId &&
                         <td className="row">
                             <div className="small-12 columns text--right">
                                 <GenericDataViewField

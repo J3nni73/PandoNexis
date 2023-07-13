@@ -13,12 +13,16 @@ export const ButtonField = ({
     //const { handleSubmit, getValues, dirtyFields } = useForm();
     //console.log("theFormValues", JSON.stringify(theFormValues));
     const buttonClick = (e) => {
+
         // Check validation
         window.currGenDW_useConfirmation = useConfirmation;
         window.currGenDW_fieldSettings = fieldSettings;
         window.currGenDW_confirmationText = confirmationText;
         window.currGenDW_fieldId = fieldSettings.fieldId || fieldId;
-
+        
+        window.currGenDW_lastClickedFieldId = fieldSettings.fieldId || fieldId;
+        window.currGenDW_lastClickedEntitySystemId = fieldSettings.entitySystemId;
+        
         onButtonClick(e);
     };
     const rndNo = Math.floor(Math.random() * 89233);

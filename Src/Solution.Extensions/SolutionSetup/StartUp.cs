@@ -14,20 +14,17 @@ namespace Solution.Extensions.SolutionSetup
         private readonly IEnumerable<IDefinitionInit> _extraInit;
         private readonly SecurityContextService _securityContextService;
         private readonly IEnumerable<DatabaseInitiator> _databaseInitiator;
-        private readonly IEnumerable<FieldHelper> _fieldHelper;
 
         public Startup(
             IEnumerable<IDefinitionInit> extraInit,
             IEnumerable<IDefinitionSetup> extraSetup,
             SecurityContextService securityContextService,
-            IEnumerable<DatabaseInitiator> databaseInitiator,
-            IEnumerable<FieldHelper> fieldHelper)
+            IEnumerable<DatabaseInitiator> databaseInitiator)
         {
             _extraInit = extraInit;
             _extraSetup = extraSetup;
             _securityContextService = securityContextService;
             _databaseInitiator = databaseInitiator;
-            _fieldHelper = fieldHelper;
         }
 
         public void Start()
@@ -38,13 +35,6 @@ namespace Solution.Extensions.SolutionSetup
                 {
                     item.GetCheckDatabaseObjects();
                 }
-
-                foreach(var item in _fieldHelper)
-                {
-                    item.HandleFieldOptions();
-                    item.HandleMultiFieldFields();
-                }
-
             }
         }
 

@@ -9,8 +9,8 @@ import {
     GENERIC_DATA_VIEW_SHOW_MODAL, GENERIC_MODAL_DATA_UPDATE_FIELDS, GENERIC_MODAL_DATA_VIEW_ALL_ROWS, GENERIC_MODAL_DATA_VIEW_RECEIVE, GENERIC_MODAL_DATA_VIEW_INIT,
     GENERIC_DATA_VIEW_SET_CURRENT_PAGE_ID
 } from '../constants';
-//import mockdata from '../mockdata.json';// _jennifer.json';
-//import mockdata2 from '../mockdataKanban.json';// '../mockdataForm.json';
+//import mockdata from '../mockdataForm.json';// _jennifer.json';
+//import mockdata from '../mockdata4.json';// '../mockdataForm.json';
 const rootRoute = '/api/genericdataview/';
 const genericLoaderType = "spinner"; // spinner or ripple
 
@@ -37,8 +37,7 @@ export const getMediaFolderData = (mediaFolderId) => (dispatch, getState) => {
 
     let pagenationActive = false;
     //dispatch(toggleLoader(true));
-
-
+    
     return get(rootRoute + `getGenericDataViewMedia?folderId=` + mediaFolderId)
         .then((response) => response.json())
         .then((response) => dispatch(checkResponse(response)))
@@ -47,7 +46,7 @@ export const getMediaFolderData = (mediaFolderId) => (dispatch, getState) => {
 };
 
 export const load = (pageId, settings, isInModal=false, entitySystemId='') => (dispatch, getState) => {
-
+    ////alert(entitySystemId);
     let pagenationActive = false;
     dispatch(toggleLoader(true));    
     if (!isInModal) {      
@@ -103,7 +102,7 @@ export const load = (pageId, settings, isInModal=false, entitySystemId='') => (d
     //    dispatch(checkPaging(response, pagenationActive));
     //    return;
     //}
-   
+    
     return get(rootRoute + `getGenericDataView/${pageId}?${params}`)
         .then((response) => response.json())
         .then((response) => dispatch(checkResponse(response, isInModal)))
@@ -118,11 +117,12 @@ export const loadModal = (modalSettings) => (dispatch, getState) => {
         type: GENERIC_MODAL_DATA_VIEW_INIT,
         payload: { modalSettings },
     });
-  
+    
     // Open modal
     dispatch(toggleModal());
 
     // Trigger BE-call
+
     if (modalSettings?.modalPageSystemId) {
         dispatch(load(modalSettings.modalPageSystemId, false, true, modalSettings.entitySystemId));
     }
@@ -217,6 +217,7 @@ export const checkResponse = (response, isInModal = false) => (dispatch, getStat
     
     //Clear Data view before adding data-due to strange bug //
     dispatch(clearRows(isInModal));
+    
     if (!isInModal) {
         dispatch(getHeaderInformationData());
         //Set dataViewHasTabs to true if response contains dataViewTabs
@@ -227,6 +228,7 @@ export const checkResponse = (response, isInModal = false) => (dispatch, getStat
     }
 
     dispatch(toggleLoader(false));
+    
     if (response.isNotLoggedOn) {
         //We use reversed condition due to object maybe not found
         return dispatch({
@@ -319,6 +321,7 @@ export const updateAllRows = (dataContainers, isInModal=false) => {
 };
 
 export const receive = (data, isInModal = false) => {
+    
     if (isInModal) {
         return {
             type: isInModal ? GENERIC_MODAL_DATA_VIEW_RECEIVE : GENERIC_DATA_VIEW_RECEIVE,

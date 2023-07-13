@@ -1,6 +1,6 @@
 import { get, patch, post, put, remove } from '../../../Services/http';
 import { catchError } from '../../../Actions/Error.action';
-//import mockdata from '../mockdataKanban.json';// '../mockdataForm.json';
+//import mockdata from '../mockdata3.json';// '../mockdataForm.json';
 import { toggleGenericLoader } from '../../../_PandoNexis/Actions/GenericLoader.action';
 import {
     receiveCart,
@@ -72,41 +72,36 @@ export const autocompleteGetList = (fieldId, query) => (dispatch, getState) => {
         .catch((ex) => dispatch(catchError(ex, (error) => loadError(error))));
 };
 
-export const buttonClick = (fieldId, containerIndex, setValueObject, isInModal = false, buttonSettings = {}) => (
+export const buttonClick = (fieldId, containerIndex = -1, setValueObject, isInModal = false, buttonSettings = {}, pageDataSource = null) => (
     dispatch,
     getState
 ) => {
 
     let fields = [];
-
-    if (containerIndex !== null && containerIndex !== undefined) {
+    if (containerIndex !== -1 && containerIndex !== undefined) {
         fields = getState().genericDataView.dataContainers[containerIndex].fields;
     }
     const data = {
         entitySystemId: fields.entitySystemId,
     };
-
     dispatch({
         type: isInModal ? GENERIC_MODAL_DATA_CONTAINER_UPDATE : GENERIC_DATA_CONTAINER_UPDATE,
         payload: { data, fields },
     });
-
-    const currentPageId = getState().genericDataView.currentPageId;
+    let currentPageId = setValueObject.postContainerPageSystemId || pageDataSource || getState().genericDataView.currentPageId;
     setValueObject.fieldId = fieldId;
 
     setValueObject.dataSource = currentPageId;
     dispatch(toggleGenericLoader(true));
 
-
     //if (mockdata) {
-    //    dispatch(updateDataContainer(mockdata, fields, buttonSettings));
+    //    dispatch(updateDataContainer(mockdata, fields, buttonSettings, containerIndex, isInModal));
     //    //response = mockdata; // isInModal ? mockdata2 : mockdata;
     //    return;
     //}
-
     return put(rootRoute + 'buttonClick', setValueObject)
         .then((response) => response.json())
-        .then((response) => dispatch(updateDataContainer(response, fields, buttonSettings)))
+        .then((response) => dispatch(updateDataContainer(response, fields, buttonSettings, containerIndex, isInModal)))
         .catch((ex) => dispatch(catchError(ex, (error) => loadError(error))));
 };
 
@@ -135,7 +130,7 @@ export const receiveOrganizationList = (data) => {
     };
 };
 
-export const updateDataContainer = (response, fields, buttonSettings = {}) => (dispatch, getState) => {
+export const updateDataContainer = (response, fields, buttonSettings = {}, containerIndex = -1, isInModal = false) => (dispatch, getState) => {
     dispatch(toggleGenericLoader(false));
    
     // If ony one data container is to be updated
@@ -159,7 +154,7 @@ export const updateDataContainer = (response, fields, buttonSettings = {}) => (d
         }
         
         if (response.fields) {
-            return dispatch(checkDataContainerResponse(response, fields));
+            return dispatch(checkDataContainerResponse(response, fields, false, '', containerIndex));
         }
         return dispatch(checkResponse(response));
         

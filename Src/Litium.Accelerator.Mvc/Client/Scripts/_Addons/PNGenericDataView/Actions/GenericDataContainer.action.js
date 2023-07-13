@@ -4,6 +4,7 @@ import { patch, post } from '../../../Services/http';
 import { catchError } from '../../../Actions/Error.action';
 import { toggleGenericLoader } from '../../../_PandoNexis/Actions/GenericLoader.action';
 import {
+    checkResponse,
     receiveGenericDataViewTabs,
     getHeaderInformationData,
 } from './GenericDataView.action';
@@ -103,7 +104,7 @@ export const update = (pageSystemId, data, fields, isInModal = false, entitySyst
             dispatch(catchError(ex, (error) => updateError(error, fields)))
         );
 };
-export const checkDataContainerResponse = (response, fields, isInModal = false, entitySystemId = '') => (dispatch, getState) => {
+export const checkDataContainerResponse = (response, fields, isInModal = false, entitySystemId = '', containerIndex = -1) => (dispatch, getState) => {
 
     if (!isInModal) {
         // Update header data
@@ -114,14 +115,16 @@ export const checkDataContainerResponse = (response, fields, isInModal = false, 
             dispatch(receiveGenericDataViewTabs(response.dataViewTabs));
         }
     }
-    if (!response.cart && !response.dataContainer) {
-        return dispatch(receive(response, fields, isInModal, entitySystemId));
+    if (!response.cart && !response.dataContainers) {
+        const genericDataView = { ...getState().genericDataView };        
+        genericDataView.dataContainers[containerIndex] = { ...response };        
+        return dispatch(checkResponse(genericDataView));//dispatch(receive(genericDataView.dataContainers, fields, isInModal, entitySystemId));
     } else {
         if (response.cart) {
             dispatch(receiveCart(response.cart));
         }
-        if (response.dataContainer) {
-            dispatch(receive(response.dataContainer, fields, isInModal, entitySystemId));
+        if (response.dataContainers) {
+            dispatch(receive(response.dataContainers, fields, isInModal, entitySystemId));
         }
         return true;
     }

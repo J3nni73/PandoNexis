@@ -100,7 +100,7 @@ export const GenericDataViewField = React.forwardRef(
                         <ButtonField
                             key={`button-group${index}-${dataContainerIndex}`}
                             fieldId={fieldId}
-                            entitySystemId={entitySystemId}
+                            entitySystemId={button.entitySystemId || entitySystemId}
                             dataContainerIndex={dataContainerIndex}
                             fieldSettings={button}
                             defaultValue={props.fieldName || ''}

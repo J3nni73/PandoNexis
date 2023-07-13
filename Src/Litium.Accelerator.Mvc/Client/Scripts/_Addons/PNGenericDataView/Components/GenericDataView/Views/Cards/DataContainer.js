@@ -131,7 +131,9 @@ export const DataContainer = React.memo(
                     return false;
                 }
             }
+
             if (fieldSettings?.buttonOpenInModal) {
+
                 const modalSettings = {
                     modalPageSystemId: fieldSettings.pageSystemId,
                     entitySystemId,
@@ -143,18 +145,19 @@ export const DataContainer = React.memo(
             const selectedValueObject = {
                 value: '',
                 name: '',
-                entitySystemId,
+                entitySystemId: entitySystemId,
                 dataContainerIndex,
+                postContainerPageSystemId = containerSettings?.postContainerPageSystemId || null,
                 form: containerSettings?.postContainer ? form : null
             };
-            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings));
+            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings, fieldSettings.pageSystemId));
         };
 
         const onBlur = (form, getWinValue=false) => {
             if (getWinValue) {
                 form[window.currGenDW_lastClickedFieldId] = window.currGenDW_lastClickedFieldValue;
             }
-            const identifierField = { EntitySystemId: fields[0].entitySystemId };;
+            const identifierField = { EntitySystemId: fields[0].entitySystemId };
             const errObjs = isContainerValid(identifierField, form, dirtyFields);
             setErrorObject(errObjs);
         };
@@ -358,7 +361,7 @@ export const DataContainer = React.memo(
                             )
                         )}
                     </div>
-                    {fields && containerSettings && containerSettings?.postContainer &&
+                    {fields && containerSettings && containerSettings?.postContainer && containerSettings?.postContainerPageSystemId &&
                         <div className="row">
                             <div className="small-12 columns text--right">
                                 <GenericDataViewField

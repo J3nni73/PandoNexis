@@ -129,6 +129,8 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
 
         public async override Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data)
         {
+            var view = new GenericDataView();
+            view.Settings = GetDataViewSettings(pageSystemId);
             var dataViewResponse = JsonConvert.DeserializeObject<GenericDataViewResponse>(data);
             if (Guid.TryParse(dataViewResponse.EntitySystemId, out Guid personSystemId))
             {
@@ -137,17 +139,22 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                 if (dataViewResponse.Form.ContainsKey("codeField"))
                 {
                     var code = dataViewResponse?.Form["codeField"]?.ToString() ?? string.Empty;
-                    if (Validate(code))
-                    {
-                        container = BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson));
-                        container.Settings.PostContainer = true;
-                        container.Settings.PostContainerButtonText = "addons.registerme.headertexts.saveperson".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
-                        return container;
-                    }
-                    else
-                    {
-                        return BuildCodeContainer();
-                    }
+                    Validate(code);
+                    return GetDataView(pageSystemId, "")?.Result;
+                    //if (Validate(code))
+                    //{
+                    //    container = BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson));
+                    //    container.Settings.PostContainer = true;
+                    //    container.Settings.PostContainerButtonText = "addons.registerme.headertexts.saveperson".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
+                      
+                    //    view.DataContainers.Add(container); 
+                    //    return view;
+                    //}
+                    //else
+                    //{
+                    //    view.DataContainers.Add(BuildCodeContainer());
+                    //    return view;
+                    //}
                 }
                 else if (IsValidated()&&!dataViewResponse.Form.ContainsKey("Response"))
                 {
@@ -170,14 +177,16 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                         };
                     container.Settings.PostContainer = true;
                     container.Settings.PostContainerButtonText = "Lägg till ytterligare en deltagare";
-                    return container;
+                    view.DataContainers.Add(container);
+                    return view;
                 }
                 else
                 {
                     container = BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson));
                     container.Settings.PostContainer = true;
                     container.Settings.PostContainerButtonText = "addons.registerme.headertexts.saveperson".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
-                    return container;
+                    view.DataContainers.Add(container);
+                    return view;
                 }
             }
 

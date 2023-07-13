@@ -135,10 +135,10 @@ $pn-megamenu-background-color-end: lighten($solution-megamenu-background-color, 
                 img {
                     @include transition;
                     max-height: 6.5rem;
-                  /*  margin: 0 0 auto;*/
+                    /*  margin: 0 0 auto;*/
                     position: absolute;
                     top: rem(14px);
-                    margin-left:140%;
+                    margin-left: 140%;
                 }
 
                 &:hover {
@@ -147,7 +147,7 @@ $pn-megamenu-background-color-end: lighten($solution-megamenu-background-color, 
                     }
                 }
             }
-            
+
 
             &-mobile {
                 @include transition;
@@ -174,7 +174,7 @@ $pn-megamenu-background-color-end: lighten($solution-megamenu-background-color, 
         align-items: center;
         justify-content: end;
         margin-top: rem(20px);
-        display: none;
+
 
         .top-link, .profile, .cart {
             &__link--block {
@@ -182,7 +182,7 @@ $pn-megamenu-background-color-end: lighten($solution-megamenu-background-color, 
                 font-size: rem($pn-header-components-size);
                 height: rem($pn-header-components-height);
                 text-transform: $pn-header-components-transform;
-                color: $pn-header-components-color;
+                color: #cb5012;
 
                 &:hover {
                     background: $pn-navbar-link-hover-background;
@@ -202,18 +202,18 @@ $pn-megamenu-background-color-end: lighten($solution-megamenu-background-color, 
             .pn-icon__account, .pn-icon__cart {
                 margin-right: rem(8px);
                 @include transition;
-                fill: $solution-icon-color;
+                fill: #cb5012;
                 //@include rotate(90);
 
                 @include mobile {
-                    fill: $solution-icon-color-mobile;
+                    fill: #cb5012;
                     margin-right: 0;
                 }
             }
 
             &:hover {
                 .pn-icon__account, .pn-icon__cart {
-                    fill: $solution-icon-hover-color;
+                    fill: $pn-header-components-hover-color;
                 }
             }
         }
@@ -237,6 +237,7 @@ $pn-megamenu-background-color-end: lighten($solution-megamenu-background-color, 
 
             &__icon-wrapper {
                 position: relative;
+                display:none;
             }
         }
 
@@ -649,8 +650,8 @@ $pn-megamenu-background-color-end: lighten($solution-megamenu-background-color, 
                     }
 
                     @include mobile-small {
-                       
-                       
+
+
                         img {
                             width: rem(136px);
                             max-height: rem($pn-header-mobile-height);

@@ -8,7 +8,11 @@ export const GridHeader = ({
     fieldsToShow,
     isInModal = false,
 }) => {
-   
+
+    if (!fields) {
+        return null;
+    }
+    
     //useEffect(() => {
 
     //    setHiddenFieldsCount(fields.length - [...fieldsToShow].length);
@@ -17,16 +21,18 @@ export const GridHeader = ({
     return (
         <thead> 
             <tr>
-                {fields.map(({ fieldName, settings }, index) => (
+                {fields.map((field, index) => (
+                    field?.fieldName ? (
                     <th
                         key={index}
-                        style={{ backgroundColor: settings.backgroundColor || null }}
-                        onClick={() => sortColumn(fieldName, index)}
-                        className={`${sortConfig?.fieldName === fieldName ? sortConfig.direction : ''
+                            style={{ backgroundColor: field.settings.backgroundColor || null }}
+                            onClick={() => sortColumn(field.fieldName, index)}
+                            className={`${sortConfig?.fieldName === field.fieldName ? sortConfig.direction : ''
                             } ${fieldsToShow.includes(index) ? '' : 'fieldToHide'}`}
                     >
-                        {fieldName}
-                    </th>
+                            {field.fieldName}
+                        </th>
+                    ) : null
                 ))}
             </tr>
         </thead>
