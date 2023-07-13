@@ -12,6 +12,7 @@ using Solution.Extensions.PNQuizWalk.Objects;
 using Solution.Extensions.PNQuizWalk.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,6 +72,7 @@ namespace Solution.Extensions.PNQuizWalk.Processors
             var result = JsonConvert.DeserializeObject<GenericDataContainer>(JsonConvert.SerializeObject(templateContainer));
 
             result.Settings.PostContainer = true;
+            result.Settings.PostContainerPageSystemId = _currentPageSystemId;
 
             foreach (var field in result.Fields)
             {

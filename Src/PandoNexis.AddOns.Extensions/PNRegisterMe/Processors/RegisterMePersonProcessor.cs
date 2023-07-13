@@ -60,6 +60,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
             {
                 var container = BuildCodeContainer();
                 container.Settings.PostContainer = true;
+                container.Settings.PostContainerPageSystemId = _currentPageSystemId;
                 container.Settings.PostContainerButtonText = "addons.registerme.headertexts.saveperson".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
                 view.DataContainers.Add(container);
             }
@@ -68,6 +69,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                 var person = SetOrCreatePerson(new PersonWithProperties());
                 var container = BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson));
                 container.Settings.PostContainer = true;
+                container.Settings.PostContainerPageSystemId = _currentPageSystemId;
                 container.Settings.PostContainerButtonText = "addons.registerme.headertexts.saveperson".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
                 view.DataContainers.Add(container);
             }
@@ -81,6 +83,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
             var website = _requestModelAccessor.RequestModel.WebsiteModel.Website;
             container.Fields.Add(CodeField(website));
             container.Settings.PostContainer = true;
+            container.Settings.PostContainerPageSystemId = _currentPageSystemId;
             container.Settings.PostContainerButtonText = "addons.registerme.headertexts.saveperson".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
 
             while (fields.Fields.Count() > container.Fields.Count())
@@ -176,6 +179,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                             SaveResponseAsGenericField(_requestModelAccessor.RequestModel.WebsiteModel.Website)
                         };
                     container.Settings.PostContainer = true;
+                    container.Settings.PostContainerPageSystemId = _currentPageSystemId;
                     container.Settings.PostContainerButtonText = "Lägg till ytterligare en deltagare";
                     view.DataContainers.Add(container);
                     return view;
@@ -184,6 +188,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                 {
                     container = BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson));
                     container.Settings.PostContainer = true;
+                    container.Settings.PostContainerPageSystemId = _currentPageSystemId;
                     container.Settings.PostContainerButtonText = "addons.registerme.headertexts.saveperson".AsWebsiteText(_requestModelAccessor.RequestModel.WebsiteModel.Website);
                     view.DataContainers.Add(container);
                     return view;

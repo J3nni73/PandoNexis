@@ -26,7 +26,7 @@ namespace Solution.Extensions.PNQuizWalk.Processors
         private readonly GenericDataViewService _genericDataViewService;
         private readonly PersonService _personService;
         private readonly PersonStorage _personStorage;
-
+        public Guid _currentPageSystemId { get; set; }
         protected QuizWalkItemBase(GenericDataViewService genericDataViewService, 
                                     PersonService personService, 
                                     PersonStorage personStorage)

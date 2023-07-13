@@ -19,7 +19,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
         private readonly FieldDefinitionService _fieldDefinitionService;
         private readonly GenericDataViewService _genericDataViewService;
         private readonly RequestModelAccessor _requestModelAccessor;
-
+        public Guid _currentPageSystemId { get; set; }
         protected OrganizationDataViewBase(FieldDefinitionService fieldDefinitionService,
                                         FieldTemplateService fieldTemplateService,
                                         GenericDataViewService genericDataViewService,

@@ -62,6 +62,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
         }
         public async Task<GenericDataView> GetDataView(Guid pageSystemId, Guid groupId)
         {
+            _currentPageSystemId = pageSystemId;
             var view = new GenericDataView();
             view.Settings = GetDataViewSettings(pageSystemId);
             var website = _requestModelAccessor.RequestModel.WebsiteModel.Website;

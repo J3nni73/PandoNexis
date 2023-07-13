@@ -29,28 +29,27 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Services
             _dataService = dataService;
         }
 
-        public GenericDataField GetFieldCustomers(Website website, Guid? selectedOrganizationSystemId,Person person)
+        public GenericDataField GetFieldCustomers(Website website, Guid? selectedOrganizationSystemId, Person person)
         {
-            if (selectedOrganizationSystemId == null) return null;
             //hämta organizationer
             var field = new GenericDataField();
             field.FieldId = NoCrmProcessorConstants.ChildOrganizations;
             field.FieldName = "addons.nocrm.headertexts.organizations".AsWebsiteText(website);
             field.FieldType = DataFieldTypes.DropDownDGType;
             field.Settings.Editable = true;
-            var customers = GetChildOrganizations((Guid)selectedOrganizationSystemId);
-            var selected = person.OrganizationLinks.Select(i => i.OrganizationSystemId).ToList();
-            
 
-            foreach (var customer in customers)
+            if (selectedOrganizationSystemId != null)
             {
-                field.Options.Add(new GenericOption() { Key = customer.SystemId.ToString(), Value = customer.Name, Selected = selected.Contains(customer.SystemId) });
-                if (selected.Contains(customer.SystemId))
-                    field.FieldValue = customer.SystemId.ToString();
-                
+                var customers = GetChildOrganizations((Guid)selectedOrganizationSystemId);
+                var selected = person.OrganizationLinks.Select(i => i.OrganizationSystemId).ToList();
 
+                foreach (var customer in customers)
+                {
+                    field.Options.Add(new GenericOption() { Key = customer.SystemId.ToString(), Value = customer.Name, Selected = selected.Contains(customer.SystemId) });
+                    if (selected.Contains(customer.SystemId))
+                        field.FieldValue = customer.SystemId.ToString();
+                }
             }
-
             return field;
         }
         public List<Organization> GetChildOrganizations(Guid organizationSystemId)

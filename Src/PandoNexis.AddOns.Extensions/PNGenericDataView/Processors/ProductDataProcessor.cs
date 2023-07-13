@@ -13,7 +13,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
     {
         private readonly RequestModelAccessor _requestModelAccessor;
         private readonly ProductSearchService _productSearchService;
-        
+        public Guid _currentPageSystemId { get; set; }
 
         private const string AreaSource = "ProductData";
         public ProductDataProcessor(FieldTemplateService fieldTemplateService,
