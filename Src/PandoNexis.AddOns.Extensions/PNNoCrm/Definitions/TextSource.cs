@@ -28,7 +28,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Definitions
             {
                 
                 "nocrm.headertexts.viewpersons".AsWebsiteTextDefinition("View persons", "Visa personer", clientAvailable: true, serverAvailable: true),
-                
+                "nocrm.headertexts.organizations".AsWebsiteTextDefinition("Organizations", "Organisationer", clientAvailable: true, serverAvailable: true),
             };
         }
     }

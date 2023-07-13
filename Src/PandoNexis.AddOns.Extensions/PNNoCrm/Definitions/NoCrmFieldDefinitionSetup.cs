@@ -30,6 +30,16 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Definitions
                          Fields  = new List<string>()
                      }
                 },
+                new FieldDefinition<WebsiteArea>(NoCrmProcessorConstants.Subject, SystemFieldTypeConstants.Text)
+                {
+                    MultiCulture = false,
+                    
+                },
+                new FieldDefinition<WebsiteArea>(NoCrmProcessorConstants.Body, SystemFieldTypeConstants.Editor)
+                {
+                    MultiCulture = false,
+                     
+                },
             };
             return fields;
         }

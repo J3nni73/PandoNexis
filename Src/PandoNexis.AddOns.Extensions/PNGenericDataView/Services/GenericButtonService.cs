@@ -41,5 +41,21 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
             }
             return button;
         }
+        public GenericButton GetButton(string buttonName, Guid entitySystemId,Guid pageSystemId, string buttonText, string confirmationText = "", bool useConfirmation = false, bool buttonOpenInModal = false )
+        {
+
+            var button = new GenericButton();
+
+            button.FieldId = buttonName;
+            button.EntitySystemId = entitySystemId;
+            button.ButtonText = buttonText;
+            button.UseConfirmation = useConfirmation;
+            button.ConfirmationText = confirmationText;
+            button.ButtonOpenInModal = buttonOpenInModal;
+            
+            button.ClassName = "generic-data-view__btn-green";
+
+            return button;
+        }
     }
 }

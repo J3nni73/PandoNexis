@@ -26,6 +26,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Definitions
             {
                GetPersonField(NoCrmProcessorConstants.PersonListByGroup, ProcessorConstants.AvailableFields, SystemFieldDefinitionConstants.FirstName),
                GetPersonField(NoCrmProcessorConstants.PersonListByGroup, ProcessorConstants.AvailableFields, SystemFieldDefinitionConstants.LastName),
+               GetPersonField(NoCrmProcessorConstants.PersonListByGroup, ProcessorConstants.AvailableFields, SystemFieldDefinitionConstants.Email),
                GetPersonField(NoCrmProcessorConstants.PersonListByGroup, ProcessorConstants.AvailableFields, SystemFieldDefinitionConstants.Description),
             };
 

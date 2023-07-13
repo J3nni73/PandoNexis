@@ -99,6 +99,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
                 viewGroupButton.FieldName = NoCrmProcessorConstants.ViewPersonListByGroup;
                 viewGroupButton.FieldType= DataFieldTypes.ButtonDGType;
                 viewGroupButton.Settings.GenericButtons.Add(_genericButtonService.GetButton(website, NoCrmProcessorConstants.NoCrmButtonLinks, NoCrmProcessorConstants.ViewPersonListByGroup, NoCrmProcessorConstants.NoCrmButtonNames, group.SystemId));
+                viewGroupButton.Settings.GenericButtons.Add(_genericButtonService.GetButton(website, NoCrmProcessorConstants.NoCrmButtonLinks, NoCrmProcessorConstants.SendMail, NoCrmProcessorConstants.NoCrmButtonNames, group.SystemId));
 
 
 

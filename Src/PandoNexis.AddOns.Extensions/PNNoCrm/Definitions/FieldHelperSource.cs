@@ -22,9 +22,12 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Definitions
                 GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.DataArea, NoCrmProcessorConstants.NoCrm),
                 GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.Groups),
                 GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.PersonListByGroup),
+                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.SendMail),
                 GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.ViewPersonListByGroup),
                 GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.CreatePerson),
                 GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.AddLogin),
+                GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.ResetPassword),
+                GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.SendMail),
 
             };
 
