@@ -147,7 +147,7 @@ export const DataContainer = React.memo(
                 name: '',
                 entitySystemId: entitySystemId,
                 dataContainerIndex,
-                postContainerPageSystemId = containerSettings?.postContainerPageSystemId || null,
+                postContainerPageSystemId: containerSettings?.postContainerPageSystemId || null,
                 form: containerSettings?.postContainer ? form : null
             };
             dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings, fieldSettings.pageSystemId));
