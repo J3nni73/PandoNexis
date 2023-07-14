@@ -105,7 +105,7 @@ export const update = (pageSystemId, data, fields, isInModal = false, entitySyst
         );
 };
 export const checkDataContainerResponse = (response, fields, isInModal = false, entitySystemId = '', containerIndex = -1) => (dispatch, getState) => {
-
+    
     if (!isInModal) {
         // Update header data
         dispatch(getHeaderInformationData());
@@ -115,16 +115,27 @@ export const checkDataContainerResponse = (response, fields, isInModal = false, 
             dispatch(receiveGenericDataViewTabs(response.dataViewTabs));
         }
     }
+    
     if (!response.cart && !response.dataContainers) {
-        const genericDataView = { ...getState().genericDataView };        
-        genericDataView.dataContainers[containerIndex] = { ...response };        
-        return dispatch(checkResponse(genericDataView));//dispatch(receive(genericDataView.dataContainers, fields, isInModal, entitySystemId));
+        const genericDataView = { ...getState().genericDataView };
+         
+        if (isInModal) {
+            genericDataView.modalDataContainers[containerIndex] = { ...response };
+        }
+        else {
+            genericDataView.dataContainers[containerIndex] = { ...response };
+        }
+        
+        dispatch(receive(genericDataView.dataContainers, fields, isInModal, entitySystemId)); //dispatch(checkResponse(genericDataView, isInModal));
     } else {
         if (response.cart) {
             dispatch(receiveCart(response.cart));
         }
         if (response.dataContainers) {
             dispatch(receive(response.dataContainers, fields, isInModal, entitySystemId));
+        }
+        else {
+            dispatch(receive(response, fields, isInModal, entitySystemId));
         }
         return true;
     }

@@ -134,7 +134,7 @@ export const DataContainer = React.memo(
                 postContainerPageSystemId: containerSettings?.postContainerPageSystemId || null,
                 form: containerSettings?.postContainer ? form : null
             };
-            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, false, fieldSettings, fieldSettings.pageSystemId));
+            dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, isInModal, fieldSettings, fieldSettings.pageSystemId));
         };
 
         const onBlur = (form, getWinValue = false) => {

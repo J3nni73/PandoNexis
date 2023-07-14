@@ -76,7 +76,6 @@ export const buttonClick = (fieldId, containerIndex = -1, setValueObject, isInMo
     dispatch,
     getState
 ) => {
-
     let fields = [];
     if (containerIndex !== -1 && containerIndex !== undefined) {
         fields = getState().genericDataView.dataContainers[containerIndex].fields;
@@ -93,7 +92,7 @@ export const buttonClick = (fieldId, containerIndex = -1, setValueObject, isInMo
 
     setValueObject.dataSource = currentPageId;
     dispatch(toggleGenericLoader(true));
-
+    
     //if (mockdata) {
     //    dispatch(updateDataContainer(mockdata, fields, buttonSettings, containerIndex, isInModal));
     //    //response = mockdata; // isInModal ? mockdata2 : mockdata;
@@ -154,7 +153,7 @@ export const updateDataContainer = (response, fields, buttonSettings = {}, conta
         }
         
         if (response.fields) {
-            return dispatch(checkDataContainerResponse(response, fields, false, '', containerIndex));
+            return dispatch(checkDataContainerResponse(response, fields, isInModal, '', containerIndex));
         }
         return dispatch(checkResponse(response));
         

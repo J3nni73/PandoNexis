@@ -66,6 +66,7 @@ export const TableView = ({
                                 dataContainerIndex={index}
                                 fieldsToShow={fieldsToShow}
                                 dropDownOptions={dataContainer.options}
+                                {...{ isInModal } }
                             />
                         ))}
                 </tbody>

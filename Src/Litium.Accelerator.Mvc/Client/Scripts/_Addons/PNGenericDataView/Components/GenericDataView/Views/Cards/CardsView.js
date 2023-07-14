@@ -67,7 +67,9 @@ export const CardsView = ({
                                     columnsInsideContainerMedium,
                                     columnsInsideContainerLarge,
                                     showTitles,
-                                    ingressField                             }}
+                                    ingressField,
+                                    isInModal
+                                }}
                             />
                         ))}
                 </div>

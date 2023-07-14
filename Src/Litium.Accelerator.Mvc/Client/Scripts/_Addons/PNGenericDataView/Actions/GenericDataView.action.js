@@ -209,6 +209,7 @@ export const checkResponse = (response, isInModal = false) => (dispatch, getStat
     if (response.result) {
         response = response.result;
     }
+    
     //console.log('Check Response ', response);
     if (!response) {
         dispatch(toggleLoader(false));
@@ -324,12 +325,12 @@ export const receive = (data, isInModal = false) => {
     
     if (isInModal) {
         return {
-            type: isInModal ? GENERIC_MODAL_DATA_VIEW_RECEIVE : GENERIC_DATA_VIEW_RECEIVE,
+            type: GENERIC_MODAL_DATA_VIEW_RECEIVE,
             payload: data,
         };
     }
     return {
-        type: isInModal ? GENERIC_MODAL_DATA_VIEW_RECEIVE : GENERIC_DATA_VIEW_RECEIVE,
+        type: GENERIC_DATA_VIEW_RECEIVE,
         payload: data,
     };
 };

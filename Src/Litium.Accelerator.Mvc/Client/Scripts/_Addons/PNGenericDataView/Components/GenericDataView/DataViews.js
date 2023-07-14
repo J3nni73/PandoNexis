@@ -152,7 +152,7 @@ export const GenericDataView = ({
             setHasInitialized(true);
             
             // REMOVE FOLLOWING ROW WHEN USING PAGENATION
-            setCurrentPosts(items);
+            setCurrentPosts(items);            
             //// WHEN USING PAGE SIZE
             //if (pageSize) {
             //    // Pagination
@@ -160,7 +160,7 @@ export const GenericDataView = ({
             //    const indexOfFirstPost = indexOfLastPost - pageSize;
             //    setCurrentPosts(items.slice(indexOfFirstPost, indexOfLastPost));
             //}
-        }
+        }      
     }, [items, dataContainers]);
 
 
