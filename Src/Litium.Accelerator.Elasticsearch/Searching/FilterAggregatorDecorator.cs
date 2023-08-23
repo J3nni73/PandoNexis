@@ -52,13 +52,15 @@ namespace Litium.Accelerator.Search.Searching
             _requestModelAccessor = requestModelAccessor;
             _searchQueryBuilder = searchQueryBuilder;
             _fieldDefinitionService = fieldDefinitionService;
-            _marketModel = new Lazy<MarketModel>(() => _requestModelAccessor.RequestModel.ChannelModel?.Channel?.MarketSystemId?.MapTo<MarketModel>());
+            _marketModel = new Lazy<MarketModel>(() =>
+                _requestModelAccessor.RequestModel.ChannelModel?.Channel?.MarketSystemId?.MapTo<MarketModel>());
             _assortmentSystemId = new Lazy<Guid>(() => _marketModel.Value?.Market.AssortmentSystemId ?? Guid.Empty);
             _countrySystemId = new Lazy<Guid>(() => _requestModelAccessor.RequestModel.CountryModel.SystemId);
             _priceContainer = new Lazy<SearchPriceFilterService.Container>(() => priceFilterService.GetPrices());
         }
 
-        public override async Task<IEnumerable<GroupFilter>> GetFilterAsync(SearchQuery searchQuery, IEnumerable<string> fieldNames)
+        public override async Task<IEnumerable<GroupFilter>> GetFilterAsync(SearchQuery searchQuery,
+            IEnumerable<string> fieldNames)
         {
             var fieldNamesList = fieldNames as IList<string> ?? fieldNames.ToList();
 
@@ -66,8 +68,9 @@ namespace Litium.Accelerator.Search.Searching
             {
                 return await _parent.GetFilterAsync(searchQuery, fieldNames);
             }
-            else if (fieldNamesList.Count > 0
-                    && !fieldNamesList.All(fieldName => fieldName.Equals(FilteringConstants.FilterNews, StringComparison.OrdinalIgnoreCase)))
+            if (fieldNamesList.Count > 0
+                && !fieldNamesList.All(fieldName =>
+                    fieldName.Equals(FilteringConstants.FilterNews, StringComparison.OrdinalIgnoreCase)))
             {
                 var noFilterFieldNames = new HashSet<string>(new[]
                 {
@@ -152,42 +155,48 @@ namespace Litium.Accelerator.Search.Searching
                     }
                 }
 
-                AggregationContainerDescriptor<ProductDocument> BuildCategoryAggregation(AggregationContainerDescriptor<ProductDocument> selector)
+                AggregationContainerDescriptor<ProductDocument> BuildCategoryAggregation(
+                    AggregationContainerDescriptor<ProductDocument> selector)
                 {
                     return selector
-                        .Nested("$Categories", filterContainer => filterContainer
-                            .Path(x => x.MainCategories)
-                            .Aggregations(a => a
-                                .Filter("filter", filterSelector => filterSelector
-                                    .Filter(ff => ff
-                                        .Bool(bq => bq
-                                            .Must(m =>
+                        .Filter("$Categories", filterContainer => filterContainer
+                            .Filter(filterSelector => filterSelector
+                                .Bool(bq =>
                                             {
-                                                var qc = m
-                                                .Term(t => t
-                                                    .Field(x => x.MainCategories[0].AssortmentSystemId)
-                                                    .Value(_assortmentSystemId.Value)
-                                                );
-
-                                                if (searchQuery.ContainsFilter() && (!searchQuery.ContainsCategoryFilter() || searchQuery.ContainsMultipleFilters()))
+                                    if (searchQuery.ContainsFilter(includeCategoryFilter:false))
                                                 {
-                                                    qc &= _searchQueryBuilder.BuildQuery(
+                                        return bq.Must(m =>
+                                            _searchQueryBuilder.BuildQuery(
                                                             m,
                                                             searchQuery,
                                                             tags: searchQuery.Tags,
                                                             addPriceFilterTags: true,
                                                             addNewsFilterTags: true,
                                                             addCategoryFilterTags: false,
-                                                            addDefaultQuery: false);
-                                                }
+                                                addDefaultQuery: false)
 
-                                                return qc;
-                                            })
+                                        );
+                                                }
+                                    return bq.Must(x => x.Term(valueSelector => valueSelector
+                                        .Field(a => a.ChannelSystemId)
+                                        .Value(_requestModelAccessor.RequestModel.ChannelModel?.SystemId)
+                                    ));
+                                }))
+                            .Aggregations(container =>
+                                container
+                                    .Nested("$Categories", nestedDescriptor => nestedDescriptor
+                                        .Path(x => x.MainCategories)
+                                        .Aggregations(fieldAggregation => fieldAggregation
+                                            .Filter("filter", fieldFilter => fieldFilter
+                                                .Filter(filter => filter
+                                                    .Term(valueSelector => valueSelector
+                                                        .Field(x => x.MainCategories[0].AssortmentSystemId)
+                                                        .Value(_assortmentSystemId.Value)
                                         )
                                     )
-                                    .Aggregations(termAgg => termAgg
+                                                .Aggregations(tags => tags
                                         .Terms("tags", termSelector => termSelector
-                                            .Field(x => x.MainCategories[0].AssortmentSystemId)
+                                                        .Field(field => field.MainCategories[0].AssortmentSystemId)
                                             .Aggregations(subAggregation => subAggregation
                                                 .Terms("tag", valueSelector => valueSelector
                                                     .Field(x => x.MainCategories[0].CategorySystemId)
@@ -198,10 +207,12 @@ namespace Litium.Accelerator.Search.Searching
                                     )
                                 )
                             )
-                        );
+                                    )
+                            ));
                 }
 
-                IEnumerable<AggregationContainerDescriptor<ProductDocument>> BuildFieldAggregations(AggregationContainerDescriptor<ProductDocument> selector, IEnumerable<string> fieldNames)
+                IEnumerable<AggregationContainerDescriptor<ProductDocument>> BuildFieldAggregations(
+                    AggregationContainerDescriptor<ProductDocument> selector, IEnumerable<string> fieldNames)
                 {
                     return fieldNames
                         .Select(fieldName =>
@@ -336,7 +347,7 @@ namespace Litium.Accelerator.Search.Searching
                                 ? "item.priceIncludeVat"
                                 : "item.priceExcludeVat";
                         var scriptStr =
-                            $"double r; for (item in params._source.prices) {{ if (params.id.contains(item.systemId) && item.countrySystemId == params.country && item.isCampaignPrice == false) {{ r = r == 0 ? {priceType} : Math.min(r, {priceType})}}}} return r";
+                            $"double r; boolean a = false; for (item in params._source.prices) {{ for (x in item.priceListSystemIds){{ a = params.id.contains(x)}}  if ( a == true && item.countrySystemId == params.country && item.isCampaignPrice == false) {{ r = r == 0 ? {priceType} : Math.min(r, {priceType})}}}} return r";
                         return selector
                             .Terms("$Prices", prices => prices
                                 .Script(script => script
@@ -353,6 +364,7 @@ namespace Litium.Accelerator.Search.Searching
                 {
                     var categoryBucket = result.Aggregations
                            .Global("$Categories")
+                        .Global("$Categories")
                            .Filter("filter")?
                            .Terms("tags")?
                            .Buckets

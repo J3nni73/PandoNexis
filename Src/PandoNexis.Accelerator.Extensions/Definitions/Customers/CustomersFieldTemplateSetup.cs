@@ -1,19 +1,33 @@
 ﻿using Litium.Accelerator.Definitions;
 using Litium.Customers;
 using Litium.FieldFramework;
+using Litium.Sales;
 using PandoNexis.Accelerator.Extensions.Constants;
+using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 
 namespace PandoNexis.Accelerator.Extensions.Definitions.Customers
 {
-    internal class CustomersFieldTemplateSetup : FieldTemplateSetup
+    internal class CustomersFieldTemplateSetup : FieldTemplateHelper
     {
-        public override IEnumerable<FieldTemplate> GetTemplates()
+        public override IEnumerable<FieldTemplateChanges> GetFieldTemplateFieldChanges()
         {
-            var items = new FieldTemplate[]
+            var templateChanges = new List<FieldTemplateChanges>
             {
-                new PersonFieldTemplate(CustomerTemplateIdConstants.SystemAdminUser)
+                GetOrganizationField(CustomerTemplateIdConstants.SystemAdminUser,"General", SystemFieldDefinitionConstants.FirstName),
+                GetOrganizationField(CustomerTemplateIdConstants.SystemAdminUser, "General", SystemFieldDefinitionConstants.LastName),
+                GetOrganizationField(CustomerTemplateIdConstants.SystemAdminUser, "General", SystemFieldDefinitionConstants.Email),
+                GetOrganizationField(CustomerTemplateIdConstants.SystemAdminUser, "General", SystemFieldDefinitionConstants.Phone),
+                GetOrganizationField(CustomerTemplateIdConstants.SystemAdminUser, "General", "SocialSecurityNumber")
+            };
+
+            return templateChanges;
+        }
+
+        public override FieldTemplate GetFieldTemplateNewTemplate()
+        {
+            var tempalate = new PersonFieldTemplate(CustomerTemplateIdConstants.SystemAdminUser)
                 {
-                    FieldGroups = new []
+                FieldGroups = new[]
                     {
                         new FieldTemplateFieldGroup()
                         {
@@ -21,17 +35,12 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.Customers
                             Collapsed = false,
                             Fields =
                             {
-                                SystemFieldDefinitionConstants.FirstName,
-                                SystemFieldDefinitionConstants.LastName,
-                                SystemFieldDefinitionConstants.Email,
-                                SystemFieldDefinitionConstants.Phone,
-                                "SocialSecurityNumber"
+
                             }
                         }
                     }
-                },
             };
-            return items;
+            return tempalate;
         }
     }
 }

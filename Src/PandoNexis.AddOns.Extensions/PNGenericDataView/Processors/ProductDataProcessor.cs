@@ -26,11 +26,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
             _productSearchService = productSearchService;
         }
 
-        public override async Task<object> GetDataForm(string data)
-        {
-            throw new NotImplementedException();
-        }
-
         public override async Task<GenericDataView> GetDataView(Guid pageSystemId, string data)
         {
             var dataView = new GenericDataView();
@@ -73,11 +68,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
         }
 
         public override async Task<object> GetGridViewForExport(string data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override async Task<object> HandleFormData(string data)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-@using PandoNexis.AddOns.Extensions.Block.ColumnBlock
+﻿@using PandoNexis.AddOns.Extensions.Block.ColumnBlock
 @model ColumnBlockViewModel
 
 <div class="column-block">
@@ -64,23 +64,23 @@
     </div>
     @if (!string.IsNullOrEmpty(Model.Summary) || !string.IsNullOrEmpty(Model.Button.Href))
     {
-        <div class="row">
-            <div class="small-12 columns">
-                <div class=" column-block__summary">
-                    <div>
-                        @Html.Raw(Model.Summary)
+    <div class="row">
+        <div class="small-12 columns">
+            <div class=" column-block__summary">
+                <div>
+                    @Html.Raw(Model.Summary)
 
-                        @if (Model.Button != null && !string.IsNullOrEmpty(Model.Button.Href))
-                        {
-                            <div class="button column-block__summary__button">
-                                <a href="@Model.Button.Href" target="@Model.Button.Target" class="@Model.Button.Class">@Model.Button.LinkText</a>
-                                <p class="column-block__summary__subtext">@Model.Button.ButtonSubText</p>
-                            </div>
-                        }
-                    </div>
+                    @if (Model.Button != null && !string.IsNullOrEmpty(Model.Button.Href))
+                    {
+                        <div class="button column-block__summary__button">
+                            <a href="@Model.Button.Href" target="@Model.Button.Target" class="@Model.Button.Class">@Model.Button.LinkText</a>
+                            <p class="column-block__summary__subtext">@Model.Button.ButtonSubText</p>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
+    </div>
     }
 </div>
 

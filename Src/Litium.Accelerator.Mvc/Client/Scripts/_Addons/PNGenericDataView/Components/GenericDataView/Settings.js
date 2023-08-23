@@ -9,6 +9,7 @@ import { getURLSearchParams } from '../../../../_PandoNexis/Services/url';
 import { any } from 'array-flat-polyfill';
 import { GenericDataViewField } from './Field';
 import { buttonClick } from '../../Actions/GenericDataContainerField.action';
+import { loadModal } from '../../Actions/GenericDataView.action';
 
 const SORT_BY = 'sortBy';
 const EXPORT = 'export';
@@ -69,7 +70,7 @@ export const GenericDataViewSettings = ({
         }
         if (fieldSettings?.buttonOpenInModal) {
             const modalSettings = {
-                modalPageSystemId: fieldSettings.modalPageSystemId,
+                modalPageSystemId: fieldSettings.modalPageSystemId || fieldSettings.pageSystemId,
                 entitySystemId,
 
             };

@@ -2,6 +2,7 @@
 using Litium.FieldFramework;
 using System.Collections.Generic;
 using Litium.Accelerator.Constants;
+using Litium.Blocks;
 
 namespace Litium.Accelerator.Definitions.Pages
 {

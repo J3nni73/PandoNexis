@@ -3,6 +3,7 @@ using Litium.FieldFramework;
 using Litium.Accelerator.Constants;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 using PNFieldTemplateConstants = PandoNexis.Accelerator.Extensions.Constants.PageFieldTemplateConstants;
+using Litium.Blocks;
 
 namespace Solution.Extensions.Definitions
 {

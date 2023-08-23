@@ -2,46 +2,29 @@
 using Litium.FieldFramework;
 using Litium.FieldFramework.FieldTypes;
 using Litium.Websites;
+using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 using PandoNexis.AddOns.Extensions.PNNoErp.Constants;
 
 namespace PandoNexis.AddOns.Extensions.PNNoErp.Definitions
 {
     internal class NoErpFieldDefinitionSetup : Litium.Accelerator.Definitions.FieldDefinitionSetup
     {
+        public readonly FieldHelper _fieldHelper;
+
+        public NoErpFieldDefinitionSetup(FieldHelper fieldHelper)
+        {
+            _fieldHelper = fieldHelper;
+        }
+
         public override IEnumerable<FieldDefinition> GetFieldDefinitions()
         {
+
             var fields = new List<FieldDefinition>
             {
-                new FieldDefinition<CustomerArea>(NoErpOrderAdminConstants.Authorization, SystemFieldTypeConstants.Text)
-                {
-                    CanBeGridColumn = true,
-                    CanBeGridFilter = true,
-                    MultiCulture = false,
-                },
-                new FieldDefinition<CustomerArea>(NoErpOrderAdminConstants.BaseUrl, SystemFieldTypeConstants.Text)
-                {
-                    CanBeGridColumn = true,
-                    CanBeGridFilter = true,
-                    MultiCulture = false,
-                },
-                new FieldDefinition<WebsiteArea>(NoErpOrderAdminConstants.NoErpButtonNames, SystemFieldTypeConstants.TextOption)
-                {
-                      Option = new TextOption 
-                      {
-                        MultiSelect = false,
-                        Items = new List<TextOption.Item>()
-                      }
-                }, 
-                
-                new FieldDefinition<WebsiteArea>(NoErpOrderAdminConstants.NoErpButtonLinks, SystemFieldTypeConstants.MultiField)
-                {
-                    MultiCulture = false,
-                     Option = new MultiFieldOption
-                     {
-                         IsArray = true,
-                         Fields  = new List<string>()
-                     }
-                },
+                _fieldHelper.GetCustomerFieldDefinition(NoErpOrderAdminConstants.Authorization, SystemFieldTypeConstants.Text, false, true, true),
+                _fieldHelper.GetCustomerFieldDefinition(NoErpOrderAdminConstants.BaseUrl, SystemFieldTypeConstants.Text, false, true, true),
+                _fieldHelper.GetWebsiteTextOptionField(NoErpOrderAdminConstants.NoErpButtonNames, SystemFieldTypeConstants.TextOption),
+                _fieldHelper.GetWebsiteMultiField(NoErpOrderAdminConstants.NoErpButtonLinks, SystemFieldTypeConstants.MultiField, true),
             };
             return fields;
         }

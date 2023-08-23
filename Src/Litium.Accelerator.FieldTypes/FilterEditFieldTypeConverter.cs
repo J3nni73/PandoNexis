@@ -14,16 +14,16 @@ namespace Litium.Accelerator.FieldTypes
     internal class FilterEditFieldTypeConverter : IEditFieldTypeConverter
     {
         private readonly JsonSerializer _jsonSerializer;
-        private readonly SettingService _settingsService;
+        private readonly FilterFieldRepository _filterFieldtypeService;
         private readonly FieldDefinitionService _fieldDefinitionService;
 
         public FilterEditFieldTypeConverter(
             JsonSerializer jsonSerializer,
-            SettingService settingsService,
+            FilterFieldRepository filterFieldtypeService,
             FieldDefinitionService fieldDefinitionService)
         {
             _jsonSerializer = jsonSerializer;
-            _settingsService = settingsService;
+            _filterFieldtypeService = filterFieldtypeService;
             _fieldDefinitionService = fieldDefinitionService;
         }
 
@@ -51,7 +51,7 @@ namespace Litium.Accelerator.FieldTypes
 
             var removedIds = new List<string>();
             var ignoredIds = new List<string> { "#Price", "#News" };
-            var productFilteringFields = _settingsService.Get<IList<string>>("Accelerator.ProductFiltering") ?? new List<string>();
+            var productFilteringFields = _filterFieldtypeService.GetProductFilteringFields();
             foreach (var fieldId in items.Where(x => !ignoredIds.Contains(x)))
             {
                 if (!productFilteringFields.Contains(fieldId))

@@ -42,5 +42,7 @@ namespace Litium.Accelerator.ViewModels.Checkout
         public string TermsUrl { get; set; }
         public string LoginUrl { get; set; }
         public string RedirectUrl { get; set; }
+        public string GiftCard { get; set; }
+        public ISet<string> UsedGiftCards { get; set; }
     }
 }

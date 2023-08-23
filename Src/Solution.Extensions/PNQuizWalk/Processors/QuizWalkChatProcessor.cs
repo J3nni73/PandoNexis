@@ -7,8 +7,6 @@ using Litium.Web.Mvc;
 using Newtonsoft.Json;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Services;
-using Solution.Extensions.PNPilot.Objects;
-using Solution.Extensions.PNPilot.Services;
 using Solution.Extensions.PNQuizWalk.Constants;
 using Solution.Extensions.PNQuizWalk.Objects;
 using Solution.Extensions.PNQuizWalk.Services;

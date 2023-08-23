@@ -20,5 +20,9 @@
 
         public const string TextBlockItem = "TextBlockItem";
 
+        public const string primaryColor = "primaryColor";
+        public const string secondaryColor = "secondaryColor";
+        public const string thirdColor = "thirdColor";
+
     }
 }

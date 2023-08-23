@@ -2,6 +2,7 @@
 using Litium.FieldFramework;
 using Litium.FieldFramework.FieldTypes;
 using Litium.Websites;
+using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNRegisterMe.Constants;
 
@@ -9,6 +10,13 @@ namespace PandoNexis.AddOns.Extensions.PNContactForm.Definitions
 {
     internal class PageFieldDefinitionSetup : Litium.Accelerator.Definitions.FieldDefinitionSetup
     {
+        public readonly FieldHelper _fieldHelper;
+
+        public PageFieldDefinitionSetup(FieldHelper fieldHelper)
+        {
+            _fieldHelper = fieldHelper;
+        }
+
         public override IEnumerable<FieldDefinition> GetFieldDefinitions()
         {
             var fields = new List<FieldDefinition>();
@@ -22,14 +30,10 @@ namespace PandoNexis.AddOns.Extensions.PNContactForm.Definitions
         {
             var fields = new List<FieldDefinition>
             {
-                new FieldDefinition<CustomerArea>(ContactFormConstants.ContactFormCompany, SystemFieldTypeConstants.Text),
-                new FieldDefinition<CustomerArea>(ContactFormConstants.ContactFormMessage, SystemFieldTypeConstants.MultirowText),
-                new FieldDefinition<CustomerArea>(ContactFormConstants.AddedByContactForm, SystemFieldTypeConstants.Boolean)
-                {
-                    CanBeGridColumn = true,
-                    CanBeGridFilter = true,
-                },
-                new FieldDefinition<CustomerArea>(ContactFormConstants.ContactAccept, SystemFieldTypeConstants.Boolean)
+                _fieldHelper.GetCustomerFieldDefinition(ContactFormConstants.ContactFormCompany, SystemFieldTypeConstants.Text),
+                _fieldHelper.GetCustomerFieldDefinition(ContactFormConstants.ContactFormMessage, SystemFieldTypeConstants.MultirowText),
+                _fieldHelper.GetCustomerFieldDefinition(ContactFormConstants.AddedByContactForm, SystemFieldTypeConstants.Boolean, false, true, true),
+                _fieldHelper.GetCustomerFieldDefinition(ContactFormConstants.ContactAccept, SystemFieldTypeConstants.Boolean, false, true, true),
             };
             return fields;
         }

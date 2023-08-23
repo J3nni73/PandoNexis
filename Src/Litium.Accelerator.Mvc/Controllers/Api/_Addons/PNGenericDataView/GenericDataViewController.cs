@@ -63,6 +63,13 @@ namespace Litium.Accelerator.Mvc.Controllers.Api._Addons.PNGenericDataView
             return BadRequest();
         }
 
+        [HttpPost]
+        [Route("changeContainerState")]
+        public async Task<IActionResult> ChangeContainerState(object containerState)
+        {
+            return BadRequest();
+        }
+
         [HttpGet]
         [Route("getGenericDataView/{type}")]
         public async Task<IActionResult> GetGenericDataView(string type)
@@ -111,45 +118,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api._Addons.PNGenericDataView
             return null;
         }
 
-        [HttpPost]
-        [Route("handleFormData/{type}")]
-        public async Task<IActionResult> HandleFormData(string type)
-        {
 
-            HttpContext.Request.EnableBuffering();
-            Request.Body.Position = 0;
-            using (StreamReader stream = new StreamReader(HttpContext.Request.Body))
-            {
-                var task = stream
-                    .ReadToEndAsync()
-                    .ContinueWith(t =>
-                    {
-                        var res = t.Result;
-                        // TODO: Handle the post result!
-                        return res;
-                    });
-
-                // await processing of the result
-                task.Wait();
-                var test = task.Result;
-                var dataViewRow = await (await GetProcessor(type)).HandleFormData(test);
-                if (dataViewRow != null)
-                    return Ok(dataViewRow);
-            }
-
-            return BadRequest();
-        }
-
-        [HttpGet]
-        [Route("getGenericDataForm/{type}")]
-        public async Task<IActionResult> GetGenericDataForm(string type)
-        {
-
-            var dataRow = await (await GetProcessor(type)).GetDataForm(HttpContext.Request.QueryString.ToString());
-            if (dataRow != null)
-                return Ok(dataRow);
-            return BadRequest();
-        }
 
         //[HttpGet]
         //[Route("getGenericDataViewForExport/{type}")]
@@ -299,7 +268,9 @@ namespace Litium.Accelerator.Mvc.Controllers.Api._Addons.PNGenericDataView
         {
             var page = _pageService.Get(pageSystemId);
             var source = page.Fields.GetValue<string>(DataViewFieldNameConstants.AreaSource);
-            return await GetProcessor(source);
+            var processor = await GetProcessor(source);
+            processor._currentPageSystemId= pageSystemId;
+            return processor;
 
 
         }

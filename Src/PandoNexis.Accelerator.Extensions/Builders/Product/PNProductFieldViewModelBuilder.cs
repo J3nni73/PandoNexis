@@ -133,7 +133,7 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Product
             {
                 foreach (var fieldDefinitionItem in fielddefinitions)
                 {
-                    var valueItem = item.Fields.GetValue<Object>(fieldDefinitionItem.Id);
+                    var valueItem = item.Fields.GetValue<Object>(fieldDefinitionItem.Id) ?? item.Fields.GetValue<Object>(fieldDefinitionItem.Id, cultureInfo.Name); 
                     var model = CreateModel(fieldDefinitionItem, cultureInfo, valueItem, person);
                     productFieldViewModelList.Add(model);
                 }

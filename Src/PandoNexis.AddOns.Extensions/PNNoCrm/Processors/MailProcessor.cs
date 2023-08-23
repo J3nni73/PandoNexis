@@ -92,11 +92,6 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
             }          
         }
 
-        public override Task<object> GetDataForm(string data)
-        {
-            throw new NotImplementedException();
-        }
-
         public async override Task<GenericDataView> GetDataView(Guid pageSystemId, string data)
         {
             _currentPageSystemId = pageSystemId;
@@ -191,12 +186,6 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
         {
             throw new NotImplementedException();
         }
-
-        public override Task<object> HandleFormData(string data)
-        {
-            throw new NotImplementedException();
-        }
-
         public override Task<GenericDataContainer> UpdateField(GenericDataField fieldData)
         {
             throw new NotImplementedException();

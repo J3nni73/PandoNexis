@@ -36,11 +36,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
             throw new NotImplementedException();
         }
 
-        public Task<object> GetDataForm(string data)
-        {
-            throw new NotImplementedException();
-        }
-
         public abstract Task<GenericDataView> GetDataView(Guid pageSystemId, string data);
 
 
@@ -102,12 +97,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
         {
             throw new NotImplementedException();
         }
-
-        public Task<object> HandleFormData(string data)
-        {
-            throw new NotImplementedException();
-        }
-
         public abstract Task<GenericDataContainer> UpdateField(GenericDataField fieldData);
         
         

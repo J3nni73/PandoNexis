@@ -114,9 +114,9 @@ namespace Litium.Accelerator.Search
                             case SystemFieldTypeConstants.Decimal:
                             case SystemFieldTypeConstants.DecimalOption:
                                 {
-                                    if (decimal.TryParse(x.Key, NumberStyles.Any, CultureInfo.InvariantCulture, out var decValue))
+                                    if (decimal.TryParse(x.Key, NumberStyles.Any, CultureInfo.CurrentCulture, out var decValue))
                                     {
-                                        key = decValue.ToString("0.########", CultureInfo.InvariantCulture);
+                                        key = decValue.ToString("0.########", CultureInfo.CurrentCulture);
                                     }
                                     else
                                     {

@@ -2,44 +2,27 @@
 using Litium.FieldFramework;
 using Litium.FieldFramework.FieldTypes;
 using Litium.Websites;
+using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 using PandoNexis.AddOns.Extensions.PNNoCrm.Constants;
 
 namespace PandoNexis.AddOns.Extensions.PNNoCrm.Definitions
 {
     internal class NoCrmFieldDefinitionSetup : Litium.Accelerator.Definitions.FieldDefinitionSetup
     {
-        public override IEnumerable<FieldDefinition> GetFieldDefinitions()
-        {
-            var fields = new List<FieldDefinition>
+        public readonly FieldHelper _fieldHelper;
+
+        public NoCrmFieldDefinitionSetup(FieldHelper fieldHelper)
             {
-                new FieldDefinition<WebsiteArea>(NoCrmProcessorConstants.NoCrmButtonNames, SystemFieldTypeConstants.TextOption)
-                {
-                      Option = new TextOption 
-                      {
-                        MultiSelect = false,
-                        Items = new List<TextOption.Item>()
+            _fieldHelper = fieldHelper;
                       }
-                }, 
                 
-                new FieldDefinition<WebsiteArea>(NoCrmProcessorConstants.NoCrmButtonLinks, SystemFieldTypeConstants.MultiField)
+        public override IEnumerable<FieldDefinition> GetFieldDefinitions()
                 {
-                    MultiCulture = false,
-                     Option = new MultiFieldOption
-                     {
-                         IsArray = true,
-                         Fields  = new List<string>()
-                     }
-                },
-                new FieldDefinition<WebsiteArea>(NoCrmProcessorConstants.Subject, SystemFieldTypeConstants.Text)
+            var fields = new List<FieldDefinition>
                 {
-                    MultiCulture = false,
-                    
-                },
-                new FieldDefinition<WebsiteArea>(NoCrmProcessorConstants.Body, SystemFieldTypeConstants.Editor)
-                {
-                    MultiCulture = false,
-                     
-                },
+                _fieldHelper.GetWebsiteTextOptionField(NoCrmProcessorConstants.NoCrmButtonNames, SystemFieldTypeConstants.TextOption),
+                _fieldHelper.GetWebsiteMultiField(NoCrmProcessorConstants.NoCrmButtonLinks, SystemFieldTypeConstants.MultiField, true),
+				_fieldHelper.GetWebsiteMultiField(NoCrmProcessorConstants.Body, SystemFieldTypeConstants.Editor),
             };
             return fields;
         }

@@ -73,7 +73,8 @@
                         {
                              <h1 class="banner-text__title banners-in-row-@bannerPerRow">@banner.LinkText</h1>
                         }
-                        else{
+                        else
+                        {
                             @Html.ImageFor(x => banner.Image, maxSize: largeColumn == 12 ? new Size(1314, -1) : new Size(786, -1), htmlAttributes: new { @class = "banner-block__image" }, renderSizeAttributes: true, responsiveDefinition: BannerSelector(bannerPerRow));
                         }
                     </a>
@@ -84,7 +85,9 @@
                         }
                         @if (!string.IsNullOrWhiteSpace(banner.ActionText))
                         {
+                            <a href="@(banner.LinkUrl.NullIfEmpty()??"#")" alt="@text" title="@text" rel="@(string.IsNullOrEmpty(banner.LinkUrl) ? "nofollow" : null)">
                             <span class="banner-text__button">@banner.ActionText</span>
+                            </a>
                         }
                     </div>
                 </div>

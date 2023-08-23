@@ -211,7 +211,7 @@ export const DataContainer = React.memo(
                             },
                             fieldIndex
                         ) => (
-                            <td
+                            <td data-test="gaga"
                                 key={`field-${fieldIndex}-${fieldName}`}
                                 id={`${entitySystemId}${fieldId}${dataContainerIndex}`}
                                 {...register(fieldId)}
@@ -226,8 +226,9 @@ export const DataContainer = React.memo(
                                 className={classNames(
                                     {
                                         'generic-data-view__error': error,
+                                        'fieldToHide': !fieldsToShow.includes(fieldIndex),
+                                        'nowrap': !settings.wrapField
                                     },
-                                    `${fieldsToShow.includes(fieldIndex) ? '' : 'fieldToHide'}`
                                 )}
                             >
                                 {settings.fieldMessage && (
@@ -292,7 +293,7 @@ export const DataContainer = React.memo(
                         )
                     )}
                     {fields && containerSettings && containerSettings?.postContainer && containerSettings?.postContainerPageSystemId &&
-                        <td className="row">
+                        <td>
                             <div className="small-12 columns text--right">
                                 <GenericDataViewField
                                     type={"button"}

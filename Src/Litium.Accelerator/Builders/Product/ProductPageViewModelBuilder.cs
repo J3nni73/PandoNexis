@@ -24,7 +24,6 @@ namespace Litium.Accelerator.Builders.Product
         private readonly RequestModelAccessor _requestModelAccessor;
         private readonly ProductService _productService;
         private readonly PageByFieldTemplateCache<BrandPageFieldTemplateCache> _brandPageByFieldTypeCache;
-        private readonly ProductFieldViewModelBuilder _productFieldViewModelBuilder;
         private readonly ProductModelBuilder _productModelBuilder;
         private readonly FieldDefinitionService _fieldDefinitionService;
         private readonly ProductFieldGroupViewModelBuilder _productFieldGroupViewModelBuilder;
@@ -34,7 +33,6 @@ namespace Litium.Accelerator.Builders.Product
             RequestModelAccessor requestModelAccessor, 
             ProductService productService, 
             PageByFieldTemplateCache<BrandPageFieldTemplateCache> brandPageByFieldTypeCache, 
-            ProductFieldViewModelBuilder productFieldViewModelBuilder,
             ProductModelBuilder productModelBuilder,
             FieldDefinitionService fieldDefinitionService,
             ProductFieldGroupViewModelBuilder productFieldGroupViewModelBuilder)
@@ -43,13 +41,12 @@ namespace Litium.Accelerator.Builders.Product
             _requestModelAccessor = requestModelAccessor;
             _productService = productService;
             _brandPageByFieldTypeCache = brandPageByFieldTypeCache;
-            _productFieldViewModelBuilder = productFieldViewModelBuilder;
             _productModelBuilder = productModelBuilder;
             _fieldDefinitionService = fieldDefinitionService;
             _productFieldGroupViewModelBuilder = productFieldGroupViewModelBuilder;
         }
 
-        public virtual async Task<ProductPageViewModel> BuildAsync(BaseProduct baseProduct)
+        public async Task<ProductPageViewModel> BuildAsync(BaseProduct baseProduct)
         {
             var productModel = _productModelBuilder.BuildFromBaseProduct(baseProduct);
             var viewModel = Build(productModel);
@@ -60,7 +57,7 @@ namespace Litium.Accelerator.Builders.Product
             return viewModel;
         }
 
-        public virtual async Task<ProductPageViewModel> BuildAsync(Variant variant)
+        public async Task<ProductPageViewModel> BuildAsync(Variant variant)
         {
             var productModel = _productModelBuilder.BuildFromVariant(variant);
             var viewModel = Build(productModel);

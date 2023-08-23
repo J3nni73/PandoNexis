@@ -1,6 +1,7 @@
 ﻿using Litium.FieldFramework;
 using Litium.Globalization;
 using Litium.Security;
+using Litium.Websites;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNNoCrm.Constants;
@@ -19,15 +20,15 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Definitions
         {
             var changes = new List<FieldOptionChanges>()
             {
-                GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.DataArea, NoCrmProcessorConstants.NoCrm),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.Groups),
-                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.PersonListByGroup),
-                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.SendMail),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.ViewPersonListByGroup),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.CreatePerson),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.AddLogin),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.ResetPassword),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.SendMail),
+                GetFieldOption(nameof(WebsiteArea),DataViewFieldNameConstants.DataArea, NoCrmProcessorConstants.NoCrm),
+                GetFieldOption(nameof(WebsiteArea),DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.Groups),
+                GetFieldOption(nameof(WebsiteArea), DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.PersonListByGroup),
+                GetFieldOption(nameof(WebsiteArea), DataViewFieldNameConstants.AreaSource, NoCrmProcessorConstants.SendMail),
+                GetFieldOption(nameof(WebsiteArea),NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.ViewPersonListByGroup),
+                GetFieldOption(nameof(WebsiteArea),NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.CreatePerson),
+                GetFieldOption(nameof(WebsiteArea),NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.AddLogin),
+                GetFieldOption(nameof(WebsiteArea),NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.ResetPassword),
+                GetFieldOption(nameof(WebsiteArea),NoCrmProcessorConstants.NoCrmButtonNames, NoCrmProcessorConstants.SendMail),
 
             };
 
@@ -40,13 +41,13 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Definitions
 
             var changes = new List<FieldMultiFieldChanges>()
             {
-                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoCrmProcessorConstants.NoCrmButtonLinks, NoCrmProcessorConstants.NoCrmButtonNames),
-                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.ButtonPagePointer),
-                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.UseConfirmation),
-                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.ConfirmationText),
-                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.ButtonOpenInModal),
-                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.EndPointMethod),
-                GetMultiFieldChange(FieldHelperConstants.WebsiteArea, NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.FieldTooltipMessage),
+                GetMultiFieldChange(nameof(WebsiteArea), NoCrmProcessorConstants.NoCrmButtonLinks, NoCrmProcessorConstants.NoCrmButtonNames),
+                GetMultiFieldChange(nameof(WebsiteArea), NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.ButtonPagePointer),
+                GetMultiFieldChange(nameof(WebsiteArea), NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.UseConfirmation),
+                GetMultiFieldChange(nameof(WebsiteArea), NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.ConfirmationText),
+                GetMultiFieldChange(nameof(WebsiteArea), NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.ButtonOpenInModal),
+                GetMultiFieldChange(nameof(WebsiteArea), NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.EndPointMethod),
+                GetMultiFieldChange(nameof(WebsiteArea), NoCrmProcessorConstants.NoCrmButtonLinks, DataViewFieldNameConstants.FieldTooltipMessage),
             };
 
             UpdateMultiFieldField(changes);

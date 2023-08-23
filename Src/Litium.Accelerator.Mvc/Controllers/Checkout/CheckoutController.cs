@@ -88,6 +88,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Checkout
                 // cart context with.
 
                 var discountCodes = cartContext.Cart.DiscountCodes;
+                var giftcards = cartContext.Cart.GiftCards;
                 var orderRows = cartContext.Cart.Order.Rows;
 
                 await cartContext.ClearCartContextAsync();
@@ -106,6 +107,11 @@ namespace Litium.Accelerator.Mvc.Controllers.Checkout
                 foreach (var code in discountCodes)
                 {
                     await cartContext.AddDiscountCodeAsync(code);
+                }
+
+                foreach (var giftcard in giftcards)
+                {
+                    await cartContext.AddGiftCardAsync(giftcard);
                 }
 
                 await cartContext.AddOrUpdateCheckoutFlowAsync(new CheckoutFlowInfoArgs

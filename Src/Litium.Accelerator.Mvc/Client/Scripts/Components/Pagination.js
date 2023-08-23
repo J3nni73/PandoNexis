@@ -4,9 +4,10 @@ const PaginationItem = ({
     name = '',
     current = false,
     disabled = false,
+    className = '',
     onChange,
 }) => {
-    const cssClass = `pagination__link 
+    const cssClass = `pagination__link ${className}
     ${current ? 'pagination__link--current' : ''} 
     ${disabled ? 'pagination__link--disabled' : ''}`;
 
@@ -111,6 +112,7 @@ const Pagination = ({ model, onChange }) => {
                     {currentPageIndex > 1 && (
                         <PaginationItem
                             name="<<"
+                            className='prev'
                             current={false}
                             disabled={false}
                             onChange={() => onChange(currentPageIndex - 1)}
@@ -142,6 +144,7 @@ const Pagination = ({ model, onChange }) => {
                     {currentPageIndex < pageCount && (
                         <PaginationItem
                             name=">>"
+                            className='next'
                             current={false}
                             disabled={false}
                             onChange={() => onChange(currentPageIndex + 1)}

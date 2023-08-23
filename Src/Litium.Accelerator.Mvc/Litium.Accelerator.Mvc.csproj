@@ -19,10 +19,10 @@
     <ProjectReference Include="..\Solution.Extensions\Solution.Extensions.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Litium.Accelerator.Administration.Deployment" Version="8.9.1" />
-    <PackageReference Include="Litium.Web.Setup.Elasticsearch" Version="8.9.1" />
-    <PackageReference Include="Litium.Web.Setup.Redis" Version="8.9.1" />
-    <PackageReference Include="Litium.Web.Setup.Complete" Version="8.9.1" />
+    <PackageReference Include="Litium.Accelerator.Administration.Deployment" Version="8.11.4" />
+    <PackageReference Include="Litium.Web.Setup.Elasticsearch" Version="8.11.4" />
+    <PackageReference Include="Litium.Web.Setup.Redis" Version="8.11.4" />
+    <PackageReference Include="Litium.Web.Setup.Complete" Version="8.11.4" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Litium.Cloud.NLog.Extensions" Version="1.4.1" />
@@ -30,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\Api\_PandoNexis\" />
+    <Folder Include="Controllers\Api\_Solution\" />
     <Folder Include="Controllers\_Solution\" />
     <Folder Include="Views\_Solution\Shared\DisplayTemplates\" />
     <Folder Include="Views\_PandoNexis\Shared\DisplayTemplates\" />

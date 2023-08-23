@@ -120,4 +120,11 @@
   <data name="fieldtemplate.customerarea.groups.name" xml:space="preserve">
     <value>Groups</value>
   </data>
+	<data name="fielddefinition.websitearea.nocrmbuttonlinks.name"  xml:space="preserve">
+		<value>NoCrmButtonLinks</value>
+	</data>
+	<data name="fielddefinition.websitearea.nocrmbuttonnames.name"  xml:space="preserve">
+		<value>NoCrmButtonNames</value>
+	</data>
+	<data name="fieldtemplate.customerarea.personlistbygroup.name"  xml:space="preserve"><value>PersonListByGroup</value></data>
 </root>

@@ -174,4 +174,18 @@
   <data name="fieldtemplate.productarea.productdata.name" xml:space="preserve">
     <value>Produktdata för dataview</value>
   </data>
+	<data name="fielddefinition.websitearea.aligncontainers.name"  xml:space="preserve"><value>AlignContainers</value></data>
+	<data name="fielddefinition.websitearea.buttonopeninmodal.name"  xml:space="preserve"><value>ButtonOpenInModal</value></data>
+	<data name="fielddefinition.websitearea.columnsinsidecontainerlarge.name"  xml:space="preserve"><value>ColumnsInsideContainerLarge</value></data>
+	<data name="fielddefinition.websitearea.columnsinsidecontainermedium.name"  xml:space="preserve"><value>ColumnsInsideContainerMedium</value></data>
+	<data name="fielddefinition.websitearea.columnsinsidecontainersmall.name"  xml:space="preserve"><value>ColumnsInsideContainerSmall</value></data>
+	<data name="fielddefinition.websitearea.columnswithcontainerslarge.name"  xml:space="preserve"><value>ColumnsWithContainersLarge</value></data>
+	<data name="fielddefinition.websitearea.columnswithcontainersmedium.name"  xml:space="preserve"><value>ColumnsWithContainersMedium</value></data>
+	<data name="fielddefinition.websitearea.columnswithcontainerssmall.name"  xml:space="preserve"><value>ColumnsWithContainersSmall</value></data>
+	<data name="fielddefinition.websitearea.confirmationtext.name"  xml:space="preserve"><value>ConfirmationText</value></data>
+	<data name="fielddefinition.websitearea.displaytypes.name"  xml:space="preserve"><value>DisplayTypes</value></data>
+	<data name="fielddefinition.websitearea.endpointmethod.name"  xml:space="preserve"><value>EndPointMethod</value></data>
+	<data name="fielddefinition.websitearea.fieldtooltipmessage.name"  xml:space="preserve"><value>FieldTooltipMessage</value></data>
+	<data name="fielddefinition.websitearea.useconfirmation.name"  xml:space="preserve"><value>UseConfirmation</value></data>
+	<data name="fielddefinition.websitearea.hidebutton.name"  xml:space="preserve"><value>HideButton</value></data>
 </root>

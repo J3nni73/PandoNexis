@@ -1,8 +1,8 @@
-﻿using Litium.Accelerator.Constants;
+﻿using System.Collections.Generic;
+using Litium.Accelerator.Constants;
+using Litium.Accelerator.FieldTypes;
 using Litium.Accelerator.Routing;
-using Litium.Common;
 using Litium.Runtime.DependencyInjection;
-using System.Collections.Generic;
 
 namespace Litium.Accelerator.Search.Filtering
 {
@@ -10,14 +10,16 @@ namespace Litium.Accelerator.Search.Filtering
     public class FilterService
     {
         private readonly RequestModelAccessor _requestModelAccessor;
-        private readonly SettingService _settingsService;
+        private readonly FilterFieldRepository _filterFieldRepository;
 
         internal const string _key = "Accelerator.ProductFiltering";
 
-        public FilterService(RequestModelAccessor requestModelAccessor, SettingService settingsService)
+        public FilterService(
+            RequestModelAccessor requestModelAccessor,
+            FilterFieldRepository filterFieldRepository)
         {
             _requestModelAccessor = requestModelAccessor;
-            _settingsService = settingsService;
+            _filterFieldRepository = filterFieldRepository;
         }
 
         public bool IndexFilter(string filterName)
@@ -28,12 +30,12 @@ namespace Litium.Accelerator.Search.Filtering
 
         public IList<string> GetProductFilteringFields()
         {
-            return _settingsService.Get<IList<string>>(_key) ?? new List<string>();
+            return _filterFieldRepository.GetProductFilteringFields();
         }
 
-        public void SaveProductFilteringFields(ICollection<string> items)
+        public void SaveProductFilteringFields(IList<string> items)
         {
-            _settingsService.Set(_key, items);
+            _filterFieldRepository.SaveProductFilteringFields(items);
         }
     }
 }

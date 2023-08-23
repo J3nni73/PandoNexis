@@ -21,6 +21,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Constants
     public static class DataFieldFormats
     {
         public const string DateTimeFormat = "yyyy-MM-dd HH:mm";
-        public const string TimeFormat = "0.##";
+        public const string DecimalFormat = "0.##";
     }
 }

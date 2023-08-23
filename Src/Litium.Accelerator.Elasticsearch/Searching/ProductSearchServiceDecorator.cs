@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Litium.Accelerator.Extensions;
 using Litium.Accelerator.Routing;
-using Litium.Accelerator.Search;
 using Litium.Accelerator.Utilities;
 using Litium.Accelerator.ViewModels.Brand;
 using Litium.Accelerator.ViewModels.Search;
@@ -693,8 +692,7 @@ namespace Litium.Accelerator.Search.Searching
                                 Nested = new NestedSort
                                 {
                                     Path = Infer.Field<ProductDocument>(ff => ff.Prices),
-                                    Filter = new QueryContainerDescriptor<ProductDocument>().Bool(b =>
-                                       b.Filter(bf => bf.Bool(bb => bb.Should(priceFilters))))
+                                    Filter = new QueryContainerDescriptor<ProductDocument>().Bool(bb => bb.Should(priceFilters))
                                 }
                             });
                         }

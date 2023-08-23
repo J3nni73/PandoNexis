@@ -41,7 +41,6 @@ export const TableView = ({
     };
 
     if (dataContainers && fieldsToShow) {
-
         return (
             <table className={classNames('generic-data-view__table', {
                 'is-loading': isLoading,
@@ -53,6 +52,7 @@ export const TableView = ({
                     sortConfig={sortConfig}
                     handleSetfieldsToShow={handleSetfieldsToShow}
                     fieldsToShow={fieldsToShow}
+                    dataContainers={dataContainers}
                 />
                 <tbody>
                     {currentPosts &&

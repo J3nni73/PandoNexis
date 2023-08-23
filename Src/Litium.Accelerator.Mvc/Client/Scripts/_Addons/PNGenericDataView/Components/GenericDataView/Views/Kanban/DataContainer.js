@@ -43,7 +43,7 @@ export const DataContainer = React.memo(
 
     }) => {
         const { register, handleSubmit, setFocus, reset, formState: { dirtyFields, isSubmitted }, } = useForm();
-        const [cardFields, setCardFields] = useState([]);              
+        const [cardFields, setCardFields] = useState([]);
         const [containerState, setContainerState] = useState(settings?.containerState);
         const [nextAvailableStatus, setNewAvailableStatus] = useState(settings?.possibleContainerStateTransitions);
         const [cardIngressField, setCardIngressField] = useState(null);
@@ -140,7 +140,7 @@ export const DataContainer = React.memo(
             }
         };
 
-        useEffect(() => {           
+        useEffect(() => {
             if (ingressField) {
                 const cardIngress = fields.filter(x => x.fieldId == ingressField);
                 if (cardIngress.length > 0) {
@@ -195,7 +195,7 @@ export const DataContainer = React.memo(
             e.preventDefault();
 
             const isAvailable = nextAvailableStatus.indexOf(status.id) !== -1;
-            
+
         };
         const dragLeave = (e, status) => {
             e.preventDefault();
@@ -378,9 +378,11 @@ export const DataContainer = React.memo(
                                                             }
                                                             className={classNames(
                                                                 {
+                                                                    'columns': true,
                                                                     'generic-data-view__error': error,
+                                                                    'fieldToHide': !fieldsToShow.includes(fieldIndex),
+                                                                    'nowrap': !settings.wrapField
                                                                 },
-                                                                `${fieldsToShow.includes(fieldIndex) ? '' : 'fieldToHide'} columns`
                                                             )}
                                                         >
                                                             {settings.fieldMessage && (

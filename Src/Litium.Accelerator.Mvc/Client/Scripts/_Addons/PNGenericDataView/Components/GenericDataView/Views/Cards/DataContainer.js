@@ -41,29 +41,29 @@ export const DataContainer = React.memo(
     }) => {
         const { register, handleSubmit, setFocus, watch, reset, getValues, formState: { dirtyFields, isSubmitted, errors }, } = useForm();
         const [cardFields, setCardFields] = useState([]);
-       
+
         const [isFormValid, setIsFormValid] = useState(false);
         const [containerSettings, setContainerSettings] = useState(settings);
         const [cardIngressField, setCardIngressField] = useState(null);
         const [errorObject, setErrorObject] = useState(null);
         const dispatch = useDispatch();
-        
+
         const isContainerValid = (identifierField, form, theFormFields) => {
-            
+
             let isFullFormCheck = false;
-            
+
             if (theFormFields === undefined) {
                 isFullFormCheck = true;
                 theFormFields = form;
             }
-            
+
             if (Object.keys(theFormFields).length < 1) {
                 const lastClickedFieldId = window.currGenDW_lastClickedFieldId;
                 const lastClickedFieldValue = window.currGenDW_lastClickedFieldId;
-                
+
                 theFormFields[lastClickedFieldId] = true;
             }
-            
+
             if (Object.keys(theFormFields).length) {
                 let errorObjects = [];
                 const FullData = Object.keys(theFormFields).reduce((payload, key) => {
@@ -87,10 +87,10 @@ export const DataContainer = React.memo(
                         return null;
                     }
                 }, identifierField);
-                
+
                 return errorObjects;
             }
-        }; 
+        };
         const onCheckboxChange = (form, fieldId, entitySystemId, dataContainerIndex, settings) => {
             const isTrue = currGenDW_isTrue;
             form[fieldId] = isTrue;
@@ -153,7 +153,7 @@ export const DataContainer = React.memo(
             dispatch(buttonClick(fieldId, dataContainerIndex, selectedValueObject, isInModal, fieldSettings, fieldSettings.pageSystemId));
         };
 
-        const onBlur = (form, getWinValue=false) => {
+        const onBlur = (form, getWinValue = false) => {
             if (getWinValue) {
                 form[window.currGenDW_lastClickedFieldId] = window.currGenDW_lastClickedFieldValue;
             }
@@ -249,7 +249,7 @@ export const DataContainer = React.memo(
                                         ? handleSubmit(onBlur)
                                         : null
                                 }
-                              
+
                                 aria-labelledby={cardIngressField.fieldName}
                                 entitySystemId={cardIngressField.entitySystemId}
                                 dataContainerIndex={dataContainerIndex}
@@ -291,9 +291,11 @@ export const DataContainer = React.memo(
                                     }
                                     className={classNames(
                                         {
+                                            'columns': true,
                                             'generic-data-view__error': error,
+                                            'fieldToHide': !fieldsToShow.includes(fieldIndex),
+                                            'nowrap': !settings.wrapField
                                         },
-                                        `${fieldsToShow.includes(fieldIndex) ? '' : 'fieldToHide'} columns `
                                     )}
                                 >
                                     {settings.fieldMessage && (
@@ -305,12 +307,12 @@ export const DataContainer = React.memo(
                                     {showTitles && (fieldType !== 'button' && settings.genericButtons?.length < 1) &&
                                         <b>{fieldName}</b>
                                     }
-                                   
+
                                     <GenericDataViewField
                                         isEditable={settings && settings.editable}
                                         type={fieldType}
                                         suffix={fieldSuffix}
-                                        defaultValue={  cleanData(fieldValue, fieldType) || ''}
+                                        defaultValue={cleanData(fieldValue, fieldType) || ''}
                                         title={fieldName}
                                         name={fieldId}
                                         setErrorObject={setErrorObject}
@@ -324,10 +326,10 @@ export const DataContainer = React.memo(
                                         onBlur={
                                             containerSettings?.postContainer ? handleSubmit(validateForm) :
                                                 !containerSettings?.postContainer && (fieldType !== 'autocomplete' && fieldType !== 'dropdown' && fieldType !== 'productimageupload' && fieldType !== 'checkbox' && fieldType !== 'radiobutton')
-                                                ? handleSubmit(onBlur)
-                                                : null
+                                                    ? handleSubmit(onBlur)
+                                                    : null
                                         }
-                                        
+
                                         onChange={
                                             !containerSettings?.postContainer && (fieldType === 'dropdown' || fieldType === 'productimageupload' || fieldType === 'datetime') ? handleSubmit((e) => onBlur(e, true)) : null
                                         }
@@ -343,7 +345,7 @@ export const DataContainer = React.memo(
                                             fieldType === 'dropdown' || fieldType === 'productimageupload' ? options : null
                                         }
                                     />
-                                    {settings.fieldTooltipMessage && settings.fieldTooltipMessage.length>0 &&
+                                    {settings.fieldTooltipMessage && settings.fieldTooltipMessage.length > 0 &&
                                         <ReactTooltip className="generic-data-view__tooltip" float={true} delayShow="800" delayHide="300" anchorId={`${entitySystemId}${fieldId}${dataContainerIndex}`} variant={settings.fieldTooltipType || "dark"} positionStrategy="fixed" offset="32" place="left" >
                                             {settings.fieldTooltipMessage}
                                         </ReactTooltip>

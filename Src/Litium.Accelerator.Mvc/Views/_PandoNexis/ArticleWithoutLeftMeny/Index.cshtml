@@ -24,6 +24,7 @@
 @await Component.BlockContainerAsync(Model.Blocks, BlockContainerNameConstant.Header)
 <div class="row">
     <div class="small-12 medium-8 columns">
+        <div class="pn-blurry-box">
         @if (Model.Image != null)
         {
             <figure>
@@ -40,6 +41,7 @@
             <p class="intro">@Model.Introduction</p>
         }
         @Model.Text
+        </div>
     </div>
 
     <div class="small-12 medium-4 columns">

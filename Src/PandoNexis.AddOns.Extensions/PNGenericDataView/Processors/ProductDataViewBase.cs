@@ -26,14 +26,9 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
             _genericDataViewService = genericDataViewService;
         }
 
-        public abstract Task<object> GetDataForm(string data);
-
-
         public abstract Task<GenericDataView> GetDataView(Guid pageSystemId, string data);
 
         public abstract Task<object> GetGridViewForExport(string data);
-
-        public abstract Task<object> HandleFormData(string data);
 
         public abstract Task<GenericDataContainer> UpdateField(GenericDataField fieldData);
         public virtual GenericDataContainer GetFields(string templateId)

@@ -44,6 +44,25 @@ namespace Litium.Accelerator.Search.Searching
                 {
                     foreach (var priceItem in searchQuery.PriceRanges)
                     {
+                        if (filterForSorting)
+                        {
+                            yield return q => q.Bool(n => n
+                                .Must(nq
+                                    => nq.Term(t => t.Field(f => f.Prices[0].PriceListSystemIds).Value(item))
+                                       && nq.Term(t => t.Field(f => f.Prices[0].CountrySystemId).Value(countrySystemId))
+                                       && nq.Term(t => t.Field(f => f.Prices[0].IsCampaignPrice).Value(false))
+                                       && nq.Range(t => isShowPriceWithVat
+                                           ? t.Field(f =>  f.Prices[0].PriceIncludeVat)
+                                               .GreaterThanOrEquals(priceItem.Item1)
+                                               .LessThanOrEquals(priceItem.Item2)
+                                           : t.Field(f =>  f.Prices[0].PriceExcludeVat)
+                                               .GreaterThanOrEquals(priceItem.Item1)
+                                               .LessThanOrEquals(priceItem.Item2))
+                                )
+                            );
+                        }
+                        else
+                        {
                         yield return q => q.Nested(n => n
                                 .Path(x => x.Prices)
                                 .Query(nq
@@ -60,12 +79,30 @@ namespace Litium.Accelerator.Search.Searching
                                 )
                             );
                     }
+
+                    }
                 }
 
                 foreach (var item in container.Campaigns)
                 {
                     foreach (var priceItem in searchQuery.PriceRanges)
                     {
+                        if (filterForSorting)
+                        {
+                            yield return q => q.Bool(n => n
+                                .Must(nq
+                                    => nq.Term(t => t.Field(f => f.Prices[0].PriceListSystemIds).Value(item))
+                                       && nq.Term(t => t.Field(f => f.Prices[0].IsCampaignPrice).Value(true))
+                                       && nq.Range(t => isShowPriceWithVat
+                                           ? t.Field(f => f.Prices[0].PriceIncludeVat)
+                                               .GreaterThanOrEquals(priceItem.Item1)
+                                               .LessThanOrEquals(priceItem.Item2)
+                                           : t.Field(f => f.Prices[0].PriceExcludeVat)
+                                               .GreaterThanOrEquals(priceItem.Item1)
+                                               .LessThanOrEquals(priceItem.Item2))));
+                        }
+                        else
+                        {
                         yield return q => q.Nested(n => n
                               .Path(x => x.Prices)
                               .Query(nq
@@ -80,6 +117,7 @@ namespace Litium.Accelerator.Search.Searching
                                             .LessThanOrEquals(priceItem.Item2))
                               )
                           );
+                        }
                     }
                 }
             }

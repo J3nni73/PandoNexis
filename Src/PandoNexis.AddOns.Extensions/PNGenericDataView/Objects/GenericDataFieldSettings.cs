@@ -10,12 +10,10 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Objects
         public bool ShowForMobile { get; set; } = true;
         public bool ShowForTablet { get; set; } = true;
         public bool ShowForDesktop { get; set; } = true;
-        //public bool IsRequired { get; set; } = false;
-        //public string ValidationRules { get; set; } = string.Empty;
-        //public string FieldMessage { get; set; } = string.Empty;
         public List<ValidationRule> ValidationRules{get;set;}
         public bool IsFilterField { get; set; } = false;
         public bool IsSortField { get; set; } = false;
+        public bool WrapField { get; set; } = true;
         public string EndPointMethod { get; set; } = string.Empty;
         public string AutocompleteEndPointMethod { get; set; } = string.Empty;
         public string PlaceholderText { get; set; } = string.Empty;

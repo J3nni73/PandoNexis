@@ -2,7 +2,6 @@
 using PandoNexis.Accelerator.Extensions.Database.Constants;
 using PandoNexis.Accelerator.Extensions.Database.Objects;
 using PandoNexis.Accelerator.Extensions.Database.Services;
-using Solution.Extensions.PNPilot.Constants;
 using Solution.Extensions.PNQuizWalk.Constants;
 using System;
 using System.Collections.Generic;

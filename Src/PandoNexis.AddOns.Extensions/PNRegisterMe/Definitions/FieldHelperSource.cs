@@ -1,6 +1,7 @@
 ﻿using Litium.FieldFramework;
 using Litium.Globalization;
 using Litium.Security;
+using Litium.Websites;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNRegisterMe.Constants;
@@ -17,9 +18,9 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Definitions
         {
             var changes = new List<FieldOptionChanges>()
             {
-                GetFieldOption(FieldHelperConstants.WebsiteArea, DataViewFieldNameConstants.DataArea, ProcessorConstants.CustomerArea),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.AreaSource, RegisterMeConstants.RegisterMePerson),
-                GetFieldOption(FieldHelperConstants.WebsiteArea,DataViewFieldNameConstants.AreaSource, RegisterMeConstants.RegisterMeOrganization),
+                GetFieldOption(nameof(WebsiteArea), DataViewFieldNameConstants.DataArea, ProcessorConstants.CustomerArea),
+                GetFieldOption(nameof(WebsiteArea),DataViewFieldNameConstants.AreaSource, RegisterMeConstants.RegisterMePerson),
+                GetFieldOption(nameof(WebsiteArea),DataViewFieldNameConstants.AreaSource, RegisterMeConstants.RegisterMeOrganization),
             };
 
             UpdateFieldOptions(changes);

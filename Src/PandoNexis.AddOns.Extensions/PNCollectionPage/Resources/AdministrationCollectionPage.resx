@@ -179,6 +179,12 @@
 	<data name="fieldtemplate.websitearea.collectionpage.description" xml:space="preserve">
 		<value>A page that renders it's children</value>
 	</data>
-
+	<data name="fielddefinition.websitearea.collectionfilterfield1name.name"  xml:space="preserve"><value>CollectionFilterField1Name</value></data>
+	<data name="fielddefinition.websitearea.collectionfilterfield1value.name"  xml:space="preserve"><value>CollectionFilterField1Value</value></data>
+	<data name="fielddefinition.websitearea.collectionfilterfield2name.name"  xml:space="preserve"><value>CollectionFilterField2Name</value></data>
+	<data name="fielddefinition.websitearea.collectionfilterfield2value.name"  xml:space="preserve"><value>CollectionFilterField2Value</value></data>
+	<data name="fielddefinition.websitearea.collectionfilterfield3name.name"  xml:space="preserve"><value>CollectionFilterField3Name</value></data>
+	<data name="fielddefinition.websitearea.collectionfilterfield3value.name"  xml:space="preserve"><value>CollectionFilterField3Value</value></data>
+	<data name="fielddefinition.websitearea.collectionpageusefilter.name"  xml:space="preserve"><value>CollectionPageUseFilter</value></data>
 
 </root>

@@ -2,6 +2,7 @@
 using Litium.FieldFramework;
 using Litium.Accelerator.Constants;
 using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
+using Litium.Blocks;
 
 namespace PandoNexis.Accelerator.Extensions.Definitions.Pages.Article
 {

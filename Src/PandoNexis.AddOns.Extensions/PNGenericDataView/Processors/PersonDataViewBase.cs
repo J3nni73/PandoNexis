@@ -36,22 +36,13 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
         {
             throw new NotImplementedException();
         }
-
-        public Task<object> GetDataForm(string data)
-        {
-            throw new NotImplementedException();
-        }
-
         public abstract Task<GenericDataView> GetDataView(Guid pageSystemId, string data);
-
-
         public GenericDataViewSettings GetDataViewSettings(Guid pageSystemId)
         {
             return _genericDataViewService.GetDataViewSettings(pageSystemId);
         }
         public virtual GenericDataContainer GetFields(string templateId)
         {
-
             var container = new GenericDataContainer();
             var fieldTemplate = _fieldTemplateService.GetAll()?.FirstOrDefault(i => i.Id == templateId);
             if (fieldTemplate == null) { return container; }
@@ -137,12 +128,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
         {
             throw new NotImplementedException();
         }
-
-        public Task<object> HandleFormData(string data)
-        {
-            throw new NotImplementedException();
-        }
-
         public abstract Task<GenericDataContainer> UpdateField(GenericDataField fieldData);
         
         

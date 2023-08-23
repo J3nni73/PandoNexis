@@ -20,13 +20,12 @@ namespace Litium.Accelerator.Search
     {
         private static readonly LazyService<UrlService> _urlService = new LazyService<UrlService>();
 
-        public static bool ContainsFilter(this SearchQuery searchQuery, string exceptTag = null, bool includePriceFilter = true)
+        public static bool ContainsFilter(this SearchQuery searchQuery, string exceptTag = null, bool includePriceFilter = true, bool includeCategoryFilter = true)
         {
             return searchQuery.Tags.Any(x => exceptTag is null || exceptTag != x.Key)
-                || searchQuery.Category.Count > 0
                 || searchQuery.ContainsNewsFilter()
                 || (includePriceFilter && searchQuery.ContainsPriceFilter())
-                || searchQuery.ContainsCategoryFilter();
+                || (includeCategoryFilter && searchQuery.ContainsCategoryFilter());
         }
 
         public static bool ContainsMultipleFilters(this SearchQuery searchQuery)

@@ -85,7 +85,8 @@ namespace Litium.Accelerator.Builders.Checkout
                 CheckoutUrl = cartContext?.CheckoutFlowInfo.CheckoutPageUrl,
                 TermsUrl = cartContext?.CheckoutFlowInfo.TermsUrl,
                 LoginUrl = loginPageUrl,
-                UsedDiscountCodes = cartContext?.Cart.DiscountCodes
+                UsedDiscountCodes = cartContext?.Cart.DiscountCodes,
+                UsedGiftCards = cartContext?.Cart.GiftCards
             };
 
             model.SignUp = cartContext?.Cart.Order.AdditionalInfo?.TryGetValue(nameof(CheckoutViewModel.SignUp), out _) == true;

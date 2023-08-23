@@ -4,6 +4,7 @@ using PandoNexis.Accelerator.Extensions.Definitions.FieldTemplateHelpers;
 using PageTemplateNameConstants = PandoNexis.AddOns.Extensions.PNGenericDataView.Constants.PageTemplateNameConstants;
 using PageFieldNameConstants = PandoNexis.AddOns.Extensions.PNGenericDataView.Constants.DataViewFieldNameConstants;
 using Litium.Accelerator.Constants;
+using Litium.Blocks;
 
 namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions
 {

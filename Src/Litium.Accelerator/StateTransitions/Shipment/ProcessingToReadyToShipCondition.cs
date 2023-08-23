@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Litium.Sales;
+﻿using Litium.Sales;
 using Litium.StateTransitions;
 using Litium.Validations;
 
@@ -8,11 +6,8 @@ namespace Litium.Accelerator.StateTransitions.Shipment
 {
     public class ProcessingToReadyToShipCondition : StateTransitionValidationRule<Sales.Shipment>
     {
-        private readonly OrderOverviewService _orderOverviewService;
-
-        public ProcessingToReadyToShipCondition(OrderOverviewService orderOverviewService)
+        public ProcessingToReadyToShipCondition()
         {
-            _orderOverviewService = orderOverviewService;
         }
 
         public override string FromState => ShipmentState.Processing;
@@ -22,25 +17,10 @@ namespace Litium.Accelerator.StateTransitions.Shipment
         public override ValidationResult Validate(Sales.Shipment entity)
         {
             var result = new ValidationResult();
-            var orderOverview = _orderOverviewService.Get(entity.OrderSystemId);
-            if (orderOverview == null)
-            {
-                throw new Exception($"The order for shipment ({entity.SystemId}) cannot be found.");
-            }
 
-            var remainingToAuthorize = orderOverview.GetRemainingToAuthorize();
+            //We should allow the shipment to move to ready to ship, without checking its payment status.
+            //The reason is that we cannot execute the capture for the partial shipment in case the payment does not partial capture.   
 
-            var transactionRows = orderOverview.PaymentOverviews.SelectMany(x => x.Transactions)
-                .SelectMany(m => m.Rows)
-                .Where(x => x.ShipmentRowSystemId is not null);
-
-            if (remainingToAuthorize == 0
-                || (transactionRows is not null && entity.Rows.All(x => transactionRows.Any(m => m.ShipmentRowSystemId == x.SystemId))))
-            {
-                return result;
-            }
-
-            result.AddError("Shipment", "All captures are not completed.");
             return result;
         }
     }

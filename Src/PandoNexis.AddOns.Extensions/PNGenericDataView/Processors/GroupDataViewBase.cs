@@ -37,7 +37,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
         }
 
         public abstract Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data);
-        public abstract Task<object> GetDataForm(string data);
         public abstract Task<GenericDataView> GetDataView(Guid pageSystemId, string data);
         public abstract GenericDataViewSettings GetDataViewSettings(Guid pageSystemId);
         public virtual GenericDataContainer GetFields(string templateId)
@@ -82,7 +81,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Processors
             return container;
         }
         public abstract Task<object> GetGridViewForExport(string data);
-        public abstract Task<object> HandleFormData(string data);
         public abstract Task<GenericDataContainer> UpdateField(GenericDataField fieldData);
         public List<ValidationRule> GetValidationRules(string fieldDefinitionId, List<string> requiredFields)
         {

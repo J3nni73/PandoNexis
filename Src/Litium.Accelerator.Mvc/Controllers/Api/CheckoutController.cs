@@ -436,6 +436,76 @@ namespace Litium.Accelerator.Mvc.Controllers.Api
             }
         }
 
+        /// <summary>
+        /// Redeem a gift card for the order.
+        /// </summary>
+        /// <param name="model">Object containing the gift card.</param>
+        [HttpPut]
+        [ValidateAntiForgeryToken]
+        [Route("redeemGiftCard")]
+        public async Task<IActionResult> RedeemGiftCard(CheckoutViewModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(model.GiftCard))
+                {
+                    var cartContext = await HttpContext.GetCartContextAsync();
+                    if (await cartContext.AddGiftCardAsync(model.GiftCard.Trim()))
+                    {
+                        model.UsedGiftCards = cartContext.Cart.GiftCards;
+                        await cartContext.CalculatePaymentsAsync();
+                        if (model.PaymentWidget != null)
+                        {
+                            model.PaymentWidget = _paymentOptionViewModelBuilder.BuildWidget(cartContext, model.SelectedPaymentMethod?.Id);
+                        }
+                        return Ok(model);
+                    }
+                }
+
+                ModelState.AddModelError(nameof(CheckoutViewModel.GiftCard), "checkout.giftcardinvalid".AsWebsiteText());
+                return BadRequest(ModelState);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error when setting gift card {GiftCard}", model.GiftCard);
+                ModelState.AddModelError("general", "checkout.setgiftcarderror".AsWebsiteText());
+                return BadRequest(ModelState);
+            }
+        }
+
+        /// <summary>
+        /// Abandon applied gift card.
+        /// </summary>
+        /// <param name="model">Object containing the gift card.</param>
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        [Route("abandonGiftCard")]
+        public async Task<IActionResult> AbandonGiftCard(CheckoutViewModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(model.GiftCard))
+                {
+                    var cartContext = await HttpContext.GetCartContextAsync();
+                    await cartContext.RemoveGiftCardAsync(model.GiftCard.Trim());
+                    model.UsedGiftCards = cartContext.Cart.GiftCards;
+                    await cartContext.CalculatePaymentsAsync();
+                    if (model.PaymentWidget != null)
+                    {
+                        model.PaymentWidget = _paymentOptionViewModelBuilder.BuildWidget(cartContext, model.SelectedPaymentMethod?.Id);
+                    }
+
+                    model.GiftCard = string.Empty;
+                }
+
+                return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error when removing gift card code {GiftCard}", model.GiftCard);
+                return BadRequest(ModelState);
+            }
+        }
         private bool Validate(ModelStateDictionary modelState, CheckoutViewModel viewModel)
         {
             var validationRules = new List<ValidationRuleItem<CheckoutViewModel>>()

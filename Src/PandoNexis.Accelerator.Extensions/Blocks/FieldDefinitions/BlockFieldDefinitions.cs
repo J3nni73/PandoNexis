@@ -3,143 +3,38 @@ using Litium.Blocks;
 using Litium.FieldFramework;
 using Litium.FieldFramework.FieldTypes;
 using PandoNexis.Accelerator.Extensions.Constants;
+using PandoNexis.Accelerator.Extensions.Definitions.FieldHelper;
 
 namespace PandoNexis.Accelerator.Extensions.Block.FieldDefinitions
 {
     internal class BlockFieldDefinitions : FieldDefinitionSetup
     {
+        public readonly FieldHelper _fieldHelper;
+
+        public BlockFieldDefinitions(FieldHelper fieldHelper)
+        {
+            _fieldHelper = fieldHelper;
+        }
+
         public override IEnumerable<FieldDefinition> GetFieldDefinitions()
         {
             var fields = new[]
             {
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.BlockTitle, SystemFieldTypeConstants.Text)
-                {
-                    MultiCulture = true,
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.BlockSubTitle, SystemFieldTypeConstants.Text)
-                {
-                    MultiCulture = true,
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.BlockText, SystemFieldTypeConstants.Editor)
-                {
-                    MultiCulture = true,
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.Background, SystemFieldTypeConstants.TextOption)
-                {
-                   MultiCulture = false,
-                   Option = new TextOption
-                    {
-                        MultiSelect = false,
-                        Items = new List<TextOption.Item>
-                        {
-                            new TextOption.Item
-                            {
-                                Value = "primaryColor",
-                                Name = new Dictionary<string, string> { { "en-US", "primaryColor" }, { "sv-SE", "primaryColor" } }
-                            },
-                            new TextOption.Item
-                            {
-                                Value = "secondaryColor",
-                                Name = new Dictionary<string, string> { { "en-US", "secondaryColor" }, { "sv-SE", "secondaryColor" } }
-                            },
-                            new TextOption.Item
-                            {
-                                Value = "thirdColor",
-                                Name = new Dictionary<string, string> { { "en-US", "thirdColor" }, { "sv-SE", "thirdColor" } }
-                            }
-                        }
-                    }
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.ExtendedLinkText, SystemFieldTypeConstants.Text)
-                {
-                    MultiCulture = true,
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.ExtendedLinkToPage, SystemFieldTypeConstants.Pointer)
-                {
-                    MultiCulture = false,
-                    Option = new PointerOption { EntityType = PointerTypeConstants.WebsitesPage }
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.ExtendedLinkToCategory, SystemFieldTypeConstants.Pointer)
-                {
-                    MultiCulture = false,
-                    Option = new PointerOption { EntityType = PointerTypeConstants.ProductsCategory }
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.ExtendedLinkToProduct, SystemFieldTypeConstants.Pointer)
-                {
-                    MultiCulture = false,
-                    Option = new PointerOption { EntityType = PointerTypeConstants.ProductsProduct }
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.ExtendedLinkToProductList, SystemFieldTypeConstants.Pointer)
-                {
-                    MultiCulture = false,
-                    Option = new PointerOption { EntityType = PointerTypeConstants.ProductsProductList }
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.ExtendedLinkToFile, SystemFieldTypeConstants.Pointer)
-                {
-                    MultiCulture = false,
-                    Option = new PointerOption { EntityType = PointerTypeConstants.MediaFile }
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.ExtendedLinkToYouTube, SystemFieldTypeConstants.Text)
-                {
-                    MultiCulture = false,
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.ExtendedLinkToExternalUrl, SystemFieldTypeConstants.Text)
-                {
-                    MultiCulture = true,
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.ExtendedButtonSubText, SystemFieldTypeConstants.Text)
-                {
-                    MultiCulture = true,
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.ExtendedClass, SystemFieldTypeConstants.TextOption)
-                {
-                    Option = new TextOption
-                    {
-                        MultiSelect = false,
-                        Items = new List<TextOption.Item>
-                        {
-                            new TextOption.Item
-                            {
-                                Value = "primaryButton",
-                                Name = new Dictionary<string, string> { { "en-US", "primaryButton" }, { "sv-SE", "primaryButton" } }
-                            },
-                            new TextOption.Item
-                            {
-                                Value = "secondaryButton",
-                                Name = new Dictionary<string, string> { { "en-US", "secondaryButton" }, { "sv-SE", "secondaryButton" } }
-                            },
-                            new TextOption.Item
-                            {
-                                Value = "thirdButton",
-                                Name = new Dictionary<string, string> { { "en-US", "thirdButton" }, { "sv-SE", "thirdButton" } }
-                            }
-                        }
-                    }
-                },
-                new FieldDefinition<BlockArea>(BlockFieldNameConstants.TextBlockItem, SystemFieldTypeConstants.MultiField)
-                {
-                    MultiCulture = false,
-                     Option = new MultiFieldOption
-                     {
-                         IsArray = true,
-                         Fields  = new List<string>()
-                         {
-                             BlockFieldNameConstants.BlockTitle,
-                             BlockFieldNameConstants.BlockSubTitle,
-                             BlockFieldNameConstants.BlockText,
-                             BlockFieldNameConstants.Background,
-                             BlockFieldNameConstants.ExtendedLinkText,
-                             BlockFieldNameConstants.ExtendedLinkToPage,
-                             BlockFieldNameConstants.ExtendedLinkToCategory,
-                             BlockFieldNameConstants.ExtendedLinkToProduct,
-                             BlockFieldNameConstants.ExtendedLinkToProductList,
-                             BlockFieldNameConstants.ExtendedLinkToFile,
-                             BlockFieldNameConstants.ExtendedLinkToYouTube,
-                             BlockFieldNameConstants.ExtendedLinkToExternalUrl,
-                             BlockFieldNameConstants.ExtendedClass,
-                         }
-                     }
-                },
+                _fieldHelper.GetBlockFieldDefinition(BlockFieldNameConstants.BlockTitle, SystemFieldTypeConstants.Text, true),
+                _fieldHelper.GetBlockFieldDefinition(BlockFieldNameConstants.BlockSubTitle, SystemFieldTypeConstants.Text, true),            
+                _fieldHelper.GetBlockFieldDefinition(BlockFieldNameConstants.BlockText, SystemFieldTypeConstants.Editor, true),
+                _fieldHelper.GetBlockTextOptionField(BlockFieldNameConstants.Background, SystemFieldTypeConstants.TextOption),
+                _fieldHelper.GetBlockFieldDefinition(BlockFieldNameConstants.ExtendedLinkText, SystemFieldTypeConstants.Text, true),
+                _fieldHelper.GetBlockPointerField(BlockFieldNameConstants.ExtendedLinkToPage, SystemFieldTypeConstants.Pointer, PointerTypeConstants.WebsitesPage),
+                _fieldHelper.GetBlockPointerField(BlockFieldNameConstants.ExtendedLinkToCategory, SystemFieldTypeConstants.Pointer, PointerTypeConstants.ProductsCategory),
+                _fieldHelper.GetBlockPointerField(BlockFieldNameConstants.ExtendedLinkToProduct, SystemFieldTypeConstants.Pointer, PointerTypeConstants.ProductsProduct),
+                _fieldHelper.GetBlockPointerField(BlockFieldNameConstants.ExtendedLinkToProductList, SystemFieldTypeConstants.Pointer, PointerTypeConstants.ProductsProductList),
+                _fieldHelper.GetBlockPointerField(BlockFieldNameConstants.ExtendedLinkToFile, SystemFieldTypeConstants.Pointer, PointerTypeConstants.MediaFile),
+                _fieldHelper.GetBlockFieldDefinition(BlockFieldNameConstants.ExtendedLinkToYouTube, SystemFieldTypeConstants.Text),
+                _fieldHelper.GetBlockFieldDefinition(BlockFieldNameConstants.ExtendedLinkToExternalUrl, SystemFieldTypeConstants.Text, true),            
+                _fieldHelper.GetBlockFieldDefinition(BlockFieldNameConstants.ExtendedButtonSubText, SystemFieldTypeConstants.Text, true),
+                _fieldHelper.GetBlockTextOptionField(BlockFieldNameConstants.ExtendedClass, SystemFieldTypeConstants.TextOption),                
+                _fieldHelper.GetBlockMultiField(BlockFieldNameConstants.TextBlockItem, SystemFieldTypeConstants.MultiField),
             };
             return fields;
         }

@@ -9,7 +9,6 @@ using Litium.Accelerator.Services;
 using Litium.Common;
 using Litium.Customers;
 using Litium.FieldFramework;
-using Litium.FieldFramework.Internal;
 using Litium.Products;
 using Litium.Runtime;
 using Litium.Security;
@@ -229,6 +228,7 @@ namespace Litium.Accelerator.Definitions
                 var currentField = _fieldDefinitionService.Get(item.AreaType, item.Id);
                 if (currentField == null)
                 {
+                    item.Editable = true;
                     _fieldFrameworkSetupLocalizationService.Localize(item);
                     _fieldDefinitionService.Create(item);
                     SetAlreadyExecuted<FieldDefinition>(item.Id, item.AreaType.Name);

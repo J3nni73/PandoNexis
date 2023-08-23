@@ -19,7 +19,7 @@ export const toggleModal = () => (dispatch, getState) => {
     const bodyEl = document.querySelector('body');
     if (bodyEl) {
         if (pnModal.open) {
-            bodyEl.classList.add('modal--open');
+            bodyEl.classList.remove('modal--open');
         }
         else {
             bodyEl.classList.add('modal--open');

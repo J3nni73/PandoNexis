@@ -1,7 +1,5 @@
 ﻿using Litium.Runtime.DependencyInjection;
 using Newtonsoft.Json;
-using Solution.Extensions.PNPilot.Objects;
-using Solution.Extensions.PNPilot.Services.DALServices;
 using Solution.Extensions.PNQuizWalk.Objects;
 using Solution.Extensions.PNQuizWalk.Services.DALServices;
 using System;

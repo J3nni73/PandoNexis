@@ -1,10 +1,16 @@
-﻿using Litium.FieldFramework;
+﻿using Litium.Accelerator.ViewModels.MyPages;
+using Litium.Blocks;
+using Litium.Customers;
+using Litium.FieldFramework;
 using Litium.FieldFramework.FieldTypes;
 using Litium.Globalization;
 using Litium.Products;
 using Litium.Runtime.DependencyInjection;
 using Litium.Security;
 using Litium.Websites;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PandoNexis.Accelerator.Extensions.Constants;
+using System.ComponentModel.DataAnnotations;
 
 namespace PandoNexis.Accelerator.Extensions.Definitions.FieldHelper
 {
@@ -92,10 +98,14 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.FieldHelper
         {
             switch (area)
             {
-                case "ProductArea":
+                case nameof(ProductArea):
                     return _fieldDefinitionService.Get<ProductArea>(fieldDefinitionId);
-                case "WebsiteArea":
+                case nameof(WebsiteArea):
                     return _fieldDefinitionService.Get<WebsiteArea>(fieldDefinitionId);
+                case nameof(BlockArea):
+                    return _fieldDefinitionService.Get<BlockArea>(fieldDefinitionId);
+                case nameof(CustomerArea):
+                    return _fieldDefinitionService.Get<CustomerArea>(fieldDefinitionId);
             }
             return null;
 
@@ -140,5 +150,254 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.FieldHelper
 
             return result;
         }
+
+        #region Product
+        public FieldDefinition GetProductFieldDefinition(string fieldDefinitionId, string fieldType, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var fieldDefinition = new FieldDefinition<ProductArea>(fieldDefinitionId, fieldType)
+            {
+                CanBeGridColumn = gridColumn,
+                CanBeGridFilter = gridFilter,
+                MultiCulture = multiCulture,
+                UseInStorefront = useInStorefront,
+                Editable = editable,
+            };
+            return fieldDefinition;
+        }
+        public FieldDefinition GetProductTextOptionField(string fieldDefinitionId, string fieldType, bool manualSort = false, bool multiSelect = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var optionField = GetProductFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            optionField.Option = new TextOption
+            {
+                MultiSelect = multiSelect,
+                ManualSort = manualSort,
+                Items = new List<TextOption.Item>()
+            };
+            return optionField;
+        }
+        public FieldDefinition GetProductPointerField(string fieldDefinitionId, string fieldType, string pointerEntity, bool multiSelect = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var pointerField = GetProductFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            pointerField.Option = new PointerOption
+            {
+                EntityType = pointerEntity,
+                MultiSelect = multiSelect
+            };
+            return pointerField;
+
+        }
+
+        public FieldDefinition GetProductMultiField(string fieldDefinitionId, string fieldType, bool isArray = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var multiField = GetProductFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            multiField.Option = new MultiFieldOption
+            {
+                IsArray = isArray,
+                Fields = new List<string>()
+            };
+            return multiField;
+
+        }
+        #endregion
+
+        #region Customer
+        public FieldDefinition GetCustomerFieldDefinition(string fieldDefinitionId, string fieldType, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var fieldDefinition = new FieldDefinition<CustomerArea>(fieldDefinitionId, fieldType)
+            {
+                CanBeGridColumn = gridColumn,
+                CanBeGridFilter = gridFilter,
+                MultiCulture = multiCulture,
+                UseInStorefront = useInStorefront,
+                Editable = editable,
+            };
+            return fieldDefinition;
+        }
+
+        public FieldDefinition GetCustomerTextOptionField(string fieldDefinitionId, string fieldType, bool manualSort = false, bool multiSelect = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var optionField = GetCustomerFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            optionField.Option = new TextOption
+            {
+                MultiSelect = multiSelect,
+                ManualSort = manualSort,
+                Items = new List<TextOption.Item>()
+            };
+            return optionField;
+        }
+        public FieldDefinition GetCustomerPointerField(string fieldDefinitionId, string fieldType, string pointerEntity, bool multiSelect = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var pointerField = GetCustomerFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            pointerField.Option = new PointerOption
+            {
+                EntityType = pointerEntity,
+                MultiSelect = multiSelect
+            };
+            return pointerField;
+
+        }
+
+        public FieldDefinition GetCustomerMultiField(string fieldDefinitionId, string fieldType, bool isArray = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var multiField = GetCustomerFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            multiField.Option = new MultiFieldOption
+            {
+                IsArray = isArray,
+                Fields = new List<string>()
+            };
+            return multiField;
+
+        }
+        #endregion
+
+        #region Website
+        public FieldDefinition GetWebsiteFieldDefinition(string fieldDefinitionId, string fieldType, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var fieldDefinition = new FieldDefinition<WebsiteArea>(fieldDefinitionId, fieldType)
+            {
+                CanBeGridColumn = gridColumn,
+                CanBeGridFilter = gridFilter,
+                MultiCulture = multiCulture,
+                UseInStorefront = useInStorefront,
+                Editable = editable,
+            };
+            return fieldDefinition;
+        }
+
+        public FieldDefinition GetWebsiteTextOptionField(string fieldDefinitionId, string fieldType, bool manualSort = false, bool multiSelect = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var optionField = GetWebsiteFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            optionField.Option = new TextOption
+            {
+                MultiSelect = multiSelect,
+                ManualSort = manualSort,
+                Items = new List<TextOption.Item>()
+            };
+            return optionField;
+        }
+        public FieldDefinition GetWebsitePointerField(string fieldDefinitionId, string fieldType, string pointerEntity, bool multiSelect = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var pointerField = GetWebsiteFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            pointerField.Option = new PointerOption
+            {
+                EntityType = pointerEntity,
+                MultiSelect = multiSelect
+            };
+            return pointerField;
+
+        }
+
+        public FieldDefinition GetWebsiteMultiField(string fieldDefinitionId, string fieldType, bool isArray = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var multiField = GetWebsiteFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            multiField.Option = new MultiFieldOption
+            {
+                IsArray = isArray,
+                Fields = new List<string>()
+            };
+            return multiField;
+
+        }
+        #endregion
+
+        #region Block
+        public FieldDefinition GetBlockFieldDefinition(string fieldDefinitionId, string fieldType, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var fieldDefinition = new FieldDefinition<BlockArea>(fieldDefinitionId, fieldType)
+            {
+                CanBeGridColumn = gridColumn,
+                CanBeGridFilter = gridFilter,
+                MultiCulture = multiCulture,
+                UseInStorefront = useInStorefront,
+                Editable = editable,
+            };
+            return fieldDefinition;
+        }
+        public FieldDefinition GetBlockTextOptionField(string fieldDefinitionId, string fieldType, bool manualSort = false, bool multiSelect = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var optionField = GetBlockFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            optionField.Option = new TextOption 
+            { 
+                MultiSelect = multiSelect, 
+                ManualSort  = manualSort, 
+                Items = new List<TextOption.Item>()
+            };
+            return optionField;
+        }
+        public FieldDefinition GetBlockPointerField(string fieldDefinitionId, string fieldType, string pointerEntity, bool multiSelect = false,  bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var pointerField = GetBlockFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            pointerField.Option = new PointerOption
+            {
+                EntityType = pointerEntity, 
+                MultiSelect = multiSelect
+            };
+            return pointerField;
+
+        }
+
+        public FieldDefinition GetBlockMultiField(string fieldDefinitionId, string fieldType, bool isArray = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var multiField = GetBlockFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            multiField.Option = new MultiFieldOption
+            {
+                IsArray = isArray,
+                Fields = new List<string>()
+            };
+            return multiField;
+
+        }
+        #endregion
+
+
+        #region Globalization
+        public FieldDefinition GetGlobalizationFieldDefinition(string fieldDefinitionId, string fieldType, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var fieldDefinition = new FieldDefinition<GlobalizationArea>(fieldDefinitionId, fieldType)
+            {
+                CanBeGridColumn = gridColumn,
+                CanBeGridFilter = gridFilter,
+                MultiCulture = multiCulture,
+                UseInStorefront = useInStorefront,
+                Editable = editable,
+            };
+            return fieldDefinition;
+        }
+        public FieldDefinition GetGlobalizationTextOptionField(string fieldDefinitionId, string fieldType, bool manualSort = false, bool multiSelect = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var optionField = GetGlobalizationFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            optionField.Option = new TextOption
+            {
+                MultiSelect = multiSelect,
+                ManualSort = manualSort,
+                Items = new List<TextOption.Item>()
+            };
+            return optionField;
+        }
+        public FieldDefinition GetGlobalizationPointerField(string fieldDefinitionId, string fieldType, string pointerEntity, bool multiSelect = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var pointerField = GetGlobalizationFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            pointerField.Option = new PointerOption
+            {
+                EntityType = pointerEntity,
+                MultiSelect = multiSelect
+            };
+            return pointerField;
+
+        }
+
+        public FieldDefinition GetGlobalizationMultiField(string fieldDefinitionId, string fieldType, bool isArray = false, bool multiCulture = false, bool gridColumn = false, bool gridFilter = false, bool editable = true, bool useInStorefront = true)
+        {
+            var multiField = GetGlobalizationFieldDefinition(fieldDefinitionId, fieldType, multiCulture, gridColumn, gridFilter, editable, useInStorefront);
+            multiField.Option = new MultiFieldOption
+            {
+                IsArray = isArray,
+                Fields = new List<string>()
+            };
+            return multiField;
+
+        }
+        #endregion
+
     }
 }

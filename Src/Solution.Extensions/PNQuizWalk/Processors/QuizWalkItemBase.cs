@@ -9,7 +9,6 @@ using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Processors;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Services;
 using PandoNexis.AddOns.Extensions.PNRegisterMe.Constants;
-using Solution.Extensions.PNPilot.Constants;
 using Solution.Extensions.PNQuizWalk.Constants;
 using Solution.Extensions.PNQuizWalk.Objects;
 using System;

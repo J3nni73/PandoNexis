@@ -20,7 +20,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Framework
         public IViewComponentResult Invoke()
         {
             var viewModel = _footerViewModelBuilder.Build();
-            return View("~/Views/Framework/Footer.cshtml", viewModel);
+            return View("~/Views/_solution/Framework/Footer.cshtml", viewModel);
         }
     }
 }

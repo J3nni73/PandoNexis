@@ -7,6 +7,8 @@
         public const string AreaSource = "AreaSource";
         public const string EnableDropZone = "EnableDropZone";
         public const string DisplayTypes = "DisplayTypes";
+        public const string Table = "table";
+        public const string Cards = "cards";
         public const string ColumnsInsideContainerSmall = "ColumnsInsideContainerSmall";
         public const string ColumnsInsideContainerMedium = "ColumnsInsideContainerMedium";
         public const string ColumnsInsideContainerLarge = "ColumnsInsideContainerLarge";

@@ -38,30 +38,6 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
 
             var genericButtons = new List<GenericButton>();
 
-            //var genericButton = new GenericButton
-            //{
-            //    FieldId = ContactFormConstants.SavePerson,
-            //    ButtonText = "Klicka här så gör vi ngt coolt",
-            //    EndPointMethod = "test",
-            //    FieldTooltipMessage = "testar knapp",
-            //    HideButton = false,
-            //    UseConfirmation = false,
-            //    ClassName = "generic-data-view__btn-green"
-            //};
-
-            //var genericButton2 = new GenericButton
-            //{
-            //    FieldId = ContactFormConstants.RegisterMeOrganization,
-            //    ButtonText = "Exportera",
-            //    EndPointMethod = "test2",
-            //    FieldTooltipMessage = "testar knapp2",
-            //    HideButton = false,
-            //    UseConfirmation = false,
-            //    ClassName = "generic-data-view__btn-orange"
-            //};
-
-            //genericButtons.Add(genericButton);
-            //genericButtons.Add(genericButton2);
             settings.DataViewButtons = genericButtons;
 
             return settings;
@@ -81,6 +57,17 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
             }
 
             return "string";
+        }
+        public Guid GetEntitySystemIdFromQuerystring(string querystring)
+        {
+            if (Guid.TryParse(querystring.Replace("?entitySystemId=", ""), out Guid systemId))
+            {
+                return systemId;
+            }
+            else
+            {
+                return Guid.Empty;
+            }
         }
         public List<ValidationRule> GetValidationRules(string fieldDefinitionId, List<string> requiredFields)
         {

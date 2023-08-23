@@ -15,6 +15,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
         private readonly string _baseUrl;
         private readonly string _token;
         public Guid _currentPageSystemId { get; set; }
+
         public NoErpProcessorBase(PersonStorage personStorage,
             GenericDataViewService genericDataViewService)
         {
@@ -27,9 +28,9 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
             }
         }
 
-        public abstract Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data);
 
-        public abstract Task<object> GetDataForm(string data);
+
+        public abstract Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data);
 
         public abstract Task<GenericDataView> GetDataView(Guid pageSystemId, string data);
 
@@ -44,8 +45,6 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
         }
 
         public abstract Task<object> GetGridViewForExport(string data);
-
-        public abstract Task<object> HandleFormData(string data);
 
         public abstract Task<GenericDataContainer> UpdateField(GenericDataField fieldData);
 

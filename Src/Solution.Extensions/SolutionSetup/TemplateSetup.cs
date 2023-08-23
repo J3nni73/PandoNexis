@@ -542,8 +542,15 @@ namespace Solution.Extensions.Definitions
 
             foreach (var group in groups)
             {
-                var templateFieldGroup = new FieldTemplateFieldGroup();
-                templateFieldGroup.Collapsed = false;
+                var templateFieldGroup = new FieldTemplateFieldGroup()
+                {
+                    Id = group.Key,
+                    Collapsed = false,
+                    Localizations =  {
+                                            ["sv-SE"] = { Name = group.Key },
+                                            ["en-US"] = { Name = group.Key }
+                                         },
+                };
 
                 foreach (var field in group)
                 {
@@ -563,8 +570,15 @@ namespace Solution.Extensions.Definitions
 
             foreach (var group in groups)
             {
-                var templateFieldGroup = new FieldTemplateFieldGroup();
-                templateFieldGroup.Collapsed = false;
+                var templateFieldGroup = new FieldTemplateFieldGroup()
+                {
+                    Id = group.Key,
+                    Collapsed = false,
+                    Localizations =  {
+                                            ["sv-SE"] = { Name = group.Key },
+                                            ["en-US"] = { Name = group.Key }
+                                         },
+                };
 
                 foreach (var field in group)
                 {

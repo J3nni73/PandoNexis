@@ -145,7 +145,7 @@ namespace PandoNexis.Accelerator.Extensions.Builders
             {
                 if (!externalUrl.StartsWith("http"))
                 {
-                    externalUrl = "http://" + externalUrl;
+                    externalUrl = "https://" + externalUrl;
                 }
                 model.Href = externalUrl;
                 model.Target = "_blanc";

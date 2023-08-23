@@ -78,7 +78,6 @@ export const GenericDataView = ({
             setfieldsToShow(fieldsToShow.filter((f) => f !== index));
             return;
         }
-
         setfieldsToShow((prevState) => [...prevState, index]);
     };
     

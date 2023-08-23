@@ -28,12 +28,6 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
             _requestModelAccessor = requestModelAccessor;
             _personStorage = personStorage; 
         }
-
-        public override Task<object> GetDataForm(string data)
-        {
-            throw new NotImplementedException();
-        }
-
         public async override Task<GenericDataView> GetDataView(Guid pageSystemId, string data)
         {
             var view = new GenericDataView();
@@ -80,11 +74,6 @@ namespace PandoNexis.AddOns.Extensions.PNNoErp.Processors
         }
 
         public override Task<object> GetGridViewForExport(string data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<object> HandleFormData(string data)
         {
             throw new NotImplementedException();
         }

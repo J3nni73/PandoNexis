@@ -13,6 +13,6 @@
     <ProjectReference Include="..\Litium.Accelerator\Litium.Accelerator.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Litium.Web.Administration.Application" Version="8.9.1" />
+    <PackageReference Include="Litium.Web.Administration.Application" Version="8.11.4" />
   </ItemGroup>
 </Project>
