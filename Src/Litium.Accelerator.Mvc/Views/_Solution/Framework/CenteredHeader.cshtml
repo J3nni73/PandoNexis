@@ -30,12 +30,7 @@
             };
 }
 
-@*PandoNexis: BEGIN ADDON PNWebsiteSelector*@
-@if (extendedModel.GetType() != typeof(string))
-{
-    @await Html.PartialAsync("_WebsiteSelector_Portal", extendedModel)
-}
-@*PandoNexis: END ADDON END PNWebsiteSelector*@
+
 <header id="header" role="banner" class="pn-header">
     <div class="row pn-header__row @headerClass align-center">
         <div class="small-2 large-4 columns">
@@ -55,10 +50,14 @@
 
         <div class="small-2 large-4 columns text--right">
             <div class="pn-header__components">
-
-
-
-
+                @*//PandoNexis: BEGIN ADDON PNOrganisationSelector*@
+                @if (User.Identity.IsAuthenticated && !pageCssClass.Contains("login"))
+                {
+                    <div class="pn-organization-selector__container">
+                        <div class="pn-organization-selector"></div>
+                    </div>
+                }
+                @*//PandoNexis: END ADDON PNOrganisationSelector*@
                 @if (Model.TopLinkList.Any())
                 {
                     foreach (var link in Model.TopLinkList)

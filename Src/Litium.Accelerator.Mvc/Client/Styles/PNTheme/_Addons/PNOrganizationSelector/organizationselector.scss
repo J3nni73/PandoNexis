@@ -49,6 +49,8 @@ $pn-organization-selector-shadow-color: $color-grey-darkest;
             color: $solution-link-color;
         }
 
+        @include blurry-backdrop(3.5rem);
+
         .select-org-list {
             @include border-radius(5px);
             font-size: rem(14px);
@@ -57,7 +59,8 @@ $pn-organization-selector-shadow-color: $color-grey-darkest;
 
         > div {
             @include animation(0, 0.3s, fade-in, ease-in-out);
-            background: rgba(lighten($solution-megamenu-background-color, 20%), .95);
+            @include gradient(50, rgba(#16071b, .94), rgba(lighten(#16071b, 10%), .98));
+            @include blurry-backdrop(3.5rem);
             position: absolute;
             top: 100%;
             right: rem(-16px);

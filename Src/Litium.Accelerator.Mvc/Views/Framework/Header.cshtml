@@ -4,7 +4,7 @@
     var logoHeight = Model.IsBigHeader ? 60 : 50;
     var headerClass = Model.IsBigHeader ? "extended-header" : "compact-header";
     var headerRow = Model.HeaderName == "OneRow" ? "header__row--one-row" : "";
-
+    var pageCssClass = ViewData["PageCssClass"] as string;
     var responsiveDefinition = new ResponsiveImageDefinition
     {
         SrcSets = new SrcSetDefinition[]
@@ -32,6 +32,14 @@
             @Html.ImageFor(x => x.Logo, maxSize: new System.Drawing.Size(-1, logoHeight), renderSizeAttributes: true, responsiveDefinition: responsiveDefinition)
         </a>
         <div class="header__components">
+            @*//PandoNexis: BEGIN ADDON PNOrganisationSelector*@
+            @if (User.Identity.IsAuthenticated && !pageCssClass.Contains("login"))
+            {
+                <div class="pn-organization-selector__container">
+                    <div class="pn-organization-selector"></div>
+                </div>
+            }
+            @*//PandoNexis: END ADDON PNOrganisationSelector*@
             @if (Model.TopLinkList.Any())
             {
                 foreach (var link in Model.TopLinkList)
