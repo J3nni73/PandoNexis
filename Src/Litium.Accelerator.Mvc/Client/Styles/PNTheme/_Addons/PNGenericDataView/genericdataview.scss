@@ -26,7 +26,7 @@ $dataview-error-field-color: rgba(255,0,0,1);
         }
     }
 
-    overflow: hidden;
+    //overflow: hidden;
 
     .main-content {
         padding-bottom: 0;
@@ -133,6 +133,7 @@ $dataview-error-field-color: rgba(255,0,0,1);
 .generic-data-view {
     font-family: $font-family-condensed;
     font-size: $dataview-general-font-size;
+    margin: 0 auto;
 
     &__tooltip {
         z-index: 999999 !important;
@@ -233,18 +234,15 @@ $dataview-error-field-color: rgba(255,0,0,1);
         }
     }
 
-    &__modal {
-        .generic-data-view__view-selector {
-            top: rem(4px);
-        }
-    }
-
     &-container {
         margin-top: rem(64px);
         opacity: 0;
         @include animation(.5s,1s, fade-in, ease-in-out);
         position: relative;
         //@include blurry-backdrop(8px);
+        &.row {
+            max-width: 55px;
+        }
 
         td {
             vertical-align: top;
@@ -329,10 +327,19 @@ $dataview-error-field-color: rgba(255,0,0,1);
 .generic-data-view {
     width: 100%;
     min-height: rem(200px);
+    margin: 0 auto;
+
+    &.row {
+        max-width: none;
+    }
 
     &__container {
         position: relative;
         z-index: 3000;
+
+        > .row {
+            max-width: none;
+        }
     }
 
     &__datepicker {
@@ -366,9 +373,20 @@ $dataview-error-field-color: rgba(255,0,0,1);
     &__wrapper {
         max-height: calc(100vh - 240px);
         padding-bottom: 64px;
-        overflow: hidden;
-        overflow-y: scroll;
+        /*overflow: hidden;
+        overflow-y: scroll;*/
         @include scroll-styling(8px);
+
+        &.row, >.row {
+            max-width: none;
+        }
+
+        .nowrap {
+            span {
+                display: inline-block;
+                white-space: nowrap;
+            }
+        }
     }
 
     @include mobile {
@@ -703,7 +721,6 @@ $dataview-error-field-color: rgba(255,0,0,1);
             left: 50%;
             transform: translateX(-50%);
             width: calc(100% - 120px);
-            
             //border-top: 1px solid rgba(255,255,255,.9);
         }
 
@@ -761,11 +778,12 @@ $dataview-error-field-color: rgba(255,0,0,1);
         overflow-x: auto;
         position: relative;
         border-spacing: 0;
+        @include backdrop-filter(saturate(180%) blur(rem(16px)));
 
         &-view {
-            background: rgba(255, 255, 255, .8);
+            /*background: rgba(255, 255, 255, .8);
             @include backdrop-filter(saturate(180%) blur(rem(16px)));
-            @include image-border-tiny;
+            @include image-border-tiny;*/
         }
 
         thead th,
@@ -791,7 +809,7 @@ $dataview-error-field-color: rgba(255,0,0,1);
             font-style: italic;
             letter-spacing: .001rem;
             font-weight: 500;
-            background: rgba($color-white, .9);
+            background: rgba($color-white, .98);
             border-bottom: 2px solid $bg-color-odd-row;
             padding: rem(4px 6px);
             text-align: left;
@@ -819,9 +837,9 @@ $dataview-error-field-color: rgba(255,0,0,1);
             }
 
             tr:nth-child(odd) {
-                @include gradient($dataview-background-angle,rgba($bg-color-odd-row, .5), lighten($bg-color-odd-row, 5%));
-                border-bottom: 1px solid rgba(darken($bg-color-odd-row, 20%), 0.9);
-                border-top: 1px solid rgba(darken($bg-color-odd-row, 20%), 0.9);
+                @include gradient($dataview-background-angle,rgba($bg-color-odd-row, .9), lighten($bg-color-odd-row, 5%));
+                border-bottom: 1px solid rgba(darken($bg-color-odd-row, 20%), 0.98);
+                border-top: 1px solid rgba(darken($bg-color-odd-row, 20%), 0.98);
             }
 
             tr:nth-child(even) {
@@ -849,7 +867,7 @@ $dataview-error-field-color: rgba(255,0,0,1);
 
             td,
             td input {
-                background: rgba(255, 255, 255, 0.5);
+                background: rgba(255, 255, 255, 0.9);
 
                 a {
                     &, &:active, &:visited {
@@ -908,10 +926,10 @@ $dataview-error-field-color: rgba(255,0,0,1);
                     /*&, &:hover {
                         cursor: grabbing !important;
                     }*/
-                    }
                 }
             }
         }
+    }
 
     &__error {
         background: $dataview-error-bg;
@@ -924,7 +942,7 @@ $dataview-error-field-color: rgba(255,0,0,1);
             font-size: smaller;
             font-weight: 400;
             letter-spacing: .04rem;
-    }
+        }
 
         &:not(.columns) {
             padding: rem(6px);
@@ -984,60 +1002,6 @@ $dataview-error-field-color: rgba(255,0,0,1);
         width: 100%;
         margin-bottom: $global-margin;
         position: relative;
-    }
-
-    &__modal {
-        padding: rem(80px 24px 0 24px);
-
-        input[type='text'] {
-            border: 1px solid rgba(0, 0, 0, 0.3);
-            border-radius: rem(4px);
-        }
-        .generic-data-view__wrapper{
-            max-height: calc(100vh - 70px);
-        }
-
-       /* button {
-            float: right;
-        }
-*/
-        &-send {
-            @include generalDataViewButton;
-        }
-
-        &-wrapper {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 500;
-            background: rgba(0,0,0,.94);
-        }
-
-        .field-settings {
-            margin-left: -24px;
-
-            &--show {
-                &:before {
-                    background: rgba(253, 270, 255, 0.5);
-                }
-            }
-        }
-
-        &-icon-close {
-            cursor: pointer;
-            position: absolute;
-            right: 64px;
-            top: 30px;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-
-            svg {
-                fill: rgba(255,255,255,.9);
-            }
-        }
     }
 
     @include breakpoint(large) {

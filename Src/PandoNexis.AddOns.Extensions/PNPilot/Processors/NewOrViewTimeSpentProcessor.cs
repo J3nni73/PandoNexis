@@ -90,7 +90,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
                     var time = _pilotProcessorService.UpdateTimeSpentFields(systemId, organizationSystemId, (Guid)personSystemId, response.Form);
                     if (time != null)
                     {
-                        var containter = BuildTimeSpentContainer(GetFields(PilotProcessorConstants.WorkItems), time);
+                        var containter = BuildTimeSpentContainer(GetFields(PilotProcessorConstants.NewOrViewTimeSpent), time);
 
                         return containter;
                     }
@@ -139,6 +139,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
         }
         public GenericDataContainer BuildNewTimeSpentContainer(GenericDataContainer templateContainer, Time time)
         {
+            time.SystemId = time.ItemSystemId;
             var result = BuildTimeSpentContainer(templateContainer, time);
 
             result.Settings.PostContainerButtonText = "Save new";

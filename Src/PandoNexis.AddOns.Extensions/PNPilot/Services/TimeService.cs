@@ -31,7 +31,7 @@ namespace PandoNexis.AddOns.PNPilot.Services
         public Time GetNewTime(Guid itemSystemId, Guid timeTypeSystemId, Guid organizationSystemId, Guid personSystemId)
         {
             var item = new Time();
-            item.SystemId = itemSystemId;
+            item.SystemId = Guid.NewGuid();
             item.ItemSystemId= itemSystemId;
             item.OrganizationSystemId = organizationSystemId;
             item.TimeTypeSystemId = timeTypeSystemId;

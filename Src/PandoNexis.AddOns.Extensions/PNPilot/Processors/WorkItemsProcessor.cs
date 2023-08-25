@@ -78,6 +78,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
                 if (Guid.TryParse(response.EntitySystemId, out Guid systemId))
                 {
                     var item = _pilotProcessorService.UpdateFields(systemId, response.Form);
+                    RefreshDataLayer();
                     return BuildWorkItemContainer(GetFields(PilotProcessorConstants.WorkItems), item);
                 }
             }

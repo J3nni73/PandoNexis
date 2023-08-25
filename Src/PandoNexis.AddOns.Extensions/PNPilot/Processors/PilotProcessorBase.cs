@@ -77,15 +77,18 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
             _personStorage = personStorage;
 
             _itemStatuses = _itemStatusService.GetItemStatuses();
-            _itemTypes = _itemTypeService.GetItemTypes();
-            _workItems = _workItemService.GetItems();
+            RefreshDataLayer();
             _times = _timeService.GetAllTime();
             var timeTypes = _timeTypeService.GetTimeTypes();
             _estimatedTimeTypeSystemId = timeTypes.FirstOrDefault(i => i.Name == TimeTypeConstants.Estimated)?.SystemId ?? Guid.Empty;
             _workedTimeTypeSystemId = timeTypes.FirstOrDefault(i => i.Name == TimeTypeConstants.Worked)?.SystemId ?? Guid.Empty;
 
         }
-
+        public void RefreshDataLayer()
+        {
+            _workItems = _workItemService.GetItems();
+            _times = _timeService.GetAllTime();
+        }
         public abstract Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data);
         public abstract Task<GenericDataView> GetDataView(Guid pageSystemId, string data);
         public virtual GenericDataViewSettings GetDataViewSettings(Guid pageSystemId)
