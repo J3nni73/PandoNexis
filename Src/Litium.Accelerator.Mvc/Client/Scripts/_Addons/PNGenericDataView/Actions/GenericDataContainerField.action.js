@@ -10,6 +10,7 @@ import {
 import {
     checkResponse,
     getHeaderInformationData,
+    toggleModal
 } from './GenericDataView.action';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 
@@ -131,10 +132,27 @@ export const receiveOrganizationList = (data) => {
 
 export const updateDataContainer = (response, fields, buttonSettings = {}, containerIndex = -1, isInModal = false) => (dispatch, getState) => {
     dispatch(toggleGenericLoader(false));
-   
+    
     // If ony one data container is to be updated
     if (response) {
         
+        // Check if there are settings telling us how to handle this response
+        const responseActions = response.settings?.responseActions;
+        if (responseActions) {
+            
+            if (responseActions.hardReloadPage) {
+                location.reload();
+                return;
+            }
+            //if (responseActions.updateTopLevel) {
+            //    isInModal = false;
+            //}
+            if (responseActions.closeModal) {
+                // Close Modal
+                dispatch(toggleModal(true));
+            }
+        }
+
         // First check if we want to download a file
         if (buttonSettings && buttonSettings.downloadMimeTypeString?.length > 0 && buttonSettings.downloadFileType?.length > 0) {
             const fileName = `${buttonSettings.downloadFileName || buttonSettings.fieldId}.${buttonSettings.downloadFileType}`;
@@ -153,7 +171,7 @@ export const updateDataContainer = (response, fields, buttonSettings = {}, conta
         }
         
         if (response.fields) {
-            return dispatch(checkDataContainerResponse(response, fields, isInModal, '', containerIndex));
+            return dispatch(checkDataContainerResponse(response, fields, isInModal, '', containerIndex, responseActions));
         }
         return dispatch(checkResponse(response));
         

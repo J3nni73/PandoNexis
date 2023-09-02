@@ -13,7 +13,6 @@ export const ButtonField = ({
     //const { handleSubmit, getValues, dirtyFields } = useForm();
     //console.log("theFormValues", JSON.stringify(theFormValues));
     const buttonClick = (e) => {
-
         // Check validation
         window.currGenDW_useConfirmation = useConfirmation;
         window.currGenDW_fieldSettings = fieldSettings;
@@ -21,8 +20,10 @@ export const ButtonField = ({
         window.currGenDW_fieldId = fieldSettings.fieldId || fieldId;
         
         window.currGenDW_lastClickedFieldId = fieldSettings.fieldId || fieldId;
-        window.currGenDW_lastClickedEntitySystemId = fieldSettings.entitySystemId;
-        
+        window.currGenDW_lastClickedEntitySystemId = fieldSettings.entitySystemId;    
+        if (fieldSettings.buttonOpenInModal && dataContainerIndex !== undefined && dataContainerIndex !== null) {
+            window.currGenDW_dataContainerIndex = dataContainerIndex;
+        }
         onButtonClick(e);
     };
     const rndNo = Math.floor(Math.random() * 89233);

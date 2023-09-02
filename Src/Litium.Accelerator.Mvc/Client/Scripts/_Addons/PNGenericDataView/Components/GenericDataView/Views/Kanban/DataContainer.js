@@ -38,14 +38,13 @@ export const DataContainer = React.memo(
         settings,
         mainSettings,
         sortConfig,
-        sortColumn,
-        onlyShowTaskName = true
+        sortColumn
 
     }) => {
         const { register, handleSubmit, setFocus, reset, formState: { dirtyFields, isSubmitted }, } = useForm();
         const [cardFields, setCardFields] = useState([]);
-        const [containerState, setContainerState] = useState(settings?.containerState);
-        const [nextAvailableStatus, setNewAvailableStatus] = useState(settings?.possibleContainerStateTransitions);
+        const [containerState, setContainerState] = useState(settings?.kanbanContainerData?.containerState);
+        const [nextAvailableStatus, setNewAvailableStatus] = useState(settings?.kanbanContainerData?.possibleContainerStateTransitions);
         const [cardIngressField, setCardIngressField] = useState(null);
         const [errorObject, setErrorObject] = useState(null);
         const dispatch = useDispatch();
@@ -55,7 +54,6 @@ export const DataContainer = React.memo(
         let tempState = null;
         let initialOffset = null;
         let currentOffset = null;
-
         const isContainerValid = (identifierField, form, theFormFields) => {
             let isFullFormCheck = false;
             if (theFormFields === undefined) {
@@ -92,7 +90,6 @@ export const DataContainer = React.memo(
                 return errorObjects;
             }
         }
-
         const onButtonClick = (form) => {
             const useConfirmation = currGenDW_useConfirmation;
             const fieldSettings = currGenDW_fieldSettings;
@@ -289,7 +286,7 @@ export const DataContainer = React.memo(
                     </div>
                 )}
 
-                {mainSettings?.genericDataContainerStateList?.length > 0 && mainSettings.genericDataContainerStateList.map((status, index) => (
+                {mainSettings?.kanbanData?.genericDataContainerStateList?.length > 0 && mainSettings.kanbanData.genericDataContainerStateList.map((status, index) => (
                     <td
                         onDragEnter={(event) => dragEnter(event, status)}
                         onDragOver={(event) => dragOver(event, status)}
@@ -313,9 +310,9 @@ export const DataContainer = React.memo(
 
                                 draggable
                             >
-                                {onlyShowTaskName ? (
+                                {mainSettings?.kanbanData?.onlyShowTaskName ? (
                                     <div className="clean">
-                                        {settings?.taskName || ''}
+                                        {settings?.kanbanContainerData?.taskName || ''}
                                     </div>
                                 ) :
                                     (

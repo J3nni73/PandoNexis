@@ -14,6 +14,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Constants
         public const string WorkItems = "WorkItems";
         public const string NewOrViewWorkItem = "NewOrViewWorkItem";
         public const string NewOrViewTimeSpent = "NewOrViewTimeSpent";
+        public const string PilotOverview = "PilotOverview";
 
         public static string PilotButtonNames = "PilotButtonNames";
         public static string PilotButtonLinks = "PilotButtonLinks";

@@ -31,7 +31,6 @@ export const KanbanView = ({
     isInModal = false,
     error,
     rowIndex,
-    onlyShowTaskName = true,
     columnsInsideContainerSmall = 1,
     columnsInsideContainerMedium = 2,
     columnsInsideContainerLarge = 3,
@@ -47,6 +46,7 @@ export const KanbanView = ({
             <table className={classNames('generic-data-view__table kanban', {
                 'is-loading': isLoading,
             })}
+                 style={{ maxWidth: settings?.dataViewMaxWidth ? settings.dataViewMaxWidth : null }}
             >
                 <GridHeader
                     {...items[0]}
@@ -54,7 +54,7 @@ export const KanbanView = ({
                     sortConfig={sortConfig}
                     handleSetfieldsToShow={handleSetfieldsToShow}
                     fieldsToShow={fieldsToShow}
-                    statusList={settings.genericDataContainerStateList}
+                    statusList={settings.kanbanData?.genericDataContainerStateList}
                 />
                 <tbody>
                     {currentPosts &&
@@ -70,7 +70,6 @@ export const KanbanView = ({
                                 columnsInsideContainerSmall={columnsInsideContainerSmall}
                                 columnsInsideContainerMedium={columnsInsideContainerMedium}
                                 columnsInsideContainerLarge={columnsInsideContainerLarge}
-                                onlyShowTaskName={onlyShowTaskName}
                             />
                         ))}
                 </tbody>

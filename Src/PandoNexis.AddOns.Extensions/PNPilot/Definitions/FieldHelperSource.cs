@@ -26,10 +26,13 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Definitions
                 GetFieldOption(nameof(WebsiteArea),DataViewFieldNameConstants.AreaSource, PilotProcessorConstants.WorkItems),
                 GetFieldOption(nameof(WebsiteArea),DataViewFieldNameConstants.AreaSource, PilotProcessorConstants.NewOrViewWorkItem),
                 GetFieldOption(nameof(WebsiteArea),DataViewFieldNameConstants.AreaSource, PilotProcessorConstants.NewOrViewTimeSpent),
+                GetFieldOption(nameof(WebsiteArea),DataViewFieldNameConstants.AreaSource, PilotProcessorConstants.PilotOverview),
                 GetFieldOption(nameof(WebsiteArea), PilotProcessorConstants.PilotButtonNames, PilotProcessorConstants.NewWorkItem),
                 GetFieldOption(nameof(WebsiteArea), PilotProcessorConstants.PilotButtonNames, PilotProcessorConstants.ViewWorkItem),
                 GetFieldOption(nameof(WebsiteArea), PilotProcessorConstants.PilotButtonNames, PilotProcessorConstants.ViewWorkItem),
                 GetFieldOption(nameof(WebsiteArea), PilotProcessorConstants.PilotButtonNames, PilotProcessorConstants.ViewTimeSpentOnWorkItem),
+                GetFieldOption(nameof(WebsiteArea), PilotProcessorConstants.PilotButtonNames, PilotProcessorConstants.WorkItems),
+
                 GetFieldOption(nameof(CustomerArea), PilotFieldNameConstants.ProjectType,ProjectTypeConstants.PandoNexisAccelerator ),
                 GetFieldOption(nameof(CustomerArea), PilotFieldNameConstants.ProjectType,ProjectTypeConstants.LitiumAccelerator ),
                 GetFieldOption(nameof(CustomerArea), PilotFieldNameConstants.ProjectType,ProjectTypeConstants.SubContractor ),

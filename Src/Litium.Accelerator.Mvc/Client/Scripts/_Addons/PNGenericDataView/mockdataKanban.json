@@ -299,9 +299,11 @@
         }
       ],
       "settings": {
-        "taskName": "Sätta upp miljö",
-        "containerState": "NotStarted",
-        "possibleContainerStateTransitions": [ "NotStarted", "Dev", "InTest" ]
+        "kanbanContainerData": {
+          "taskName": "Sätta upp miljö",
+          "containerState": "NotStarted",
+          "possibleContainerStateTransitions": [ "NotStarted", "Dev", "InTest" ]
+        }
       },
       "messages": ""
     },
@@ -562,9 +564,11 @@
 
       ],
       "settings": {
-        "taskName": "Skapa grund",
-        "containerState": "InTest",
-        "possibleContainerStateTransitions": [ "NotStarted", "Dev", "InTest" ]
+        "kanbanContainerData": {
+          "taskName": "Skapa grund",
+          "containerState": "InTest",
+          "possibleContainerStateTransitions": [ "NotStarted", "Dev", "InTest" ]
+        }
       },
       "messages": ""
     },
@@ -824,9 +828,13 @@
         }
       ],
       "settings": {
-        "taskName": "Styling",
-        "containerState": "Accepted",
-        "possibleContainerStateTransitions": [ "NotStarted", "Dev", "InTest" ]
+        "kanbanContainerData": {
+          "kanbanContainerData": {
+            "taskName": "Styling",
+            "containerState": "Accepted",
+            "possibleContainerStateTransitions": [ "NotStarted", "Dev", "InTest" ]
+          }
+        }
       },
       "messages": ""
     },
@@ -1087,9 +1095,11 @@
 
       ],
       "settings": {
-        "taskName": "Fixa APIer",
-        "containerState": "Accepted",
-        "possibleContainerStateTransitions": [ "NotStarted", "Dev", "InTest" ]
+        "kanbanContainerData": {
+          "taskName": "Fixa APIer",
+          "containerState": "Accepted",
+          "possibleContainerStateTransitions": [ "NotStarted", "Dev", "InTest" ]
+        }
       },
       "messages": ""
     },
@@ -1342,9 +1352,11 @@
         }
       ],
       "settings": {
-        "taskName": "Justera PDP",
-        "containerState": "NotStarted",
-        "possibleContainerStateTransitions": [ "NotStarted", "Dev", "InTest" ]
+        "kanbanContainerData": {
+          "taskName": "Justera PDP",
+          "containerState": "NotStarted",
+          "possibleContainerStateTransitions": [ "NotStarted", "Dev", "InTest" ]
+        }
       },
       "messages": ""
     }
@@ -1359,27 +1371,30 @@
     "editableFieldIds": null,
     "identifierFieldId": null,
     "preventInitialLoad": false,
-    "genericDataContainerStateList": [
-      {
-        "id": "NotStarted",
-        "name": "Inte påbörjad"
-      },
-      {
-        "id": "Dev",
-        "name": "Under utveckling"
-      },
-      {
-        "id": "InTest",
-        "name": "Skickad till test"
-      },
-      {
-        "id": "Accepted",
-        "name": "Godkänd"
-      },
-      {
-        "id": "InProd",
-        "name": "I produktion"
-      }
-    ]
+    "kanbanData": {
+      "onlyShowTaskName": true,
+      "genericDataContainerStateList": [
+        {
+          "id": "NotStarted",
+          "name": "Inte påbörjad"
+        },
+        {
+          "id": "Dev",
+          "name": "Under utveckling"
+        },
+        {
+          "id": "InTest",
+          "name": "Skickad till test"
+        },
+        {
+          "id": "Accepted",
+          "name": "Godkänd"
+        },
+        {
+          "id": "InProd",
+          "name": "I produktion"
+        }
+      ]
+    }
   }
 }

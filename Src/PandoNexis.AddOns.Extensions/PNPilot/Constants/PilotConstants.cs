@@ -56,7 +56,8 @@ namespace PandoNexis.AddOns.PNPilot.Constants
         public const string Name = "Name";
         public const string Description = "Description";
 
-        public const string ItemProcessor = "ItemProcessor";
+        public const string OverviewHeader = "OverviewHeader";
+        public const string AmoutOfItems = "AmoutOfItems";
     }
     public static class PilotFieldTemplateConstants
     {

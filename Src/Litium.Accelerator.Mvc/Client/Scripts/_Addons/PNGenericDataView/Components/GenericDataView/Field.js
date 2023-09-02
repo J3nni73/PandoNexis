@@ -21,7 +21,6 @@ export const GenericDataViewField = React.forwardRef(
         if (fieldSettings && fieldSettings.validationRules) {
             isRequired = fieldSettings.validationRules.find(x => x.rule === 'IsRequired') ? true : false;
         }
-
         const handleChecked = (e) => {
             window.currGenDW_isTrue = !isChecked;
             onCheckboxChange(e);

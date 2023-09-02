@@ -51,7 +51,7 @@ export const CardsView = ({
                 'is-loading': isLoading,
             })}
             >   
-                <div className={`row small-up-${columnsWithContainersSmall || 1} medium-up-${columnsWithContainersMedium || 2} large-up-${columnsWithContainersLarge || 3} ${settings.alignContainers?'align-'+settings.alignContainers:''} `}>
+                <div className={`row small-up-${columnsWithContainersSmall || 1} medium-up-${columnsWithContainersMedium || 2} large-up-${columnsWithContainersLarge || 3} ${settings.alignContainers ? 'align-' + settings.alignContainers : ''} `}>
                     {currentPosts &&
                         currentPosts.map((dataContainer, index) => (
                             <DataContainer

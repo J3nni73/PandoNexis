@@ -13,6 +13,7 @@ using PandoNexis.AddOns.Extensions.PNGenericDataView.Constants;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Objects;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Processors;
 using PandoNexis.AddOns.Extensions.PNGenericDataView.Services;
+using PandoNexis.AddOns.Extensions.PNNoCrm.Constants;
 using PandoNexis.AddOns.Extensions.PNPilot.Constants;
 using PandoNexis.AddOns.Extensions.PNPilot.Services;
 using PandoNexis.AddOns.PNPilot.Constants;
@@ -39,6 +40,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
         private readonly TimeTypeService _timeTypeService;
         private readonly SecurityContextService _securityContextService;
         private readonly PersonStorage _personStorage;
+        private readonly GenericButtonService  _genericButtonService;
 
         private IEnumerable<ItemStatus> _itemStatuses;
         private IEnumerable<ItemType> _itemTypes;
@@ -60,7 +62,8 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
                                         RequestModelAccessor requestModelAccessor,
                                         TimeTypeService timeTypeService,
                                         SecurityContextService securityContextService,
-                                        PersonStorage personStorage)
+                                        PersonStorage personStorage,
+                                        GenericButtonService genericButtonService)
         {
             _genericDataViewService = genericDataViewService;
             _itemStatusService = itemStatusService;
@@ -77,17 +80,54 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
             _personStorage = personStorage;
 
             _itemStatuses = _itemStatusService.GetItemStatuses();
+            _itemTypes = _itemTypeService.GetItemTypes();
             RefreshDataLayer();
-            _times = _timeService.GetAllTime();
             var timeTypes = _timeTypeService.GetTimeTypes();
             _estimatedTimeTypeSystemId = timeTypes.FirstOrDefault(i => i.Name == TimeTypeConstants.Estimated)?.SystemId ?? Guid.Empty;
             _workedTimeTypeSystemId = timeTypes.FirstOrDefault(i => i.Name == TimeTypeConstants.Worked)?.SystemId ?? Guid.Empty;
-
+            _genericButtonService = genericButtonService;
         }
         public void RefreshDataLayer()
         {
             _workItems = _workItemService.GetItems();
             _times = _timeService.GetAllTime();
+        }
+
+        public List<GenericDataContainer> GetOverViewPerStatusContainer(GenericDataContainer templateContainer)
+        {
+            var resultList =  new List<GenericDataContainer>();
+
+            
+            foreach(var status in _itemStatuses)
+            {
+                var result = JsonConvert.DeserializeObject<GenericDataContainer>(JsonConvert.SerializeObject(templateContainer));
+               
+                foreach(var field in result.Fields)
+                {
+                    field.EntitySystemId = status.SystemId.ToString();
+                    switch (field.FieldId)
+                    {
+                        case PilotConstants.OverviewHeader:
+                            field.FieldValue = status.Name;
+                            break;
+                        case PilotConstants.AmoutOfItems:
+                            field.FieldValue = _workItems.Where(i => i.ItemStatusSystemId == status.SystemId).Count().ToString();
+                            break;
+                    }
+                }
+                var viewButton = new GenericDataField();
+                viewButton.EntitySystemId = status.SystemId.ToString();
+                viewButton.FieldId = NoCrmProcessorConstants.ViewPersonListByGroup;
+                viewButton.FieldName = NoCrmProcessorConstants.ViewPersonListByGroup;
+                viewButton.FieldType = DataFieldTypes.ButtonDGType;
+                viewButton.Settings.GenericButtons.Add(_genericButtonService.GetButton(_requestModelAccessor.RequestModel.WebsiteModel.Website, PilotProcessorConstants.PilotButtonLinks, PilotProcessorConstants.WorkItems, PilotProcessorConstants.PilotButtonNames, status.SystemId));
+
+
+                resultList.Add(result);
+
+            }
+
+            return resultList;
         }
         public abstract Task<object> ButtonClick(Guid pageSystemId, string buttonId, string data);
         public abstract Task<GenericDataView> GetDataView(Guid pageSystemId, string data);
@@ -104,7 +144,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
                 field.EntitySystemId = workItem.SystemId.ToString();
                 field.FieldValue = GetValue(field, workItem);
             }
-            
+
             return result;
         }
         public virtual GenericDataContainer BuildTimeSpentContainer(GenericDataContainer templateContainer, Time time)
@@ -123,7 +163,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
         {
             return _times?.FirstOrDefault(i => i.SystemId == systemId);
         }
-        public Time GetNewTimeSpent(Guid itemSystemId )
+        public Time GetNewTimeSpent(Guid itemSystemId)
         {
             var personSystemId = _securityContextService.GetIdentityUserSystemId();
             var organizationSystemId = _personStorage.CurrentSelectedOrganization.SystemId;
@@ -142,6 +182,11 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
             var result = new GenericDataContainer();
             switch (templateId)
             {
+                case PilotProcessorConstants.PilotOverview:
+                    result.Fields.Add(GetFieldOverviewHeader(website));
+                    result.Fields.Add(GetFieldAmoutOfItems(website));
+
+                    break;
                 case PilotProcessorConstants.NewOrViewTimeSpent:
                     result.Fields.Add(GetFieldAddTimeSpentFrom(website, true));
                     result.Fields.Add(GetFieldAddTimeSpentTo(website, true));
@@ -202,7 +247,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
                     case PilotConstants.Estimate:
                         if (decimal.TryParse(fieldData.FieldValue.ToString(), out decimal estimatedTime))
                         {
-                            var estimate = _times.FirstOrDefault(i => i.ItemSystemId == systemId && i.TimeTypeSystemId == _workedTimeTypeSystemId) 
+                            var estimate = _times.FirstOrDefault(i => i.ItemSystemId == systemId && i.TimeTypeSystemId == _workedTimeTypeSystemId)
                                                                     ?? _timeService.GetNewTime(item.SystemId, _estimatedTimeTypeSystemId, item.SystemId, item.OrganizationSystemId);
                             estimate.TimeAsHours = estimatedTime;
                             _timeService.AddOrUpdateTime(estimate);
@@ -211,7 +256,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
                     case PilotConstants.AddTimeSpent:
                         if (decimal.TryParse(fieldData.FieldValue.ToString(), out decimal addTimeSpent))
                         {
-                            var timeSpent = _times.FirstOrDefault(i => i.ItemSystemId == systemId && i.TimeTypeSystemId== _workedTimeTypeSystemId) 
+                            var timeSpent = _times.FirstOrDefault(i => i.ItemSystemId == systemId && i.TimeTypeSystemId == _workedTimeTypeSystemId)
                                                                     ?? _timeService.GetNewTime(item.SystemId, _workedTimeTypeSystemId, item.SystemId, item.OrganizationSystemId);
                             timeSpent.TimeAsHours = addTimeSpent;
                             _timeService.AddOrUpdateTime(timeSpent);
@@ -272,7 +317,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
 
         public IEnumerable<Time> GetTimeSpentOnWorkItem(Guid itemSystemId)
         {
-            var time = _times.Where(i=>i.ItemSystemId==itemSystemId&& i.TimeTypeSystemId==_workedTimeTypeSystemId)?.OrderByDescending(i=>i.TimeFrom)?.ToList()??new List<Time>();
+            var time = _times.Where(i => i.ItemSystemId == itemSystemId && i.TimeTypeSystemId == _workedTimeTypeSystemId)?.OrderByDescending(i => i.TimeFrom)?.ToList() ?? new List<Time>();
             return time;
         }
 
@@ -313,7 +358,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
                     result = (_times?.FirstOrDefault(i => i.ItemSystemId == workItem.SystemId && i.TimeTypeSystemId == _estimatedTimeTypeSystemId)?.Risk.ToString(DataFieldFormats.DecimalFormat)) ?? string.Empty;
                     break;
                 case PilotConstants.EstimatedComment:
-                    result = (_times?.FirstOrDefault(i => i.ItemSystemId == workItem.SystemId && i.TimeTypeSystemId == _estimatedTimeTypeSystemId)?.TimeComment)?? string.Empty;
+                    result = (_times?.FirstOrDefault(i => i.ItemSystemId == workItem.SystemId && i.TimeTypeSystemId == _estimatedTimeTypeSystemId)?.TimeComment) ?? string.Empty;
                     break;
                 case PilotConstants.SumTimeSpent:
                     //ToDo: select only timeSpent
@@ -694,6 +739,29 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
 
             return field;
         }
+        public GenericDataField GetFieldAmoutOfItems(Website website, bool editable = false)
+        {
+
+            var field = new GenericDataField();
+            field.FieldId = PilotConstants.AmoutOfItems;
+            field.FieldName = "addons.pilot.headertexts.amountofitems".AsWebsiteText(website);
+            field.FieldType = DataFieldTypes.DecimalDGType;
+            field.Settings.Editable = editable;
+
+            return field;
+        }
+        public GenericDataField GetFieldOverviewHeader(Website website, bool editable = false)
+        {
+
+            var field = new GenericDataField();
+            field.FieldId = PilotConstants.OverviewHeader;
+            field.FieldName = "addons.pilot.headertexts.overviewheader".AsWebsiteText(website);
+            field.FieldType = DataFieldTypes.StringDGType;
+            field.Settings.Editable = editable;
+
+            return field;
+        }
+
         #endregion
     }
 }

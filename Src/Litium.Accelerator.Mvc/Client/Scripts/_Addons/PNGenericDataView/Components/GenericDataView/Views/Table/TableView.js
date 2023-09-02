@@ -29,51 +29,58 @@ export const TableView = ({
     onDataContainerChange,
     fieldsToShow,
     currentPosts,
+    columnsWithContainersSmall = 1,
+    columnsWithContainersMedium = 1,
+    columnsWithContainersLarge = 1,
     dropDownOptions,
     error,
     rowIndex,
 }) => {
     const { items, requestSort, sortConfig } = useSortableData(dataContainers);
     const [mainSettings, setMainSettings] = useState(settings);
-    
+
     const sortColumn = (fieldName, index) => {
         requestSort('fieldValue', index, fieldName);
     };
 
     if (dataContainers && fieldsToShow) {
         return (
-            <table className={classNames('generic-data-view__table', {
-                'is-loading': isLoading,
-            })}
-            >
-                <GridHeader
-                    {...items[0]}
-                    sortColumn={sortColumn}
-                    sortConfig={sortConfig}
-                    handleSetfieldsToShow={handleSetfieldsToShow}
-                    fieldsToShow={fieldsToShow}
-                    dataContainers={dataContainers}
-                />
-                <tbody>
-                    {currentPosts &&
-                        currentPosts.map((dataContainer, index) => (
-                            <DataContainer
-                                key={`${uuidv4()}${index}`}
-                                {...dataContainer}
-                                {...settings}
-                                mainSettings={mainSettings}
-                                onDataContainerChange={onDataContainerChange}
-                                dataContainerIndex={index}
-                                fieldsToShow={fieldsToShow}
-                                dropDownOptions={dataContainer.options}
-                                {...{ isInModal } }
-                            />
-                        ))}
-                </tbody>
-            </table>
+            <div className={`row collapse align-center small-up-${columnsWithContainersSmall || 1} medium-up-${columnsWithContainersMedium || 1} large-up-${columnsWithContainersLarge || 1}`}>
+                <div className="columns">
+                    <table className={classNames('generic-data-view__table', {
+                        'is-loading': isLoading,
+                    })}
+                    >
+                        <GridHeader
+                            {...items[0]}
+                            sortColumn={sortColumn}
+                            sortConfig={sortConfig}
+                            handleSetfieldsToShow={handleSetfieldsToShow}
+                            fieldsToShow={fieldsToShow}
+                            dataContainers={dataContainers}
+                        />
+                        <tbody>
+                            {currentPosts &&
+                                currentPosts.map((dataContainer, index) => (
+                                    <DataContainer
+                                        key={`${uuidv4()}${index}`}
+                                        {...dataContainer}
+                                        {...settings}
+                                        mainSettings={mainSettings}
+                                        onDataContainerChange={onDataContainerChange}
+                                        dataContainerIndex={index}
+                                        fieldsToShow={fieldsToShow}
+                                        dropDownOptions={dataContainer.options}
+                                        {...{ isInModal }}
+                                    />
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         );
     }
-        else {
+    else {
         return null;
     }
 };

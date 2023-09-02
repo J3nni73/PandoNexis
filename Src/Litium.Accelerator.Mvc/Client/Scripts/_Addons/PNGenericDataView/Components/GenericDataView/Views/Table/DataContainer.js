@@ -211,9 +211,10 @@ export const DataContainer = React.memo(
                             },
                             fieldIndex
                         ) => (
-                            <td data-test="gaga"
+                            <td
                                 key={`field-${fieldIndex}-${fieldName}`}
                                 id={`${entitySystemId}${fieldId}${dataContainerIndex}`}
+                                colSpan={`${(fieldIndex === (fields.length-1) && !(fields && containerSettings && containerSettings?.postContainer && containerSettings?.postContainerPageSystemId))?100:null}` }
                                 {...register(fieldId)}
                                 style={
                                     isLoading
@@ -293,7 +294,7 @@ export const DataContainer = React.memo(
                         )
                     )}
                     {fields && containerSettings && containerSettings?.postContainer && containerSettings?.postContainerPageSystemId &&
-                        <td>
+                        <td colSpan="100">
                             <div className="small-12 columns text--right">
                                 <GenericDataViewField
                                     type={"button"}
@@ -312,7 +313,6 @@ export const DataContainer = React.memo(
                         </td>
                     }
                 </tr>
-
             </>
         );
     }

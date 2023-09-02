@@ -18,6 +18,9 @@
         public const string ColumnsWithContainersLarge = "ColumnsWithContainersLarge";
 
         public const string AlignContainers = "AlignContainers";
+        
+        public const string UpdateTopLevel = "UpdateTopLevel";
+        public const string CloseModal = "CloseModal";
 
         // ReactPage
         public const string ReactClass = "ReactClass";

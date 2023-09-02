@@ -50,7 +50,8 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
                                     PersonService personService,
                                     OrganizationService organizationService,
                                     TimeTypeService timeTypeService,
-                                    PilotProcessorService pilotProcessorService) : base(genericDataViewService,
+                                    PilotProcessorService pilotProcessorService, 
+                                    GenericButtonService genericButtonService) : base(genericDataViewService,
                                                                                     itemStatusService,
                                                                                     itemTypeService,
                                                                                     timeService,
@@ -62,7 +63,7 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
                                                                                     requestModelAccessor,
                                                                                     timeTypeService, 
                                                                                     securityContextService, 
-                                                                                    personStorage)
+                                                                                    personStorage, genericButtonService)
         {
             _workItemService = workItemService;
             _requestModelAccessor = requestModelAccessor;

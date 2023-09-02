@@ -7,6 +7,7 @@ import {
     checkResponse,
     receiveGenericDataViewTabs,
     getHeaderInformationData,
+    clearRows,
 } from './GenericDataView.action';
 
 import {
@@ -56,7 +57,7 @@ const getFocused = () => {
 }
 
 export const sendContainerState = (entitySystemId, containerState) => (dispatch, getState) => {
-   
+
     //var field = fields.find(x => x.fieldId === data.fieldId);
     //if (field && field.settings && field.settings.validationRules) {
 
@@ -64,7 +65,7 @@ export const sendContainerState = (entitySystemId, containerState) => (dispatch,
     //    //alert(JSON.stringify(field.settings.validationRules));
     //    return;
     //}   
-
+    
     //dispatch({
     //    type: isInModal ? GENERIC_MODAL_DATA_CONTAINER_UPDATE : GENERIC_DATA_CONTAINER_UPDATE,
     //    payload: { data, fields },
@@ -90,7 +91,7 @@ export const update = (pageSystemId, data, fields, isInModal = false, entitySyst
     //    //alert(JSON.stringify(field.settings.validationRules));
     //    return;
     //}   
-   
+
     dispatch({
         type: isInModal ? GENERIC_MODAL_DATA_CONTAINER_UPDATE : GENERIC_DATA_CONTAINER_UPDATE,
         payload: { data, fields },
@@ -104,30 +105,44 @@ export const update = (pageSystemId, data, fields, isInModal = false, entitySyst
             dispatch(catchError(ex, (error) => updateError(error, fields)))
         );
 };
-export const checkDataContainerResponse = (response, fields, isInModal = false, entitySystemId = '', containerIndex = -1) => (dispatch, getState) => {
-    
-    if (!isInModal) {
+export const checkDataContainerResponse = (response, fields, isInModal = false, entitySystemId = '', containerIndex = -1, responseActions) => (dispatch, getState) => {
+
+    if (!isInModal || responseActions?.updateTopLevel) {
         // Update header data
         dispatch(getHeaderInformationData());
-
         // If processor return tabs
         if (response.dataViewTabs) {
             dispatch(receiveGenericDataViewTabs(response.dataViewTabs));
         }
     }
-    
+
     if (!response.cart && !response.dataContainers) {
+
         const genericDataView = { ...getState().genericDataView };
-         
-        if (isInModal) {
-            genericDataView.modalDataContainers[containerIndex] = { ...response };
-        }
-        else {
-            genericDataView.dataContainers[containerIndex] = { ...response };
-        }
         
-        dispatch(receive(genericDataView.dataContainers, fields, isInModal, entitySystemId)); //dispatch(checkResponse(genericDataView, isInModal));
-    } else {
+        let updatedTopLevel = false;
+        if (isInModal && responseActions?.updateTopLevel) {
+            const topLevelContainerIndex = window.currGenDW_dataContainerIndex;
+            if (topLevelContainerIndex !== null && topLevelContainerIndex !== undefined && topLevelContainerIndex > -1) {
+                updatedTopLevel = true;
+                const dataContainers = genericDataView.dataContainers[topLevelContainerIndex] = { ...response };
+                return dispatch({
+                    type: GENERIC_DATA_CONTAINER_RECEIVE,
+                    payload: { dataContainers, fields },
+                });
+            }
+        }
+        if (!updatedTopLevel) {
+            if (isInModal) {
+                genericDataView.modalDataContainers[containerIndex] = { ...response };
+            }
+            else {
+                genericDataView.dataContainers[containerIndex] = { ...response };
+            }
+        }
+        // Kolla så denna fortfatande funkar
+        dispatch(receive(genericDataView, fields, isInModal, entitySystemId)); //dispatch(checkResponse(genericDataView, isInModal));
+   } else {
         if (response.cart) {
             dispatch(receiveCart(response.cart));
         }
@@ -158,9 +173,20 @@ export const updateError = (error, fields) => ({
     payload: { error, fields },
 });
 
+///Kolla upp denna metod så att den fortfarande fungerar
 export const receive = (response, fields, isInModal = false, entitySystemId = '') => {
     return {
         type: isInModal ? GENERIC_MODAL_DATA_CONTAINER_RECEIVE : GENERIC_DATA_CONTAINER_RECEIVE,
         payload: { response, fields },
     };
 };
+
+//export const receive = (dataContainers, fields, isInModal = false, entitySystemId = '') => (dispatch, getState) =>{
+//    ///Kolla upp denna metod
+//    //console.log("data", response);
+//    //dispatch(clearRows(isInModal));
+//    return dispatch({
+//        type: isInModal ? GENERIC_MODAL_DATA_CONTAINER_RECEIVE : GENERIC_DATA_CONTAINER_RECEIVE,
+//        payload: { dataContainers, fields },
+//    });
+//};

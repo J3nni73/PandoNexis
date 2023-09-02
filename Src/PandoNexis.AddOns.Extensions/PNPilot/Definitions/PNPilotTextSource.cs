@@ -49,6 +49,8 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Definitions
                 "pilot.headertexts.customer".AsWebsiteTextDefinition("Customer", "Kund", clientAvailable: true, serverAvailable: true),
                 "pilot.headertexts.assigned".AsWebsiteTextDefinition("Assigned", "Tilldelat till", clientAvailable: true, serverAvailable: true),
                 "pilot.headertexts.reportedby".AsWebsiteTextDefinition("Reported by", "Rapporterad av", clientAvailable: true, serverAvailable: true),
+                "pilot.headertexts.amountofitems".AsWebsiteTextDefinition("Activities", "Aktiviteter", clientAvailable: true, serverAvailable: true),
+                "pilot.headertexts.overviewheader".AsWebsiteTextDefinition("Activities", "Aktiviteter", clientAvailable: true, serverAvailable: true),
 
             };
         }

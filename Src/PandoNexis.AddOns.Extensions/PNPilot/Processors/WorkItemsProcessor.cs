@@ -61,7 +61,8 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
                                                                                     requestModelAccessor,
                                                                                     timeTypeService,
                                                                                     securityContextService,
-                                                                                    personStorage)
+                                                                                    personStorage, 
+                                                                                    genericButtonService)
         {
             _workItemService = workItemService;
             _requestModelAccessor = requestModelAccessor;

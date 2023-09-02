@@ -52,23 +52,22 @@ export const GenericDataView = ({
     const [columnsWithContainersMedium, setColumnsWithContainersMedium] = useState(isInModal ? 1 : 2);
     const [columnsWithContainersLarge, setColumnsWithContainersLarge] = useState(isInModal ? 1 : 3);
 
-
     const [hasInitialized, setHasInitialized] = useState(false);
     const [viewsList, setViewsList] = useState([]);
     const { totalHits, pageSize } = settings;
-   
+
     const { items, requestSort, sortConfig } = useSortableData(dataContainers);
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage, setPostsPerPage] = useState(pageSize);    
+    const [postsPerPage, setPostsPerPage] = useState(pageSize);
     const [currentPosts, setCurrentPosts] = useState(items);
-  
-    
+
+
     const sortColumn = (fieldName, index) => {
         requestSort('fieldValue', index, fieldName);
     };
     const hasDataContainers = (items || []).length > 0;
-    
+
     //const pageCount = Math.ceil(totalHits / pageSize) || 1;
     //const { page = 1 } = getURLSearchParams();
 
@@ -80,8 +79,8 @@ export const GenericDataView = ({
         }
         setfieldsToShow((prevState) => [...prevState, index]);
     };
-    
-    
+
+
     // Change page
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -128,13 +127,14 @@ export const GenericDataView = ({
 
             setViewsList(_displayTypes);
             setCurrentView(_displayTypes[0]);
+
             setColumnsInsideContainerSmall(settings?.columnsInsideContainerSmall || 1);
             setColumnsInsideContainerMedium(settings?.columnsInsideContainerMedium || 2);
             setColumnsInsideContainerLarge(settings?.columnsInsideContainerLarge || 3);
 
             setColumnsWithContainersSmall(settings?.columnsWithContainersSmall || 1);
-            setColumnsWithContainersMedium(settings?.columnsWithContainersMedium || 2);
-            setColumnsWithContainersLarge(settings?.columnsWithContainersLarge || 3);
+            setColumnsWithContainersMedium(settings?.columnsWithContainersMedium || (currentView === "table" ? 1 : 2));
+            setColumnsWithContainersLarge(settings?.columnsWithContainersLarge || (currentView === "table" ? 1 : 3));
         }
     }, [settings]);
 
@@ -149,9 +149,9 @@ export const GenericDataView = ({
             }
             setfieldsToShow(tempVisibleFields);
             setHasInitialized(true);
-            
+
             // REMOVE FOLLOWING ROW WHEN USING PAGENATION
-            setCurrentPosts(items);            
+            setCurrentPosts(items);
             //// WHEN USING PAGE SIZE
             //if (pageSize) {
             //    // Pagination
@@ -159,19 +159,18 @@ export const GenericDataView = ({
             //    const indexOfFirstPost = indexOfLastPost - pageSize;
             //    setCurrentPosts(items.slice(indexOfFirstPost, indexOfLastPost));
             //}
-        }      
+        }
     }, [items, dataContainers]);
 
 
-    if (!currentView || !items || !settings || !viewsList || viewsList.length<1) {
+    if (!currentView || !items || !settings || !viewsList || viewsList.length < 1) {
         return null;
     }
-    
+
     return (
         <Fragment>
             {viewsList && viewsList.length > 1 &&
                 <div className="generic-data-view__views">
-                    {console.log("viewsList", viewsList) }
                     <ul className="generic-data-view__view-selector">
                         {viewsList.map((viewItem, index) => (
                             <li key={`view${index}}`} onClick={() => toggleView(viewItem)}> <ViewIcon name={viewItem} /></li>
@@ -180,64 +179,64 @@ export const GenericDataView = ({
                 </div>
             }
 
-            <div className={`generic-data-view generic-data-view__${currentView}-view`}>
-                {/* <button className="form__button" onClick={sortColumn}>
+
+            {/* <button className="form__button" onClick={sortColumn}>
         Sort Test
       </button> */}
 
-                <GenericDataViewSettings onChange={onSettingsChange} {...settings} />
-                {settings.changeVisibleFields && 
-                    <GenericDataViewFieldSettings  {...items[0]}
-                        handleSetfieldsToShow={handleSetfieldsToShow}
-                        fieldsToShow={fieldsToShow}
+            <GenericDataViewSettings onChange={onSettingsChange} {...settings} />
+            {settings.changeVisibleFields &&
+                <GenericDataViewFieldSettings  {...items[0]}
+                    handleSetfieldsToShow={handleSetfieldsToShow}
+                    fieldsToShow={fieldsToShow}
 
-                    />
-                }
-                {isLoading && !hasDataContainers && (
+                />
+            }
+            {isLoading && !hasDataContainers && (
+                <Fragment>
+                    <p className="generic-data-view--loading">
+                        {translate('addons.GenericDataview.loadingtext')}
+                    </p>
+                    <div className="generic-loader active"></div>
+                </Fragment>
+            )}
+
+            <div className={`generic-data-view__wrapper`}>
+                {hasDataContainers ? (
                     <Fragment>
-                        <p className="generic-data-view--loading">
-                            {translate('addons.GenericDataview.loadingtext')}
-                        </p>
-                        <div className="generic-loader active"></div>
-                    </Fragment>
-                )}
-
-                <div className="generic-data-view__wrapper">
-                    {hasDataContainers ? (
-                        <Fragment>
+                        {
                             {
-                                {
-                                    'table': <views.TableView
-                                        {...{ dataContainers, settings, handleSetfieldsToShow, fieldsToShow, currentPosts, isLoading, isInModal }}
-                                        onDataContainerChange={onDataContainerChange}
-                                    />,
-                                    'cards': <views.CardsView
-                                        columnsWithContainersSmall={columnsWithContainersSmall || 1} columnsWithContainersMedium={columnsWithContainersMedium || 2} columnsWithContainersLarge={columnsWithContainersLarge || 3}
-                                        columnsInsideContainerSmall={columnsInsideContainerSmall || 1} columnsInsideContainerMedium={columnsInsideContainerMedium || 2} columnsInsideContainerLarge={columnsInsideContainerLarge || 3} ingressField="Description" showTitles={true}
-                                        {...{ dataContainers, settings, handleSetfieldsToShow, fieldsToShow, currentPosts, isLoading, isInModal }}
-                                        onDataContainerChange={onDataContainerChange}
-                                    />,
-                                    'kanban': <views.KanbanView
-                                        {...{ dataContainers, settings, handleSetfieldsToShow, fieldsToShow, currentPosts, isLoading, isInModal}}
-                                        columnsInsideContainerSmall={columnsInsideContainerSmall || 1} columnsInsideContainerMedium={columnsInsideContainerMedium || 2} columnsInsideContainerLarge={columnsInsideContainerLarge || 3} onlyShowTaskName={true}
-                                        onDataContainerChange={onDataContainerChange}
-                                    />
-                                }[currentView]
-                            }
-                        </Fragment>
+                                'table': <views.TableView
+                                    columnsWithContainersSmall={columnsWithContainersSmall || 1} columnsWithContainersMedium={columnsWithContainersMedium || 1} columnsWithContainersLarge={columnsWithContainersLarge || 1}
+                                    {...{ dataContainers, settings, handleSetfieldsToShow, fieldsToShow, currentPosts, isLoading, isInModal }}
+                                    onDataContainerChange={onDataContainerChange}
+                                />,
+                                'cards': <views.CardsView
+                                    columnsWithContainersSmall={columnsWithContainersSmall || 1} columnsWithContainersMedium={columnsWithContainersMedium || 2} columnsWithContainersLarge={columnsWithContainersLarge || 3}
+                                    columnsInsideContainerSmall={columnsInsideContainerSmall || 1} columnsInsideContainerMedium={columnsInsideContainerMedium || 2} columnsInsideContainerLarge={columnsInsideContainerLarge || 3} ingressField="Description" showTitles={true}
+                                    {...{ dataContainers, settings, handleSetfieldsToShow, fieldsToShow, currentPosts, isLoading, isInModal }}
+                                    onDataContainerChange={onDataContainerChange}
+                                />,
+                                'kanban': <views.KanbanView
+                                    {...{ dataContainers, settings, handleSetfieldsToShow, fieldsToShow, currentPosts, isLoading, isInModal }}
+                                    columnsInsideContainerSmall={columnsInsideContainerSmall || 1} columnsInsideContainerMedium={columnsInsideContainerMedium || 2} columnsInsideContainerLarge={columnsInsideContainerLarge || 3} 
+                                    onDataContainerChange={onDataContainerChange}
+                                />
+                            }[currentView]
+                        }
+                    </Fragment>
 
-                    ) : !isLoading ? (
-                        <div className="generic-data-view__no-result">
-                            {translate('addons.GenericDataview.noresult')}
-                        </div>
-                    ) : null}
-                </div>
-                {items.length !== 0 && <PaginationComponent
-                    postsPerPage={postsPerPage}
-                    totalPosts={items.length}
-                    paginate={paginate}
-                />}
+                ) : !isLoading ? (
+                    <div className="generic-data-view__no-result">
+                        {translate('addons.GenericDataview.noresult')}
+                    </div>
+                ) : null}
             </div>
+            {items.length !== 0 && <PaginationComponent
+                postsPerPage={postsPerPage}
+                totalPosts={items.length}
+                paginate={paginate}
+            />}
         </Fragment>
     );
 };

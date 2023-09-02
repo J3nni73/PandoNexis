@@ -22,6 +22,7 @@ const PNGenericDataViewContainer = ({
     pageSystemId,
     ...props }) => {
     const genericDataView = useSelector((state) => state.genericDataView);
+
     const dispatch = useDispatch();
     const elementRef = useRef(null);
     const [showingPNGenericDataView, setShowingPNGenericDataView] = useState(false);
@@ -76,7 +77,7 @@ const PNGenericDataViewContainer = ({
                 {genericDataView?.pnModal?.open && genericDataView?.modalDataContainers?.length > 0 &&
                     <div className="generic-data-view__modal-wrapper">
                         <div className="generic-data-view__modal-icon-close" onClick={() => doToggleModal()}><CloseIcon width="24" height="24" /><span>Close</span></div>
-                        <div className="generic-data-view__modal">
+                        <div className={`generic-data-view__modal`}>
                             <GenericDataView
                                 onSettingsChange={load}
                                 onExportSelected={getGenericDataViewForExport}
@@ -88,12 +89,13 @@ const PNGenericDataViewContainer = ({
                         </div>
                     </div>
                 }
+
                 <div className="generic-data-view-container">
                     <div id='portal'></div>
-                   
+
                     {dataViewHasTabs && <GenericDataViewTabs />}
                     <div
-                        className={`row ${dataViewHasTabs
+                        className={` ${dataViewHasTabs
                             ? 'generic-data-view__container--has-tabs'
                             : 'generic-data-view__container'
                             }`}

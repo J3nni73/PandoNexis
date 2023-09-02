@@ -15,7 +15,7 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
         private readonly PageService _pageService;
         private readonly RequestModelAccessor _requestModelAccessor;
 
-        public GenericDataViewService(PageService pageService, 
+        public GenericDataViewService(PageService pageService,
                                       RequestModelAccessor requestModelAccessor)
         {
             _pageService = pageService;
@@ -35,6 +35,13 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Services
             settings.ColumnsWithContainersMedium = page.Fields.GetValue<int>(DataViewFieldNameConstants.ColumnsWithContainersMedium);
             settings.ColumnsWithContainersLarge = page.Fields.GetValue<int>(DataViewFieldNameConstants.ColumnsWithContainersLarge);
             settings.AlignContainers = page.Fields.GetValue<string>(DataViewFieldNameConstants.AlignContainers);
+
+            //settings.DataViewMaxWidth = "90vw";
+
+            // Response Example
+            //settings.ResponseActions.UpdateTopLevel = true; 
+            //settings.ResponseActions.CloseModal = true;
+            //settings.ResponseActions.HardReloadPage = true;
 
             var genericButtons = new List<GenericButton>();
 

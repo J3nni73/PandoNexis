@@ -72,7 +72,6 @@ export const GenericDataViewSettings = ({
             const modalSettings = {
                 modalPageSystemId: fieldSettings.modalPageSystemId || fieldSettings.pageSystemId,
                 entitySystemId,
-
             };
             dispatch(loadModal(modalSettings));
             return;

@@ -9,25 +9,25 @@ import {
     GENERIC_DATA_VIEW_SHOW_MODAL, GENERIC_MODAL_DATA_UPDATE_FIELDS, GENERIC_MODAL_DATA_VIEW_ALL_ROWS, GENERIC_MODAL_DATA_VIEW_RECEIVE, GENERIC_MODAL_DATA_VIEW_INIT,
     GENERIC_DATA_VIEW_SET_CURRENT_PAGE_ID
 } from '../constants';
-//import mockdata from '../mockdataForm.json';// _jennifer.json';
+//import mockdata from '../mockdataKanban.json';// _jennifer.json';
 //import mockdata from '../mockdata4.json';// '../mockdataForm.json';
 const rootRoute = '/api/genericdataview/';
 const genericLoaderType = "spinner"; // spinner or ripple
 
-export const toggleModal = () => (dispatch, getState) => {
+export const toggleModal = (forceClose=false) => (dispatch, getState) => {
     const pnModal = getState().genericDataView.pnModal;
     const bodyEl = document.querySelector('body');
     if (bodyEl) {
-        if (pnModal.open) {
+        if (forceClose || pnModal.open) {
             bodyEl.classList.remove('modal--open');
         }
         else {
-            bodyEl.classList.add('modal--open');
+            bodyEl.classList.add('modal--open');            
         }
     }
     dispatch({
         type: GENERIC_DATA_VIEW_SHOW_MODAL,
-        payload: { pnModal: { open: !pnModal.open, index: pnModal.index } },
+        payload: { pnModal: { open: forceClose? false : !pnModal.open, index: pnModal.index } },
     });
 };
 
@@ -111,7 +111,11 @@ export const load = (pageId, settings, isInModal=false, entitySystemId='') => (d
 };
 
 export const loadModal = (modalSettings) => (dispatch, getState) => {
-  
+
+    if (modalSettings?.fromTopLevelDataContainerIndex!=null) {
+        window.currGenDW_dataContainerIndex = modalSettings?.fromTopLevelDataContainerIndex;
+    }
+
     // Set modal settings
     dispatch({
         type: GENERIC_MODAL_DATA_VIEW_INIT,

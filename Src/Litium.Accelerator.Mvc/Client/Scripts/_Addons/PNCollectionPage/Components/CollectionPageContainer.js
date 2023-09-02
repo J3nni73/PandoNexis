@@ -130,7 +130,7 @@ const CollectionPageContainer = ({
     }
     return (
         <Fragment>
-            {pageStructure.useFilters && filters && filters.length > 0 &&
+            {pageStructure?.useFilters && filters && filters.length > 0 &&
                 <div className="row collection-page__filters" ref={filterContainerRef}>
                     <div className="small-12 columns">
                         {filters.map((child, indexFilter) => {
