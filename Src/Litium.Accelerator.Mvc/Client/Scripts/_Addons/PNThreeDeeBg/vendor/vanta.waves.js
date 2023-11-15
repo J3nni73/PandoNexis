@@ -4,7 +4,7 @@ import { rn, ri, sample } from './helpers.js';
 let THREE = typeof window == 'object' && window.THREE;
 
 const defaultOptions = {
-    color: 0x005588,
+    color: 0x170322,
     shininess: 30,
     waveHeight: 15,
     waveSpeed: 1,
