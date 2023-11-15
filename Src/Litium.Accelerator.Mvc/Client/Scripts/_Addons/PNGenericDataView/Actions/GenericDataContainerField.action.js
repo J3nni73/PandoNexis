@@ -90,7 +90,13 @@ export const buttonClick = (
   
     let fields = [];
     if (containerIndex !== -1 && containerIndex !== undefined) {
-        fields = getState().genericDataView.dataContainers[containerIndex].fields;
+        const genDataView = getState().genericDataView;
+        if (isInModal && genDataView.modalDataContainers) {
+            fields = genDataView.modalDataContainers[containerIndex].fields;
+        }
+        else if (genDataView.dataContainers) {
+            fields = genDataView.dataContainers[containerIndex].fields;
+        }
     }
     const data = {
         entitySystemId: fields.entitySystemId,
