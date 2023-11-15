@@ -28,7 +28,8 @@ button {
     text-transform: none;
 
     &-green {
-        @include general-button-color($color-green);
+        background: $color-green;
+        //@include general-button-color($color-green);
     }
 
     &-orange {
