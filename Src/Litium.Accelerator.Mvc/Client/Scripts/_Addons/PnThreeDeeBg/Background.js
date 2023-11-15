@@ -11,13 +11,13 @@ const Background = (props) => {
   const [theme, setTheme] = useState(props.theme || 'waves');
     const mainBg = useRef(null);
     const cellsOptions = {
-    backgroundColor: 0xffffff,
+    backgroundColor: 0xff11aa,
         mouseControls: false,
         touchControls: false,
         gyroControls: false,
     scale: 1.0,
         color1: 0x120096, 
-    color2: 0xffffff,
+        color2: 0xff11aa,
     THREE: THREE,
     };
     const cloudOptions = {
