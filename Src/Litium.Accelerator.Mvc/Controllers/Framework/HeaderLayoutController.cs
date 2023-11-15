@@ -32,7 +32,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Framework
             var viewModel = _headerViewModelBuilder.Build();
             //PandoExtensions: begin
             var website = _requestModelAccessor.RequestModel.WebsiteModel;
-            return View("~/Views/_Solution/Framework/Header.cshtml", viewModel);
+            return View("~/Views/_Solution/Framework/CenteredHeader.cshtml", viewModel);
             //PandoExtensions: end
 
             //return View("~/Views/Framework/Header.cshtml", viewModel);
