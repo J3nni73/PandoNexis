@@ -2,13 +2,16 @@
 using Litium.Runtime.AutoMapper;
 using AutoMapper;
 
-namespace PandoNexis.Accelerator.Extensions.Framework.ViewModels
+namespace PandoNexis.Accelerator.Extensions.ViewModels.Framework
 {
     public class PNHeaderViewModel : HeaderViewModel, IAutoMapperConfiguration
     {
         //PandoNexis: BEGIN MODEL
+        public bool CenteredNavigation { get; set; }
+        public bool ShowIconTitles { get; set; }
+
         //PandoNexis Websiteselector begin
-        public string Area { get; set; } = String.Empty;
+        public string Area { get; set; } = string.Empty;
         public string ChannelId { get; set; }
         public Dictionary<Guid, (string CountryName, string Url, string IconUrl, bool LinkToNewWindow)> Channels { get; set; } = new Dictionary<Guid, (string CountryName, string Url, string IconUrl, bool LinkToNewWindow)>();
         public PortalData PortalData { get; set; } = new PortalData();
@@ -16,7 +19,7 @@ namespace PandoNexis.Accelerator.Extensions.Framework.ViewModels
 
         //PandoNexis Visibility begin
         public bool VisibleLogin { get; set; } = true;
-        public bool VisibleCheckout { get; set; } = true;
+        public bool VisibleCheckout { get; set; }
         //PandoNexis Visibility end
 
         //PandoNexis HeaderBannerMessage begin
@@ -27,6 +30,10 @@ namespace PandoNexis.Accelerator.Extensions.Framework.ViewModels
         //PandoNexis HeaderUSPs begin
         public string HeaderUsps { get; set; } = string.Empty;
         //PandoNexis HeaderUSPs end
+
+        //PandoNExis CookieConsent begin
+        public bool ShowCookieBar { get; set; }
+        //PandoNExis CookieConsent end
 
         //PandoNexis: END MODEL
         public void Configure(IMapperConfigurationExpression cfg)

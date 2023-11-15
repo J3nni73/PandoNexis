@@ -1,0 +1,130 @@
+﻿@model PNHeaderViewModel
+@using Litium.Web.Mvc
+@using PandoNexis.Accelerator.Extensions.ViewModels.Framework;
+@{
+    var logoHeight = Model.IsBigHeader ? 60 : 50;
+    var headerClass = Model.IsBigHeader ? "extended-header" : "compact-header";
+    var headerRow = Model.HeaderName == "OneRow" ? "header__row--one-row" : "";
+    var headerLayout = Model.CenteredNavigation ? "header__centered-navigation" : "header__left-navigation";
+    var showIconTitles = Model.ShowIconTitles ? "" : "header__simple";
+    var pageCssClass = ViewData["PageCssClass"] as string;
+    var showExtendedMinicart = false;
+    @*//PandoNexis: BEGIN ADDON PNMiniCartExtended*@
+    showExtendedMinicart = true;
+    @*//PandoNexis: END ADDON PNMiniCartExtended*@
+
+    var showHeaderBanneMessage = false;
+    @*//PandoNexis: BEGIN ADDON PNHeaderBannerMessage*@
+    showHeaderBanneMessage = Model.GetType() != typeof(string) && Model.ShowHeaderBannerMessage ? true : false;
+    @*//PandoNexis: END ADDON PNHeaderBannerMessage*@
+
+    var responsiveDefinition = new ResponsiveImageDefinition
+            {
+                SrcSets = new SrcSetDefinition[]
+                                        {
+            new (174),
+            new (180),
+            new (200),
+            new (220),
+            new (260),
+            new (300),
+            new (340),
+                                        },
+                Sizes = new SizeDefinition[]
+                                        {
+            new ("(min-width: 1040px)", "calc(1.02vw + 156px)"),
+            new ("(min-width: 420px)", "203px"),
+            new ("calc(89vw - 153px)"),
+                                        },
+            };
+}
+
+<header id="header" role="banner" class="header header__row @headerClass @headerRow @headerLayout @showIconTitles">
+    @*PandoNexis: BEGIN ADDON PNWebsiteSelector*@
+    @if (Model.GetType() != typeof(string))
+    {
+        @await Html.PartialAsync("_WebsiteSelector", Model)
+        @await Html.PartialAsync("_WebsiteSelector_Portal", Model)
+    }
+    @*PandoNexis: END ADDON END PNWebsiteSelector*@
+    <a href="@Model.StartPageUrl" class="header__logo">
+        @Html.ImageFor(x => x.Logo, maxSize: new System.Drawing.Size(-1, logoHeight), renderSizeAttributes: true, responsiveDefinition: responsiveDefinition)
+    </a>
+    <div class="header__components">
+
+        @*//PandoNexis: BEGIN ADDON PNOrganisationSelector*@
+        @if (User.Identity.IsAuthenticated && !pageCssClass.Contains("login"))
+        {
+            @*  <div class="pn-info-label"></div> <!-- <---- To be places anywhere on the site to display logged on user--> *@
+            <div class="pn-organization-selector__container">
+                <div class="pn-organization-selector"></div>
+            </div>
+        }
+        @*//PandoNexis: END ADDON PNOrganisationSelector*@
+
+        @if (Model.TopLinkList.Any())
+        {
+            foreach (var link in Model.TopLinkList)
+            {
+                if (link != null)
+                {
+                    <div class="top-link">
+                        <a class="top-link__link--block" href="@link.Href">
+                            <span class="top-link__title">@link.Text</span>
+                        </a>
+                    </div>
+                }
+            }
+        }
+        <div id="quickSearch"></div>
+        @{
+            var currentPage = User.Identity.IsAuthenticated ? Model.MyPage : Model.LoginPage;
+        }
+        @*PandoNexis: BEGIN ADDON PNEcomVisibility*@
+        @if (Model.VisibleLogin && !string.IsNullOrEmpty(@currentPage.Href))
+        {
+            @*PandoNexis: END ADDON PNEcomVisibility*@
+            <div class="profile">
+                <a href="@currentPage.Href" class="profile__link--block" rel="nofollow" alt="@currentPage.Text" title="@currentPage.Text">
+                    <span class="pn-icon" data-icon-name="account" data-width="32" data-height="32" data-title="@Html.WebSiteString("solution.account")"></span>
+                    <span class="profile__title">@currentPage.Text</span>
+                </a>
+            </div>
+            @*PandoNexis: BEGIN ADDON PNEcomVisibility*@
+        }
+        @if (Model.VisibleCheckout)
+        {
+            @*PandoNexis: END ADDON PNEcomVisibility*@
+            @*//PandoNexis: BEGIN ADDON PNMiniCartExtended*@
+            if (showExtendedMinicart)
+            {
+                <div id="PNMiniCartExtended" class="" data-is-in-checkout="false"></div>
+            }
+            else
+            {
+                @*//PandoNexis: END ADDON PNMiniCartExtended*@
+                <div id="miniCart" class="cart cart--mini"></div>
+                @*//PandoNexis: BEGIN ADDON PNMiniCartExtended*@
+
+            }
+            @*//PandoNexis: END ADDON PNMiniCartExtended*@
+
+            @*PandoNexis: BEGIN ADDON PNEcomVisibility*@
+        }
+        @*PandoNexis: END ADDON PNEcomVisibility*@
+    </div>
+    <div class="header__break"></div>
+    <nav role="navigation" class="navbar" id="navbar"></nav>
+</header>
+@*PandoNexis: BEGIN ADDON PNHeaderBannerMessage*@
+@if (showHeaderBanneMessage)
+{
+    @await Html.PartialAsync("_HeaderBannerMessage", Model)
+}
+@*PandoNexis: END ADDON PNHeaderBannerMessage*@
+@*PandoNexis: BEGIN ADDON PNCookieConsent*@
+@if (Model.ShowCookieBar)// && !Model.ShowLanguageSelector && !Model.ShowModalCountrySelector)
+{
+    <div id="cookieConsent"></div>
+}
+@*PandoNexis: END ADDON PNCookieConsent*@

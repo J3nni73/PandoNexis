@@ -9,7 +9,7 @@ using Litium.Web.Routing;
 using PandoNexis.Accelerator.Extensions.ViewModels.Framework;
 using PandoNexis.Accelerator.Extensions.ModelServices;
 
-namespace Solution.Extensions.Builders.Framework
+namespace PandoNexis.Accelerator.Extensions.Builders.Framework
 {
     [Litium.Owin.UsedImplicitly]
     [Service(ServiceType = typeof(HeadViewModelBuilder<HeadViewModel>), Lifetime = DependencyLifetime.Default)]

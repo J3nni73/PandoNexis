@@ -5,7 +5,7 @@ export default VANTA.register('CELLS', Effect)
 
 Effect.prototype.defaultOptions = {
     color1: 0x303904,
-    color2: 0x52047f,
+    color2: 0x303904,
     backgroundColor: 0x170322,
     amplitudeFactor: 1.0,
     ringFactor: 1.0,

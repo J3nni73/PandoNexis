@@ -51,7 +51,7 @@ namespace Litium.Accelerator.Builders.Framework
             _isoCountryService = isoCountryService;
         }
 
-        public async Task<ClientContextViewModel> BuildAsync()
+        public virtual async Task<ClientContextViewModel> BuildAsync()
         {
             var tokens = _antiforgery.GetAndStoreTokens(_httpContextAccessor.HttpContext);
             var requestVerification = tokens.RequestToken;

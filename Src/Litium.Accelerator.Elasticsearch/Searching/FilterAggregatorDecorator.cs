@@ -347,7 +347,7 @@ namespace Litium.Accelerator.Search.Searching
                                 ? "item.priceIncludeVat"
                                 : "item.priceExcludeVat";
                         var scriptStr =
-                            $"double r; boolean a = false; for (item in params._source.prices) {{ for (x in item.priceListSystemIds){{ a = params.id.contains(x)}}  if ( a == true && item.countrySystemId == params.country && item.isCampaignPrice == false) {{ r = r == 0 ? {priceType} : Math.min(r, {priceType})}}}} return r";
+                            $"double r; for (item in params._source.prices) {{ boolean a = false; for (x in item.priceListSystemIds){{ a = params.id.contains(x); if( a == true) {{ break; }}}}  if ( a == true && item.countrySystemId == params.country && item.isCampaignPrice == false) {{ r = r == 0 ? {priceType} : Math.min(r, {priceType})}}}} return r";
                         return selector
                             .Terms("$Prices", prices => prices
                                 .Script(script => script

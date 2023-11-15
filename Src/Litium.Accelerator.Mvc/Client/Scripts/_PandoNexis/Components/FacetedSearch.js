@@ -20,9 +20,8 @@ const FacetedSearchGroup = ({ group }) => {
             (prevState) => !prevState,
             (collapsed) => {
                 list.current.style.height = `${
-                    (collapsed
-                        ? showLessBottom.current
-                        : showMoreBottom.current) - listTop.current
+          (collapsed ? showLessBottom.current : showMoreBottom.current) -
+          listTop.current
                 }px`;
             }
         );
@@ -57,6 +56,7 @@ const FacetedSearchGroup = ({ group }) => {
             <ul className="faceted-search__group" role="group" ref={list}>
                 <div className="faceted-search__group-header">
                     {group.label}
+          <div className="arrow__dropdown"></div>
                 </div>
                 {group.options &&
                     group.options.map((item, itemIndex, array) => (
@@ -65,10 +65,7 @@ const FacetedSearchGroup = ({ group }) => {
                             className="faceted-search__item"
                             role="menuitemcheckbox"
                             ref={(elem) => {
-                                if (
-                                    itemIndex ===
-                                    showLessItemCount.current - 1
-                                ) {
+                if (itemIndex === showLessItemCount.current - 1) {
                                     showLess.current = elem;
                                 }
                                 if (itemIndex === array.length - 1) {
@@ -81,10 +78,7 @@ const FacetedSearchGroup = ({ group }) => {
                     ))}
             </ul>
             {group.options.length > showLessItemCount.current && (
-                <span
-                    className="faceted-search__show-more"
-                    onClick={toggleShowMore}
-                >
+        <span className="faceted-search__show-more" onClick={toggleShowMore}>
                     {`${
                         collapsed
                             ? translate('filter.showmore')

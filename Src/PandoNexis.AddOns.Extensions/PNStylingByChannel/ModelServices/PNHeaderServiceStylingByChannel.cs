@@ -1,9 +1,9 @@
 ﻿using Litium.Accelerator.Routing;
 using Litium.Runtime.AutoMapper;
 using Litium.Web.Models;
-using PandoNexis.Accelerator.Extensions.Framework.ViewModels;
 using PandoNexis.Accelerator.Extensions.ModelServices;
 using PandoNexis.AddOns.Extensions.PNStylingByChannel.Constants;
+using PandoNexis.Accelerator.Extensions.ViewModels.Framework;
 
 namespace PandoNexis.AddOns.Extensions.PNStylingByChannel.ModelServices
 {

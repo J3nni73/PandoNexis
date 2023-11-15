@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Litium.Web.WebApi.Abstractions" Version="8.11.4" />
+    <PackageReference Include="Litium.Web.WebApi.Abstractions" Version="8.12.0" />
   </ItemGroup>
 
   <ItemGroup>

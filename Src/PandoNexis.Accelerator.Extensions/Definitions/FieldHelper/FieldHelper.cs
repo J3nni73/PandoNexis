@@ -106,6 +106,8 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.FieldHelper
                     return _fieldDefinitionService.Get<BlockArea>(fieldDefinitionId);
                 case nameof(CustomerArea):
                     return _fieldDefinitionService.Get<CustomerArea>(fieldDefinitionId);
+                case nameof(GlobalizationArea):
+                    return _fieldDefinitionService.Get<GlobalizationArea>(fieldDefinitionId);
             }
             return null;
 

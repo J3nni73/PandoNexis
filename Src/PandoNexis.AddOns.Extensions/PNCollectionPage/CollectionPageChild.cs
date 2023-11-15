@@ -40,7 +40,7 @@ namespace PandoNexis.AddOns.Extensions.PNCollectionPage
             public SimpleImageModel Resolve(PageModel source, CollectionPageChild collectionPageChildViewModel, SimpleImageModel destMember, ResolutionContext context)            
             {
                 
-                var imageModel = source.GetValue<Guid>(PageFieldNameConstants.Image).MapTo<ImageModel>();
+                var imageModel = source.GetValue<Guid>(CollectionPageFieldNameConstants.CollectionPageImage).MapTo<ImageModel>() ?? source.GetValue<Guid>(PageFieldNameConstants.Image).MapTo<ImageModel>();
                 if (imageModel is not null)
                 {
                     var imageScaleConstant = 1024/imageModel.Dimension.Width;

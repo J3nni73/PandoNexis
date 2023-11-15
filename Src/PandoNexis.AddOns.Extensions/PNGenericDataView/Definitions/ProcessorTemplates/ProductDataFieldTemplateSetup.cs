@@ -8,10 +8,10 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions.ProcessorTe
 {
     internal class ProductDataFieldTemplateSetup : FieldTemplateHelper
     {
-        private readonly DisplayTemplateService _displayTemplateService;
-        public ProductDataFieldTemplateSetup(DisplayTemplateService displayTemplateService)
+        
+        public ProductDataFieldTemplateSetup()
         {
-            _displayTemplateService = displayTemplateService;
+            
         }
         public override IEnumerable<FieldTemplateChanges> GetFieldTemplateFieldChanges()
         {
@@ -39,9 +39,9 @@ namespace PandoNexis.AddOns.Extensions.PNGenericDataView.Definitions.ProcessorTe
 
         public override FieldTemplate GetFieldTemplateNewTemplate()
         {
-            var productDisplayTemplateId = _displayTemplateService.Get<ProductDisplayTemplate>("Product")?.SystemId ?? Guid.Empty;
+            
 
-            var template = new ProductFieldTemplate(ProcessorConstants.ProductData, productDisplayTemplateId)
+            var template = new ProductFieldTemplate(ProcessorConstants.ProductData)
             {
                 VariantFieldGroups = new[]
                      {

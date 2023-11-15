@@ -23,7 +23,14 @@ namespace Litium.Accelerator.Mvc.Controllers.Blocks
         public async Task<IViewComponentResult> InvokeAsync(BlockModel currentBlockModel)
         {
             var model = await _builder.BuildAsync(currentBlockModel);
-            return View("~/Views/Blocks/Product.cshtml", model);
+            var productViewString = "~/Views/Blocks/Product.cshtml";
+            
+            //PandoNexis: BEGIN ADDON PNGtmEnhancedEcom
+            productViewString = "~/Views/_Addons/Blocks/Product.cshtml";
+            //PandoNexis: END ADDON PNGtmEnhancedEcom
+
+
+            return View(productViewString, model);
         }
     }
 }

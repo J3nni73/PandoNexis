@@ -1,6 +1,11 @@
 ﻿@using PandoNexis.AddOns.Extensions.Block.HeroBlock
 @model HeroBlockViewModel
 @{
+
+    var hasBlockImage = Model.BlockImage != null;
+    var hasBlockMobileImage = Model.BlockMobileImage != null;
+    var hasBlockOverlayImage = Model.BlockOverlayImage != null;
+
     var narrow = string.Empty;
     if (Model.FullWidth == false)
     {
@@ -12,7 +17,7 @@
         overlayImageLeftPosition = "right";
     }
     var extraPadding = string.Empty;
-    if (Model.BlockOverlayImage != null && Model.BlockOverlayLeft)
+    if (hasBlockOverlayImage && Model.BlockOverlayLeft)
     {
         extraPadding = "extra-padding";
     }
@@ -52,22 +57,31 @@
                 </div>
             }
         </div>
-        <div class="hero-block__image-wrapper @narrow">
+        @if (hasBlockImage)
+        {
+            <div class="hero-block__image-wrapper @narrow @(hasBlockMobileImage?"hero-block__mobile--hide":"")">
             @if (Model.GradiantOverlay)
             {
                 <div class="overlay"></div>
             }
-            @Html.ImageFor(x => Model.BlockImage)
+                @Html.ImageFor(x => Model.BlockImage, renderSizeAttributes:true)
         </div>
+        }
+        @if (hasBlockMobileImage)
+        {
         <div class="hero-block__image-wrapper-mobile @narrow">
             @if (Model.GradiantOverlay)
             {
                 <div class="overlay"></div>
             }
-            @Html.ImageFor(x => Model.BlockMobileImage)
+                @Html.ImageFor(x => Model.BlockMobileImage, renderSizeAttributes:true)
         </div>
+        }
+        @if (hasBlockOverlayImage)
+        {
         <div class="hero-block__image @overlayImageLeftPosition">
-            @Html.ImageFor(x => Model.BlockOverlayImage)
+                @Html.ImageFor(x => Model.BlockOverlayImage, renderSizeAttributes:true)
         </div>
+        }
     </div>
 </div>

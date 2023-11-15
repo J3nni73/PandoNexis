@@ -67,7 +67,8 @@ namespace Litium.Accelerator.Mvc.Controllers.Api._Addons.PNGenericDataView
         [Route("changeContainerState")]
         public async Task<IActionResult> ChangeContainerState(object containerState)
         {
-            return BadRequest();
+            // Todo: Set item (DataContainer) status
+            return Ok();
         }
 
         [HttpGet]
@@ -118,8 +119,8 @@ namespace Litium.Accelerator.Mvc.Controllers.Api._Addons.PNGenericDataView
             return null;
         }
 
-
-
+   
+     
         //[HttpGet]
         //[Route("getGenericDataViewForExport/{type}")]
         //public async Task<IActionResult> GetGenericDataViewForExport(string type)
@@ -174,6 +175,7 @@ namespace Litium.Accelerator.Mvc.Controllers.Api._Addons.PNGenericDataView
         [Route("{type}")]
         public async Task<IActionResult> UpdateField(string type, object fieldData) 
         {
+
             if (Guid.TryParse(type, out Guid pageSystemId))
             {
 

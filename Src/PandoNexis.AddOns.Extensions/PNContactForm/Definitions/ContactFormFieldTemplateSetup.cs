@@ -10,10 +10,9 @@ namespace PandoNexis.AddOns.Extensions.PNContactForm.Definitions
 {
     internal class ContactFormFieldTemplateSetup : FieldTemplateHelper
     {
-        private readonly DisplayTemplateService _displayTemplateService;
-        public ContactFormFieldTemplateSetup(DisplayTemplateService displayTemplateService)
+        public ContactFormFieldTemplateSetup()
         {
-            _displayTemplateService = displayTemplateService;
+            
         }
         public override IEnumerable<FieldTemplateChanges> GetFieldTemplateFieldChanges()
         {

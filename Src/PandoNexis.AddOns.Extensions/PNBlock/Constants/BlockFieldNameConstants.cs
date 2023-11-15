@@ -13,7 +13,7 @@
         public const string BlockTitle2 = "BlockTitle2";
         public const string BlockSubTitle2 = "BlockSubTitle2";
         public const string BlockText2 = "BlockText2";
-
+        public const string YoutubeCode = "YoutubeCode";
 
         public const string FullWidth = "FullWidth";
         public const string UseFullWidthBackgroundColor = "UseFullWidthBackgroundColor";
@@ -30,8 +30,12 @@
         //BlockItems
         public const string InspirationalBlockItem = "InspirationalBlockItem";
         public const string ColumnBlockItem = "ColumnBlockItem";
+        public const string YoutubeBlockItem = "YoutubeBlockItem";
+
         public const string InfoTileBlockItem = "InfoTileBlockItem";
+
         public const string ImageStatsBlockItem = "ImageStatsBlockItem";
+
         public const string HeroBlockItem = "HeroBlockItem";
         public const string UspBlockItem = "UspBlockItem";
         public const string BannerBlockItems = "BannerBlockItems";

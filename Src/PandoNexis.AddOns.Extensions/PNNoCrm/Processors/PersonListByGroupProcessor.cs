@@ -70,7 +70,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
             var templateFields = GetFields(NoCrmProcessorConstants.PersonListByGroup);
 
             foreach (var person in persons)
-            {
+            { 
                 var container = BuildContainer(templateFields, person);
 
                 view.DataContainers.Add(container);
@@ -100,7 +100,7 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Processors
         {
             if (fieldData == null) return null;
             if (Guid.TryParse(fieldData.EntitySystemId, out var entitySystemId))
-            {
+        {
                 var person = _personService.Get(entitySystemId)?.MakeWritableClone();
                 if (person == null) return null;
 

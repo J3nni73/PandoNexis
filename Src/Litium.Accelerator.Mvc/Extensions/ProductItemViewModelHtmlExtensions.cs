@@ -1,11 +1,12 @@
-﻿using System;
-using System.Linq.Expressions;
-using Litium.Accelerator.ViewModels.Product;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Litium.Accelerator.ViewModels.Product;
+using Litium.Web;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Litium.Web;
+using Microsoft.Extensions.DependencyInjection;
+using PandoNexis.Accelerator.Extensions.ViewModels.Product;
+using System;
+using System.Linq.Expressions;
 
 namespace Litium.Accelerator.Mvc.Extensions
 {

@@ -15,10 +15,10 @@ namespace PandoNexis.AddOns.Extensions.PNNoCrm.Definitions
 {
     internal class PersonListByGroupFieldTemplateSetup : FieldTemplateHelper
     {
-        private readonly DisplayTemplateService _displayTemplateService;
-        public PersonListByGroupFieldTemplateSetup(DisplayTemplateService displayTemplateService)
+        
+        public PersonListByGroupFieldTemplateSetup()
         {
-            _displayTemplateService = displayTemplateService;
+            
         }
         public override IEnumerable<FieldTemplateChanges> GetFieldTemplateFieldChanges()
         {

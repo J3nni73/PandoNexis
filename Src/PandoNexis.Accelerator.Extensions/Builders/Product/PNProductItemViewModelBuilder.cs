@@ -9,6 +9,7 @@ using Litium.Products;
 using Litium.Runtime.AutoMapper;
 using Litium.Runtime.DependencyInjection;
 using Litium.Sales;
+using Litium.Web.Models;
 using Litium.Web.Models.Products;
 using PandoNexis.Accelerator.Extensions.Extensions;
 using PandoNexis.Accelerator.Extensions.ModelServices;
@@ -79,7 +80,15 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Product
                 if (baseProduct != null)
                     viewModel.ExtendedDescription = baseProduct.DescriptionExtended();
             }
-
+            if (!viewModel.Images.Any())
+            {
+                viewModel.Images = productModel.SelectedVariant.Fields.GetValue<IList<Guid>>(SystemFieldDefinitionConstants.Images).MapTo<IList<ImageModel>>() ??
+                                    productModel.BaseProduct.Fields.GetValue<IList<Guid>>(SystemFieldDefinitionConstants.Images).MapTo<IList<ImageModel>>();
+            }
+            if (viewModel.Product == null)
+            {
+                viewModel.Product = productModel;
+            }
             foreach (var item in _pnProductItemModelService)
             {
                 item.BuildPartialModel(ref viewModel);
@@ -87,6 +96,5 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Product
 
             return viewModel;
         }
-
     }
 }

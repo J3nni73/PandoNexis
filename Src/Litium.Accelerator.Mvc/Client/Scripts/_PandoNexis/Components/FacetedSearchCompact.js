@@ -30,17 +30,15 @@ const FacetedSearchCompact = ({ facetFilters, onFacetChange }) => {
                                     }`}
                                     role="faceted-search-item-group"
                                     onClick={(event) =>
-                                        dispatch(
-                                            toggleVisibleDropdownMenu(group)
-                                        )
+                    dispatch(toggleVisibleDropdownMenu(group))
                                     }
                                 >
                                     {group.label}
+                  <div className="arrow__dropdown"></div>
                                 </div>
                                 <ul className="faceted-search__sublist">
                                     {group.options &&
-                                        group.options.map(
-                                            (item, itemIndex, array) => (
+                    group.options.map((item, itemIndex, array) => (
                                                 <li
                                                     key={`${item.label}-${itemIndex}`}
                                                     className="faceted-search__item"
@@ -49,27 +47,16 @@ const FacetedSearchCompact = ({ facetFilters, onFacetChange }) => {
                                                     <FacetedFilterCheckbox
                                                         item={item}
                                                         group={group}
-                                                        onFacetChange={
-                                                            onFacetChange
-                                                        }
+                          onFacetChange={onFacetChange}
                                                     />
                                                 </li>
-                                            )
-                                        )}
+                    ))}
                                     <li className="faceted-search__item">
                                         <button
                                             className="filter__button"
                                             onClick={(event) => {
-                                                dispatch(
-                                                    toggleVisibleDropdownMenu(
-                                                        group
-                                                    )
-                                                );
-                                                dispatch(
-                                                    submitSearchFacet(
-                                                        facetFilters
-                                                    )
-                                                );
+                        dispatch(toggleVisibleDropdownMenu(group));
+                        dispatch(submitSearchFacet(facetFilters));
                                             }}
                                         >
                                             {translate('general.select')}
@@ -94,10 +81,7 @@ const FacetedFilterCheckbox = ({ item, group, onFacetChange }) => (
         <span className="faceted-filter__label">
             {item.label}
             {!isNaN(item.quantity) && item.quantity > 0 && (
-                <span className="faceted-filter__quantity">
-                    {' '}
-                    ({item.quantity})
-                </span>
+        <span className="faceted-filter__quantity"> ({item.quantity})</span>
             )}
         </span>
     </label>

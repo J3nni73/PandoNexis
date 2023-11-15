@@ -74,8 +74,8 @@ namespace Litium.Accelerator.Mvc.Controllers
 
                 //PandoNexis: BEGIN ADDON PNThreeDeeBg
                 masterName = menuModel.ShowLeftColumn
-                    ? "~/Views/_Addons/Shared/_LayoutWithLeftColumn.cshtml"
-                    : "~/Views/_Addons/Shared/_Layout.cshtml";
+                    ? "~/Views/_PandoNexis/Shared/_LayoutWithLeftColumn.cshtml"
+                    : "~/Views/_PandoNexis/Shared/_Layout.cshtml";
                 //PandoNexis: END ADDON PNThreeDeeBg
             }
 

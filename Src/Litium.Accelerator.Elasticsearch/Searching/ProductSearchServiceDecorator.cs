@@ -420,6 +420,9 @@ namespace Litium.Accelerator.Search.Searching
                         currentVariants = order.OrderByDescending(x => x.Value).Select(x => x.Key);
                     }
                 }
+                //Pando Nexis, fix för att det smällde i produktlistningen, bör undersökas en dag
+                if (baseProduct == null && currentVariants.Count() == 0)
+                    return null;
 
                 return baseProduct == null
                     ? _productModelBuilder.BuildFromVariant(currentVariants.First())

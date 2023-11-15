@@ -53,6 +53,8 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
 
         public async override Task<GenericDataView> GetDataView(Guid pageSystemId, string data)
         {
+           
+
             var view = new GenericDataView();
             view.Settings = GetDataViewSettings(pageSystemId);
 
@@ -112,7 +114,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
             {
                 person.fields.Add(fieldData.FieldId, fieldData.FieldValue);
             }
-
+            
 
             var container = BuildContainer(GetFields(RegisterMeConstants.RegisterMePerson));
 
@@ -125,7 +127,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
             var test = JsonConvert.SerializeObject(templateContainer);
             var test2 = JsonConvert.DeserializeObject<GenericDataContainer>(test);
             var result = test2;
-
+            
             return result;
 
         }
@@ -135,6 +137,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
             var view = new GenericDataView();
             view.Settings = GetDataViewSettings(pageSystemId);
             var dataViewResponse = JsonConvert.DeserializeObject<GenericDataViewResponse>(data);
+
             if (Guid.TryParse(dataViewResponse.EntitySystemId, out Guid personSystemId))
             {
                 var container = new GenericDataContainer();
@@ -161,20 +164,20 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                 }
                 else if (IsValidated()&&!dataViewResponse.Form.ContainsKey("Response"))
                 {
-                    var template = _fieldTemplateService.Get<PersonFieldTemplate>(typeof(CustomerArea), DefaultWebsiteFieldValueConstants.CustomerTemplateId);
-                    var person = new Person(template.SystemId);
-                    person.SystemId = Guid.NewGuid();
-                    foreach (var field in dataViewResponse.Form)
-                    {
-                        person.Fields.AddOrUpdateValue(field.Key, field.Value);
-                    }
+                        var template = _fieldTemplateService.Get<PersonFieldTemplate>(typeof(CustomerArea), DefaultWebsiteFieldValueConstants.CustomerTemplateId);
+                        var person = new Person(template.SystemId);
+                        person.SystemId = Guid.NewGuid();
+                        foreach (var field in dataViewResponse.Form)
+                        {
+                            person.Fields.AddOrUpdateValue(field.Key, field.Value);
+                        }
                     person.Fields.AddOrUpdateValue(RegisterMeConstants.AddedByRegisterMeForm, true);
 
-                    using (_securityContextService.ActAsSystem())
-                    {
-                        _personService.Create(person);
-                    }
-                    container.Fields = new List<GenericDataField>
+                        using (_securityContextService.ActAsSystem())
+                        {
+                            _personService.Create(person);
+                        }
+                        container.Fields = new List<GenericDataField>
                         {
                             SaveResponseAsGenericField(_requestModelAccessor.RequestModel.WebsiteModel.Website)
                         };
@@ -194,7 +197,6 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                     return view;
                 }
             }
-
             return null;
 
         }
@@ -286,7 +288,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
         private bool IsValidated()
         {
             var result = _sessionStorage.GetValue<bool>(RegisterMeConstants.Validated);
-
+       
             return result;
         }
         private bool Validate(string code)
@@ -296,7 +298,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Processors
                 _sessionStorage.SetValue(RegisterMeConstants.Validated, true);
 
             }
-
+       
             return IsValidated();
         }
         private PersonWithProperties SetOrCreatePerson(PersonWithProperties person)

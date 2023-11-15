@@ -46,7 +46,7 @@ namespace Litium.Accelerator.Builders.Product
             _productFieldGroupViewModelBuilder = productFieldGroupViewModelBuilder;
         }
 
-        public async Task<ProductPageViewModel> BuildAsync(BaseProduct baseProduct)
+        public virtual async Task<ProductPageViewModel> BuildAsync(BaseProduct baseProduct)
         {
             var productModel = _productModelBuilder.BuildFromBaseProduct(baseProduct);
             var viewModel = Build(productModel);
@@ -57,7 +57,7 @@ namespace Litium.Accelerator.Builders.Product
             return viewModel;
         }
 
-        public async Task<ProductPageViewModel> BuildAsync(Variant variant)
+        public virtual async Task<ProductPageViewModel> BuildAsync(Variant variant)
         {
             var productModel = _productModelBuilder.BuildFromVariant(variant);
             var viewModel = Build(productModel);

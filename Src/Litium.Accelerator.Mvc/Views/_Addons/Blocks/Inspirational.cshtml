@@ -8,8 +8,8 @@
     var extraPadding = string.Empty;
     var textColor = string.Empty;
     var test = Model.Background;
-    var textBackgroundColor = !Model.UseFullWidthBackgroundColor?Model.Background: string.Empty;
-    var fullWidthBackgroundColor = Model.UseFullWidthBackgroundColor?Model.Background: string.Empty;
+    var textBackgroundColor = !Model.UseFullWidthBackgroundColor ? Model.Background : string.Empty;
+    var fullWidthBackgroundColor = Model.UseFullWidthBackgroundColor ? Model.Background : string.Empty;
     //if (backgroundColor == "thirdColor")
     //{
     //    textColor = "white";
@@ -40,8 +40,8 @@
                 {
                     negativeMargin = "negativeMargin";
                 }
-
-                <div class="@sectionsclass @fullWidth">
+                <div class="@fullWidth">
+                    <div class="@sectionsclass @(!Model.FullWidth ? "small-12 columns":"")">
                     @*section1*@
                     <div class="inspirational-block__sectionleft @extraPadding @textBackgroundColor">
                         <h2 class="inspirational-block__title @textColor">
@@ -97,6 +97,7 @@
                                 </div>
                             </div>
                         }
+                        </div>
                     </div>
                 </div>
             }

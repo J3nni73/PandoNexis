@@ -2,6 +2,8 @@
 using AutoMapper;
 using Litium.Accelerator.ViewModels.Framework;
 using Litium.Runtime.AutoMapper;
+using Litium.Accelerator.Builders;
+using PandoNexis.Accelerator.Extensions.ViewModel;
 
 namespace PandoNexis.Accelerator.Extensions.ViewModels.Framework
 {
@@ -12,7 +14,15 @@ namespace PandoNexis.Accelerator.Extensions.ViewModels.Framework
 	{
 		public IList<LinkModel> TopLinkList { get; set; }
 
-		public void Configure(IMapperConfigurationExpression cfg)
+        //PandoNexis MapWithOrganizations begin
+        public string GmKey { get; set; } = string.Empty;
+        //PandoNexis MapWithOrganizations end
+
+        //PandoNexis PNCookieConsent begin
+        public PNCookieConsentModel CookieConsent { get; set; }
+        //PandoNexis PNCookieConsent end
+
+        public void Configure(IMapperConfigurationExpression cfg)
 		{
 			cfg.CreateMap<ClientContextViewModel, PNClientContextViewModel>();
 		}

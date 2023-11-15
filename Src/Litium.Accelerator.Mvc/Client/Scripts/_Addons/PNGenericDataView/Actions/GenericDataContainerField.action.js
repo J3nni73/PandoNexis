@@ -10,13 +10,19 @@ import {
 import {
     checkResponse,
     getHeaderInformationData,
-    toggleModal
+  toggleModal,
 } from './GenericDataView.action';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 
 import {
-    GENERIC_DATA_FIELD_LOAD, GENERIC_DATA_FIELD_LOAD_ERROR, GENERIC_DATA_FIELD_RECEIVE, GENERIC_DATA_FIELD_LIST_RECEIVE,
-    GENERIC_DATA_CONTAINER_UPDATE, GENERIC_DATA_FIELD_GET_DATA_LIST, GENERIC_DATA_FIELD_GET_ORGANIZATION_LIST, GENERIC_MODAL_DATA_CONTAINER_UPDATE
+  GENERIC_DATA_FIELD_LOAD,
+  GENERIC_DATA_FIELD_LOAD_ERROR,
+  GENERIC_DATA_FIELD_RECEIVE,
+  GENERIC_DATA_FIELD_LIST_RECEIVE,
+  GENERIC_DATA_CONTAINER_UPDATE,
+  GENERIC_DATA_FIELD_GET_DATA_LIST,
+  GENERIC_DATA_FIELD_GET_ORGANIZATION_LIST,
+  GENERIC_MODAL_DATA_CONTAINER_UPDATE,
 } from '../constants';
 
 const rootRoute = '/api/genericdataview/';
@@ -73,22 +79,38 @@ export const autocompleteGetList = (fieldId, query) => (dispatch, getState) => {
         .catch((ex) => dispatch(catchError(ex, (error) => loadError(error))));
 };
 
-export const buttonClick = (fieldId, containerIndex = -1, setValueObject, isInModal = false, buttonSettings = {}, pageDataSource = null) => (
-    dispatch,
-    getState
-) => {
+export const buttonClick = (
+  fieldId,
+  containerIndex = -1,
+  setValueObject,
+  isInModal = false,
+  buttonSettings = {},
+  pageDataSource = null
+) => (dispatch, getState) => {
+  
     let fields = [];
     if (containerIndex !== -1 && containerIndex !== undefined) {
-        fields = getState().genericDataView.dataContainers[containerIndex].fields;
+        const genDataView = getState().genericDataView;
+        if (isInModal && genDataView.modalDataContainers) {
+            fields = genDataView.modalDataContainers[containerIndex].fields;
+        }
+        else if (genDataView.dataContainers) {
+            fields = genDataView.dataContainers[containerIndex].fields;
+        }
     }
     const data = {
         entitySystemId: fields.entitySystemId,
     };
     dispatch({
-        type: isInModal ? GENERIC_MODAL_DATA_CONTAINER_UPDATE : GENERIC_DATA_CONTAINER_UPDATE,
+    type: isInModal
+      ? GENERIC_MODAL_DATA_CONTAINER_UPDATE
+      : GENERIC_DATA_CONTAINER_UPDATE,
         payload: { data, fields },
     });
-    let currentPageId = setValueObject.postContainerPageSystemId || pageDataSource || getState().genericDataView.currentPageId;
+  let currentPageId =
+    setValueObject.postContainerPageSystemId ||
+    pageDataSource ||
+    getState().genericDataView.currentPageId;
     setValueObject.fieldId = fieldId;
 
     setValueObject.dataSource = currentPageId;
@@ -101,7 +123,17 @@ export const buttonClick = (fieldId, containerIndex = -1, setValueObject, isInMo
     //}
     return put(rootRoute + 'buttonClick', setValueObject)
         .then((response) => response.json())
-        .then((response) => dispatch(updateDataContainer(response, fields, buttonSettings, containerIndex, isInModal)))
+    .then((response) =>
+      dispatch(
+        updateDataContainer(
+          response,
+          fields,
+          buttonSettings,
+          containerIndex,
+          isInModal
+        )
+      )
+    )
         .catch((ex) => dispatch(catchError(ex, (error) => loadError(error))));
 };
 
@@ -130,7 +162,13 @@ export const receiveOrganizationList = (data) => {
     };
 };
 
-export const updateDataContainer = (response, fields, buttonSettings = {}, containerIndex = -1, isInModal = false) => (dispatch, getState) => {
+export const updateDataContainer = (
+  response,
+  fields,
+  buttonSettings = {},
+  containerIndex = -1,
+  isInModal = false
+) => (dispatch, getState) => {
     dispatch(toggleGenericLoader(false));
     
     // If ony one data container is to be updated
@@ -154,8 +192,14 @@ export const updateDataContainer = (response, fields, buttonSettings = {}, conta
         }
 
         // First check if we want to download a file
-        if (buttonSettings && buttonSettings.downloadMimeTypeString?.length > 0 && buttonSettings.downloadFileType?.length > 0) {
-            const fileName = `${buttonSettings.downloadFileName || buttonSettings.fieldId}.${buttonSettings.downloadFileType}`;
+    if (
+      buttonSettings &&
+      buttonSettings.downloadMimeTypeString?.length > 0 &&
+      buttonSettings.downloadFileType?.length > 0
+    ) {
+      const fileName = `${
+        buttonSettings.downloadFileName || buttonSettings.fieldId
+      }.${buttonSettings.downloadFileType}`;
 
             const linkSource = `${buttonSettings.downloadMimeTypeString},${response.base64}`;
             const downloadLink = document.createElement('a');
@@ -171,7 +215,16 @@ export const updateDataContainer = (response, fields, buttonSettings = {}, conta
         }
         
         if (response.fields) {
-            return dispatch(checkDataContainerResponse(response, fields, isInModal, '', containerIndex, responseActions));
+      return dispatch(
+        checkDataContainerResponse(
+          response,
+          fields,
+          isInModal,
+          '',
+          containerIndex,
+          responseActions
+        )
+      );
         }
         return dispatch(checkResponse(response));
         

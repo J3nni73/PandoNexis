@@ -13,6 +13,11 @@ $icon-color: $solution-icon-color; // #fff;
     margin: rem(16px auto 10px auto);
     opacity: .7;
 
+    &.active {
+        z-index: 9999999;
+        position: relative;
+    }
+
     &:before, &:after {
         content: '';
         position: absolute;

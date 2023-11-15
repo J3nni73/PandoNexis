@@ -17,11 +17,11 @@ namespace Litium.Accelerator.Mvc.Controllers.Navigation
 
         public IViewComponentResult Invoke(Guid categorySystemId)
         {
-            var model = _childCategoryNavigationBuilder.Build(categorySystemId);
-            if (model != null)
-            {
-                return View("~/Views/Navigation/ChildCategoryNavigation.cshtml", model);
-            }
+            //var model = _childCategoryNavigationBuilder.Build(categorySystemId);
+            //if (model != null)
+            //{
+            //    return View("~/Views/Navigation/ChildCategoryNavigation.cshtml", model);
+            //}
 
             return Content("");
         }

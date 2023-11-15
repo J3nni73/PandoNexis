@@ -91,7 +91,8 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
             view.Settings = GetDataViewSettings(pageSystemId);
             var templateContainer = GetFields(PilotProcessorConstants.WorkItems);
             view.Settings.DataViewButtons.Add(_genericButtonService.GetButton(_requestModelAccessor.RequestModel.WebsiteModel.Website, PilotProcessorConstants.PilotButtonLinks, PilotProcessorConstants.NewWorkItem, PilotProcessorConstants.PilotButtonNames, Guid.Empty));
-            var items = GetItems();
+            
+            var items = GetItemsByOrganization();
 
             foreach (var item in items)
             {
