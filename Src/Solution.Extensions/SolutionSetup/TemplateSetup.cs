@@ -18,7 +18,6 @@ namespace Solution.Extensions.Definitions
         private readonly FieldTemplateService _fieldTemplateService;
         private readonly SecurityContextService _securityContextService;
         private readonly CategoryService _categoryService;
-        private readonly DisplayTemplateService _displayTemplateService;
         private readonly IEnumerable<FieldTemplateHelper> _fieldTemplateHelper;
         private readonly IEnumerable<FieldHelper> _fieldHelper;
 
@@ -26,14 +25,12 @@ namespace Solution.Extensions.Definitions
         public TemplateSetup(FieldTemplateService fieldTemplateService,
             SecurityContextService securityContextService,
             CategoryService categoryService,
-            DisplayTemplateService displayTemplateService,
             IEnumerable<FieldTemplateHelper> fieldTemplateHelper,
             IEnumerable<FieldHelper> fieldHelper)
         {
             _fieldTemplateService = fieldTemplateService;
             _securityContextService = securityContextService;
             _categoryService = categoryService;
-            _displayTemplateService = displayTemplateService;
             _fieldTemplateHelper = fieldTemplateHelper;
             _fieldHelper = fieldHelper;
         }
@@ -407,8 +404,8 @@ namespace Solution.Extensions.Definitions
             var categoryFieldTemplate = _fieldTemplateService.Get<CategoryFieldTemplate>(templateId)?.MakeWritableClone();
             if (categoryFieldTemplate == null)
             {
-                var categoryDisplayTemplateId = _displayTemplateService.Get<CategoryDisplayTemplate>(changes.FirstOrDefault().DisplayTemplate)?.SystemId ?? Guid.Empty;
-                categoryFieldTemplate = new CategoryFieldTemplate(templateId, categoryDisplayTemplateId);
+               
+                categoryFieldTemplate = new CategoryFieldTemplate(templateId);
                 categoryFieldTemplate.CategoryFieldGroups = new List<FieldTemplateFieldGroup>();
             }
             foreach (var change in changes)

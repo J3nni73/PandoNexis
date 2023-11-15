@@ -120,79 +120,83 @@
   <data name="fielddefinition.blockarea.BlockTitle.name" xml:space="preserve">
     <value>Blocktitle</value>
   </data>
-	<data name="fielddefinition.blockarea.BlockTitle.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.BlockTitle.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.BlockSubTitle.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.BlockSubTitle.name" xml:space="preserve">
     <value>Blocksubtitle</value>
   </data>
-	<data name="fielddefinition.blockarea.BlockSubTitle.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.BlockSubTitle.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.BlockText1.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.BlockText1.name" xml:space="preserve">
     <value>Blocktext</value>
   </data>
-	<data name="fielddefinition.blockarea.BlockText1.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.BlockText1.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkText.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkText.name" xml:space="preserve">
     <value>Link text</value>
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkText.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkText.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToPage.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToPage.name" xml:space="preserve">
     <value>Link to page</value>
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToPage.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToPage.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToCategory.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToCategory.name" xml:space="preserve">
     <value>Link to category</value>
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToCategory.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToCategory.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToProduct.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToProduct.name" xml:space="preserve">
     <value>Link to product</value>
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToProduct.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToProduct.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToProductList.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToProductList.name" xml:space="preserve">
     <value>Link to productlist</value>
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToProductList.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToProductList.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToFile.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToFile.name" xml:space="preserve">
     <value>Link to file</value>
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToFile.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToFile.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToYouTube.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToYouTube.name" xml:space="preserve">
     <value>Link to youtube</value>
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToYouTube.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToYouTube.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToExternalUrl.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToExternalUrl.name" xml:space="preserve">
     <value>Link to external site</value>
   </data>
-	<data name="fielddefinition.blockarea.ExtendedLinkToExternalUrl.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedLinkToExternalUrl.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.ExtendedButtonSubText.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedButtonSubText.name" xml:space="preserve">
     <value>ButtonSubText</value>
   </data>
-	<data name="fielddefinition.blockarea.ExtendedButtonSubText.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.ExtendedButtonSubText.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fieldtemplate.blockarea.TextBlock.name" xml:space="preserve">
+  <data name="fieldtemplate.blockarea.TextBlock.name" xml:space="preserve">
     <value>Textblock</value>
   </data>
-	<data name="fieldtemplate.blockarea.TextBlock.description" xml:space="preserve">
+  <data name="fieldtemplate.blockarea.TextBlock.description" xml:space="preserve">
     <value />
   </data>
+  <data name="fielddefinition.blockarea.textblockitem.name" xml:space="preserve">
+    <value>Textblock item</value>
+  </data>
+	<data name="fieldtemplate.websitearea.articlewithoutleftmenu.name"  xml:space="preserve"><value>Article Without leftmenu</value></data>
 </root>

@@ -2,9 +2,11 @@
 using Litium.Accelerator.Constants;
 using Litium.Accelerator.Routing;
 using Litium.Accelerator.Utilities;
+using Litium.Accelerator.ViewModels.Framework;
 using Litium.FieldFramework.FieldTypes;
 using Litium.Globalization;
 using Litium.Runtime.AutoMapper;
+using Litium.Runtime.DependencyInjection;
 using Litium.Sales;
 using Litium.Web.Models;
 using Microsoft.AspNetCore.Antiforgery;
@@ -13,6 +15,8 @@ using PandoNexis.Accelerator.Extensions.ViewModels.Framework;
 
 namespace PandoNexis.Accelerator.Extensions.Builders.Framework
 {
+    [Service(ServiceType = typeof(ClientContextViewModelBuilder), Lifetime = DependencyLifetime.Scoped)]
+
     public class PNClientContextViewModelBuilder : ClientContextViewModelBuilder
 	{
 		private readonly RequestModelAccessor _requestModelAccessor;
@@ -35,7 +39,7 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Framework
 
 		}
 
-		public async Task<PNClientContextViewModel> BuildAsync()
+		public override async Task<ClientContextViewModel> BuildAsync()
 		{
 			var baseModel = await base.BuildAsync();
 			var model = baseModel.MapTo<PNClientContextViewModel>();

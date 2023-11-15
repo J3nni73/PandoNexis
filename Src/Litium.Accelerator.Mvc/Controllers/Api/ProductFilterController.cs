@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using Litium.Accelerator.Builders.Product;
 using Litium.Accelerator.Builders.Search;
@@ -49,11 +50,10 @@ namespace Litium.Accelerator.Mvc.Controllers.Api
         /// </summary>
         [HttpGet]
         [Route("withHtmlResult")]
-        public Task<IActionResult> WithHtmlResultAsync()
+        public async Task<IActionResult> WithHtmlResultAsync()
         {
-            return GetAsync(true);
+            return await GetAsync(true);
         }
-
         private async Task<IActionResult> GetAsync(bool withHtmlResult)
         {
             if (_requestModelAccessor.RequestModel.CurrentPageModel == null)

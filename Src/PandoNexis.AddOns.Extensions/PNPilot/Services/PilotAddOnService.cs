@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.VariantTypes;
+using Litium.Accelerator.Constants;
 using Litium.Accelerator.Services;
 using Litium.FieldFramework;
 using Litium.Products;
@@ -51,7 +52,7 @@ namespace PandoNexis.AddOns.PNPilot.Services
             var baseProduct = _baseProductService.Get("bp_" + AddOnId);
             if (baseProduct == null)
             {
-                var fieldTemplate = _fieldTemplateService.Get<ProductFieldTemplate>("ProductWithVariants");
+                var fieldTemplate = _fieldTemplateService.Get<ProductFieldTemplate>(ProductTemplateNameConstants.ProductWithVariants);
                 baseProduct = new BaseProduct("bp_" + AddOnId, fieldTemplate.SystemId);
                 using (_securityContextService.ActAsSystem("Pilot"))
                 {

@@ -11,10 +11,10 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Definitions
 {
     internal class RegisterMeFieldTemplateSetup : FieldTemplateHelper
     {
-        private readonly DisplayTemplateService _displayTemplateService;
-        public RegisterMeFieldTemplateSetup(DisplayTemplateService displayTemplateService)
+        
+        public RegisterMeFieldTemplateSetup()
         {
-            _displayTemplateService = displayTemplateService;
+            
         }
         public override IEnumerable<FieldTemplateChanges> GetFieldTemplateFieldChanges()
         {
@@ -78,7 +78,7 @@ namespace PandoNexis.AddOns.Extensions.PNRegisterMe.Definitions
 
                             UseInStorefront = true,
                         },
-                      
+
                 },
             };
             return template;

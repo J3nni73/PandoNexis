@@ -3,8 +3,8 @@
     public static class ProductTemplateNameConstants
     {
         public const string Category = "Category";
-        public const string Product = "Product";
-        public const string ProductWithVariantList = "ProductWithVariantList";
+        public const string ProductWithVariants = "ProductWithVariants";
+        public const string ProductWithVariantsList = "ProductWithVariantsList";
+        public const string ProductWithOneVariant = "ProductWithOneVariant";
     }
 }
-;

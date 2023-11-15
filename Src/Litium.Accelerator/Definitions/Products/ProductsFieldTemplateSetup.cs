@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Litium.FieldFramework;
 using Litium.Products;
 using Litium.Accelerator.Constants;
@@ -9,26 +7,11 @@ namespace Litium.Accelerator.Definitions.Products
 {
     internal class ProductsFieldTemplateSetup : FieldTemplateSetup
     {
-        private readonly DisplayTemplateService _displayTemplateService;
-
-        public ProductsFieldTemplateSetup(DisplayTemplateService displayTemplateService)
-        {
-            _displayTemplateService = displayTemplateService;
-        }
         public override IEnumerable<FieldTemplate> GetTemplates()
         {
-            var categoryDisplayTemplateId = _displayTemplateService.Get<CategoryDisplayTemplate>("Category")?.SystemId ?? Guid.Empty;
-            var productDisplayTemplateId = _displayTemplateService.Get<ProductDisplayTemplate>("Product")?.SystemId ?? Guid.Empty;
-            var productWithVariantListDisplayTemplateId = _displayTemplateService.Get<ProductDisplayTemplate>("ProductWithVariantList")?.SystemId ?? Guid.Empty;
-
-            if (categoryDisplayTemplateId == Guid.Empty || productDisplayTemplateId == Guid.Empty || productWithVariantListDisplayTemplateId == Guid.Empty)
-            {
-                return Enumerable.Empty<FieldTemplate>();
-            }
-
             var fieldTemplates = new FieldTemplate[]
             {
-                new CategoryFieldTemplate("Category", categoryDisplayTemplateId)
+                new CategoryFieldTemplate(ProductTemplateNameConstants.Category)
                 {
                     CategoryFieldGroups = new[]
                     {
@@ -54,8 +37,9 @@ namespace Litium.Accelerator.Definitions.Products
                         }
                     }
                 },
-                new ProductFieldTemplate("ProductWithOneVariant", productDisplayTemplateId)
+                new ProductFieldTemplate(ProductTemplateNameConstants.ProductWithOneVariant)
                 {
+                    UseVariantUrl = true,
                     ProductFieldGroups = new[]
                     {
                         new FieldTemplateFieldGroup
@@ -131,8 +115,9 @@ namespace Litium.Accelerator.Definitions.Products
                         }
                     }
                 },
-                new ProductFieldTemplate("ProductWithVariants", productDisplayTemplateId)
+                new ProductFieldTemplate(ProductTemplateNameConstants.ProductWithVariants)
                 {
+                    UseVariantUrl = true,
                     ProductFieldGroups = new[]
                     {
                         new FieldTemplateFieldGroup
@@ -208,8 +193,9 @@ namespace Litium.Accelerator.Definitions.Products
                         }
                     }
                 },
-                new ProductFieldTemplate("ProductWithVariantsList", productWithVariantListDisplayTemplateId)
+                new ProductFieldTemplate(ProductTemplateNameConstants.ProductWithVariantsList)
                 {
+                    UseVariantUrl = false,
                     ProductFieldGroups = new[]
                     {
                         new FieldTemplateFieldGroup

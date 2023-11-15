@@ -1,48 +1,47 @@
-import React, { Fragment, useState, useEffect, useRef, memo } from "react";
-import CELLS from "./vendor/vanta.cells";
-import CLOUDS2 from "./vendor/vanta.clouds";
-import HALO from "./vendor/vanta.halo";
-import RIPPLE from "./vendor/vanta.ripple";
-import WAVES from "./vendor/vanta.waves";
+import React, { Fragment, useState, useEffect, useRef, memo } from 'react';
+import CELLS from './vendor/vanta.cells';
+import CLOUDS2 from './vendor/vanta.clouds';
+import HALO from './vendor/vanta.halo';
+import RIPPLE from './vendor/vanta.ripple';
+import WAVES from './vendor/vanta.waves';
 
 import * as THREE from 'three';
 const Background = (props) => {
     const [vantaEffect, setVantaEffect] = useState(0);
-    const [theme, setTheme] = useState(window.channel && window.channel === 'sitenoerp' ? 'waves' : window.channel === 'sitejennifer50' ? 'halo' : props.theme || 'waves');
-    
+  const [theme, setTheme] = useState(props.theme || 'waves');
     const mainBg = useRef(null);
     const cellsOptions = {
-        backgroundColor: 0x170322,
+    backgroundColor: 0xffffff,
         mouseControls: false,
         touchControls: false,
         gyroControls: false,
-        scale: 2.0, 
-        color1: 0x303904,
-        color2: 0x52047f,
-        THREE: THREE
+    scale: 1.0,
+    color1: 0x020096,
+    color2: 0xffffff,
+    THREE: THREE,
     };
     const cloudOptions = {
         mouseControls: true,
         touchControls: false,
         gyroControls: true,
-        scale: 1.00,
+    scale: 1.0,
         backgroundColor: 0x0,
-        skyColor: 0x4b95b9,// 0x68b8d7, // 0x99b5bf,
+    skyColor: 0x4b95b9, // 0x68b8d7, // 0x99b5bf,
         cloudColor: 0xadc1de,
         cloudShadowColor: 0x183550,
         lightColor: 0xffffff,
-        speed: .9,
-        texturePath: "./images/noise.png",
-        THREE: THREE
+    speed: 0.9,
+    texturePath: './images/noise.png',
+    THREE: THREE,
     };
     const haloOptions = {
         mouseEase: false,
         mouseControls: false,
         touchControls: false,
         gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        THREE: THREE
+    minHeight: 200.0,
+    minWidth: 200.0,
+    THREE: THREE,
     };
     const rippleOptions = {
         color1: 0xeeaaff,
@@ -53,22 +52,22 @@ const Background = (props) => {
         rotationFactor: 0.1,
         speed: 1.0,
         scaleMobile: 4,
-        THREE: THREE
+    THREE: THREE,
     };
 
     const waveOptions = {
         mouseControls: false,
         touchControls: false,
         gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 1.00,
-        scaleMobile: 1.00,
-        color: 0x005588,
+    minHeight: 200.0,
+    minWidth: 200.0,
+    scale: 1.0,
+    scaleMobile: 1.0,
+    color: 0x888888,
         shininess: 30,
         waveHeight: 15,
-        waveSpeed: .4,
-        THREE: THREE
+    waveSpeed: 0.4,
+    THREE: THREE,
     };
     const [effectLoaded, setEffectLoaded] = useState(false);
     useEffect(() => {
@@ -91,7 +90,8 @@ const Background = (props) => {
                     setVantaEffect(WAVES({ ...waveOptions, el: mainBg.current }));
                     break;
 
-                default: break;
+        default:
+          break;
             }
         }
         return () => {
@@ -117,7 +117,8 @@ const Background = (props) => {
                 case 'waves':
                     setVantaEffect(WAVES({ ...waveOptions, el: mainBg.current }));
                     break;
-                default: break;
+        default:
+          break;
             }
             setEffectLoaded(true);
         }
@@ -128,7 +129,10 @@ const Background = (props) => {
     //return null;
     return (
         <Fragment>
-            <div className={`pn-main-background__container pn-main-background__${theme}`} ref={mainBg}>
+      <div
+        className={`pn-main-background__container pn-main-background__${theme}`}
+        ref={mainBg}
+      >
                 <div className="pn-main-background__overlay"></div>
                 <div className="pn-main-background__canvas"></div>
             </div>

@@ -7,6 +7,5 @@ namespace PandoNexis.Accelerator.Extensions.ModelServices
     public abstract class PNProductItemModelService : IPNModelService
     {
         public abstract void BuildPartialModel(ref PNProductItemViewModel model);
-
     }
 }

@@ -314,6 +314,14 @@ namespace PandoNexis.AddOns.Extensions.PNPilot.Processors
         {
             return _workItems;
         }
+        public IEnumerable<WorkItem> GetItemsByOrganization()
+        {
+            var organizationSystemIds = new List<Guid>();
+            organizationSystemIds.Add(_personStorage.CurrentSelectedOrganization.SystemId);
+
+
+            return _workItems.Where(i => organizationSystemIds.Contains(i.OrganizationSystemId));
+        }
 
         public IEnumerable<Time> GetTimeSpentOnWorkItem(Guid itemSystemId)
         {

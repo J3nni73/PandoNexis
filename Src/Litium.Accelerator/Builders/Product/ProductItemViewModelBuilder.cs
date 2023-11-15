@@ -67,6 +67,7 @@ namespace Litium.Accelerator.Builders.Product
             {
                 foreach (var item in images)
                 {
+                    if (item == null) continue;
                     if (string.IsNullOrEmpty(item.Alt))
                     {
                         item.Alt = productName;

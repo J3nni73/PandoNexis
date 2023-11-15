@@ -2,6 +2,9 @@
 using Litium.Accelerator.Builders.Framework;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
+using Litium.Accelerator.Constants;
+using Litium.Accelerator.Routing;
+using HeaderLayoutConstants = PandoNexis.Accelerator.Extensions.Constants.HeaderLayoutConstants;
 
 namespace Litium.Accelerator.Mvc.Controllers.Framework
 {
@@ -12,10 +15,12 @@ namespace Litium.Accelerator.Mvc.Controllers.Framework
     public class HeaderLayoutController : ViewComponent
     {
         private readonly HeaderViewModelBuilder<HeaderViewModel> _headerViewModelBuilder;
+        private readonly RequestModelAccessor _requestModelAccessor;
 
-        public HeaderLayoutController(HeaderViewModelBuilder<HeaderViewModel> headerViewModelBuilder)
+        public HeaderLayoutController(HeaderViewModelBuilder<HeaderViewModel> headerViewModelBuilder, RequestModelAccessor requestModelAccessor)
         {
             _headerViewModelBuilder = headerViewModelBuilder;
+            _requestModelAccessor = requestModelAccessor;
         }
 
         /// <summary>
@@ -25,11 +30,12 @@ namespace Litium.Accelerator.Mvc.Controllers.Framework
         public IViewComponentResult Invoke()
         {
             var viewModel = _headerViewModelBuilder.Build();
-            //return View("~/Views/Framework/Header.cshtml", viewModel);
-
             //PandoExtensions: begin
-            return View("~/Views/_Solution/Framework/CenteredHeader.cshtml", viewModel); 
+            var website = _requestModelAccessor.RequestModel.WebsiteModel;
+            return View("~/Views/_Solution/Framework/Header.cshtml", viewModel);
             //PandoExtensions: end
+
+            //return View("~/Views/Framework/Header.cshtml", viewModel);
         }
     }
 }

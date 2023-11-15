@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Litium.Accelerator.Builders.Framework;
 using Microsoft.AspNetCore.Mvc;
+using PandoNexis.Accelerator.Extensions.ViewModels.Framework;
 
 namespace Litium.Accelerator.Mvc.Controllers.Framework
 {
@@ -18,6 +19,10 @@ namespace Litium.Accelerator.Mvc.Controllers.Framework
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var viewModel = await _clientContextViewModelBuilder.BuildAsync();
+            //PandoExtensions: begin
+            return View("~/Views/_PandoNexis/Framework/ClientContext.cshtml", viewModel);
+            //PandoExtensions: end
+
             return View("~/Views/Framework/ClientContext.cshtml", viewModel);
         }
     }

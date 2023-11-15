@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Litium.Accelerator.Constants;
 using Litium.Accelerator.Search.Filtering;
 using Litium.Accelerator.Services;
 using Litium.Common;
@@ -26,13 +27,11 @@ namespace Litium.Accelerator.Definitions
         private readonly FieldDefinitionService _fieldDefinitionService;
         private readonly SecurityContextService _securityContextService;
         private readonly RelationshipTypeService _relationshipTypeService;
-        private readonly DisplayTemplateService _displayTemplateService;
         private readonly Block.CategoryService _categoryService;
         private readonly AddressTypeService _addressTypeService;
         private readonly RoleService _roleService;
         private readonly TemplateSettingService _templateSettingService;
         private readonly IEnumerable<FieldDefinitionSetup> _definitionSetups;
-        private readonly IEnumerable<DisplayTemplateSetup> _displayTemplateSetups;
         private readonly IEnumerable<FieldTemplateSetup> _fieldTemplateSetups;
         private readonly IEnumerable<RelationshipTypeSetup> _relationshipTypeSetups;
         private readonly IEnumerable<BlockCategorySetup> _categorySetups;
@@ -51,14 +50,12 @@ namespace Litium.Accelerator.Definitions
             SettingService settingService,
             SecurityContextService securityContextService,
             RelationshipTypeService relationshipTypeService,
-            DisplayTemplateService displayTemplateService,
             Block.CategoryService categoryService,
             AddressTypeService addressTypeService,
             RoleService roleService,
             TemplateSettingService templateSettingService,
             IEnumerable<FieldDefinitionSetup> fieldDefinitonSetups,
             IEnumerable<FieldTemplateSetup> fieldTemplateSetups,
-            IEnumerable<DisplayTemplateSetup> displayTemplateSetups,
             IEnumerable<RelationshipTypeSetup> relationshipTypeSetups,
             IEnumerable<BlockCategorySetup> categorySetup,
             IEnumerable<AddressTypeSetup> addressTypeSetup,
@@ -77,10 +74,8 @@ namespace Litium.Accelerator.Definitions
             _fieldTemplateSetups = fieldTemplateSetups;
             _securityContextService = securityContextService;
             _relationshipTypeService = relationshipTypeService;
-            _displayTemplateService = displayTemplateService;
             _categoryService = categoryService;
             _templateSettingService = templateSettingService;
-            _displayTemplateSetups = displayTemplateSetups;
             _relationshipTypeSetups = relationshipTypeSetups;
             _categorySetups = categorySetup;
             _addressTypeService = addressTypeService;
@@ -102,11 +97,6 @@ namespace Litium.Accelerator.Definitions
                 foreach (var item in _definitionSetups)
                 {
                     InitFields(item.GetFieldDefinitions());
-                }
-
-                foreach (var item in _displayTemplateSetups)
-                {
-                    InitDisplayTemplates(item.GetDisplayTemplates());
                 }
 
                 foreach (var item in _relationshipTypeSetups)
@@ -136,7 +126,7 @@ namespace Litium.Accelerator.Definitions
 
                 if (!IsAlreadyExecuted<FieldTemplate>("ProductWithVariants:Settings"))
                 {
-                    _templateSettingService.SetTemplateGroupings("ProductWithVariants", "color");
+                    _templateSettingService.SetTemplateGroupings(ProductTemplateNameConstants.ProductWithVariants, "color");
                     SetAlreadyExecuted<FieldTemplate>("ProductWithVariants:Settings");
                 }
 
@@ -195,24 +185,6 @@ namespace Litium.Accelerator.Definitions
                 }
                 _categoryService.Create(category);
                 SetAlreadyExecuted<Category>(category.Id);
-            }
-        }
-
-        private void InitDisplayTemplates(IEnumerable<DisplayTemplate> displayTemplates)
-        {
-            foreach (var displayTemplate in displayTemplates)
-            {
-                if (IsAlreadyExecuted<DisplayTemplate>(displayTemplate.Id))
-                {
-                    continue;
-                }
-                var currentField = _displayTemplateService.Get<DisplayTemplate>(displayTemplate.Id);
-                if (currentField != null)
-                {
-                    continue;
-                }
-                _displayTemplateService.Create(displayTemplate);
-                SetAlreadyExecuted<DisplayTemplate>(displayTemplate.Id);
             }
         }
 

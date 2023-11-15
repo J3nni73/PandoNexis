@@ -1,15 +1,15 @@
-import VantaBase, { VANTA } from './_base.js'
-import { rn, ri, sample } from './helpers.js'
+import VantaBase, { VANTA } from './_base.js';
+import { rn, ri, sample } from './helpers.js';
 
-let THREE = (typeof window == 'object' && window.THREE)
+let THREE = typeof window == 'object' && window.THREE;
 
 const defaultOptions = {
     color: 0x005588,
     shininess: 30,
     waveHeight: 15,
     waveSpeed: 1,
-    zoom: 1
-}
+  zoom: 1,
+};
 
 class Waves extends VantaBase {
     static initClass() {
@@ -18,8 +18,8 @@ class Waves extends VantaBase {
         this.prototype.waveNoise = 4; // Choppiness of water
     }
     constructor(userOptions) {
-        THREE = userOptions.THREE || THREE
-        super(userOptions)
+    THREE = userOptions.THREE || THREE;
+    super(userOptions);
     }
 
     getMaterial() {
@@ -27,7 +27,7 @@ class Waves extends VantaBase {
             color: this.options.color,
             shininess: this.options.shininess,
             flatShading: true,
-            side: THREE.DoubleSide
+      side: THREE.DoubleSide,
         };
         return new THREE.MeshPhongMaterial(options);
     }
@@ -46,9 +46,9 @@ class Waves extends VantaBase {
             for (j = 0; j <= this.hh; j++) {
                 const id = points.length;
                 const newVertex = new THREE.Vector3(
-                    (i - (this.ww * 0.5)) * CELLSIZE,
+          (i - this.ww * 0.5) * CELLSIZE,
                     rn(0, this.waveNoise) - 10,
-                    ((this.hh * 0.5) - j) * CELLSIZE
+          (this.hh * 0.5 - j) * CELLSIZE
                 );
                 points.push(newVertex);
                 this.gg[i][j] = id;
@@ -62,19 +62,19 @@ class Waves extends VantaBase {
         const indices = [];
         for (i = 1; i <= this.ww; i++) {
             for (j = 1; j <= this.hh; j++) {
-                let face1, face2
-                const d = this.gg[i][j]
-                const b = this.gg[i][j - 1]
-                const c = this.gg[i - 1][j]
-                const a = this.gg[i - 1][j - 1]
+        let face1, face2;
+        const d = this.gg[i][j];
+        const b = this.gg[i][j - 1];
+        const c = this.gg[i - 1][j];
+        const a = this.gg[i - 1][j - 1];
                 if (ri(0, 1)) {
-                    face1 = [a, b, c]
-                    face2 = [b, c, d]
+          face1 = [a, b, c];
+          face2 = [b, c, d];
                 } else {
-                    face1 = [a, b, d]
-                    face2 = [a, c, d]
+          face1 = [a, b, d];
+          face2 = [a, c, d];
                 }
-                indices.push(...face1, ...face2)
+        indices.push(...face1, ...face2);
             }
         }
         geometry.setIndex(indices);
@@ -103,7 +103,9 @@ class Waves extends VantaBase {
         this.camera = new THREE.PerspectiveCamera(
             35,
             this.width / this.height,
-            50, 10000);
+      50,
+      10000
+    );
 
         const xOffset = -10;
         const zOffset = -10;
@@ -116,62 +118,69 @@ class Waves extends VantaBase {
     onUpdate() {
         // Update options
         let diff;
-        this.plane.material.color.set(this.options.color)
-        this.plane.material.shininess = this.options.shininess
-        this.camera.ox = this.cameraPosition.x / this.options.zoom
-        this.camera.oy = this.cameraPosition.y / this.options.zoom
-        this.camera.oz = this.cameraPosition.z / this.options.zoom
+    this.plane.material.color.set(this.options.color);
+    this.plane.material.shininess = this.options.shininess;
+    this.camera.ox = this.cameraPosition.x / this.options.zoom;
+    this.camera.oy = this.cameraPosition.y / this.options.zoom;
+    this.camera.oz = this.cameraPosition.z / this.options.zoom;
 
         if (this.controls != null) {
-            this.controls.update()
+      this.controls.update();
         }
 
-        const c = this.camera
+    const c = this.camera;
         if (Math.abs(c.tx - c.position.x) > 0.01) {
-            diff = c.tx - c.position.x
-            c.position.x += diff * 0.02
+      diff = c.tx - c.position.x;
+      c.position.x += diff * 0.02;
         }
         if (Math.abs(c.ty - c.position.y) > 0.01) {
-            diff = c.ty - c.position.y
-            c.position.y += diff * 0.02
+      diff = c.ty - c.position.y;
+      c.position.y += diff * 0.02;
         }
         if (Math.abs(c.tz - c.position.z) > 0.01) {
-            diff = c.tz - c.position.z
-            c.position.z += diff * 0.02
+      diff = c.tz - c.position.z;
+      c.position.z += diff * 0.02;
         }
 
-        c.lookAt(this.cameraTarget)
+    c.lookAt(this.cameraTarget);
 
         // Fix flickering problems
         // c.near = Math.max((c.position.y * 0.5) - 20, 1);
         // c.updateMatrix();
 
         // WAVES
-        this.oy = this.oy || {}
-        for (let i = 0; i < this.plane.geometry.attributes.position.array.length; i += 3) {
+    this.oy = this.oy || {};
+    for (
+      let i = 0;
+      i < this.plane.geometry.attributes.position.array.length;
+      i += 3
+    ) {
             const v = {
                 x: this.plane.geometry.attributes.position.array[i],
                 y: this.plane.geometry.attributes.position.array[i + 1],
                 z: this.plane.geometry.attributes.position.array[i + 2],
-                oy: this.oy[i]
+        oy: this.oy[i],
             };
-            if (!v.oy) { // INIT
-                this.oy[i] = v.y
+      if (!v.oy) {
+        // INIT
+        this.oy[i] = v.y;
             } else {
-                const s = this.options.waveSpeed
-                const crossChop = Math.sqrt(s) * Math.cos(-v.x - (v.z * 0.7)) // + s * (i % 229) / 229 * 5
-                const delta = Math.sin((((s * this.t * 0.02) - (s * v.x * 0.025)) + (s * v.z * 0.015) + crossChop))
-                const trochoidDelta = Math.pow(delta + 1, 2) / 4
-                v.y = v.oy + (trochoidDelta * this.options.waveHeight)
-                this.plane.geometry.attributes.position.array[i + 1] = v.y
+        const s = this.options.waveSpeed;
+        const crossChop = Math.sqrt(s) * Math.cos(-v.x - v.z * 0.7); // + s * (i % 229) / 229 * 5
+        const delta = Math.sin(
+          s * this.t * 0.02 - s * v.x * 0.025 + s * v.z * 0.015 + crossChop
+        );
+        const trochoidDelta = Math.pow(delta + 1, 2) / 4;
+        v.y = v.oy + trochoidDelta * this.options.waveHeight;
+        this.plane.geometry.attributes.position.array[i + 1] = v.y;
             }
         }
 
         // @wireframe.geometry.vertices[i].y = v.y
 
-        this.plane.geometry.attributes.position.setUsage(THREE.DynamicDrawUsage)
-        this.plane.geometry.computeVertexNormals()
-        this.plane.geometry.attributes.position.needsUpdate = true
+    this.plane.geometry.attributes.position.setUsage(THREE.DynamicDrawUsage);
+    this.plane.geometry.computeVertexNormals();
+    this.plane.geometry.attributes.position.needsUpdate = true;
 
         // @scene.remove( @wireframe )
         // geo = new THREE.EdgesGeometry(@plane.geometry)
@@ -180,8 +189,8 @@ class Waves extends VantaBase {
         // @scene.add( @wireframe )
 
         if (this.wireframe) {
-            this.wireframe.geometry.fromGeometry(this.plane.geometry)
-            this.wireframe.geometry.computeFaceNormals()
+      this.wireframe.geometry.fromGeometry(this.plane.geometry);
+      this.wireframe.geometry.computeFaceNormals();
         }
     }
 
@@ -192,12 +201,12 @@ class Waves extends VantaBase {
             c.ox = c.position.x;
             c.oz = c.position.z;
         }
-        c.tx = c.ox + (((x - 0.5) * 100) / this.options.zoom);
-        c.ty = c.oy + (((y - 0.5) * -100) / this.options.zoom);
-        return c.tz = c.oz + (((x - 0.5) * -50) / this.options.zoom);
+    c.tx = c.ox + ((x - 0.5) * 100) / this.options.zoom;
+    c.ty = c.oy + ((y - 0.5) * -100) / this.options.zoom;
+    return (c.tz = c.oz + ((x - 0.5) * -50) / this.options.zoom);
     }
 }
 
-Waves.prototype.defaultOptions = defaultOptions
-Waves.initClass()
-export default VANTA.register('WAVES', Waves)
+Waves.prototype.defaultOptions = defaultOptions;
+Waves.initClass();
+export default VANTA.register('WAVES', Waves);

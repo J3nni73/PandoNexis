@@ -1,4 +1,5 @@
-﻿@model PandoNexis.Accelerator.Extensions.Framework.ViewModels.PNHeaderViewModel
+﻿@using PandoNexis.Accelerator.Extensions.ViewModels.Framework
+@model PNHeaderViewModel
 @{
     var isPortal = @Model.PortalData.IsPortal;
     var areaClass = @Model.Area.ToLower();
@@ -13,16 +14,21 @@
         <div class="website-selector-header__current">
             <label for='websiteSelectorCheckbox'>
                 <img src="@(currentLanguage.Value.IconUrl)" alt="@(currentLanguage.Value.CountryName)" class="website-selector__img" />
+                    <span class="website-selector-header__current-name">
                 @currentLanguage.Value.CountryName
-                <i class="arrow__dropdown"></i>
+                    </span>
+                    <span class="arrow__dropdown"><i></i></span>
             </label>
         </div>
         <input id='websiteSelectorCheckbox' type='checkbox' />
         }
-        <ul id="websitePicker@(Model.Area)" class="website-selector-@(areaClass)__items">
+        <label class="website-selector__overlay" for='websiteSelectorCheckbox'>
+            <div></div>
+        </label>
+        <ul id="websitePicker@(Model.Area)" class="website-selector-@(areaClass)__items row">
             @if (@Model.Area != "Header")
             {
-                <li class="website-selector__current">
+                <li class="website-selector__current small-6 columns">
                     <img src="@(currentLanguage.Value.IconUrl)" title="@currentLanguage.Value.CountryName" alt="@(currentLanguage.Value.CountryName)" class="website-selector__img" />
                     @currentLanguage.Value.CountryName
                 </li>
@@ -31,7 +37,7 @@
             {
                 if (channel.Key.ToString() != Model.ChannelId)
                 {
-                    <li>
+                    <li class="small-6 columns">
                         <a href="@channel.Value.Url" title="@channel.Value.CountryName" target="@(channel.Value.LinkToNewWindow?"_blank":"_self")">
                             <img src="@channel.Value.IconUrl" alt="@(channel.Value.CountryName)" class="website-selector__img" />
                             @channel.Value.CountryName

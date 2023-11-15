@@ -19,7 +19,6 @@ namespace Litium.Accelerator.Search.Indexing.Products
     public class ProductIndexDocumentBuilder : MultilingualIndexDocumentBuilderBase<ProductDocument>
     {
         private readonly BaseProductService _baseProductService;
-        private readonly DisplayTemplateService _displayTemplateService;
         private readonly FieldTemplateService _fieldTemplateService;
         private readonly VariantService _variantService;
         private readonly TemplateSettingService _templateSettingService;
@@ -42,7 +41,6 @@ namespace Litium.Accelerator.Search.Indexing.Products
         public ProductIndexDocumentBuilder(
             IndexDocumentBuilderDependencies dependencies,
             BaseProductService baseProductService,
-            DisplayTemplateService displayTemplateService,
             FieldTemplateService fieldTemplateService,
             VariantService variantService,
             TemplateSettingService templateSettingService,
@@ -64,7 +62,6 @@ namespace Litium.Accelerator.Search.Indexing.Products
             : base(dependencies)
         {
             _baseProductService = baseProductService;
-            _displayTemplateService = displayTemplateService;
             _fieldTemplateService = fieldTemplateService;
             _variantService = variantService;
             _templateSettingService = templateSettingService;
@@ -105,14 +102,6 @@ namespace Litium.Accelerator.Search.Indexing.Products
                 yield break;
             }
 
-            var displayTemplate = _displayTemplateService.Get<ProductDisplayTemplate>(productFieldTemplate.DisplayTemplateSystemId);
-            if (displayTemplate == null)
-            {
-                // Display template is removed, all products with template that using the display template is also removed.
-                // BuildRemoveIndexDocuments will be invoked by the removing of product.
-                yield break;
-            }
-
             var variants = _variantService.GetByBaseProduct(baseProduct.SystemId).ToList();
             if (variants.Count == 0)
             {
@@ -129,7 +118,7 @@ namespace Litium.Accelerator.Search.Indexing.Products
                 yield break;
             }
 
-            var productDocuments = CreateModelsPerChannel(baseProduct, productFieldTemplate, displayTemplate, ref variants);
+            var productDocuments = CreateModelsPerChannel(baseProduct, productFieldTemplate, ref variants);
             var usedVariantSystemIds = productDocuments.SelectMany(x => x.VariantSystemIds).ToHashSet();
             var usedChannelSystemIds = productDocuments.Select(x => x.ChannelSystemId).ToHashSet();
 
@@ -163,7 +152,7 @@ namespace Litium.Accelerator.Search.Indexing.Products
                     continue;
                 }
 
-                PopulateProductDocument(model, cultureInfo, currentVariants, context, !displayTemplate.UseVariantUrl);
+                PopulateProductDocument(model, cultureInfo, currentVariants, context, !productFieldTemplate.UseVariantUrl);
                 articleNumberInChannel.Add((model.ArticleNumber, channel.SystemId));
                 yield return (cultureInfo, model);
             }
@@ -246,10 +235,10 @@ namespace Litium.Accelerator.Search.Indexing.Products
             }
         }
 
-        private List<ProductDocument> CreateModelsPerChannel(BaseProduct baseProduct, ProductFieldTemplate productFieldTemplate, ProductDisplayTemplate displayTemplate, ref List<Variant> variants)
+        private List<ProductDocument> CreateModelsPerChannel(BaseProduct baseProduct, ProductFieldTemplate productFieldTemplate, ref List<Variant> variants)
         {
             List<ProductDocument> productDocuments;
-            if (displayTemplate.UseVariantUrl)
+            if (productFieldTemplate.UseVariantUrl)
             {
                 variants = variants.OrderBy(x => x.SortIndex).ThenBy(x => x.Id).ToList();
                 var groupingField = _templateSettingService.GetTemplateGroupingField(productFieldTemplate.Id);

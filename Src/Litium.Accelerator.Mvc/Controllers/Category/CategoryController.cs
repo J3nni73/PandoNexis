@@ -5,16 +5,18 @@ using Litium.Accelerator.Builders.Product;
 using Litium.Web.Models.Products;
 using Litium.Web.Rendering;
 using Microsoft.AspNetCore.Mvc;
+using PandoNexis.Accelerator.Extensions.Builders.Product;
+using PandoNexis.Accelerator.Extensions.ViewModels.Product;
 
 namespace Litium.Accelerator.Mvc.Controllers.Category
 {
     public class CategoryController : ControllerBase
     {
-        private readonly CategoryPageViewModelBuilder _categoryPageViewModelBuilder;
+        private readonly PNCategoryPageViewModelBuilder _categoryPageViewModelBuilder;
         private readonly IEnumerable<IRenderingValidator<Products.Category>> _renderingValidators;
 
         public CategoryController(
-            CategoryPageViewModelBuilder categoryPageViewModelBuilder,
+            PNCategoryPageViewModelBuilder categoryPageViewModelBuilder,
             IEnumerable<IRenderingValidator<Products.Category>> renderingValidators)
         {
             _categoryPageViewModelBuilder = categoryPageViewModelBuilder;
@@ -29,7 +31,11 @@ namespace Litium.Accelerator.Mvc.Controllers.Category
             }
 
             var model = await _categoryPageViewModelBuilder.BuildAsync(currentCategoryModel.SystemId);
-
+            var pnModel = (PNCategoryPageViewModel)model;
+            if (pnModel != null)
+            {
+                return View(pnModel);
+            }
             return View(model);
         }
     }

@@ -17,7 +17,7 @@ namespace Litium.Accelerator.Builders.Framework
             _requestModelAccessor = requestModelAccessor;
         }
 
-        public FooterViewModel Build()
+        public virtual FooterViewModel Build()
         {
             var model = new FooterViewModel();
             var website = _requestModelAccessor.RequestModel.WebsiteModel;

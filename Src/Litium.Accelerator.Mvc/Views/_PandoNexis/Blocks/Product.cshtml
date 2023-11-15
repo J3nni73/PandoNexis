@@ -1,18 +1,20 @@
-﻿@model Litium.Accelerator.ViewModels.Block.ProductBlockViewModel
+﻿@using PandoNexis.Accelerator.Extensions.ViewModels.Block;
+@model PNProductBlockViewModel
 
-<div class="row">
+<div class="product-block gtm-productimpression" data-gtmimpressiontracking="@Model.GtmImpressionTracking">
+    <div class="row">
     <h2 class="columns small-12 product-list__header text--center">@Model.Title</h2>
-</div>
-@if (!string.IsNullOrWhiteSpace(Model.FooterLinkUrl) && !string.IsNullOrWhiteSpace(Model.FooterLinkText))
-{
+    </div>
+    @if (!string.IsNullOrWhiteSpace(Model.FooterLinkUrl) && !string.IsNullOrWhiteSpace(Model.FooterLinkText))
+    {
     <div class="row">
         <div class="columns small-12 text--right">
             <a class="product-list__link" href="@Model.FooterLinkUrl">@Model.FooterLinkText</a>
         </div>
     </div>
-}
-@if (Model.Products != null && Model.Products.Any())
-{
+    }
+    @if (Model.Products != null && Model.Products.Any())
+    {
     <ul class="row product-list small-up-2 medium-up-3 large-up-4">
         @foreach (var product in Model.Products)
         {
@@ -21,4 +23,5 @@
             </li>
         }
     </ul>
-}
+    }
+</div>

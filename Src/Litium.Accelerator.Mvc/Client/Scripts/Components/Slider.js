@@ -6,6 +6,7 @@ const CarouselSettings = {
     showStatus: false,
     showThumbs: false,
     infiniteLoop: true,
+    interval: 6000
 };
 
 const Slider = ({ values }) => (

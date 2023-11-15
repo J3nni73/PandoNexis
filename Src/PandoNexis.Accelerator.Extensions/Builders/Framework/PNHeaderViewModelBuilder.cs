@@ -1,5 +1,6 @@
 ﻿using Litium.Accelerator.Builders.Framework;
 using Litium.Accelerator.Caching;
+using Litium.Accelerator.Constants;
 using Litium.Accelerator.Routing;
 using Litium.Accelerator.Utilities;
 using Litium.Accelerator.ViewModels.Framework;
@@ -9,8 +10,8 @@ using Litium.Security;
 using Litium.Web;
 using Litium.Web.Routing;
 using Litium.Websites;
-using PandoNexis.Accelerator.Extensions.Framework.ViewModels;
 using PandoNexis.Accelerator.Extensions.ModelServices;
+using PandoNexis.Accelerator.Extensions.ViewModels.Framework;
 
 namespace PandoNexis.Accelerator.Extensions.Builders.Framework
 {
@@ -51,6 +52,14 @@ namespace PandoNexis.Accelerator.Extensions.Builders.Framework
             {
                 item.BuildPartialModel(ref viewModel);
             }
+            var website = _requestModelAccessor.RequestModel.WebsiteModel;
+            var isBigHeader = website.GetValue<string>(AcceleratorWebsiteFieldNameConstants.HeaderLayout) != HeaderLayoutConstants.OneRow;
+            var centeredNavigation = website.GetValue<bool>(Constants.HeaderLayoutConstants.CenteredNavigation);
+            var showIconTitles = website.GetValue<bool>(Constants.HeaderLayoutConstants.ShowIconTitles);
+            viewModel.IsBigHeader = isBigHeader;
+            viewModel.CenteredNavigation = centeredNavigation;
+            viewModel.ShowIconTitles = showIconTitles;
+            viewModel.QuickSearch.IsBigHeader = isBigHeader;
 
             return viewModel;
         }

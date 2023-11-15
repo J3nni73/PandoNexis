@@ -20,6 +20,8 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.Websites
             var fields = new[]
             {
                 _fieldHelper.GetWebsiteFieldDefinition(WebsiteFieldNameConstants.DefaultOpenGraphImage, SystemFieldTypeConstants.MediaPointerImage),
+                _fieldHelper.GetWebsiteFieldDefinition(HeaderLayoutConstants.CenteredNavigation, SystemFieldTypeConstants.Boolean),
+                _fieldHelper.GetWebsiteFieldDefinition(HeaderLayoutConstants.ShowIconTitles, SystemFieldTypeConstants.Boolean),
             };
             return fields;
         }

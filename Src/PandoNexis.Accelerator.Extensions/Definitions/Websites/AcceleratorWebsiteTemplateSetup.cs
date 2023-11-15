@@ -16,6 +16,8 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.Websites
                 GetWebsiteField("AcceleratorWebsite",  "Logotype", AcceleratorWebsiteFieldNameConstants.LogotypeIcon),
 
                 GetWebsiteField("AcceleratorWebsite",  "Header", AcceleratorWebsiteFieldNameConstants.HeaderLayout),
+                GetWebsiteField("AcceleratorWebsite",  "Header", Constants.HeaderLayoutConstants.CenteredNavigation),
+                GetWebsiteField("AcceleratorWebsite",  "Header", Constants.HeaderLayoutConstants.ShowIconTitles),
                 GetWebsiteField("AcceleratorWebsite",  "Header", AcceleratorWebsiteFieldNameConstants.CheckoutPage),
                 GetWebsiteField("AcceleratorWebsite",  "Header", AcceleratorWebsiteFieldNameConstants.MyPagesPage),
                 GetWebsiteField("AcceleratorWebsite",  "Header", AcceleratorWebsiteFieldNameConstants.AdditionalHeaderLinks),

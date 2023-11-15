@@ -26,9 +26,9 @@ namespace PandoNexis.Accelerator.Extensions.Definitions.Customers
         public override FieldTemplate GetFieldTemplateNewTemplate()
         {
             var tempalate = new PersonFieldTemplate(CustomerTemplateIdConstants.SystemAdminUser)
-                {
+            {
                 FieldGroups = new[]
-                    {
+                     {
                         new FieldTemplateFieldGroup()
                         {
                             Id = "General",

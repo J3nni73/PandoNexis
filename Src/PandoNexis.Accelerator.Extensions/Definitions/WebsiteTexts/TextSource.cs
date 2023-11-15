@@ -24,10 +24,7 @@
             //"MySingleSiteText".AsWebsiteTextDefinition("My single site text", "Min client text", b2BSiteIds)
             return new List<WebsiteTextDefinition>
             {
-                //Cookie consent bar
-                //"cookieconsent.message".AsWebsiteTextDefinition("etta", "Tvåa", clientAvailable: true, serverAvailable: true),
                 "product.information".AsWebsiteTextDefinition("Information", "Information", clientAvailable: true, serverAvailable: true),
-
             };
         }
     }

@@ -178,21 +178,15 @@
     <value />
   </data>
   <data name="fielddefinition.blockarea.blockImage.name" xml:space="preserve">
-    <value>Block image</value>
+    <value>Bild</value>
   </data>
   <data name="fielddefinition.blockarea.blockImage.description" xml:space="preserve">
     <value />
   </data>
   <data name="fielddefinition.blockarea.BlockMobileImage.name" xml:space="preserve">
-    <value>Block image - Mobile</value>
+    <value>Bild - Mobile</value>
   </data>
   <data name="fielddefinition.blockarea.BlockMobileImage.description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="fielddefinition.blockarea.blockImage.name" xml:space="preserve">
-    <value>Overlay image</value>
-  </data>
-  <data name="fielddefinition.blockarea.blockImage.description" xml:space="preserve">
     <value />
   </data>
   <data name="fielddefinition.blockarea.blockleft.name" xml:space="preserve">
@@ -213,10 +207,10 @@
   <data name="fielddefinition.blockarea.gradiantoverlay.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.centeredtext.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.centeredtext.name" xml:space="preserve">
     <value>Centrerad text</value>
   </data>
-	<data name="fielddefinition.blockarea.centeredtext.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.centeredtext.description" xml:space="preserve">
     <value />
   </data>
   <data name="fielddefinition.blockarea.blocktitle2.name" xml:space="preserve">
@@ -243,10 +237,10 @@
   <data name="fielddefinition.blockarea.fullwidth.description" xml:space="preserve">
     <value />
   </data>
-	<data name="fielddefinition.blockarea.usefullwidthbackgroundcolor.name" xml:space="preserve">
+  <data name="fielddefinition.blockarea.usefullwidthbackgroundcolor.name" xml:space="preserve">
     <value>Use full width background color</value>
   </data>
-	<data name="fielddefinition.blockarea.usefullwidthbackgroundcolor.description" xml:space="preserve">
+  <data name="fielddefinition.blockarea.usefullwidthbackgroundcolor.description" xml:space="preserve">
     <value />
   </data>
   <data name="fielddefinition.blockarea.negativeMargin.name" xml:space="preserve">
@@ -278,5 +272,23 @@
   </data>
   <data name="fieldtemplate.blockarea.uspblock.name" xml:space="preserve">
     <value>Usp block</value>
+  </data>
+  <data name="fielddefinition.blockarea.blockImage1.name" xml:space="preserve">
+    <value>Bild1</value>
+  </data>
+  <data name="fielddefinition.blockarea.blockImage1.name1" xml:space="preserve">
+    <value>Image1</value>
+  </data>
+  <data name="fielddefinition.blockarea.blockoverlayimage.name" xml:space="preserve">
+    <value>Overlay image</value>
+  </data>
+  <data name="fielddefinition.blockarea.blockoverlayleft.name" xml:space="preserve">
+    <value>Overlay to left</value>
+  </data>
+  <data name="fielddefinition.blockarea.extendedclass.name" xml:space="preserve">
+    <value>Extended class</value>
+  </data>
+  <data name="fielddefinition.blockarea.uspblockitem.name" xml:space="preserve">
+    <value>Usb block item</value>
   </data>
 </root>
